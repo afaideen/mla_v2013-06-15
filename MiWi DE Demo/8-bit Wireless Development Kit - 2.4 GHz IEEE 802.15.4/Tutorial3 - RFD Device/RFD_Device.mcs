@@ -1,0 +1,253 @@
+[Header]
+MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
+Version=1.0
+[File000]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\MRF24J40.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File001]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\MRF49XA.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File002]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\security.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File003]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\crc.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File004]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\Console.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File005]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\HardwareProfile.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File006]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\MiWi.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File007]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\P2P.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File008]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\TimeDelay.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=-DSIMPLE_EXAMPLE -O-
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File009]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\MRF89XA.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File010]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\MSPI.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File011]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\SymbolTime.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File012]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\Demo.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File013]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\LcdDisplay.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File014]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\MiWiPRO.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File015]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\NVM.o
+Folder=Intermediary
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File016]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\RFD_Device.cof
+Folder=Output
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={96C98149-AA1B-4CF9-B967-FAE79CAB663C}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mplink.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=/m"$(BINDIR_)$(TARGETBASE).map" /w /o"$(BINDIR_)$(TARGETBASE).cof"
+TraceCmdString=
+DebugOptions=/z__MPLAB_DEBUG=1
+[File017]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\RFD_Device.hex
+Folder=Output
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={96C98149-AA1B-4CF9-B967-FAE79CAB663C}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mplink.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=/m"$(BINDIR_)$(TARGETBASE).map" /w /o"$(BINDIR_)$(TARGETBASE).cof"
+TraceCmdString=
+DebugOptions=/z__MPLAB_DEBUG=1
+[File018]
+Location=D:\microchip_solutions_v2013-06-15\MiWi DE Demo\8-bit Wireless Development Kit - 2.4 GHz IEEE 802.15.4\Tutorial3 - RFD Device\RFD_Device.map
+Folder=Output
+DeviceName=PIC18F46J50
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={96C98149-AA1B-4CF9-B967-FAE79CAB663C}
+LanguageToolLocation=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mplink.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|..\..\..\Microchip\Include;.;C:\Program Files\Microchip\MCC18\h||$(LIBDIR)|C:\Program Files\Microchip\MCC18\lib;C:\MCC18\lib||$(LKRDIR)|C:\Program Files\Microchip\MCC18\bin\LKR||
+SOLK=<src>|..\..\..\Microchip\Transceivers\MRF24J40\MRF24J40.c|..\..\..\Microchip\Transceivers\MRF49XA\MRF49XA.c|..\..\..\Microchip\Transceivers\security.c|..\..\..\Microchip\Transceivers\crc.c|..\..\..\Microchip\WirelessProtocols\Console.c|HardwareProfile.c|..\..\..\Microchip\WirelessProtocols\MiWi\MiWi.c|..\..\..\Microchip\WirelessProtocols\P2P\P2P.c|..\..\..\Microchip\Common\TimeDelay.c|..\..\..\Microchip\Transceivers\MRF89XA\MRF89XA.c|..\..\..\Microchip\WirelessProtocols\MSPI.c|..\..\..\Microchip\WirelessProtocols\SymbolTime.c|Demo.c|LcdDisplay.c|..\..\..\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c|..\..\..\Microchip\WirelessProtocols\NVM.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=extended-mode
+ToolArgsString=/m"$(BINDIR_)$(TARGETBASE).map" /w /o"$(BINDIR_)$(TARGETBASE).cof"
+TraceCmdString=
+DebugOptions=/z__MPLAB_DEBUG=1
+[TOOL_LOC_STAMPS]
+tool_loc{96C98149-AA1B-4CF9-B967-FAE79CAB663C}=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mplink.exe
+tool_loc{E56A1C86-9D32-4DF6-8C34-FE0388B1B644}=D:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\mcc18.exe
