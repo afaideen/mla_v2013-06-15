@@ -1,0 +1,4 @@
+Warning[2054] D:\microchip_solutions_v2013-06-15\MiWi DE Demo\Basic Demos\Simple Example\MiWiLesson\main_end.c 390 : suspicious pointer conversion
+Warning[2054] D:\microchip_solutions_v2013-06-15\MiWi DE Demo\Basic Demos\Simple Example\MiWiLesson\main_end.c 392 : suspicious pointer conversion
+Warning[2066] D:\microchip_solutions_v2013-06-15\MiWi DE Demo\Basic Demos\Simple Example\MiWiLesson\main_end.c 529 : type qualifier mismatch in assignment
+Warning[2066] D:\microchip_solutions_v2013-06-15\MiWi DE Demo\Basic Demos\Simple Example\MiWiLesson\main_end.c 534 : type qualifier mismatch in assignment

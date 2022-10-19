@@ -1,0 +1,5 @@
+Warning[2053] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c 43 : return value expected
+Warning[2058] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c 48 : call of function without prototype
+Warning[2053] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c 133 : return value expected
+Warning[2058] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c 152 : call of function without prototype
+Warning[2058] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c 155 : call of function without prototype

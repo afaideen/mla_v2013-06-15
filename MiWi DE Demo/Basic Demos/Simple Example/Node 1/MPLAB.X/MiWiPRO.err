@@ -1,0 +1,6 @@
+Error[1105] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c 4713 : symbol 'IFS1bits' has not been defined
+Error[1151] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c 4713 : struct or union object designator expected
+Error[1101] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c 4713 : lvalue required
+Error[1105] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c 4714 : symbol 'IEC1bits' has not been defined
+Error[1151] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c 4714 : struct or union object designator expected
+Error[1101] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c 4714 : lvalue required

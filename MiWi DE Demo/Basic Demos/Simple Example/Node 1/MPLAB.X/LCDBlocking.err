@@ -1,0 +1,10 @@
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\LCDBlocking.c 109 : unknown member 'TRISB15' in '__tag_124'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\LCDBlocking.c 109 : type mismatch in assignment
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\LCDBlocking.c 112 : unknown member 'LATB15' in '__tag_105'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\LCDBlocking.c 112 : type mismatch in assignment
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\LCDBlocking.c 180 : unknown member 'TRISB15' in '__tag_124'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\LCDBlocking.c 180 : type mismatch in assignment
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\LCDBlocking.c 228 : unknown member 'TRISB15' in '__tag_124'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\LCDBlocking.c 228 : type mismatch in assignment
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\LCDBlocking.c 241 : unknown member 'LATB15' in '__tag_105'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\LCDBlocking.c 241 : type mismatch in assignment

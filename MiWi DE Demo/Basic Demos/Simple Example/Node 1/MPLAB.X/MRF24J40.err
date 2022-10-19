@@ -1,0 +1,25 @@
+Error[1105] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 153 : symbol 'IEC1bits' has not been defined
+Error[1151] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 153 : struct or union object designator expected
+Error[1105] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 155 : symbol 'IEC1bits' has not been defined
+Error[1151] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 155 : struct or union object designator expected
+Error[1101] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 155 : lvalue required
+Error[1105] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 161 : symbol 'IEC1bits' has not been defined
+Error[1151] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 161 : struct or union object designator expected
+Error[1101] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 161 : lvalue required
+Error[1105] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 187 : symbol 'IEC1bits' has not been defined
+Error[1151] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 187 : struct or union object designator expected
+Error[1105] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 189 : symbol 'IEC1bits' has not been defined
+Error[1151] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 189 : struct or union object designator expected
+Error[1101] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 189 : lvalue required
+Error[1105] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 194 : symbol 'IEC1bits' has not been defined
+Error[1151] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 194 : struct or union object designator expected
+Error[1101] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 194 : lvalue required
+Error[1105] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 218 : symbol 'IEC1bits' has not been defined
+Error[1151] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 218 : struct or union object designator expected
+Error[1105] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 220 : symbol 'IEC1bits' has not been defined
+Error[1151] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 220 : struct or union object designator expected
+Error[1101] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 220 : lvalue required
+Error[1105] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 225 : symbol 'IEC1bits' has not been defined
+Error[1151] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 225 : struct or union object designator expected
+Error[1101] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 225 : lvalue required
+Error[1105] D:\microchip_solutions_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c 249 : symbol 'IEC1bits' has not been defined

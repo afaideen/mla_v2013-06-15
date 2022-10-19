@@ -1,0 +1,18 @@
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 178 : unknown member 'LATD12' in '__tag_134'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 178 : type mismatch in assignment
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 204 : unknown member 'LATD12' in '__tag_134'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 204 : type mismatch in assignment
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 229 : unknown member 'LATD12' in '__tag_134'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 229 : type mismatch in assignment
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 232 : unknown member 'LATD12' in '__tag_134'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 232 : type mismatch in assignment
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 236 : unknown member 'LATD12' in '__tag_134'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 236 : type mismatch in assignment
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 238 : unknown member 'LATD12' in '__tag_134'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 238 : type mismatch in assignment
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 240 : unknown member 'LATD12' in '__tag_134'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 240 : type mismatch in assignment
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 267 : unknown member 'LATD12' in '__tag_134'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 267 : type mismatch in assignment
+Error[1205] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 272 : unknown member 'LATD12' in '__tag_134'
+Error[1131] D:\microchip_solutions_v2013-06-15\Microchip\WirelessProtocols\NVM.c 272 : type mismatch in assignment

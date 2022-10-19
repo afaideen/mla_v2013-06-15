@@ -1,0 +1,48 @@
+#
+# Generated - do not edit!
+#
+# NOCDDL
+#
+CND_BASEDIR=`pwd`
+# PIC18_Explorer configuration
+CND_ARTIFACT_DIR_PIC18_Explorer=dist/PIC18_Explorer/production
+CND_ARTIFACT_NAME_PIC18_Explorer=Coordinator.X.production.hex
+CND_ARTIFACT_PATH_PIC18_Explorer=dist/PIC18_Explorer/production/Coordinator.X.production.hex
+CND_PACKAGE_DIR_PIC18_Explorer=${CND_DISTDIR}/PIC18_Explorer/package
+CND_PACKAGE_NAME_PIC18_Explorer=coordinator.x.tar
+CND_PACKAGE_PATH_PIC18_Explorer=${CND_DISTDIR}/PIC18_Explorer/package/coordinator.x.tar
+# PICDEM_Z configuration
+CND_ARTIFACT_DIR_PICDEM_Z=dist/PICDEM_Z/production
+CND_ARTIFACT_NAME_PICDEM_Z=Coordinator.X.production.hex
+CND_ARTIFACT_PATH_PICDEM_Z=dist/PICDEM_Z/production/Coordinator.X.production.hex
+CND_PACKAGE_DIR_PICDEM_Z=${CND_DISTDIR}/PICDEM_Z/package
+CND_PACKAGE_NAME_PICDEM_Z=coordinator.x.tar
+CND_PACKAGE_PATH_PICDEM_Z=${CND_DISTDIR}/PICDEM_Z/package/coordinator.x.tar
+# Eight_bit_Wireless_Development_Kit configuration
+CND_ARTIFACT_DIR_Eight_bit_Wireless_Development_Kit=dist/Eight_bit_Wireless_Development_Kit/production
+CND_ARTIFACT_NAME_Eight_bit_Wireless_Development_Kit=Coordinator.X.production.hex
+CND_ARTIFACT_PATH_Eight_bit_Wireless_Development_Kit=dist/Eight_bit_Wireless_Development_Kit/production/Coordinator.X.production.hex
+CND_PACKAGE_DIR_Eight_bit_Wireless_Development_Kit=${CND_DISTDIR}/Eight_bit_Wireless_Development_Kit/package
+CND_PACKAGE_NAME_Eight_bit_Wireless_Development_Kit=coordinator.x.tar
+CND_PACKAGE_PATH_Eight_bit_Wireless_Development_Kit=${CND_DISTDIR}/Eight_bit_Wireless_Development_Kit/package/coordinator.x.tar
+# Explorer_16_-_PIC24_or_dsPIC33 configuration
+CND_ARTIFACT_DIR_Explorer_16_-_PIC24_or_dsPIC33=dist/Explorer_16_-_PIC24_or_dsPIC33/production
+CND_ARTIFACT_NAME_Explorer_16_-_PIC24_or_dsPIC33=Coordinator.X.production.hex
+CND_ARTIFACT_PATH_Explorer_16_-_PIC24_or_dsPIC33=dist/Explorer_16_-_PIC24_or_dsPIC33/production/Coordinator.X.production.hex
+CND_PACKAGE_DIR_Explorer_16_-_PIC24_or_dsPIC33=${CND_DISTDIR}/Explorer_16_-_PIC24_or_dsPIC33/package
+CND_PACKAGE_NAME_Explorer_16_-_PIC24_or_dsPIC33=coordinator.x.tar
+CND_PACKAGE_PATH_Explorer_16_-_PIC24_or_dsPIC33=${CND_DISTDIR}/Explorer_16_-_PIC24_or_dsPIC33/package/coordinator.x.tar
+# Explorer_16_-_PIC32 configuration
+CND_ARTIFACT_DIR_Explorer_16_-_PIC32=dist/Explorer_16_-_PIC32/production
+CND_ARTIFACT_NAME_Explorer_16_-_PIC32=Coordinator.X.production.hex
+CND_ARTIFACT_PATH_Explorer_16_-_PIC32=dist/Explorer_16_-_PIC32/production/Coordinator.X.production.hex
+CND_PACKAGE_DIR_Explorer_16_-_PIC32=${CND_DISTDIR}/Explorer_16_-_PIC32/package
+CND_PACKAGE_NAME_Explorer_16_-_PIC32=coordinator.x.tar
+CND_PACKAGE_PATH_Explorer_16_-_PIC32=${CND_DISTDIR}/Explorer_16_-_PIC32/package/coordinator.x.tar
+# PIC32_WIRELESS_EVAL_BOARD configuration
+CND_ARTIFACT_DIR_PIC32_WIRELESS_EVAL_BOARD=dist/PIC32_WIRELESS_EVAL_BOARD/production
+CND_ARTIFACT_NAME_PIC32_WIRELESS_EVAL_BOARD=Coordinator.X.production.hex
+CND_ARTIFACT_PATH_PIC32_WIRELESS_EVAL_BOARD=dist/PIC32_WIRELESS_EVAL_BOARD/production/Coordinator.X.production.hex
+CND_PACKAGE_DIR_PIC32_WIRELESS_EVAL_BOARD=${CND_DISTDIR}/PIC32_WIRELESS_EVAL_BOARD/package
+CND_PACKAGE_NAME_PIC32_WIRELESS_EVAL_BOARD=coordinator.x.tar
+CND_PACKAGE_PATH_PIC32_WIRELESS_EVAL_BOARD=${CND_DISTDIR}/PIC32_WIRELESS_EVAL_BOARD/package/coordinator.x.tar
