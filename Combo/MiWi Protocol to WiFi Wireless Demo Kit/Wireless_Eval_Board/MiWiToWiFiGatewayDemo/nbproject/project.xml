@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>com.microchip.mplab.nbide.embedded.makeproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/make-project/1">
+            <name>MiWi-WiFi-Gateway-Demo</name>
+            <make-project-type>0</make-project-type>
+            <c-extensions>c</c-extensions>
+            <cpp-extensions/>
+            <header-extensions>h</header-extensions>
+            <sourceEncoding>UTF-8</sourceEncoding>
+            <asminc-extensions/>
+            <make-dep-projects/>
+            <sourceRootList>
+                <sourceRootElem>../../../../Microchip/Transceivers</sourceRootElem>
+                <sourceRootElem>../../../../Microchip/WirelessProtocols</sourceRootElem>
+                <sourceRootElem>../../../../Microchip/Include/Transceivers</sourceRootElem>
+                <sourceRootElem>../../../../Microchip/Include/WirelessProtocols</sourceRootElem>
+            </sourceRootList>
+            <confList>
+                <confElem>
+                    <name>XC32_EVAL_BOARD_PROTOCOL_MIWI_PRO</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>XC32_EVAL_BOARD_MRF24WB</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>XC32_EVAL_BOARD_PROTOCOL_P2P</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>XC32_EVAL_BOARD_PROTOCOL_MIWI</name>
+                    <type>2</type>
+                </confElem>
+            </confList>
+            <formatting>
+                <project-formatting-style>false</project-formatting-style>
+            </formatting>
+        </data>
+    </configuration>
+</project>
