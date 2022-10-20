@@ -56,13 +56,15 @@
 #include "ConfigApp.h"
 
 
-#define CLOCK_FREQ      40000000ul
-//#define CLOCK_FREQ      64000000ul
+//#define CLOCK_FREQ      40000000ul
+#define CLOCK_FREQ      64000000ul
 
 // PIC32MX processor
 #define GetSystemClock()		(CLOCK_FREQ)      // Hz
 #define GetInstructionClock()	(GetSystemClock()/1)
-#define GetPeripheralClock()	(GetInstructionClock()/1)	// Set your divider according to your Peripheral Bus Frequency configuration fuse setting
+//#define GetInstructionClock()	(GetSystemClock()/4)
+//#define GetPeripheralClock()	(GetInstructionClock()/1)	// Set your divider according to your Peripheral Bus Frequency configuration fuse setting
+#define GetPeripheralClock()	(GetInstructionClock()/4)	// Set your divider according to your Peripheral Bus Frequency configuration fuse setting
 
 
 // Hardware mappings
@@ -101,6 +103,16 @@
 #define SW1_TRIS            BUTTON1_TRIS
 #define SW2_PORT            BUTTON2_IO 
 #define SW2_TRIS            BUTTON2_TRIS
+
+#define PUSH_BUTTON_1       SW1_PORT
+#define PUSH_BUTTON_2       SW2_PORT
+#define LED_1               LED1
+#define LED_2               LED2
+
+#define BUTTON_1_TRIS       TRISDbits.TRISD6
+#define BUTTON_2_TRIS       TRISDbits.TRISD7
+#define LED_1_TRIS          TRISAbits.TRISA7
+#define LED_2_TRIS          TRISAbits.TRISA6
 
 
 
@@ -162,7 +174,7 @@
 #define SPIFLASH_SPISTATbits   (SPI3STATbits)
 #define FLASH_MAX_SPI_FREQ        (10000000ul)	// Hz
 
-// External FLASH SPI chip select pin definition
+// External EEPROM chip select pin definition
 #define EE_nCS_TRIS         EEPROM_CS_TRIS//SPIFLASH_CS_TRIS
 #define EE_nCS              EEPROM_CS_IO//SPIFLASH_CS_IO
 //----------------------------

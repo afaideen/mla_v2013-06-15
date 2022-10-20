@@ -12,7 +12,7 @@
  *
  * Software License Agreement
  *
- * Copyright © 2007-2011 Microchip Technology Inc.  All rights reserved.
+ * Copyright ï¿½ 2007-2011 Microchip Technology Inc.  All rights reserved.
  *
  * Microchip licenses to you the right to use, modify, copy and distribute 
  * Software only when embedded on a Microchip microcontroller or digital 
@@ -23,7 +23,7 @@
  * You should refer to the license agreement accompanying this Software for 
  * additional information regarding your rights and obligations.
  *
- * SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS” WITHOUT WARRANTY OF ANY 
+ * SOFTWARE AND DOCUMENTATION ARE PROVIDED ï¿½AS ISï¿½ WITHOUT WARRANTY OF ANY 
  * KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY 
  * WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A 
  * PARTICULAR PURPOSE. IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE 
@@ -51,13 +51,17 @@
 #include "LCD_ST7032.h"
 #include "HardwareProfile.h"
 
-
+#if defined(WIRELESS_EVAL_BOARD)
 void init_atod(void);
 void ConfigureLCD_SPI(void);
 
-// Config Bit Settings 
-#pragma config FNOSC = FRCPLL, FPLLIDIV = DIV_2, FPLLMUL = MUL_20, FPLLODIV = DIV_2, FPBDIV = DIV_1, FWDTEN = OFF, POSCMOD = OFF, FSOSCEN = OFF, CP = OFF
+//Config Bit Settings for speed 40Mhz 
+//#pragma config FNOSC = FRCPLL, FPLLIDIV = DIV_2, FPLLMUL = MUL_20, FPLLODIV = DIV_2, FPBDIV = DIV_1, FWDTEN = OFF, POSCMOD = OFF, FSOSCEN = OFF, CP = OFF
 
+//running at 64Mhz
+// #define CLOCK_FREQ      64000000ul
+#pragma config FPLLMUL = MUL_16, FPLLIDIV = DIV_2, FPLLODIV = DIV_1, FWDTEN = OFF
+#pragma config POSCMOD = XT, FNOSC = PRIPLL, FPBDIV = DIV_4, WDTPS = PS8192
 
 #define DEBOUNCE_TIME       0x00001FFF
 #define SWITCH_NOT_PRESSED  0
@@ -127,7 +131,8 @@ void BoardInit(void) {
 
     // Enable optimal performance
     SYSTEMConfigPerformance(GetSystemClock());
-    mOSCSetPBDIV(OSC_PB_DIV_1); // Use 1:1 CPU Core:Peripheral clocks
+//    mOSCSetPBDIV(OSC_PB_DIV_1); // Use 1:1 CPU Core:Peripheral clocks
+    mOSCSetPBDIV(OSC_PB_DIV_4); // Use 1:4 CPU Core:Peripheral clocks
 
     // Disable JTAG port so we get our I/O pins back, but first
     // wait 50ms so if you want to reprogram the part with
@@ -325,6 +330,7 @@ void BoardInit(void) {
     /*******************************************************************/
 
     ConfigureLCD_SPI();
+    LCDInit();
 
 }
 
@@ -462,3 +468,38 @@ void UserInterruptHandler(void)
         DelayMs(5);
     }  */ 
 }
+
+/*********************************************************************
+ * Function:        void LCDTRXCount(BYTE txCount, BYTE rxCount)
+ *
+ * PreCondition:    LCD has been initialized
+ *
+ * Input:           txCount - the total number of transmitted messages
+ *                  rxCount - the total number of received messages
+ *
+ * Output:          None
+ *
+ * Side Effects:    None
+ *
+ * Overview:        This function display the total numbers of TX and
+ *                  RX messages on the LCD, if applicable.
+ *
+ * Note:            This routine is only effective if Explorer16 or
+ *                  PIC18 Explorer demo boards are used
+ ********************************************************************/
+void LCDTRXCount(BYTE txCount, BYTE rxCount)
+{
+    
+    LCDErase();
+    #if defined(PIC18_EXPLORER) || defined(EIGHT_BIT_WIRELESS_BOARD)
+        sprintf((char *)LCDText, (far rom char*)"TX Messages: %3d", txCount);
+        sprintf((char *)&(LCDText[16]), (far rom char*)"RX Messages: %3d", rxCount);
+    #else
+        sprintf((char *)LCDText, (const char*)"TX Messages: %d", txCount);
+        sprintf((char *)&(LCDText[16]), (const char*)"RX Messages: %d", rxCount);
+    #endif
+    LCDUpdate();    
+   
+}
+
+#endif  //WIRELESS_EVAL_BOARD

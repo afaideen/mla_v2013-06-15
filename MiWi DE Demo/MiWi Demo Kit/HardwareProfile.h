@@ -64,7 +64,7 @@
     #elif defined(MIWI_CARD_DEMO_BOARD)
         #include "BSP_MiWiDemoBd.h"
     #elif defined(WIRELESS_EVAL_BOARD)
-        #include "BSP_PC32MX_WirelessEvalBoard.h"
+        #include "bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.h"
     #else
         #error No BSP Defined...
     #endif
