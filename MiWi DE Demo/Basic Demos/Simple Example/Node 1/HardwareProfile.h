@@ -55,7 +55,7 @@
     /*********************************************************************/
     //#define PICDEMZ
 //    #define PIC18_EXPLORER
-    #define EXPLORER16
+//    #define EXPLORER16
     //#define EIGHT_BIT_WIRELESS_BOARD
 
     // there are three ways to use NVM to store data: External EPROM, Data EEPROM and 
@@ -438,6 +438,10 @@
     	#define LCD_E_TRIS			(TRISDbits.TRISD4)
     	#define LCD_E_IO			(LATDbits.LATD4)
     
+    #elif defined(WIRELESS_EVAL_BOARD)
+        #include "bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.h"
+    #elif defined(MIWI_DEMO_KIT)
+        #include "bsp_wireless_eval_board/BSP_MiWiDemoBd.h"
     #elif defined(PIC18_EXPLORER)
     
         #define LCD_CS_TRIS         (TRISAbits.TRISA2)
@@ -465,7 +469,9 @@
     #elif defined(__C30__) 
         #define GetInstructionClock()	(CLOCK_FREQ/2)
     #elif defined(__PIC32MX__)
+        #ifndef WIRELESS_EVAL_BOARD
         #define GetInstructionClock()	(CLOCK_FREQ)
+        #endif
     #endif
 
     BYTE ButtonPressed(void);

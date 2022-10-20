@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=MPLAB.X
 
 # Active Configuration
-DEFAULTCONF=Eight_bit_Wireless_Development_Kit
+DEFAULTCONF=MIWI_DEMO_KIT
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=PIC18_Explorer PICDEM_Z Eight_bit_Wireless_Development_Kit Explorer_16_-_PIC24_or_dsPIC33 Explorer_16_-_PIC32 
+ALLCONFS=PIC18_Explorer PICDEM_Z Eight_bit_Wireless_Development_Kit Explorer_16_-_PIC24_or_dsPIC33 Explorer_16_-_PIC32 WIRELESS_EVAL_BOARD MIWI_DEMO_KIT 
 
 
 # build
@@ -50,6 +50,8 @@ ALLCONFS=PIC18_Explorer PICDEM_Z Eight_bit_Wireless_Development_Kit Explorer_16_
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Eight_bit_Wireless_Development_Kit clean
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Explorer_16_-_PIC24_or_dsPIC33 clean
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Explorer_16_-_PIC32 clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=WIRELESS_EVAL_BOARD clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=MIWI_DEMO_KIT clean
 
 
 
@@ -60,6 +62,8 @@ ALLCONFS=PIC18_Explorer PICDEM_Z Eight_bit_Wireless_Development_Kit Explorer_16_
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Eight_bit_Wireless_Development_Kit build
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Explorer_16_-_PIC24_or_dsPIC33 build
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Explorer_16_-_PIC32 build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=WIRELESS_EVAL_BOARD build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=MIWI_DEMO_KIT build
 
 
 

@@ -109,10 +109,10 @@ BYTE JoinAvailableChannel(BYTE channel);
 /*******************************************************************/
 //BYTE myChannel = 24;
 //BYTE myChannel = 11;
-BYTE myChannel = 14;
+//BYTE myChannel = 14;
 //BYTE myChannel = 15;
 //BYTE myChannel = 23;
-//BYTE myChannel = 26;//FAIL
+BYTE myChannel = 26;//FAIL
 //BYTE myChannel = 25;
 
 #define     ALL_CHANNEL     0xFFFF
@@ -156,14 +156,13 @@ int main(void)
     BYTE TxSynCount2 = 0;
     BYTE TxNum = 0;
     BYTE RxNum = 0;
+    MIWI_TICK t2, t3;
     
-        
     /*******************************************************************/
     // Initialize the system
     /*******************************************************************/
     BoardInit();      
     ConsoleInit();  
-    
     DemoOutput_Greeting();
     
     LED_1 = 0;
@@ -182,15 +181,15 @@ int main(void)
     MiApp_ProtocolInit(FALSE);  
 
     // Set default channel
-//    if( MiApp_SetChannel(myChannel) == FALSE )
-//    {
-//        DemoOutput_ChannelError(myChannel);
-//        #if defined(__18CXX)
-//            return;
-//        #else
-//            return 0;
-//        #endif
-//    }
+    if( MiApp_SetChannel(myChannel) == FALSE )
+    {
+        DemoOutput_ChannelError(myChannel);
+        #if defined(__18CXX)
+            return;
+        #else
+            return 0;
+        #endif
+    }
     
     /*******************************************************************/
     // Function MiApp_ConnectionMode defines the connection mode. The
@@ -202,7 +201,7 @@ int main(void)
     //  DISABLE_ALL_CONN:   Disable all connections. 
     /*******************************************************************/
     MiApp_ConnectionMode(ENABLE_ALL_CONN);
-//    DemoOutput_Channel(myChannel, 0);
+    DemoOutput_Channel(myChannel, 0);
     
 //    myChannel = AutoSearchActiveConnection(0b0000000011111111);
 //    AutoSearchActiveConnection(ALL_CHANNEL);
@@ -219,18 +218,18 @@ int main(void)
     //      radio range; Indirect mode means connection may or may not 
     //      in the radio range. 
     /*******************************************************************/
-//    while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
-////    DemoOutput_Channel(myChannel, 1);    
-////    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
-//    
-//    /*******************************************************************/
-//    // Display current opertion on LCD of demo board, if applicable
-//    /*******************************************************************/
+    while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
+    DemoOutput_Channel(myChannel, 1);    
+
+    /*******************************************************************/
+    // Display current opertion on LCD of demo board, if applicable
+    /*******************************************************************/
+    //    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
 //    if( i != 0xFF )
 //    {
 //        DemoOutput_Channel(myChannel, 1);
 //    }
-    JoinAvailableChannel(myChannel);
+//    JoinAvailableChannel(myChannel);
 
     /*******************************************************************/
     // Function DumpConnection is used to print out the content of the
@@ -246,14 +245,13 @@ int main(void)
     // Turn on LED 1 to indicate connection established
     LED_1 = 1;
     DemoOutput_Instruction();
-    MIWI_TICK t2, t3;
+    
     while(1)
     {
         t3 = MiWi_TickGet();
-//        if( TickGet() - t1 > TICK_SECOND )
-        if( MiWi_TickGetDiff(t3, t2) > 2 * ONE_SECOND )
+        if( MiWi_TickGetDiff(t3, t2) > 5 * ONE_SECOND )
+//        if( MiWi_TickGetDiff(t3, t2) > 0.5 * ONE_SECOND )
         {
-//            t1 = TickGet();
             t2 = MiWi_TickGet();
             LED_1 ^= 1;
         }
@@ -294,7 +292,6 @@ int main(void)
             // pushed.
             /*******************************************************************/
             BYTE PressedButton = ButtonPressed();
-            
             switch( PressedButton )
             {
                 case 1: 
@@ -304,6 +301,7 @@ int main(void)
                     // the buffer one byte by one byte by calling function 
                     // MiApp_WriteData
                     /*******************************************************************/
+                    
                     MiApp_FlushTx();
                     for(i = 0; i < 21; i++)
                     {
@@ -311,13 +309,16 @@ int main(void)
                     }
                     TxSynCount++;
                     
+                    
                     /*******************************************************************/
                     // Function MiApp_BroadcastPacket is used to broadcast a message
                     //    The only parameter is the boolean to indicate if we need to
                     //       secure the frame
                     /*******************************************************************/
                     MiApp_BroadcastPacket(FALSE);
+
                     DemoOutput_UpdateTxRx(++TxNum, RxNum);
+
                     break;
                     
                 case 2:
@@ -368,7 +369,7 @@ int main(void)
         }
     }
 }
-
+#if defined(ENABLE_ACTIVE_SCAN)
 BYTE AutoSearchActiveConnection(DWORD scan_chnl)
 {
     BYTE j, OperatingChannel = 0xFF;
@@ -420,6 +421,8 @@ BYTE AutoSearchActiveConnection(DWORD scan_chnl)
     return OperatingChannel;
 }
 
+#endif
+
 BYTE JoinAvailableChannel(BYTE channel)
 {
     BYTE i;
@@ -451,8 +454,8 @@ BYTE JoinAvailableChannel(BYTE channel)
             #endif
         }
 
-            i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
-//            while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
+//            i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+            while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
     }
     else
         while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
@@ -461,12 +464,14 @@ BYTE JoinAvailableChannel(BYTE channel)
     /*******************************************************************/
     // Display current operation on LCD of demo board, if applicable
     /*******************************************************************/
+#if defined(ENABLE_ACTIVE_SCAN)
     if( i != 0xFF )
     {
         //Join channel successful
         DemoOutput_Channel(ActiveScanResults[i].Channel, 1);
     }
     else
+#endif
         DemoOutput_Channel(channel, 0);
     
     

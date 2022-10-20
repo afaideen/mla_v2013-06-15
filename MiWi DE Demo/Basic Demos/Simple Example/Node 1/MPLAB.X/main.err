@@ -1,1 +1,2 @@
-Error[yy] D:\microchip_solutions_v2013-06-15\MiWi DE Demo\Basic Demos\Simple Example\Node 1\main.c 292 : syntax error
+Warning[2053] D:\github\microchip\mla_v2013-06-15\MiWi DE Demo\Basic Demos\Simple Example\Node 1\main.c 454 : return value expected
+Warning[2053] D:\github\microchip\mla_v2013-06-15\MiWi DE Demo\Basic Demos\Simple Example\Node 1\main.c 493 : return value expected

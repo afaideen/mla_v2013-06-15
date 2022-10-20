@@ -11,6 +11,38 @@
             <sourceEncoding>UTF-8</sourceEncoding>
             <asminc-extensions/>
             <make-dep-projects/>
+            <sourceRootList>
+                <sourceRootElem>..</sourceRootElem>
+            </sourceRootList>
+            <confList>
+                <confElem>
+                    <name>PIC18_Explorer</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>PICDEM_Z</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>Eight_bit_Wireless_Development_Kit</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>Explorer_16_-_PIC24_or_dsPIC33</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>Explorer_16_-_PIC32</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>PIC32_WIRELESS_EVAL_BOARD</name>
+                    <type>2</type>
+                </confElem>
+            </confList>
+            <formatting>
+                <project-formatting-style>false</project-formatting-style>
+            </formatting>
         </data>
     </configuration>
 </project>

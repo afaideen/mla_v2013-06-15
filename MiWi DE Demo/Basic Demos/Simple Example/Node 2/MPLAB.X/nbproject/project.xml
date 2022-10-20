@@ -11,7 +11,9 @@
             <sourceEncoding>UTF-8</sourceEncoding>
             <asminc-extensions/>
             <make-dep-projects/>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem>../bsp_wireless_eval_board</sourceRootElem>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>PIC18_Explorer</name>
@@ -31,6 +33,14 @@
                 </confElem>
                 <confElem>
                     <name>Explorer_16_-_PIC32</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>WIRELESS_EVAL_BOARD</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>MIWI_DEMO_KIT</name>
                     <type>2</type>
                 </confElem>
             </confList>

@@ -76,7 +76,7 @@ ROM const BYTE DE[6][11] =
     {0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x0D,0x0A}
 }; 
 
-
+#if defined(ENABLE_ACTIVE_SCAN)
 BYTE DemoOutput_ActiveScanResults(BYTE num)
 {
     BYTE i;
@@ -117,7 +117,7 @@ void DemoOutput_Rescan(void)
 {
     Printf("\r\nNo Suitable PAN, Rescanning...");
 }    
-
+#endif
 
 
 void DemoOutput_Greeting(void)
@@ -223,6 +223,7 @@ void DemoOutput_Channel(BYTE channel, BYTE Step)
     if( Step == 0 )
     {
         LCDDisplay((char *)"Connecting Peer  on Channel %d ", channel, TRUE);
+//        LCDDisplay((char *)"Creating network  on Ch %d ", channel, TRUE);
         Printf("\r\nConnecting Peer on Channel ");
         PrintDec(channel);
         Printf("\r\n");
@@ -238,8 +239,12 @@ void DemoOutput_Channel(BYTE channel, BYTE Step)
 
 void DemoOutput_Instruction(void)
 {
-    #if defined(EXPLORER16)
+    #if defined(EXPLORER16) 
         LCDDisplay((char *)"RD6: Broadcast  RD7: Unicast", 0, FALSE); 
+    #elif defined(WIRELESS_EVAL_BOARD)
+        LCDDisplay((char *)"SW0: Broadcast  SW2: Unicast", 0, FALSE); 
+    #elif defined(MIWI_DEMO_KIT)
+        LCDDisplay((char *)"SW1: Broadcast  SW2: Unicast", 0, FALSE); 
     #elif defined(PIC18_EXPLORER)
         LCDDisplay((char *)"RB0: Broadcast  RA5: Unicast", 0, FALSE); 
     #elif defined(EIGHT_BIT_WIRELESS_BOARD)
@@ -248,7 +253,8 @@ void DemoOutput_Instruction(void)
 }    
 
 
-void DemoOutput_HandleMessage(BYTE TxNum, BYTE RxNum)
+//void DemoOutput_HandleMessage(BYTE TxNum, BYTE RxNum)
+void DemoOutput_HandleMessage(void)
 {
     BYTE i;
     

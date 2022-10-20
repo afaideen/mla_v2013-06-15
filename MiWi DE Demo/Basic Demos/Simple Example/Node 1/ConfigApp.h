@@ -38,7 +38,9 @@
 // ENABLE_CONSOLE will enable the print out on the hyper terminal
 // this definition is very helpful in the debugging process
 /*********************************************************************/
+#ifndef MIWI_DEMO_KIT
 #define ENABLE_CONSOLE
+#endif
 
 /*********************************************************************/
 // HARDWARE_SPI enables the hardware SPI implementation on MCU
@@ -60,14 +62,14 @@
     // PROTOCOL_MIWI enables the application to use MiWi mesh networking
     // stack. This definition cannot be defined with PROTOCOL_P2P.
     /*********************************************************************/
-    //#define PROTOCOL_MIWI
+    #define PROTOCOL_MIWI
 
 
     /*********************************************************************/
     // PROTOCOL_MIWI_PRO enables the application to use MiWi PRO stack. 
     // This definition cannot be defined with PROTOCOL_P2P or PROTOCOL_MIWI.
     /*********************************************************************/
-    #define PROTOCOL_MIWI_PRO
+//    #define PROTOCOL_MIWI_PRO
 
         /*********************************************************************/
         // NWK_ROLE_COORDINATOR is not valid if PROTOCOL_P2P is defined. It
@@ -137,7 +139,7 @@
 #define EUI_3 0x55
 #define EUI_2 0x66
 #define EUI_1 0x77
-#define EUI_0 0x02
+#define EUI_0 0x01
 
 /*********************************************************************/
 // TX_BUFFER_SIZE defines the maximum size of application payload
@@ -208,7 +210,7 @@
 // ENABLE_ED_SCAN will enable the device to do an energy detection scan
 // to find out the channel with least noise and operate on that channel
 /*********************************************************************/
-#define ENABLE_ED_SCAN
+//#define ENABLE_ED_SCAN
 
 
 /*********************************************************************/
@@ -317,6 +319,10 @@
 
 #if (CONNECTION_SIZE > 0xFE)
     #error NETWORK TABLE SIZE too large.  Must be < 0xFF.
+#endif
+
+#if defined(MIWI_DEMO_KIT) && defined(ENABLE_CONSOLE)  
+    #error MIWI DEMO KIT does not have UART because pin shared with spi functions
 #endif
 
 #include "HardwareProfile.h"

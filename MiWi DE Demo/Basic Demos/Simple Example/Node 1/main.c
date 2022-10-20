@@ -110,12 +110,12 @@ BOOL CreateNewConnectionAtChannel(BYTE channel);
 //BYTE myChannel = 24;//GOOD
 //BYTE myChannel = 11;
 //BYTE myChannel = 13;
-BYTE myChannel = 14;
+//BYTE myChannel = 14;
 //BYTE myChannel = 15;//GOOD
 //BYTE myChannel = 19;//GOOD
 //BYTE myChannel = 17;//GOOD
 //BYTE myChannel = 23;//GOOD
-//BYTE myChannel = 26;//GOOD
+BYTE myChannel = 26;//GOOD
 //BYTE myChannel = 25;//GOOD
 //BYTE myChannel = 22;
 //BYTE myChannel = 21;//GOOD
@@ -165,6 +165,7 @@ int main(void)
     BYTE TxSynCount2 = 0;
     BYTE TxNum = 0;
     BYTE RxNum = 0;
+    MIWI_TICK t2, t3;
     
     /*******************************************************************/
     // Initialize the system
@@ -189,15 +190,15 @@ int main(void)
     MiApp_ProtocolInit(FALSE);
 
     // Set default channel
-//    if( MiApp_SetChannel(myChannel) == FALSE )
-//    {
-//        DemoOutput_ChannelError(myChannel);
-//        #if defined(__18CXX)
-//            return;
-//        #else
-//            return 0;
-//        #endif
-//    }
+    if( MiApp_SetChannel(myChannel) == FALSE )
+    {
+        DemoOutput_ChannelError(myChannel);
+        #if defined(__18CXX)
+            return;
+        #else
+            return 0;
+        #endif
+    }
     
     /*******************************************************************/
     // Function MiApp_ConnectionMode defines the connection mode. The
@@ -209,25 +210,26 @@ int main(void)
     //  DISABLE_ALL_CONN:   Disable all connections. 
     /*******************************************************************/
     MiApp_ConnectionMode(ENABLE_ALL_CONN);
-//    DemoOutput_Channel(myChannel, 0);
+    DemoOutput_Channel(myChannel, 0);
 
     CreateNewConnectionAtChannel(myChannel);
 //    CreateNewConnectionWithLeastNoise(0b0000000011111111);
 //    CreateNewConnectionWithLeastNoise(0b0000000011111111);
 //    CreateNewConnectionWithLeastNoise(ALL_CHANNEL);
 
-    /*******************************************************************/
-    // Function MiApp_EstablishConnection try to establish a new 
-    // connection with peer device. 
-    // The first parameter is the index to the active scan result, 
-    //      which is acquired by discovery process (active scan). If 
-    //      the value of the index is 0xFF, try to establish a 
-    //      connection with any peer.
-    // The second parameter is the mode to establish connection, 
-    //      either direct or indirect. Direct mode means connection 
-    //      within the radio range; indirect mode means connection 
-    //      may or may not in the radio range. 
-    /*******************************************************************/
+//    //Uncomment for original below
+//    /*******************************************************************/
+//    // Function MiApp_EstablishConnection try to establish a new 
+//    // connection with peer device. 
+//    // The first parameter is the index to the active scan result, 
+//    //      which is acquired by discovery process (active scan). If 
+//    //      the value of the index is 0xFF, try to establish a 
+//    //      connection with any peer.
+//    // The second parameter is the mode to establish connection, 
+//    //      either direct or indirect. Direct mode means connection 
+//    //      within the radio range; indirect mode means connection 
+//    //      may or may not in the radio range. 
+//    /*******************************************************************/
 //    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
 //    
 //    /*******************************************************************/
@@ -273,8 +275,6 @@ int main(void)
 //        MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
 //    }
     
-    
-
     /*******************************************************************/
     // Function DumpConnection is used to print out the content of the
     //  Connection Entry on the hyperterminal. It may be useful in 
@@ -289,12 +289,12 @@ int main(void)
     // Turn on LED 1 to indicate connection established
     LED_1 = 1;
     DemoOutput_Instruction();
-    MIWI_TICK t2, t3;
+     
     while(1)
     {
         ClrWdt();
         t3 = MiWi_TickGet();
-        if( MiWi_TickGetDiff(t3, t2) > 2 * ONE_SECOND )
+        if( MiWi_TickGetDiff(t3, t2) > 0.5 * ONE_SECOND )
         {
             t2 = MiWi_TickGet();
             LED_1 ^= 1;
@@ -417,6 +417,7 @@ int main(void)
 //BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl, BYTE channel)
 BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl)
 {  
+    BOOL connstat = FALSE;
     DWORD scan_chnl_;
 //    //Pre-condition compulsary to init channel setting
 //    // Set default channel
@@ -433,7 +434,7 @@ BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl)
 //    scan_chnl = 0b0000000011111000 << 11;
     scan_chnl_ = scan_chnl << 11;
 //  scan_chnl = 0xFFFF << 11; //move the 16-bit 0xFFFF to the left by 11 bits. Scan from channel bit 11 to bit 26. bit0-bit10, bit27-bit31 are considered invalid. 
-    BOOL connstat = FALSE;
+    
     while(!connstat){
         Printf("\r\nCreate connection...");
         //    MiApp_StartConnection(START_CONN_CS_SCN , 10, 0);//not yet available
@@ -444,6 +445,7 @@ BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl)
 }
 BOOL CreateNewConnectionAtChannel(BYTE channel)
 {
+    BOOL connstat;
     // Set default channel
     if( MiApp_SetChannel(channel) == FALSE )
     {
@@ -458,13 +460,16 @@ BOOL CreateNewConnectionAtChannel(BYTE channel)
     Printf("\r\nCreate connection...");
     
     
-    BOOL connstat = MiApp_StartConnection(START_CONN_DIRECT, 10, 0xFFFFFFFF);//create connection at selected channel/myChannel
+    connstat = MiApp_StartConnection(START_CONN_DIRECT, 10, 0xFFFFFFFF);//create connection at selected channel/myChannel
 //    BOOL connstat = MiApp_StartConnection(START_CONN_DIRECT, 0, 0);//also okay!
     return connstat;
 }
 
-void JoinAvailableChannel(void)
+BYTE JoinAvailableChannel(BYTE channel)
 {
+    BYTE i;
+    
+    
        /*******************************************************************/
     // Function MiApp_EstablishConnection try to establish a new 
     // connection with peer device. 
@@ -477,50 +482,40 @@ void JoinAvailableChannel(void)
     //      within the radio range; indirect mode means connection 
     //      may or may not in the radio range. 
     /*******************************************************************/
-//    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
-//    
-//    /*******************************************************************/
-//    // Display current opertion on LCD of demo board, if applicable
-//    /*******************************************************************/
-//    if( i != 0xFF )
-//    {
-//        DemoOutput_Channel(myChannel, 1);
-//    }
-//    else
-//    {
-//        /*******************************************************************/
-//        // If no network can be found and join, we need to start a new 
-//        // network by calling function MiApp_StartConnection
-//        //
-//        // The first parameter is the mode of start connection. There are 
-//        // two valid connection modes:
-//        //   - START_CONN_DIRECT        start the connection on current 
-//        //                              channel
-//        //   - START_CONN_ENERGY_SCN    perform an energy scan first, 
-//        //                              before starting the connection on 
-//        //                              the channel with least noise
-//        //   - START_CONN_CS_SCN        perform a carrier sense scan 
-//        //                              first, before starting the 
-//        //                              connection on the channel with 
-//        //                              least carrier sense noise. Not
-//        //                              supported for current radios
-//        //
-//        // The second parameter is the scan duration, which has the same 
-//        //     definition in Energy Scan. 10 is roughly 1 second. 9 is a 
-//        //     half second and 11 is 2 seconds. Maximum scan duration is 
-//        //     14, or roughly 16 seconds.
-//        //
-//        // The third parameter is the channel map. Bit 0 of the 
-//        //     double word parameter represents channel 0. For the 2.4GHz 
-//        //     frequency band, all possible channels are channel 11 to 
-//        //     channel 26. As the result, the bit map is 0x07FFF800. Stack 
-//        //     will filter out all invalid channels, so the application 
-//        //     only needs to pay attention to the channels that are not 
-//        //     preferred.
-//        /*******************************************************************/
-//        Printf("\r\nStart connection...");
-//        MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
-//    }
+
+    if( channel >= 11 && channel <= 26)
+    {
+        // Set default channel
+        if( MiApp_SetChannel(channel) == FALSE )
+        {
+            DemoOutput_ChannelError(channel);
+            #if defined(__18CXX)
+                return;
+            #else
+                return 0;
+            #endif
+        }
+
+//            i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+            while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
+    }
+    else
+        while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
+
+    
+    /*******************************************************************/
+    // Display current operation on LCD of demo board, if applicable
+    /*******************************************************************/
+#if defined(ENABLE_ACTIVE_SCAN)
+    if( i != 0xFF )
+    {
+        //Join channel successful
+        DemoOutput_Channel(ActiveScanResults[i].Channel, 1);
+    }
+    else
+#endif
+        DemoOutput_Channel(channel, 0);
     
     
+    return i;
 }

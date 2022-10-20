@@ -38,8 +38,41 @@
 // ENABLE_CONSOLE will enable the print out on the hyper terminal
 // this definition is very helpful in the debugging process
 /*********************************************************************/
-#define ENABLE_CONSOLE
+//#define ENABLE_CONSOLE    //cannot use this as uart2 rx pin because this pin RD2/RP19 conflicted with MOSI2 interfacing LCD, SPIFlash, and EEProm
 
+
+#define DEBUG_ON
+
+/*********************************************************************/
+// GUI_MODE will enable the prints according to packet format 
+//defined for GUI
+/*********************************************************************/
+#ifdef ENABLE_CONSOLE
+	#define ENABLE_GUI
+#endif
+
+/*********************************************************************/
+// ENABLE_POWERSAVE will enable power save mode 
+//defined for battery operated devices
+/*********************************************************************/
+#define ENABLE_POWERSAVE
+
+#ifdef ENABLE_POWERSAVE
+	#define ENABLE_MANUALBACKLIGHT
+#endif
+
+#define USE_IRQ0_AS_INTERRUPT   //used for MRF89XA
+
+/*********************************************************************/
+// ENABLE_NETWORK_FREEZER enables the network freezer feature, which
+// stores critical network information into non-volatile memory, so
+// that the protocol stack can recover from power loss gracefully.
+// Network freezer feature needs definition of NVM kind to be 
+// used, which is specified in HardwareProfile.h
+/*********************************************************************/
+#ifndef SIMPLE_EXAMPLE
+    #define ENABLE_NETWORK_FREEZER
+#endif
 
 /*********************************************************************/
 // HARDWARE_SPI enables the hardware SPI implementation on MCU
@@ -47,7 +80,6 @@
 // be used to bit-bang the RF transceiver
 /*********************************************************************/
 #define HARDWARE_SPI
-
 
 //------------------------------------------------------------------------
 // Definition of Protocol Stack. ONLY ONE PROTOCOL STACK CAN BE CHOSEN
@@ -63,19 +95,23 @@
     // PROTOCOL_MIWI enables the application to use MiWi mesh networking
     // stack. This definition cannot be defined with PROTOCOL_P2P.
     /*********************************************************************/
-    //#define PROTOCOL_MIWI
+    #define PROTOCOL_MIWI
 
     /*********************************************************************/
     // PROTOCOL_MIWI_PRO enables the application to use MiWi PRO stack. 
     // This definition cannot be defined with PROTOCOL_P2P or PROTOCOL_MIWI.
     /*********************************************************************/
-    #define PROTOCOL_MIWI_PRO
+//    #define PROTOCOL_MIWI_PRO
+
+
+
 
         /*********************************************************************/
         // NWK_ROLE_END_DEVICE is not valid if PROTOCOL_P2P is defined. It 
         // specified that the node has the capability to be an end device.
         // This definition cannot be defined with NWK_ROLE_COORDINATOR.
         /*********************************************************************/
+//        #define NWK_ROLE_COORDINATOR
         #define NWK_ROLE_END_DEVICE
 
 
@@ -134,8 +170,14 @@
 #define EUI_3 0x55
 #define EUI_2 0x66
 #define EUI_1 0x77
-#define EUI_0 0x03
+#ifdef NWK_ROLE_COORDINATOR
+    #define EUI_0 0x01
+#elif defined(NWK_ROLE_END_DEVICE)
 
+#define EUI_0 0x02
+#endif
+
+#define ENABLE_EEPROM
 
 /*********************************************************************/
 // TX_BUFFER_SIZE defines the maximum size of application payload
@@ -155,9 +197,12 @@
 // MY_PAN_ID defines the PAN identifier. Use 0xFFFF to join network
 // with any PAN ID.
 /*********************************************************************/
-#define MY_PAN_ID                       0x1234
-
-
+#ifdef NWK_ROLE_COORDINATOR
+    #define MY_PAN_ID                       0xFFFF
+#elif defined NWK_ROLE_END_DEVICE
+//    #define MY_PAN_ID                       0x1234
+    #define MY_PAN_ID                       0xFFFF// PAN ID used by end device must be the same with coordinator
+#endif
 /*********************************************************************/
 // ADDITIONAL_NODE_ID_SIZE defines the size of additional payload
 // will be attached to the P2P Connection Request. Additional payload 
@@ -204,8 +249,9 @@
 // ENABLE_SLEEP will enable the device to go to sleep and wake up 
 // from the sleep
 /*********************************************************************/
-//#define ENABLE_SLEEP  
-
+#ifdef NWK_ROLE_END_DEVICE
+//    #define ENABLE_SLEEP
+#endif
 
 /*********************************************************************/
 // ENABLE_ED_SCAN will enable the device to do an energy detection scan
@@ -217,8 +263,7 @@
 // ENABLE_ACTIVE_SCAN will enable the device to do an active scan to 
 // to detect current existing connection. 
 /*********************************************************************/
-#define ENABLE_ACTIVE_SCAN
-
+//#define ENABLE_ACTIVE_SCAN
 
 /*********************************************************************/
 // ENABLE_SECURITY will enable the device to encrypt and decrypt
@@ -232,15 +277,16 @@
 // for the sleeping devices temporily until they wake up and ask for
 // the messages
 /*********************************************************************/
-//#define ENABLE_INDIRECT_MESSAGE
-
-
+#ifdef NWK_ROLE_COORDINATOR//For NWK_ROLE_END_DEVICE, should disabled
+    #define ENABLE_INDIRECT_MESSAGE
+#endif
 /*********************************************************************/
 // ENABLE_BROADCAST will enable the device to broadcast messages for
 // the sleeping devices until they wake up and ask for the messages
 /*********************************************************************/
-//#define ENABLE_BROADCAST
-
+#ifdef NWK_ROLE_COORDINATOR
+    #define ENABLE_BROADCAST
+#endif
 
 /*********************************************************************/
 // RFD_WAKEUP_INTERVAL defines the wake up interval for RFDs in second.
@@ -248,14 +294,14 @@
 // timeout. RFD depends on the setting of the watchdog timer to wake 
 // up, thus this definition is not used.
 /*********************************************************************/
-//#define RFD_WAKEUP_INTERVAL     8
+#define RFD_WAKEUP_INTERVAL     8
 
 
 /*********************************************************************/
 // ENABLE_FREQUENCY_AGILITY will enable the device to change operating
 // channel to bypass the sudden change of noise
 /*********************************************************************/
-//#define ENABLE_FREQUENCY_AGILITY
+//#define ENABLE_FREQUENCY_AGILITY    //For NWK_ROLE_COORDINATOR
 
 
 // Constants Validation
@@ -287,6 +333,7 @@
 
 #if defined(ENABLE_NETWORK_FREEZER)
     #define ENABLE_NVM
+	//#define ENABLE_NVM_MAC
 #endif
 
 #if defined(ENABLE_ACTIVE_SCAN) && defined(TARGET_SMALL)
@@ -316,7 +363,6 @@
 #if (CONNECTION_SIZE > 0xFE)
     #error NETWORK TABLE SIZE too large.  Must be < 0xFF.
 #endif
-
 
 #include "HardwareProfile.h"
 

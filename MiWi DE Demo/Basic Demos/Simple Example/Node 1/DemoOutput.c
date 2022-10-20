@@ -10,7 +10,7 @@
 *
 * Copyright and Disclaimer Notice for MiWi DE Software:
 *
-* Copyright © 2007-2012 Microchip Technology Inc.  All rights reserved.
+* Copyright ï¿½ 2007-2012 Microchip Technology Inc.  All rights reserved.
 *
 * Microchip licenses to you the right to use, modify, copy and distribute 
 * Software only when embedded on a Microchip microcontroller or digital 
@@ -21,7 +21,7 @@
 * You should refer to the license agreement accompanying this Software for 
 * additional information regarding your rights and obligations.
 *
-* SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS” WITHOUT WARRANTY OF ANY 
+* SOFTWARE AND DOCUMENTATION ARE PROVIDED ï¿½AS ISï¿½ WITHOUT WARRANTY OF ANY 
 * KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY 
 * WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A 
 * PARTICULAR PURPOSE. IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE 
@@ -74,7 +74,52 @@ ROM const BYTE DE[6][11] =
     {0xB2,0x20,0x20,0xB2,0x20,0xB2,0x20,0x20,0x20,0x0D,0x0A},
     {0xB2,0xB2,0xB2,0x20,0x20,0xB2,0xB2,0xB2,0xB2,0x0D,0x0A},
     {0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x0D,0x0A}
-}; 
+}; 
+
+#if defined(ENABLE_ACTIVE_SCAN)
+BYTE DemoOutput_ActiveScanResults(BYTE num)
+{
+    BYTE i;
+    BYTE j;
+    BYTE OperatingChannel = 0xFF;
+    
+    if( num > 0 )
+    {
+        // now print out the scan result.
+        Printf("\r\nActive Scan Results: \r\n");
+        for(i = 0; i < num; i++)
+        {
+            Printf("Channel: ");
+            PrintDec(ActiveScanResults[i].Channel);
+            Printf("   RSSI: ");
+            PrintChar(ActiveScanResults[i].RSSIValue);
+            #if defined(IEEE_802_15_4)
+                #if ADDITIONAL_NODE_ID_SIZE > 0
+                    Printf("   PeerInfo: ");
+                    for(j = 0; j < ADDITIONAL_NODE_ID_SIZE; j++)
+                    {
+                        PrintChar(ActiveScanResults[i].PeerInfo[j]);
+                    }
+                #endif
+                Printf("    PANID: ");
+                PrintChar(ActiveScanResults[i].PANID.v[1]);
+                PrintChar(ActiveScanResults[i].PANID.v[0]);
+                Printf("\r\n");
+            #endif
+            OperatingChannel = ActiveScanResults[i].Channel;
+        }
+    }
+    
+    return OperatingChannel;
+}  
+
+void DemoOutput_Rescan(void)
+{
+    Printf("\r\nNo Suitable PAN, Rescanning...");
+}    
+#endif
+
+
 void DemoOutput_Greeting(void)
 {
     #if defined(MRF49XA)
@@ -177,7 +222,8 @@ void DemoOutput_Channel(BYTE channel, BYTE Step)
 {
     if( Step == 0 )
     {
-        LCDDisplay((char *)"Connecting Peer  on Channel %d ", channel, TRUE);
+//        LCDDisplay((char *)"Connecting Peer  on Channel %d ", channel, TRUE);
+        LCDDisplay((char *)"Creating network  on Ch %d ", channel, TRUE);
         Printf("\r\nConnecting Peer on Channel ");
         PrintDec(channel);
         Printf("\r\n");
@@ -195,6 +241,10 @@ void DemoOutput_Instruction(void)
 {
     #if defined(EXPLORER16)
         LCDDisplay((char *)"RD6: Broadcast  RD7: Unicast", 0, FALSE); 
+    #elif defined(WIRELESS_EVAL_BOARD)
+        LCDDisplay((char *)"SW0: Broadcast  SW2: Unicast", 0, FALSE);
+    #elif defined(MIWI_DEMO_KIT)
+        LCDDisplay((char *)"SW1: Broadcast  SW2: Unicast", 0, FALSE);
     #elif defined(PIC18_EXPLORER)
         LCDDisplay((char *)"RB0: Broadcast  RA5: Unicast", 0, FALSE); 
     #elif defined(EIGHT_BIT_WIRELESS_BOARD)
