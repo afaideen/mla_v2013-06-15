@@ -1,0 +1,7 @@
+Error[1027] C:\Users\afaid\MPLABXProjects\pic18f-ext_interrupt.X\mcc_generated_files\explorer1632demo.c 44 : unable to locate 'xc.h'
+Error[1027] C:\Users\afaid\MPLABXProjects\pic18f-ext_interrupt.X\mcc_generated_files\explorer1632demo.c 45 : unable to locate 'time.h'
+Error[1027] C:\Users\afaid\MPLABXProjects\pic18f-ext_interrupt.X\mcc_generated_files\explorer1632demo.c 46 : unable to locate 'stdbool.h'
+Error[1027] C:\Users\afaid\MPLABXProjects\pic18f-ext_interrupt.X\mcc_generated_files\explorer1632demo.c 50 : unable to locate 'button.h'
+Error[1027] C:\Users\afaid\MPLABXProjects\pic18f-ext_interrupt.X\mcc_generated_files\explorer1632demo.c 51 : unable to locate 'blink_led.h'
+Error[1027] C:\Users\afaid\MPLABXProjects\pic18f-ext_interrupt.X\mcc_generated_files\explorer1632demo.c 52 : unable to locate 'button_led.h'
+Error[1027] C:\Users\afaid\MPLABXProjects\pic18f-ext_interrupt.X\mcc_generated_files\explorer1632demo.c 54 : unable to locate 'potentiometer.h'

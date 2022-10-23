@@ -1,0 +1,2265 @@
+
+
+Microchip MPLAB XC8 Assembler V2.36 build 20220127204148 
+                                                                                               Sun Oct 23 14:59:32 2022
+
+Microchip MPLAB XC8 C Compiler v2.36 (Free license) build 20220127204148 Og1 
+     1                           	processor	18F46J13
+     2                           	fnconf	rparam,??,?,0
+     3                           	pagewidth 120
+     4                           	opt	flic
+     5                           	psect	nvCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     6                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     7                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     8                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text4,global,reloc=2,class=CODE,delta=1
+    13                           	psect	text5,global,reloc=2,class=CODE,delta=1
+    14                           	psect	text6,global,reloc=2,class=CODE,delta=1
+    15                           	psect	text7,global,reloc=2,class=CODE,delta=1
+    16                           	psect	text8,global,reloc=2,class=CODE,delta=1
+    17                           	psect	text9,global,reloc=2,class=CODE,delta=1
+    18                           	psect	intcodelo,global,reloc=2,class=CODE,delta=1
+    19                           	psect	text11,global,reloc=2,class=CODE,delta=1
+    20                           	psect	text12,global,reloc=2,class=CODE,delta=1
+    21                           	psect	text13,global,reloc=2,class=CODE,delta=1
+    22                           	psect	text14,global,reloc=2,class=CODE,delta=1
+    23                           	psect	text15,global,reloc=2,class=CODE,delta=1
+    24                           	psect	text16,global,reloc=2,class=CODE,delta=1
+    25                           	psect	intcode,global,reloc=2,class=CODE,delta=1
+    26                           	psect	intcode_body,global,reloc=2,class=CODE,delta=1
+    27                           	psect	text18,global,reloc=2,class=CODE,delta=1
+    28                           	psect	text19,global,reloc=2,class=CODE,delta=1
+    29                           	psect	text20,global,reloc=2,class=CODE,delta=1
+    30                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    31                           	psect	text21,global,reloc=2,class=CODE,delta=1
+    32                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    33                           	psect	temp,global,ovrld,common,class=COMRAM,space=1,delta=1
+    34                           	psect	config,global,abs,ovrld,class=CONFIG,space=4,delta=1,noexec
+    35  0000                     
+    36                           ; Version 2.36
+    37                           ; Generated 28/01/2022 GMT
+    38                           ; 
+    39                           ; Copyright © 2022, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    40                           ; All rights reserved.
+    41                           ; 
+    42                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    43                           ; 
+    44                           ; Redistribution and use in source and binary forms, with or without modification, are
+    45                           ; permitted provided that the following conditions are met:
+    46                           ; 
+    47                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    48                           ;        conditions and the following disclaimer.
+    49                           ; 
+    50                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    51                           ;        of conditions and the following disclaimer in the documentation and/or other
+    52                           ;        materials provided with the distribution. Publication is not required when
+    53                           ;        this file is used in an embedded application.
+    54                           ; 
+    55                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    56                           ;        software without specific prior written permission.
+    57                           ; 
+    58                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    59                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    60                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    61                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    62                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    63                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    64                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    65                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    66                           ; 
+    67                           ; 
+    68                           ; Code-generator required, PIC18F46J13 Definitions
+    69                           ; 
+    70                           ; SFR Addresses
+    71  0000                     _TMR0L	set	4054
+    72  0000                     _TMR0H	set	4055
+    73  0000                     _TRISD	set	3989
+    74  0000                     _TRISC	set	3988
+    75  0000                     _TRISB	set	3987
+    76  0000                     _LATC	set	3979
+    77  0000                     _LATB	set	3978
+    78                           
+    79                           	psect	nvCOMRAM
+    80  00000C                     __pnvCOMRAM:
+    81                           	callstack 0
+    82  00000C                     _INT2_InterruptHandler:
+    83                           	callstack 0
+    84  00000C                     	ds	2
+    85  00000E                     _INT1_InterruptHandler:
+    86                           	callstack 0
+    87  00000E                     	ds	2
+    88  000010                     _timer0ReloadVal:
+    89                           	callstack 0
+    90  000010                     	ds	2
+    91  000012                     _TMR0_InterruptHandler:
+    92                           	callstack 0
+    93  000012                     	ds	2
+    94  0000                     _T0CON	set	4053
+    95  0000                     _LATAbits	set	3977
+    96  0000                     _LATCbits	set	3979
+    97  0000                     _TRISEbits	set	3990
+    98  0000                     _RPINR1	set	3809
+    99  0000                     _RPINR2	set	3810
+   100  0000                     _REFOCON	set	3901
+   101  0000                     _OSCTUNE	set	3995
+   102  0000                     _OSCCON	set	4051
+   103  0000                     _T0CONbits	set	4053
+   104  0000                     _INTCON3bits	set	4080
+   105  0000                     _INTCON2bits	set	4081
+   106  0000                     _RCONbits	set	4048
+   107  0000                     _ODCON3	set	3904
+   108  0000                     _ODCON2	set	3905
+   109  0000                     _ODCON1	set	3906
+   110  0000                     _ANCON0	set	3912
+   111  0000                     _OSCCON2	set	3975
+   112  0000                     _LATA	set	3977
+   113  0000                     _LATD	set	3980
+   114  0000                     _LATE	set	3981
+   115  0000                     _TRISA	set	3986
+   116  0000                     _TRISE	set	3990
+   117  0000                     _ANCON1	set	3913
+   118  0000                     _INTCONbits	set	4082
+   119                           
+   120                           ; #config settings
+   121                           
+   122                           	psect	cinit
+   123  000248                     __pcinit:
+   124                           	callstack 0
+   125  000248                     start_initialization:
+   126                           	callstack 0
+   127  000248                     __initialization:
+   128                           	callstack 0
+   129  000248                     end_of_initialization:
+   130                           	callstack 0
+   131  000248                     __end_of__initialization:
+   132                           	callstack 0
+   133  000248  9014               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
+   134  00024A  9214               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+   135  00024C  0E00               	movlw	low (__Lmediumconst shr (0+16))
+   136  00024E  6EF8               	movwf	tblptru,c
+   137  000250  0100               	movlb	0
+   138  000252  EF08  F001         	goto	_main	;jump to C main() function
+   139                           
+   140                           	psect	cstackCOMRAM
+   141  000001                     __pcstackCOMRAM:
+   142                           	callstack 0
+   143  000001                     ??_INTERRUPT_InterruptManagerHigh:
+   144  000001                     
+   145                           ; 1 bytes @ 0x0
+   146  000001                     	ds	2
+   147  000003                     ??_INTERRUPT_InterruptManagerLow:
+   148  000003                     
+   149                           ; 1 bytes @ 0x2
+   150  000003                     	ds	5
+   151  000008                     TMR0_SetInterruptHandler@InterruptHandler:
+   152                           	callstack 0
+   153  000008                     INT1_SetInterruptHandler@InterruptHandler:
+   154                           	callstack 0
+   155  000008                     INT2_SetInterruptHandler@InterruptHandler:
+   156                           	callstack 0
+   157                           
+   158                           ; 2 bytes @ 0x7
+   159  000008                     	ds	2
+   160  00000A                     ??_TMR0_Initialize:
+   161  00000A                     
+   162                           ; 1 bytes @ 0x9
+   163  00000A                     	ds	2
+   164  00000C                     
+   165                           ; 1 bytes @ 0xB
+   166 ;;
+   167 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   168 ;;
+   169 ;; *************** function _main *****************
+   170 ;; Defined at:
+   171 ;;		line 49 in file "main.c"
+   172 ;; Parameters:    Size  Location     Type
+   173 ;;		None
+   174 ;; Auto vars:     Size  Location     Type
+   175 ;;		None
+   176 ;; Return value:  Size  Location     Type
+   177 ;;                  1    wreg      void 
+   178 ;; Registers used:
+   179 ;;		wreg, status,2, status,0, cstack
+   180 ;; Tracked objects:
+   181 ;;		On entry : 0/0
+   182 ;;		On exit  : 0/0
+   183 ;;		Unchanged: 0/0
+   184 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   185 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   186 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   187 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   188 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   189 ;;Total ram usage:        0 bytes
+   190 ;; Hardware stack levels required when called: 11
+   191 ;; This function calls:
+   192 ;;		_SYSTEM_Initialize
+   193 ;; This function is called by:
+   194 ;;		Startup code after reset
+   195 ;; This function uses a non-reentrant model
+   196 ;;
+   197                           
+   198                           	psect	text0
+   199  000210                     __ptext0:
+   200                           	callstack 0
+   201  000210                     _main:
+   202                           	callstack 20
+   203  000210                     
+   204                           ;main.c: 52:     SYSTEM_Initialize();
+   205  000210  ECFD  F000         	call	_SYSTEM_Initialize	;wreg free
+   206  000214                     
+   207                           ;main.c: 59:     (INTCONbits.GIEH = 1);
+   208  000214  8EF2               	bsf	242,7,c	;volatile
+   209  000216                     
+   210                           ;main.c: 62:     (INTCONbits.GIEL = 1);
+   211  000216  8CF2               	bsf	242,6,c	;volatile
+   212  000218                     l1075:
+   213                           
+   214                           ;main.c: 77:     {;main.c: 79:         __nop();
+   215  000218  F000               	nop	
+   216  00021A                     
+   217                           ;main.c: 80:         __nop();
+   218  00021A  F000               	nop	
+   219  00021C  EF0C  F001         	goto	l1075
+   220  000220  EF47  F000         	goto	start
+   221  000224                     __end_of_main:
+   222                           	callstack 0
+   223                           
+   224 ;; *************** function _SYSTEM_Initialize *****************
+   225 ;; Defined at:
+   226 ;;		line 50 in file "mcc_generated_files/mcc.c"
+   227 ;; Parameters:    Size  Location     Type
+   228 ;;		None
+   229 ;; Auto vars:     Size  Location     Type
+   230 ;;		None
+   231 ;; Return value:  Size  Location     Type
+   232 ;;                  1    wreg      void 
+   233 ;; Registers used:
+   234 ;;		wreg, status,2, status,0, cstack
+   235 ;; Tracked objects:
+   236 ;;		On entry : 0/0
+   237 ;;		On exit  : 0/0
+   238 ;;		Unchanged: 0/0
+   239 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   240 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   241 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   242 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   243 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   244 ;;Total ram usage:        0 bytes
+   245 ;; Hardware stack levels used: 1
+   246 ;; Hardware stack levels required when called: 10
+   247 ;; This function calls:
+   248 ;;		_EXT_INT_Initialize
+   249 ;;		_INTERRUPT_Initialize
+   250 ;;		_OSCILLATOR_Initialize
+   251 ;;		_PIN_MANAGER_Initialize
+   252 ;;		_TMR0_Initialize
+   253 ;; This function is called by:
+   254 ;;		_main
+   255 ;; This function uses a non-reentrant model
+   256 ;;
+   257                           
+   258                           	psect	text1
+   259  0001FA                     __ptext1:
+   260                           	callstack 0
+   261  0001FA                     _SYSTEM_Initialize:
+   262                           	callstack 20
+   263  0001FA                     
+   264                           ;mcc_generated_files/mcc.c: 52:     OSCILLATOR_Initialize();
+   265  0001FA  EC12  F001         	call	_OSCILLATOR_Initialize	;wreg free
+   266  0001FE                     
+   267                           ;mcc_generated_files/mcc.c: 54:     INTERRUPT_Initialize();
+   268  0001FE  EC30  F001         	call	_INTERRUPT_Initialize	;wreg free
+   269  000202                     
+   270                           ;mcc_generated_files/mcc.c: 55:     PIN_MANAGER_Initialize();
+   271  000202  EC49  F000         	call	_PIN_MANAGER_Initialize	;wreg free
+   272  000206                     
+   273                           ;mcc_generated_files/mcc.c: 56:     EXT_INT_Initialize();
+   274  000206  ECEA  F000         	call	_EXT_INT_Initialize	;wreg free
+   275  00020A                     
+   276                           ;mcc_generated_files/mcc.c: 57:     TMR0_Initialize();
+   277  00020A  EC6F  F000         	call	_TMR0_Initialize	;wreg free
+   278  00020E  0012               	return		;funcret
+   279  000210                     __end_of_SYSTEM_Initialize:
+   280                           	callstack 0
+   281                           
+   282 ;; *************** function _TMR0_Initialize *****************
+   283 ;; Defined at:
+   284 ;;		line 67 in file "mcc_generated_files/tmr0.c"
+   285 ;; Parameters:    Size  Location     Type
+   286 ;;		None
+   287 ;; Auto vars:     Size  Location     Type
+   288 ;;		None
+   289 ;; Return value:  Size  Location     Type
+   290 ;;                  1    wreg      void 
+   291 ;; Registers used:
+   292 ;;		wreg, status,2, status,0, cstack
+   293 ;; Tracked objects:
+   294 ;;		On entry : 0/0
+   295 ;;		On exit  : 0/0
+   296 ;;		Unchanged: 0/0
+   297 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   298 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   299 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   300 ;;      Temps:          2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   301 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   302 ;;Total ram usage:        2 bytes
+   303 ;; Hardware stack levels used: 1
+   304 ;; Hardware stack levels required when called: 9
+   305 ;; This function calls:
+   306 ;;		_TMR0_SetInterruptHandler
+   307 ;; This function is called by:
+   308 ;;		_SYSTEM_Initialize
+   309 ;; This function uses a non-reentrant model
+   310 ;;
+   311                           
+   312                           	psect	text2
+   313  0000DE                     __ptext2:
+   314                           	callstack 0
+   315  0000DE                     _TMR0_Initialize:
+   316                           	callstack 20
+   317  0000DE                     
+   318                           ;mcc_generated_files/tmr0.c: 72:     T0CONbits.T08BIT = 0;
+   319  0000DE  9CD5               	bcf	213,6,c	;volatile
+   320  0000E0                     
+   321                           ;mcc_generated_files/tmr0.c: 75:     TMR0H = 0xEC;
+   322  0000E0  0EEC               	movlw	236
+   323  0000E2  6ED7               	movwf	215,c	;volatile
+   324                           
+   325                           ;mcc_generated_files/tmr0.c: 78:     TMR0L = 0x29;
+   326  0000E4  0E29               	movlw	41
+   327  0000E6  6ED6               	movwf	214,c	;volatile
+   328  0000E8                     
+   329                           ;mcc_generated_files/tmr0.c: 82:     timer0ReloadVal = (uint16_t)((TMR0H << 8) | TMR0L);
+   330  0000E8  50D6               	movf	214,w,c	;volatile
+   331  0000EA  CFD7 F00A          	movff	4055,??_TMR0_Initialize	;volatile
+   332  0000EE  6A0B               	clrf	(??_TMR0_Initialize+1)^0,c
+   333  0000F0  C00A  F00B         	movff	??_TMR0_Initialize,??_TMR0_Initialize+1
+   334  0000F4  6A0A               	clrf	??_TMR0_Initialize^0,c
+   335  0000F6  100A               	iorwf	??_TMR0_Initialize^0,w,c
+   336  0000F8  6E10               	movwf	_timer0ReloadVal^0,c	;volatile
+   337  0000FA  500B               	movf	(??_TMR0_Initialize+1)^0,w,c
+   338  0000FC  6E11               	movwf	(_timer0ReloadVal+1)^0,c	;volatile
+   339  0000FE                     
+   340                           ;mcc_generated_files/tmr0.c: 85:     INTCONbits.TMR0IF = 0;
+   341  0000FE  94F2               	bcf	242,2,c	;volatile
+   342  000100                     
+   343                           ;mcc_generated_files/tmr0.c: 88:     INTCONbits.TMR0IE = 1;
+   344  000100  8AF2               	bsf	242,5,c	;volatile
+   345  000102                     
+   346                           ;mcc_generated_files/tmr0.c: 91:     TMR0_SetInterruptHandler(TMR0_DefaultInterruptHandl
+      +                          er);
+   347  000102  0E92               	movlw	low _TMR0_DefaultInterruptHandler
+   348  000104  6E08               	movwf	TMR0_SetInterruptHandler@InterruptHandler^0,c
+   349  000106  0E02               	movlw	high _TMR0_DefaultInterruptHandler
+   350  000108  6E09               	movwf	(TMR0_SetInterruptHandler@InterruptHandler+1)^0,c
+   351  00010A  EC2B  F001         	call	_TMR0_SetInterruptHandler	;wreg free
+   352  00010E                     
+   353                           ;mcc_generated_files/tmr0.c: 94:     T0CON = 0x97;
+   354  00010E  0E97               	movlw	151
+   355  000110  6ED5               	movwf	213,c	;volatile
+   356  000112  0012               	return		;funcret
+   357  000114                     __end_of_TMR0_Initialize:
+   358                           	callstack 0
+   359                           
+   360 ;; *************** function _TMR0_SetInterruptHandler *****************
+   361 ;; Defined at:
+   362 ;;		line 164 in file "mcc_generated_files/tmr0.c"
+   363 ;; Parameters:    Size  Location     Type
+   364 ;;  InterruptHan    2    7[COMRAM] PTR FTN()void 
+   365 ;;		 -> TMR0_DefaultInterruptHandler(1), 
+   366 ;; Auto vars:     Size  Location     Type
+   367 ;;		None
+   368 ;; Return value:  Size  Location     Type
+   369 ;;                  1    wreg      void 
+   370 ;; Registers used:
+   371 ;;		wreg, status,2, status,0
+   372 ;; Tracked objects:
+   373 ;;		On entry : 0/0
+   374 ;;		On exit  : 0/0
+   375 ;;		Unchanged: 0/0
+   376 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   377 ;;      Params:         2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   378 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   379 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   380 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   381 ;;Total ram usage:        2 bytes
+   382 ;; Hardware stack levels used: 1
+   383 ;; Hardware stack levels required when called: 8
+   384 ;; This function calls:
+   385 ;;		Nothing
+   386 ;; This function is called by:
+   387 ;;		_TMR0_Initialize
+   388 ;; This function uses a non-reentrant model
+   389 ;;
+   390                           
+   391                           	psect	text3
+   392  000256                     __ptext3:
+   393                           	callstack 0
+   394  000256                     _TMR0_SetInterruptHandler:
+   395                           	callstack 20
+   396  000256                     
+   397                           ;mcc_generated_files/tmr0.c: 165:     TMR0_InterruptHandler = InterruptHandler;
+   398  000256  C008  F012         	movff	TMR0_SetInterruptHandler@InterruptHandler,_TMR0_InterruptHandler
+   399  00025A  C009  F013         	movff	TMR0_SetInterruptHandler@InterruptHandler+1,_TMR0_InterruptHandler+1
+   400  00025E  0012               	return		;funcret
+   401  000260                     __end_of_TMR0_SetInterruptHandler:
+   402                           	callstack 0
+   403                           
+   404 ;; *************** function _PIN_MANAGER_Initialize *****************
+   405 ;; Defined at:
+   406 ;;		line 52 in file "mcc_generated_files/pin_manager.c"
+   407 ;; Parameters:    Size  Location     Type
+   408 ;;		None
+   409 ;; Auto vars:     Size  Location     Type
+   410 ;;		None
+   411 ;; Return value:  Size  Location     Type
+   412 ;;                  1    wreg      void 
+   413 ;; Registers used:
+   414 ;;		wreg, status,2
+   415 ;; Tracked objects:
+   416 ;;		On entry : 0/0
+   417 ;;		On exit  : 0/0
+   418 ;;		Unchanged: 0/0
+   419 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   420 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   421 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   422 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   423 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   424 ;;Total ram usage:        0 bytes
+   425 ;; Hardware stack levels used: 1
+   426 ;; Hardware stack levels required when called: 8
+   427 ;; This function calls:
+   428 ;;		Nothing
+   429 ;; This function is called by:
+   430 ;;		_SYSTEM_Initialize
+   431 ;; This function uses a non-reentrant model
+   432 ;;
+   433                           
+   434                           	psect	text4
+   435  000092                     __ptext4:
+   436                           	callstack 0
+   437  000092                     _PIN_MANAGER_Initialize:
+   438                           	callstack 21
+   439  000092                     
+   440                           ;mcc_generated_files/pin_manager.c: 57:     LATE = 0x00;
+   441  000092  0E00               	movlw	0
+   442  000094  6E8D               	movwf	141,c	;volatile
+   443                           
+   444                           ;mcc_generated_files/pin_manager.c: 58:     LATD = 0x00;
+   445  000096  0E00               	movlw	0
+   446  000098  6E8C               	movwf	140,c	;volatile
+   447                           
+   448                           ;mcc_generated_files/pin_manager.c: 59:     LATA = 0x00;
+   449  00009A  0E00               	movlw	0
+   450  00009C  6E89               	movwf	137,c	;volatile
+   451                           
+   452                           ;mcc_generated_files/pin_manager.c: 60:     LATB = 0x00;
+   453  00009E  0E00               	movlw	0
+   454  0000A0  6E8A               	movwf	138,c	;volatile
+   455                           
+   456                           ;mcc_generated_files/pin_manager.c: 61:     LATC = 0x00;
+   457  0000A2  0E00               	movlw	0
+   458  0000A4  6E8B               	movwf	139,c	;volatile
+   459                           
+   460                           ;mcc_generated_files/pin_manager.c: 66:     TRISE = 0xC7;
+   461  0000A6  0EC7               	movlw	199
+   462  0000A8  6E96               	movwf	150,c	;volatile
+   463                           
+   464                           ;mcc_generated_files/pin_manager.c: 67:     TRISA = 0x2F;
+   465  0000AA  0E2F               	movlw	47
+   466  0000AC  6E92               	movwf	146,c	;volatile
+   467  0000AE                     
+   468                           ;mcc_generated_files/pin_manager.c: 68:     TRISB = 0xFF;
+   469  0000AE  6893               	setf	147,c	;volatile
+   470                           
+   471                           ;mcc_generated_files/pin_manager.c: 69:     TRISC = 0xFB;
+   472  0000B0  0EFB               	movlw	251
+   473  0000B2  6E94               	movwf	148,c	;volatile
+   474  0000B4                     
+   475                           ;mcc_generated_files/pin_manager.c: 70:     TRISD = 0xFF;
+   476  0000B4  6895               	setf	149,c	;volatile
+   477                           
+   478                           ;mcc_generated_files/pin_manager.c: 75:     ANCON0 = 0x0F;
+   479  0000B6  0E0F               	movlw	15
+   480  0000B8  010F               	movlb	15	; () banked
+   481  0000BA  6F48               	movwf	72,b	;volatile
+   482                           
+   483                           ;mcc_generated_files/pin_manager.c: 76:     ANCON1 = 0x1D;
+   484  0000BC  0E1D               	movlw	29
+   485  0000BE  6F49               	movwf	73,b	;volatile
+   486  0000C0                     
+   487                           ; BSR set to: 15
+   488                           ;mcc_generated_files/pin_manager.c: 81:     INTCON2bits.nRBPU = 0;
+   489  0000C0  9EF1               	bcf	241,7,c	;volatile
+   490  0000C2                     
+   491                           ; BSR set to: 15
+   492                           ;mcc_generated_files/pin_manager.c: 84:     TRISEbits.RDPU = 1;
+   493  0000C2  8E96               	bsf	150,7,c	;volatile
+   494  0000C4                     
+   495                           ; BSR set to: 15
+   496                           ;mcc_generated_files/pin_manager.c: 85:     TRISEbits.REPU = 1;
+   497  0000C4  8C96               	bsf	150,6,c	;volatile
+   498                           
+   499                           ;mcc_generated_files/pin_manager.c: 91:     ODCON1 = 0x00;
+   500  0000C6  0E00               	movlw	0
+   501  0000C8  6F42               	movwf	66,b	;volatile
+   502                           
+   503                           ;mcc_generated_files/pin_manager.c: 92:     ODCON2 = 0x00;
+   504  0000CA  0E00               	movlw	0
+   505  0000CC  6F41               	movwf	65,b	;volatile
+   506                           
+   507                           ;mcc_generated_files/pin_manager.c: 93:     ODCON3 = 0x00;
+   508  0000CE  0E00               	movlw	0
+   509  0000D0  6F40               	movwf	64,b	;volatile
+   510                           
+   511                           ;mcc_generated_files/pin_manager.c: 99:     RPINR2 = 0x05;
+   512  0000D2  0E05               	movlw	5
+   513  0000D4  010E               	movlb	14	; () banked
+   514  0000D6  6FE2               	movwf	226,b	;volatile
+   515                           
+   516                           ;mcc_generated_files/pin_manager.c: 100:     RPINR1 = 0x04;
+   517  0000D8  0E04               	movlw	4
+   518  0000DA  6FE1               	movwf	225,b	;volatile
+   519  0000DC                     
+   520                           ; BSR set to: 14
+   521  0000DC  0012               	return		;funcret
+   522  0000DE                     __end_of_PIN_MANAGER_Initialize:
+   523                           	callstack 0
+   524                           
+   525 ;; *************** function _OSCILLATOR_Initialize *****************
+   526 ;; Defined at:
+   527 ;;		line 60 in file "mcc_generated_files/mcc.c"
+   528 ;; Parameters:    Size  Location     Type
+   529 ;;		None
+   530 ;; Auto vars:     Size  Location     Type
+   531 ;;		None
+   532 ;; Return value:  Size  Location     Type
+   533 ;;                  1    wreg      void 
+   534 ;; Registers used:
+   535 ;;		wreg, status,2
+   536 ;; Tracked objects:
+   537 ;;		On entry : 0/0
+   538 ;;		On exit  : 0/0
+   539 ;;		Unchanged: 0/0
+   540 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   541 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   542 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   543 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   544 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   545 ;;Total ram usage:        0 bytes
+   546 ;; Hardware stack levels used: 1
+   547 ;; Hardware stack levels required when called: 8
+   548 ;; This function calls:
+   549 ;;		Nothing
+   550 ;; This function is called by:
+   551 ;;		_SYSTEM_Initialize
+   552 ;; This function uses a non-reentrant model
+   553 ;;
+   554                           
+   555                           	psect	text5
+   556  000224                     __ptext5:
+   557                           	callstack 0
+   558  000224                     _OSCILLATOR_Initialize:
+   559                           	callstack 21
+   560  000224                     
+   561                           ;mcc_generated_files/mcc.c: 64:     OSCCON = 0x60;
+   562  000224  0E60               	movlw	96
+   563  000226  6ED3               	movwf	211,c	;volatile
+   564                           
+   565                           ;mcc_generated_files/mcc.c: 66:     OSCTUNE = 0x00;
+   566  000228  0E00               	movlw	0
+   567  00022A  6E9B               	movwf	155,c	;volatile
+   568                           
+   569                           ;mcc_generated_files/mcc.c: 68:     REFOCON = 0x00;
+   570  00022C  0E00               	movlw	0
+   571  00022E  010F               	movlb	15	; () banked
+   572  000230  6F3D               	movwf	61,b	;volatile
+   573                           
+   574                           ;mcc_generated_files/mcc.c: 70:     OSCCON2 = 0x14;
+   575  000232  0E14               	movlw	20
+   576  000234  6E87               	movwf	135,c	;volatile
+   577  000236                     
+   578                           ; BSR set to: 15
+   579  000236  0012               	return		;funcret
+   580  000238                     __end_of_OSCILLATOR_Initialize:
+   581                           	callstack 0
+   582                           
+   583 ;; *************** function _INTERRUPT_Initialize *****************
+   584 ;; Defined at:
+   585 ;;		line 52 in file "mcc_generated_files/interrupt_manager.c"
+   586 ;; Parameters:    Size  Location     Type
+   587 ;;		None
+   588 ;; Auto vars:     Size  Location     Type
+   589 ;;		None
+   590 ;; Return value:  Size  Location     Type
+   591 ;;                  1    wreg      void 
+   592 ;; Registers used:
+   593 ;;		None
+   594 ;; Tracked objects:
+   595 ;;		On entry : 0/0
+   596 ;;		On exit  : 0/0
+   597 ;;		Unchanged: 0/0
+   598 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   599 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   600 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   601 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   602 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   603 ;;Total ram usage:        0 bytes
+   604 ;; Hardware stack levels used: 1
+   605 ;; Hardware stack levels required when called: 8
+   606 ;; This function calls:
+   607 ;;		Nothing
+   608 ;; This function is called by:
+   609 ;;		_SYSTEM_Initialize
+   610 ;; This function uses a non-reentrant model
+   611 ;;
+   612                           
+   613                           	psect	text6
+   614  000260                     __ptext6:
+   615                           	callstack 0
+   616  000260                     _INTERRUPT_Initialize:
+   617                           	callstack 21
+   618  000260                     
+   619                           ;mcc_generated_files/interrupt_manager.c: 55:     RCONbits.IPEN = 1;
+   620  000260  8ED0               	bsf	208,7,c	;volatile
+   621                           
+   622                           ;mcc_generated_files/interrupt_manager.c: 60:     INTCON2bits.TMR0IP = 1;
+   623  000262  84F1               	bsf	241,2,c	;volatile
+   624                           
+   625                           ;mcc_generated_files/interrupt_manager.c: 64:     INTCON3bits.INT2IP = 0;
+   626  000264  9EF0               	bcf	240,7,c	;volatile
+   627                           
+   628                           ;mcc_generated_files/interrupt_manager.c: 67:     INTCON3bits.INT1IP = 0;
+   629  000266  9CF0               	bcf	240,6,c	;volatile
+   630  000268  0012               	return		;funcret
+   631  00026A                     __end_of_INTERRUPT_Initialize:
+   632                           	callstack 0
+   633                           
+   634 ;; *************** function _EXT_INT_Initialize *****************
+   635 ;; Defined at:
+   636 ;;		line 86 in file "mcc_generated_files/ext_int.c"
+   637 ;; Parameters:    Size  Location     Type
+   638 ;;		None
+   639 ;; Auto vars:     Size  Location     Type
+   640 ;;		None
+   641 ;; Return value:  Size  Location     Type
+   642 ;;                  1    wreg      void 
+   643 ;; Registers used:
+   644 ;;		wreg, status,2, status,0, cstack
+   645 ;; Tracked objects:
+   646 ;;		On entry : 0/0
+   647 ;;		On exit  : 0/0
+   648 ;;		Unchanged: 0/0
+   649 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   650 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   651 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   652 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   653 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   654 ;;Total ram usage:        0 bytes
+   655 ;; Hardware stack levels used: 1
+   656 ;; Hardware stack levels required when called: 9
+   657 ;; This function calls:
+   658 ;;		_INT1_SetInterruptHandler
+   659 ;;		_INT2_SetInterruptHandler
+   660 ;; This function is called by:
+   661 ;;		_SYSTEM_Initialize
+   662 ;; This function uses a non-reentrant model
+   663 ;;
+   664                           
+   665                           	psect	text7
+   666  0001D4                     __ptext7:
+   667                           	callstack 0
+   668  0001D4                     _EXT_INT_Initialize:
+   669                           	callstack 20
+   670  0001D4                     
+   671                           ;mcc_generated_files/ext_int.c: 91:     (INTCON3bits.INT1IF = 0);
+   672  0001D4  90F0               	bcf	240,0,c	;volatile
+   673                           
+   674                           ;mcc_generated_files/ext_int.c: 92:     (INTCON2bits.INTEDG1 = 0);
+   675  0001D6  9AF1               	bcf	241,5,c	;volatile
+   676  0001D8                     
+   677                           ;mcc_generated_files/ext_int.c: 94:     INT1_SetInterruptHandler(INT1_DefaultInterruptHa
+      +                          ndler);
+   678  0001D8  0E90               	movlw	low _INT1_DefaultInterruptHandler
+   679  0001DA  6E08               	movwf	INT1_SetInterruptHandler@InterruptHandler^0,c
+   680  0001DC  0E02               	movlw	high _INT1_DefaultInterruptHandler
+   681  0001DE  6E09               	movwf	(INT1_SetInterruptHandler@InterruptHandler+1)^0,c
+   682  0001E0  EC3A  F001         	call	_INT1_SetInterruptHandler	;wreg free
+   683  0001E4                     
+   684                           ;mcc_generated_files/ext_int.c: 95:     (INTCON3bits.INT1IE = 1);
+   685  0001E4  86F0               	bsf	240,3,c	;volatile
+   686  0001E6                     
+   687                           ;mcc_generated_files/ext_int.c: 100:     (INTCON3bits.INT2IF = 0);
+   688  0001E6  92F0               	bcf	240,1,c	;volatile
+   689  0001E8                     
+   690                           ;mcc_generated_files/ext_int.c: 101:     (INTCON2bits.INTEDG2 = 0);
+   691  0001E8  98F1               	bcf	241,4,c	;volatile
+   692                           
+   693                           ;mcc_generated_files/ext_int.c: 103:     INT2_SetInterruptHandler(INT2_DefaultInterruptH
+      +                          andler);
+   694  0001EA  0E8E               	movlw	low _INT2_DefaultInterruptHandler
+   695  0001EC  6E08               	movwf	INT2_SetInterruptHandler@InterruptHandler^0,c
+   696  0001EE  0E02               	movlw	high _INT2_DefaultInterruptHandler
+   697  0001F0  6E09               	movwf	(INT2_SetInterruptHandler@InterruptHandler+1)^0,c
+   698  0001F2  EC35  F001         	call	_INT2_SetInterruptHandler	;wreg free
+   699  0001F6                     
+   700                           ;mcc_generated_files/ext_int.c: 104:     (INTCON3bits.INT2IE = 1);
+   701  0001F6  88F0               	bsf	240,4,c	;volatile
+   702  0001F8  0012               	return		;funcret
+   703  0001FA                     __end_of_EXT_INT_Initialize:
+   704                           	callstack 0
+   705                           
+   706 ;; *************** function _INT2_SetInterruptHandler *****************
+   707 ;; Defined at:
+   708 ;;		line 77 in file "mcc_generated_files/ext_int.c"
+   709 ;; Parameters:    Size  Location     Type
+   710 ;;  InterruptHan    2    7[COMRAM] PTR FTN()void 
+   711 ;;		 -> INT2_DefaultInterruptHandler(1), 
+   712 ;; Auto vars:     Size  Location     Type
+   713 ;;		None
+   714 ;; Return value:  Size  Location     Type
+   715 ;;                  1    wreg      void 
+   716 ;; Registers used:
+   717 ;;		wreg, status,2, status,0
+   718 ;; Tracked objects:
+   719 ;;		On entry : 0/0
+   720 ;;		On exit  : 0/0
+   721 ;;		Unchanged: 0/0
+   722 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   723 ;;      Params:         2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   724 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   725 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   726 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   727 ;;Total ram usage:        2 bytes
+   728 ;; Hardware stack levels used: 1
+   729 ;; Hardware stack levels required when called: 8
+   730 ;; This function calls:
+   731 ;;		Nothing
+   732 ;; This function is called by:
+   733 ;;		_EXT_INT_Initialize
+   734 ;; This function uses a non-reentrant model
+   735 ;;
+   736                           
+   737                           	psect	text8
+   738  00026A                     __ptext8:
+   739                           	callstack 0
+   740  00026A                     _INT2_SetInterruptHandler:
+   741                           	callstack 20
+   742  00026A                     
+   743                           ;mcc_generated_files/ext_int.c: 78:     INT2_InterruptHandler = InterruptHandler;
+   744  00026A  C008  F00C         	movff	INT2_SetInterruptHandler@InterruptHandler,_INT2_InterruptHandler
+   745  00026E  C009  F00D         	movff	INT2_SetInterruptHandler@InterruptHandler+1,_INT2_InterruptHandler+1
+   746  000272  0012               	return		;funcret
+   747  000274                     __end_of_INT2_SetInterruptHandler:
+   748                           	callstack 0
+   749                           
+   750 ;; *************** function _INT1_SetInterruptHandler *****************
+   751 ;; Defined at:
+   752 ;;		line 51 in file "mcc_generated_files/ext_int.c"
+   753 ;; Parameters:    Size  Location     Type
+   754 ;;  InterruptHan    2    7[COMRAM] PTR FTN()void 
+   755 ;;		 -> INT1_DefaultInterruptHandler(1), 
+   756 ;; Auto vars:     Size  Location     Type
+   757 ;;		None
+   758 ;; Return value:  Size  Location     Type
+   759 ;;                  1    wreg      void 
+   760 ;; Registers used:
+   761 ;;		wreg, status,2, status,0
+   762 ;; Tracked objects:
+   763 ;;		On entry : 0/0
+   764 ;;		On exit  : 0/0
+   765 ;;		Unchanged: 0/0
+   766 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   767 ;;      Params:         2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   768 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   769 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   770 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   771 ;;Total ram usage:        2 bytes
+   772 ;; Hardware stack levels used: 1
+   773 ;; Hardware stack levels required when called: 8
+   774 ;; This function calls:
+   775 ;;		Nothing
+   776 ;; This function is called by:
+   777 ;;		_EXT_INT_Initialize
+   778 ;; This function uses a non-reentrant model
+   779 ;;
+   780                           
+   781                           	psect	text9
+   782  000274                     __ptext9:
+   783                           	callstack 0
+   784  000274                     _INT1_SetInterruptHandler:
+   785                           	callstack 20
+   786  000274                     
+   787                           ;mcc_generated_files/ext_int.c: 52:     INT1_InterruptHandler = InterruptHandler;
+   788  000274  C008  F00E         	movff	INT1_SetInterruptHandler@InterruptHandler,_INT1_InterruptHandler
+   789  000278  C009  F00F         	movff	INT1_SetInterruptHandler@InterruptHandler+1,_INT1_InterruptHandler+1
+   790  00027C  0012               	return		;funcret
+   791  00027E                     __end_of_INT1_SetInterruptHandler:
+   792                           	callstack 0
+   793                           
+   794 ;; *************** function _INTERRUPT_InterruptManagerLow *****************
+   795 ;; Defined at:
+   796 ;;		line 87 in file "mcc_generated_files/interrupt_manager.c"
+   797 ;; Parameters:    Size  Location     Type
+   798 ;;		None
+   799 ;; Auto vars:     Size  Location     Type
+   800 ;;		None
+   801 ;; Return value:  Size  Location     Type
+   802 ;;                  1    wreg      void 
+   803 ;; Registers used:
+   804 ;;		wreg, status,2, status,0, pcl, pclath, pclatu, tosl, cstack
+   805 ;; Tracked objects:
+   806 ;;		On entry : 0/0
+   807 ;;		On exit  : 0/0
+   808 ;;		Unchanged: 0/0
+   809 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   810 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   811 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   812 ;;      Temps:          5       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   813 ;;      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   814 ;;Total ram usage:        5 bytes
+   815 ;; Hardware stack levels used: 1
+   816 ;; Hardware stack levels required when called: 7
+   817 ;; This function calls:
+   818 ;;		_INT1_ISR
+   819 ;;		_INT2_ISR
+   820 ;; This function is called by:
+   821 ;;		Interrupt level 1
+   822 ;; This function uses a non-reentrant model
+   823 ;;
+   824                           
+   825                           	psect	intcodelo
+   826  000018                     __pintcodelo:
+   827                           	callstack 0
+   828  000018                     _INTERRUPT_InterruptManagerLow:
+   829                           	callstack 20
+   830                           
+   831                           ;incstack = 0
+   832  000018  8014               	bsf	int$flags,0,c	;set compiler interrupt flag (level 1)
+   833  00001A  CFD8 F003          	movff	status,??_INTERRUPT_InterruptManagerLow
+   834  00001E  CFE8 F004          	movff	wreg,??_INTERRUPT_InterruptManagerLow+1
+   835  000022  CFE0 F005          	movff	bsr,??_INTERRUPT_InterruptManagerLow+2
+   836  000026  CFFA F006          	movff	pclath,??_INTERRUPT_InterruptManagerLow+3
+   837  00002A  CFFB F007          	movff	pclatu,??_INTERRUPT_InterruptManagerLow+4
+   838  00002E                     
+   839                           ;mcc_generated_files/interrupt_manager.c: 91:     if(INTCON3bits.INT2IE == 1 && INTCON3b
+      +                          its.INT2IF == 1)
+   840  00002E  A8F0               	btfss	240,4,c	;volatile
+   841  000030  EF1C  F000         	goto	i1u9_21
+   842  000034  EF1E  F000         	goto	i1u9_20
+   843  000038                     i1u9_21:
+   844  000038  EF2A  F000         	goto	i1l103
+   845  00003C                     i1u9_20:
+   846  00003C  A2F0               	btfss	240,1,c	;volatile
+   847  00003E  EF23  F000         	goto	i1u10_21
+   848  000042  EF25  F000         	goto	i1u10_20
+   849  000046                     i1u10_21:
+   850  000046  EF2A  F000         	goto	i1l103
+   851  00004A                     i1u10_20:
+   852  00004A                     
+   853                           ;mcc_generated_files/interrupt_manager.c: 92:     {;mcc_generated_files/interrupt_manage
+      +                          r.c: 93:         INT2_ISR();
+   854  00004A  EC3F  F001         	call	_INT2_ISR	;wreg free
+   855  00004E                     
+   856                           ;mcc_generated_files/interrupt_manager.c: 94:         LATAbits.LATA6 ^= 1;
+   857  00004E  7C89               	btg	137,6,c	;volatile
+   858                           
+   859                           ;mcc_generated_files/interrupt_manager.c: 95:     }
+   860  000050  EF3B  F000         	goto	i1l107
+   861  000054                     i1l103:
+   862  000054  A6F0               	btfss	240,3,c	;volatile
+   863  000056  EF2F  F000         	goto	i1u11_21
+   864  00005A  EF31  F000         	goto	i1u11_20
+   865  00005E                     i1u11_21:
+   866  00005E  EF3B  F000         	goto	i1l107
+   867  000062                     i1u11_20:
+   868  000062  A0F0               	btfss	240,0,c	;volatile
+   869  000064  EF36  F000         	goto	i1u12_21
+   870  000068  EF38  F000         	goto	i1u12_20
+   871  00006C                     i1u12_21:
+   872  00006C  EF3B  F000         	goto	i1l107
+   873  000070                     i1u12_20:
+   874  000070                     
+   875                           ;mcc_generated_files/interrupt_manager.c: 97:     {;mcc_generated_files/interrupt_manage
+      +                          r.c: 98:         INT1_ISR();
+   876  000070  EC43  F001         	call	_INT1_ISR	;wreg free
+   877  000074                     
+   878                           ;mcc_generated_files/interrupt_manager.c: 99:         LATAbits.LATA7 ^= 1;
+   879  000074  7E89               	btg	137,7,c	;volatile
+   880  000076                     i1l107:
+   881  000076  C007  FFFB         	movff	??_INTERRUPT_InterruptManagerLow+4,pclatu
+   882  00007A  C006  FFFA         	movff	??_INTERRUPT_InterruptManagerLow+3,pclath
+   883  00007E  C005  FFE0         	movff	??_INTERRUPT_InterruptManagerLow+2,bsr
+   884  000082  C004  FFE8         	movff	??_INTERRUPT_InterruptManagerLow+1,wreg
+   885  000086  C003  FFD8         	movff	??_INTERRUPT_InterruptManagerLow,status
+   886  00008A  9014               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
+   887  00008C  0010               	retfie	
+   888  00008E                     __end_of_INTERRUPT_InterruptManagerLow:
+   889                           	callstack 0
+   890                           
+   891 ;; *************** function _INT2_ISR *****************
+   892 ;; Defined at:
+   893 ;;		line 59 in file "mcc_generated_files/ext_int.c"
+   894 ;; Parameters:    Size  Location     Type
+   895 ;;		None
+   896 ;; Auto vars:     Size  Location     Type
+   897 ;;		None
+   898 ;; Return value:  Size  Location     Type
+   899 ;;                  1    wreg      void 
+   900 ;; Registers used:
+   901 ;;		wreg, status,2, status,0, pcl, pclath, pclatu, tosl, cstack
+   902 ;; Tracked objects:
+   903 ;;		On entry : 0/0
+   904 ;;		On exit  : 0/0
+   905 ;;		Unchanged: 0/0
+   906 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   907 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   908 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   909 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   910 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   911 ;;Total ram usage:        0 bytes
+   912 ;; Hardware stack levels used: 1
+   913 ;; Hardware stack levels required when called: 6
+   914 ;; This function calls:
+   915 ;;		_INT2_CallBack
+   916 ;; This function is called by:
+   917 ;;		_INTERRUPT_InterruptManagerLow
+   918 ;; This function uses a non-reentrant model
+   919 ;;
+   920                           
+   921                           	psect	text11
+   922  00027E                     __ptext11:
+   923                           	callstack 0
+   924  00027E                     _INT2_ISR:
+   925                           	callstack 20
+   926  00027E                     
+   927                           ;mcc_generated_files/ext_int.c: 61:     (INTCON3bits.INT2IF = 0);
+   928  00027E  92F0               	bcf	240,1,c	;volatile
+   929  000280                     
+   930                           ;mcc_generated_files/ext_int.c: 64:     INT2_CallBack();
+   931  000280  ECA5  F000         	call	_INT2_CallBack	;wreg free
+   932  000284  0012               	return		;funcret
+   933  000286                     __end_of_INT2_ISR:
+   934                           	callstack 0
+   935                           
+   936 ;; *************** function _INT2_CallBack *****************
+   937 ;; Defined at:
+   938 ;;		line 68 in file "mcc_generated_files/ext_int.c"
+   939 ;; Parameters:    Size  Location     Type
+   940 ;;		None
+   941 ;; Auto vars:     Size  Location     Type
+   942 ;;		None
+   943 ;; Return value:  Size  Location     Type
+   944 ;;                  1    wreg      void 
+   945 ;; Registers used:
+   946 ;;		wreg, status,2, status,0, pcl, pclath, pclatu, tosl, cstack
+   947 ;; Tracked objects:
+   948 ;;		On entry : 0/0
+   949 ;;		On exit  : 0/0
+   950 ;;		Unchanged: 0/0
+   951 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+   952 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   953 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   954 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   955 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+   956 ;;Total ram usage:        0 bytes
+   957 ;; Hardware stack levels used: 1
+   958 ;; Hardware stack levels required when called: 5
+   959 ;; This function calls:
+   960 ;;		Absolute function
+   961 ;;		_INT2_DefaultInterruptHandler
+   962 ;; This function is called by:
+   963 ;;		_INT2_ISR
+   964 ;; This function uses a non-reentrant model
+   965 ;;
+   966                           
+   967                           	psect	text12
+   968  00014A                     __ptext12:
+   969                           	callstack 0
+   970  00014A                     _INT2_CallBack:
+   971                           	callstack 20
+   972  00014A                     
+   973                           ;mcc_generated_files/ext_int.c: 71:     if(INT2_InterruptHandler)
+   974  00014A  500C               	movf	_INT2_InterruptHandler^0,w,c
+   975  00014C  100D               	iorwf	(_INT2_InterruptHandler+1)^0,w,c
+   976  00014E  B4D8               	btfsc	status,2,c
+   977  000150  EFAC  F000         	goto	i1u5_21
+   978  000154  EFAE  F000         	goto	i1u5_20
+   979  000158                     i1u5_21:
+   980  000158  EFBB  F000         	goto	i1l190
+   981  00015C                     i1u5_20:
+   982  00015C                     
+   983                           ;mcc_generated_files/ext_int.c: 72:     {;mcc_generated_files/ext_int.c: 73:         INT
+      +                          2_InterruptHandler();
+   984  00015C  D802               	call	i1u6_28
+   985  00015E  EFBB  F000         	goto	i1u6_29
+   986  000162                     i1u6_28:
+   987  000162  0005               	push	
+   988  000164  6EFA               	movwf	pclath,c
+   989  000166  500C               	movf	_INT2_InterruptHandler^0,w,c
+   990  000168  6EFD               	movwf	tosl,c
+   991  00016A  500D               	movf	(_INT2_InterruptHandler+1)^0,w,c
+   992  00016C  6EFE               	movwf	tosh,c
+   993  00016E  50F8               	movf	tblptru,w,c
+   994  000170  6EFF               	movwf	tosu,c
+   995  000172  50FA               	movf	pclath,w,c
+   996  000174  0012               	return		;indir
+   997  000176                     i1u6_29:
+   998  000176                     i1l190:
+   999  000176  0012               	return		;funcret
+  1000  000178                     __end_of_INT2_CallBack:
+  1001                           	callstack 0
+  1002                           
+  1003 ;; *************** function _INT2_DefaultInterruptHandler *****************
+  1004 ;; Defined at:
+  1005 ;;		line 81 in file "mcc_generated_files/ext_int.c"
+  1006 ;; Parameters:    Size  Location     Type
+  1007 ;;		None
+  1008 ;; Auto vars:     Size  Location     Type
+  1009 ;;		None
+  1010 ;; Return value:  Size  Location     Type
+  1011 ;;                  1    wreg      void 
+  1012 ;; Registers used:
+  1013 ;;		None
+  1014 ;; Tracked objects:
+  1015 ;;		On entry : 0/0
+  1016 ;;		On exit  : 0/0
+  1017 ;;		Unchanged: 0/0
+  1018 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+  1019 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1020 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1021 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1022 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1023 ;;Total ram usage:        0 bytes
+  1024 ;; Hardware stack levels used: 1
+  1025 ;; Hardware stack levels required when called: 4
+  1026 ;; This function calls:
+  1027 ;;		Nothing
+  1028 ;; This function is called by:
+  1029 ;;		_EXT_INT_Initialize
+  1030 ;;		_INT2_CallBack
+  1031 ;; This function uses a non-reentrant model
+  1032 ;;
+  1033                           
+  1034                           	psect	text13
+  1035  00028E                     __ptext13:
+  1036                           	callstack 0
+  1037  00028E                     _INT2_DefaultInterruptHandler:
+  1038                           	callstack 20
+  1039  00028E  0012               	return		;funcret
+  1040  000290                     __end_of_INT2_DefaultInterruptHandler:
+  1041                           	callstack 0
+  1042                           
+  1043 ;; *************** function _INT1_ISR *****************
+  1044 ;; Defined at:
+  1045 ;;		line 33 in file "mcc_generated_files/ext_int.c"
+  1046 ;; Parameters:    Size  Location     Type
+  1047 ;;		None
+  1048 ;; Auto vars:     Size  Location     Type
+  1049 ;;		None
+  1050 ;; Return value:  Size  Location     Type
+  1051 ;;                  1    wreg      void 
+  1052 ;; Registers used:
+  1053 ;;		wreg, status,2, status,0, pcl, pclath, pclatu, tosl, cstack
+  1054 ;; Tracked objects:
+  1055 ;;		On entry : 0/0
+  1056 ;;		On exit  : 0/0
+  1057 ;;		Unchanged: 0/0
+  1058 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+  1059 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1060 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1061 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1062 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1063 ;;Total ram usage:        0 bytes
+  1064 ;; Hardware stack levels used: 1
+  1065 ;; Hardware stack levels required when called: 6
+  1066 ;; This function calls:
+  1067 ;;		_INT1_CallBack
+  1068 ;; This function is called by:
+  1069 ;;		_INTERRUPT_InterruptManagerLow
+  1070 ;; This function uses a non-reentrant model
+  1071 ;;
+  1072                           
+  1073                           	psect	text14
+  1074  000286                     __ptext14:
+  1075                           	callstack 0
+  1076  000286                     _INT1_ISR:
+  1077                           	callstack 20
+  1078  000286                     
+  1079                           ;mcc_generated_files/ext_int.c: 35:     (INTCON3bits.INT1IF = 0);
+  1080  000286  90F0               	bcf	240,0,c	;volatile
+  1081  000288                     
+  1082                           ;mcc_generated_files/ext_int.c: 38:     INT1_CallBack();
+  1083  000288  ECBC  F000         	call	_INT1_CallBack	;wreg free
+  1084  00028C  0012               	return		;funcret
+  1085  00028E                     __end_of_INT1_ISR:
+  1086                           	callstack 0
+  1087                           
+  1088 ;; *************** function _INT1_CallBack *****************
+  1089 ;; Defined at:
+  1090 ;;		line 42 in file "mcc_generated_files/ext_int.c"
+  1091 ;; Parameters:    Size  Location     Type
+  1092 ;;		None
+  1093 ;; Auto vars:     Size  Location     Type
+  1094 ;;		None
+  1095 ;; Return value:  Size  Location     Type
+  1096 ;;                  1    wreg      void 
+  1097 ;; Registers used:
+  1098 ;;		wreg, status,2, status,0, pcl, pclath, pclatu, tosl, cstack
+  1099 ;; Tracked objects:
+  1100 ;;		On entry : 0/0
+  1101 ;;		On exit  : 0/0
+  1102 ;;		Unchanged: 0/0
+  1103 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+  1104 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1105 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1106 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1107 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1108 ;;Total ram usage:        0 bytes
+  1109 ;; Hardware stack levels used: 1
+  1110 ;; Hardware stack levels required when called: 5
+  1111 ;; This function calls:
+  1112 ;;		Absolute function
+  1113 ;;		_INT1_DefaultInterruptHandler
+  1114 ;; This function is called by:
+  1115 ;;		_INT1_ISR
+  1116 ;; This function uses a non-reentrant model
+  1117 ;;
+  1118                           
+  1119                           	psect	text15
+  1120  000178                     __ptext15:
+  1121                           	callstack 0
+  1122  000178                     _INT1_CallBack:
+  1123                           	callstack 20
+  1124  000178                     
+  1125                           ;mcc_generated_files/ext_int.c: 45:     if(INT1_InterruptHandler)
+  1126  000178  500E               	movf	_INT1_InterruptHandler^0,w,c
+  1127  00017A  100F               	iorwf	(_INT1_InterruptHandler+1)^0,w,c
+  1128  00017C  B4D8               	btfsc	status,2,c
+  1129  00017E  EFC3  F000         	goto	i1u3_21
+  1130  000182  EFC5  F000         	goto	i1u3_20
+  1131  000186                     i1u3_21:
+  1132  000186  EFD2  F000         	goto	i1l177
+  1133  00018A                     i1u3_20:
+  1134  00018A                     
+  1135                           ;mcc_generated_files/ext_int.c: 46:     {;mcc_generated_files/ext_int.c: 47:         INT
+      +                          1_InterruptHandler();
+  1136  00018A  D802               	call	i1u4_28
+  1137  00018C  EFD2  F000         	goto	i1u4_29
+  1138  000190                     i1u4_28:
+  1139  000190  0005               	push	
+  1140  000192  6EFA               	movwf	pclath,c
+  1141  000194  500E               	movf	_INT1_InterruptHandler^0,w,c
+  1142  000196  6EFD               	movwf	tosl,c
+  1143  000198  500F               	movf	(_INT1_InterruptHandler+1)^0,w,c
+  1144  00019A  6EFE               	movwf	tosh,c
+  1145  00019C  50F8               	movf	tblptru,w,c
+  1146  00019E  6EFF               	movwf	tosu,c
+  1147  0001A0  50FA               	movf	pclath,w,c
+  1148  0001A2  0012               	return		;indir
+  1149  0001A4                     i1u4_29:
+  1150  0001A4                     i1l177:
+  1151  0001A4  0012               	return		;funcret
+  1152  0001A6                     __end_of_INT1_CallBack:
+  1153                           	callstack 0
+  1154                           
+  1155 ;; *************** function _INT1_DefaultInterruptHandler *****************
+  1156 ;; Defined at:
+  1157 ;;		line 55 in file "mcc_generated_files/ext_int.c"
+  1158 ;; Parameters:    Size  Location     Type
+  1159 ;;		None
+  1160 ;; Auto vars:     Size  Location     Type
+  1161 ;;		None
+  1162 ;; Return value:  Size  Location     Type
+  1163 ;;                  1    wreg      void 
+  1164 ;; Registers used:
+  1165 ;;		None
+  1166 ;; Tracked objects:
+  1167 ;;		On entry : 0/0
+  1168 ;;		On exit  : 0/0
+  1169 ;;		Unchanged: 0/0
+  1170 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+  1171 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1172 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1173 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1174 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1175 ;;Total ram usage:        0 bytes
+  1176 ;; Hardware stack levels used: 1
+  1177 ;; Hardware stack levels required when called: 4
+  1178 ;; This function calls:
+  1179 ;;		Nothing
+  1180 ;; This function is called by:
+  1181 ;;		_EXT_INT_Initialize
+  1182 ;;		_INT1_CallBack
+  1183 ;; This function uses a non-reentrant model
+  1184 ;;
+  1185                           
+  1186                           	psect	text16
+  1187  000290                     __ptext16:
+  1188                           	callstack 0
+  1189  000290                     _INT1_DefaultInterruptHandler:
+  1190                           	callstack 20
+  1191  000290  0012               	return		;funcret
+  1192  000292                     __end_of_INT1_DefaultInterruptHandler:
+  1193                           	callstack 0
+  1194                           
+  1195 ;; *************** function _INTERRUPT_InterruptManagerHigh *****************
+  1196 ;; Defined at:
+  1197 ;;		line 71 in file "mcc_generated_files/interrupt_manager.c"
+  1198 ;; Parameters:    Size  Location     Type
+  1199 ;;		None
+  1200 ;; Auto vars:     Size  Location     Type
+  1201 ;;		None
+  1202 ;; Return value:  Size  Location     Type
+  1203 ;;                  1    wreg      void 
+  1204 ;; Registers used:
+  1205 ;;		wreg, status,2, status,0, pcl, pclath, pclatu, tosl, cstack
+  1206 ;; Tracked objects:
+  1207 ;;		On entry : 0/0
+  1208 ;;		On exit  : 0/0
+  1209 ;;		Unchanged: 0/0
+  1210 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+  1211 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1212 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1213 ;;      Temps:          2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1214 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1215 ;;Total ram usage:        2 bytes
+  1216 ;; Hardware stack levels used: 1
+  1217 ;; Hardware stack levels required when called: 3
+  1218 ;; This function calls:
+  1219 ;;		_TMR0_ISR
+  1220 ;; This function is called by:
+  1221 ;;		Interrupt level 2
+  1222 ;; This function uses a non-reentrant model
+  1223 ;;
+  1224                           
+  1225                           	psect	intcode
+  1226  000008                     __pintcode:
+  1227                           	callstack 0
+  1228  000008                     _INTERRUPT_InterruptManagerHigh:
+  1229                           	callstack 20
+  1230                           
+  1231                           ;incstack = 0
+  1232  000008  8214               	bsf	int$flags,1,c	;set compiler interrupt flag (level 2)
+  1233  00000A  EF8A  F000         	goto	int_func
+  1234                           
+  1235                           	psect	intcode_body
+  1236  000114                     __pintcode_body:
+  1237                           	callstack 20
+  1238  000114                     int_func:
+  1239                           	callstack 20
+  1240  000114  CFFA F001          	movff	pclath,??_INTERRUPT_InterruptManagerHigh
+  1241  000118  CFFB F002          	movff	pclatu,??_INTERRUPT_InterruptManagerHigh+1
+  1242  00011C                     
+  1243                           ;mcc_generated_files/interrupt_manager.c: 74:     if(INTCONbits.TMR0IE == 1 && INTCONbit
+      +                          s.TMR0IF == 1)
+  1244  00011C  AAF2               	btfss	242,5,c	;volatile
+  1245  00011E  EF93  F000         	goto	i2u7_41
+  1246  000122  EF95  F000         	goto	i2u7_40
+  1247  000126                     i2u7_41:
+  1248  000126  EF9F  F000         	goto	i2l98
+  1249  00012A                     i2u7_40:
+  1250  00012A  A4F2               	btfss	242,2,c	;volatile
+  1251  00012C  EF9A  F000         	goto	i2u8_41
+  1252  000130  EF9C  F000         	goto	i2u8_40
+  1253  000134                     i2u8_41:
+  1254  000134  EF9F  F000         	goto	i2l98
+  1255  000138                     i2u8_40:
+  1256  000138                     
+  1257                           ;mcc_generated_files/interrupt_manager.c: 75:     {;mcc_generated_files/interrupt_manage
+      +                          r.c: 76:         TMR0_ISR();
+  1258  000138  EC1C  F001         	call	_TMR0_ISR	;wreg free
+  1259  00013C                     
+  1260                           ;mcc_generated_files/interrupt_manager.c: 77:         LATCbits.LATC2 ^= 1;
+  1261  00013C  748B               	btg	139,2,c	;volatile
+  1262  00013E                     i2l98:
+  1263  00013E  C002  FFFB         	movff	??_INTERRUPT_InterruptManagerHigh+1,pclatu
+  1264  000142  C001  FFFA         	movff	??_INTERRUPT_InterruptManagerHigh,pclath
+  1265  000146  9214               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+  1266  000148  0011               	retfie		f
+  1267  00014A                     __end_of_INTERRUPT_InterruptManagerHigh:
+  1268                           	callstack 0
+  1269                           
+  1270 ;; *************** function _TMR0_ISR *****************
+  1271 ;; Defined at:
+  1272 ;;		line 136 in file "mcc_generated_files/tmr0.c"
+  1273 ;; Parameters:    Size  Location     Type
+  1274 ;;		None
+  1275 ;; Auto vars:     Size  Location     Type
+  1276 ;;		None
+  1277 ;; Return value:  Size  Location     Type
+  1278 ;;                  1    wreg      void 
+  1279 ;; Registers used:
+  1280 ;;		wreg, status,2, status,0, pcl, pclath, pclatu, tosl, cstack
+  1281 ;; Tracked objects:
+  1282 ;;		On entry : 0/0
+  1283 ;;		On exit  : 0/0
+  1284 ;;		Unchanged: 0/0
+  1285 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+  1286 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1287 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1288 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1289 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1290 ;;Total ram usage:        0 bytes
+  1291 ;; Hardware stack levels used: 1
+  1292 ;; Hardware stack levels required when called: 2
+  1293 ;; This function calls:
+  1294 ;;		_TMR0_CallBack
+  1295 ;; This function is called by:
+  1296 ;;		_INTERRUPT_InterruptManagerHigh
+  1297 ;; This function uses a non-reentrant model
+  1298 ;;
+  1299                           
+  1300                           	psect	text18
+  1301  000238                     __ptext18:
+  1302                           	callstack 0
+  1303  000238                     _TMR0_ISR:
+  1304                           	callstack 20
+  1305  000238                     
+  1306                           ;mcc_generated_files/tmr0.c: 140:     INTCONbits.TMR0IF = 0;
+  1307  000238  94F2               	bcf	242,2,c	;volatile
+  1308  00023A                     
+  1309                           ;mcc_generated_files/tmr0.c: 144:     TMR0H = timer0ReloadVal >> 8;
+  1310  00023A  5011               	movf	(_timer0ReloadVal+1)^0,w,c	;volatile
+  1311  00023C  6ED7               	movwf	215,c	;volatile
+  1312  00023E                     
+  1313                           ;mcc_generated_files/tmr0.c: 145:     TMR0L = (uint8_t) timer0ReloadVal;
+  1314  00023E  C010  FFD6         	movff	_timer0ReloadVal,4054	;volatile
+  1315  000242                     
+  1316                           ;mcc_generated_files/tmr0.c: 149:     TMR0_CallBack();
+  1317  000242  ECD3  F000         	call	_TMR0_CallBack	;wreg free
+  1318  000246  0012               	return		;funcret
+  1319  000248                     __end_of_TMR0_ISR:
+  1320                           	callstack 0
+  1321                           
+  1322 ;; *************** function _TMR0_CallBack *****************
+  1323 ;; Defined at:
+  1324 ;;		line 154 in file "mcc_generated_files/tmr0.c"
+  1325 ;; Parameters:    Size  Location     Type
+  1326 ;;		None
+  1327 ;; Auto vars:     Size  Location     Type
+  1328 ;;		None
+  1329 ;; Return value:  Size  Location     Type
+  1330 ;;                  1    wreg      void 
+  1331 ;; Registers used:
+  1332 ;;		wreg, status,2, status,0, pcl, pclath, pclatu, tosl, cstack
+  1333 ;; Tracked objects:
+  1334 ;;		On entry : 0/0
+  1335 ;;		On exit  : 0/0
+  1336 ;;		Unchanged: 0/0
+  1337 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+  1338 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1339 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1340 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1341 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1342 ;;Total ram usage:        0 bytes
+  1343 ;; Hardware stack levels used: 1
+  1344 ;; Hardware stack levels required when called: 1
+  1345 ;; This function calls:
+  1346 ;;		Absolute function
+  1347 ;;		_TMR0_DefaultInterruptHandler
+  1348 ;; This function is called by:
+  1349 ;;		_TMR0_ISR
+  1350 ;; This function uses a non-reentrant model
+  1351 ;;
+  1352                           
+  1353                           	psect	text19
+  1354  0001A6                     __ptext19:
+  1355                           	callstack 0
+  1356  0001A6                     _TMR0_CallBack:
+  1357                           	callstack 20
+  1358  0001A6                     
+  1359                           ;mcc_generated_files/tmr0.c: 158:     if(TMR0_InterruptHandler)
+  1360  0001A6  5012               	movf	_TMR0_InterruptHandler^0,w,c
+  1361  0001A8  1013               	iorwf	(_TMR0_InterruptHandler+1)^0,w,c
+  1362  0001AA  B4D8               	btfsc	status,2,c
+  1363  0001AC  EFDA  F000         	goto	i2u1_41
+  1364  0001B0  EFDC  F000         	goto	i2u1_40
+  1365  0001B4                     i2u1_41:
+  1366  0001B4  EFE9  F000         	goto	i2l152
+  1367  0001B8                     i2u1_40:
+  1368  0001B8                     
+  1369                           ;mcc_generated_files/tmr0.c: 159:     {;mcc_generated_files/tmr0.c: 160:         TMR0_In
+      +                          terruptHandler();
+  1370  0001B8  D802               	call	i2u2_48
+  1371  0001BA  EFE9  F000         	goto	i2u2_49
+  1372  0001BE                     i2u2_48:
+  1373  0001BE  0005               	push	
+  1374  0001C0  6EFA               	movwf	pclath,c
+  1375  0001C2  5012               	movf	_TMR0_InterruptHandler^0,w,c
+  1376  0001C4  6EFD               	movwf	tosl,c
+  1377  0001C6  5013               	movf	(_TMR0_InterruptHandler+1)^0,w,c
+  1378  0001C8  6EFE               	movwf	tosh,c
+  1379  0001CA  50F8               	movf	tblptru,w,c
+  1380  0001CC  6EFF               	movwf	tosu,c
+  1381  0001CE  50FA               	movf	pclath,w,c
+  1382  0001D0  0012               	return		;indir
+  1383  0001D2                     i2u2_49:
+  1384  0001D2                     i2l152:
+  1385  0001D2  0012               	return		;funcret
+  1386  0001D4                     __end_of_TMR0_CallBack:
+  1387                           	callstack 0
+  1388                           
+  1389 ;; *************** function _TMR0_DefaultInterruptHandler *****************
+  1390 ;; Defined at:
+  1391 ;;		line 168 in file "mcc_generated_files/tmr0.c"
+  1392 ;; Parameters:    Size  Location     Type
+  1393 ;;		None
+  1394 ;; Auto vars:     Size  Location     Type
+  1395 ;;		None
+  1396 ;; Return value:  Size  Location     Type
+  1397 ;;                  1    wreg      void 
+  1398 ;; Registers used:
+  1399 ;;		None
+  1400 ;; Tracked objects:
+  1401 ;;		On entry : 0/0
+  1402 ;;		On exit  : 0/0
+  1403 ;;		Unchanged: 0/0
+  1404 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14
+  1405 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1406 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1407 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1408 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0
+  1409 ;;Total ram usage:        0 bytes
+  1410 ;; Hardware stack levels used: 1
+  1411 ;; This function calls:
+  1412 ;;		Nothing
+  1413 ;; This function is called by:
+  1414 ;;		_TMR0_Initialize
+  1415 ;;		_TMR0_CallBack
+  1416 ;; This function uses a non-reentrant model
+  1417 ;;
+  1418                           
+  1419                           	psect	text20
+  1420  000292                     __ptext20:
+  1421                           	callstack 0
+  1422  000292                     _TMR0_DefaultInterruptHandler:
+  1423                           	callstack 20
+  1424  000292  0012               	return		;funcret
+  1425  000294                     __end_of_TMR0_DefaultInterruptHandler:
+  1426                           	callstack 0
+  1427  0000                     
+  1428                           	psect	text21
+  1429  000000                     __ptext21:
+  1430                           	callstack 0
+  1431  000000                     
+  1432                           	psect	rparam
+  1433  0000                     
+  1434                           	psect	temp
+  1435  000014                     btemp:
+  1436                           	callstack 0
+  1437  000014                     	ds	1
+  1438  0000                     int$flags	set	btemp
+  1439  0000                     wtemp8	set	btemp+1
+  1440  0000                     ttemp5	set	btemp+1
+  1441  0000                     ttemp6	set	btemp+4
+  1442  0000                     ttemp7	set	btemp+8
+  1443                           
+  1444                           	psect	config
+  1445                           
+  1446                           ;Config register CONFIG1L @ 0xFFF8
+  1447                           ;	Watchdog Timer
+  1448                           ;	WDTEN = OFF, Disabled - Controlled by SWDTEN bit
+  1449                           ;	96MHz PLL Prescaler Selection (PLLSEL=0)
+  1450                           ;	PLLDIV = 2, Divide by 2 (8 MHz oscillator input)
+  1451                           ;	PLL Enable Configuration Bit
+  1452                           ;	CFGPLLEN = OFF, PLL Disabled
+  1453                           ;	Stack Overflow/Underflow Reset
+  1454                           ;	STVREN = OFF, Disabled
+  1455                           ;	Extended Instruction Set
+  1456                           ;	XINST = OFF, Disabled
+  1457  FFF8                     	org	65528
+  1458  FFF8  9C                 	db	156
+  1459                           
+  1460                           ;Config register CONFIG1H @ 0xFFF9
+  1461                           ;	Code Protect
+  1462                           ;	CP0 = OFF, Program memory is not code-protected
+  1463  FFF9                     	org	65529
+  1464  FFF9  F4                 	db	244
+  1465                           
+  1466                           ;Config register CONFIG2L @ 0xFFFA
+  1467                           ;	Oscillator
+  1468                           ;	OSC = INTOSCPLL, INTOSCPLL
+  1469                           ;	T1OSC/SOSC Power Selection Bits
+  1470                           ;	SOSCSEL = DIG, Digital (SCLKI) mode selected
+  1471                           ;	EC Clock Out Enable Bit
+  1472                           ;	CLKOEC = OFF, CLKO output disabled on the RA6 pin
+  1473                           ;	Fail-Safe Clock Monitor
+  1474                           ;	FCMEN = ON, Enabled
+  1475                           ;	Internal External Oscillator Switch Over Mode
+  1476                           ;	IESO = ON, Enabled
+  1477  FFFA                     	org	65530
+  1478  FFFA  D2                 	db	210
+  1479                           
+  1480                           ;Config register CONFIG2H @ 0xFFFB
+  1481                           ;	Watchdog Postscaler
+  1482                           ;	WDTPS = 1024, 1:1024
+  1483  FFFB                     	org	65531
+  1484  FFFB  FA                 	db	250
+  1485                           
+  1486                           ;Config register CONFIG3L @ 0xFFFC
+  1487                           ;	DSWDT Clock Select
+  1488                           ;	DSWDTOSC = INTOSCREF, DSWDT uses INTRC
+  1489                           ;	RTCC Clock Select
+  1490                           ;	RTCOSC = T1OSCREF, RTCC uses T1OSC/T1CKI
+  1491                           ;	Deep Sleep BOR
+  1492                           ;	DSBOREN = ON, Enabled
+  1493                           ;	Deep Sleep Watchdog Timer
+  1494                           ;	DSWDTEN = ON, Enabled
+  1495                           ;	Deep Sleep Watchdog Postscaler
+  1496                           ;	DSWDTPS = G2, 1:2,147,483,648 (25.7 days)
+  1497  FFFC                     	org	65532
+  1498  FFFC  FF                 	db	255
+  1499                           
+  1500                           ;Config register CONFIG3H @ 0xFFFD
+  1501                           ;	IOLOCK One-Way Set Enable bit
+  1502                           ;	IOL1WAY = ON, The IOLOCK bit (PPSCON<0>) can be set once
+  1503                           ;	ADC 10 or 12 Bit Select
+  1504                           ;	ADCSEL = BIT10, 10 - Bit ADC Enabled
+  1505                           ;	PLL Selection Bit
+  1506                           ;	PLLSEL = PLL4X, Selects 4x PLL
+  1507                           ;	MSSP address masking
+  1508                           ;	MSSP7B_EN = MSK7, 7 Bit address masking mode
+  1509  FFFD                     	org	65533
+  1510  FFFD  FF                 	db	255
+  1511                           
+  1512                           ;Config register CONFIG4L @ 0xFFFE
+  1513                           ;	Write/Erase Protect Page Start/End Location
+  1514                           ;	WPFP = PAGE_63, Write Protect Program Flash Page 63
+  1515                           ;	Write/Erase Protect Configuration Region
+  1516                           ;	WPCFG = OFF, Configuration Words page not erase/write-protected
+  1517  FFFE                     	org	65534
+  1518  FFFE  BF                 	db	191
+  1519                           
+  1520                           ;Config register CONFIG4H @ 0xFFFF
+  1521                           ;	Write Protect Disable bit
+  1522                           ;	WPDIS = OFF, WPFP<6:0>/WPEND region ignored
+  1523                           ;	Write/Erase Protect Region Select bit (valid when WPDIS = 0)
+  1524                           ;	WPEND = PAGE_WPFP, Pages WPFP<6:0> through Configuration Words erase/write protected
+  1525  FFFF                     	org	65535
+  1526  FFFF  F3                 	db	243
+  1527                           tosu	equ	0xFFF
+  1528                           tosh	equ	0xFFE
+  1529                           tosl	equ	0xFFD
+  1530                           stkptr	equ	0xFFC
+  1531                           pclatu	equ	0xFFB
+  1532                           pclath	equ	0xFFA
+  1533                           pcl	equ	0xFF9
+  1534                           tblptru	equ	0xFF8
+  1535                           tblptrh	equ	0xFF7
+  1536                           tblptrl	equ	0xFF6
+  1537                           tablat	equ	0xFF5
+  1538                           prodh	equ	0xFF4
+  1539                           prodl	equ	0xFF3
+  1540                           indf0	equ	0xFEF
+  1541                           postinc0	equ	0xFEE
+  1542                           postdec0	equ	0xFED
+  1543                           preinc0	equ	0xFEC
+  1544                           plusw0	equ	0xFEB
+  1545                           fsr0h	equ	0xFEA
+  1546                           fsr0l	equ	0xFE9
+  1547                           wreg	equ	0xFE8
+  1548                           indf1	equ	0xFE7
+  1549                           postinc1	equ	0xFE6
+  1550                           postdec1	equ	0xFE5
+  1551                           preinc1	equ	0xFE4
+  1552                           plusw1	equ	0xFE3
+  1553                           fsr1h	equ	0xFE2
+  1554                           fsr1l	equ	0xFE1
+  1555                           bsr	equ	0xFE0
+  1556                           indf2	equ	0xFDF
+  1557                           postinc2	equ	0xFDE
+  1558                           postdec2	equ	0xFDD
+  1559                           preinc2	equ	0xFDC
+  1560                           plusw2	equ	0xFDB
+  1561                           fsr2h	equ	0xFDA
+  1562                           fsr2l	equ	0xFD9
+  1563                           status	equ	0xFD8
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  8
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           94     11      19
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+    BANK6           256      0       0
+    BANK7           256      0       0
+    BANK8           256      0       0
+    BANK9           256      0       0
+    BANK10          256      0       0
+    BANK11          256      0       0
+    BANK12          256      0       0
+    BANK13          256      0       0
+    BANK14          176      0       0
+
+Pointer List with Targets:
+
+    INT2_SetInterruptHandler@InterruptHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> INT2_DefaultInterruptHandler(), 
+
+    INT2_InterruptHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> INT2_DefaultInterruptHandler(), Absolute function(), 
+
+    INT1_SetInterruptHandler@InterruptHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> INT1_DefaultInterruptHandler(), 
+
+    INT1_InterruptHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> INT1_DefaultInterruptHandler(), Absolute function(), 
+
+    TMR0_SetInterruptHandler@InterruptHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> TMR0_DefaultInterruptHandler(), 
+
+    TMR0_InterruptHandler	PTR FTN()void  size(2) Largest target is 1
+		 -> Absolute function(), TMR0_DefaultInterruptHandler(), 
+
+
+Critical Paths under _main in COMRAM
+
+    _SYSTEM_Initialize->_TMR0_Initialize
+    _TMR0_Initialize->_TMR0_SetInterruptHandler
+    _EXT_INT_Initialize->_INT1_SetInterruptHandler
+    _EXT_INT_Initialize->_INT2_SetInterruptHandler
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in COMRAM
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in COMRAM
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK0
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK1
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK2
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK3
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK4
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK5
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK5
+
+    None.
+
+Critical Paths under _main in BANK6
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK6
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK6
+
+    None.
+
+Critical Paths under _main in BANK7
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK7
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK7
+
+    None.
+
+Critical Paths under _main in BANK8
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK8
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK8
+
+    None.
+
+Critical Paths under _main in BANK9
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK9
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK9
+
+    None.
+
+Critical Paths under _main in BANK10
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK10
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK10
+
+    None.
+
+Critical Paths under _main in BANK11
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK11
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK11
+
+    None.
+
+Critical Paths under _main in BANK12
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK12
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK12
+
+    None.
+
+Critical Paths under _main in BANK13
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK13
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK13
+
+    None.
+
+Critical Paths under _main in BANK14
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerLow in BANK14
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManagerHigh in BANK14
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 0     0      0     294
+                  _SYSTEM_Initialize
+ ---------------------------------------------------------------------------------
+ (1) _SYSTEM_Initialize                                    0     0      0     294
+                 _EXT_INT_Initialize
+               _INTERRUPT_Initialize
+              _OSCILLATOR_Initialize
+             _PIN_MANAGER_Initialize
+                    _TMR0_Initialize
+ ---------------------------------------------------------------------------------
+ (2) _TMR0_Initialize                                      2     2      0      98
+                                              9 COMRAM     2     2      0
+           _TMR0_SetInterruptHandler
+ ---------------------------------------------------------------------------------
+ (3) _TMR0_SetInterruptHandler                             2     0      2      98
+                                              7 COMRAM     2     0      2
+ ---------------------------------------------------------------------------------
+ (2) _PIN_MANAGER_Initialize                               0     0      0       0
+ ---------------------------------------------------------------------------------
+ (2) _OSCILLATOR_Initialize                                0     0      0       0
+ ---------------------------------------------------------------------------------
+ (2) _INTERRUPT_Initialize                                 0     0      0       0
+ ---------------------------------------------------------------------------------
+ (2) _EXT_INT_Initialize                                   0     0      0     196
+           _INT1_SetInterruptHandler
+           _INT2_SetInterruptHandler
+ ---------------------------------------------------------------------------------
+ (3) _INT2_SetInterruptHandler                             2     0      2      98
+                                              7 COMRAM     2     0      2
+ ---------------------------------------------------------------------------------
+ (3) _INT1_SetInterruptHandler                             2     0      2      98
+                                              7 COMRAM     2     0      2
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 3
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (4) _INTERRUPT_InterruptManagerLow                        5     5      0       0
+                                              2 COMRAM     5     5      0
+                           _INT1_ISR
+                           _INT2_ISR
+ ---------------------------------------------------------------------------------
+ (5) _INT2_ISR                                             0     0      0       0
+                      _INT2_CallBack
+ ---------------------------------------------------------------------------------
+ (6) _INT2_CallBack                                        0     0      0       0
+                   Absolute function *
+       _INT2_DefaultInterruptHandler *
+ ---------------------------------------------------------------------------------
+ (7) _INT2_DefaultInterruptHandler                         0     0      0       0
+ ---------------------------------------------------------------------------------
+ (5) _INT1_ISR                                             0     0      0       0
+                      _INT1_CallBack
+ ---------------------------------------------------------------------------------
+ (6) _INT1_CallBack                                        0     0      0       0
+                   Absolute function *
+       _INT1_DefaultInterruptHandler *
+ ---------------------------------------------------------------------------------
+ (7) _INT1_DefaultInterruptHandler                         0     0      0       0
+ ---------------------------------------------------------------------------------
+ (11) Absolute function(Fake)                              0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 11
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (8) _INTERRUPT_InterruptManagerHigh                       2     2      0       0
+                                              0 COMRAM     2     2      0
+                           _TMR0_ISR
+ ---------------------------------------------------------------------------------
+ (9) _TMR0_ISR                                             0     0      0       0
+                      _TMR0_CallBack
+ ---------------------------------------------------------------------------------
+ (10) _TMR0_CallBack                                       0     0      0       0
+                   Absolute function *
+       _TMR0_DefaultInterruptHandler *
+ ---------------------------------------------------------------------------------
+ (11) _TMR0_DefaultInterruptHandler                        0     0      0       0
+ ---------------------------------------------------------------------------------
+ (11) Absolute function(Fake)                              0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 11
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _SYSTEM_Initialize
+     _EXT_INT_Initialize
+       _INT1_SetInterruptHandler
+       _INT2_SetInterruptHandler
+     _INTERRUPT_Initialize
+     _OSCILLATOR_Initialize
+     _PIN_MANAGER_Initialize
+     _TMR0_Initialize
+       _TMR0_SetInterruptHandler
+
+ _INTERRUPT_InterruptManagerLow (ROOT)
+   _INT1_ISR
+     _INT1_CallBack
+       Absolute function(Fake) *
+       _INT1_DefaultInterruptHandler *
+   _INT2_ISR
+     _INT2_CallBack
+       Absolute function(Fake) *
+       _INT2_DefaultInterruptHandler *
+
+ _INTERRUPT_InterruptManagerHigh (ROOT)
+   _TMR0_ISR
+     _TMR0_CallBack
+       Absolute function(Fake) *
+       _TMR0_DefaultInterruptHandler *
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5E      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5E      B      13       1       20.2%
+STACK                0      0       0       2        0.0%
+DATA                 0      0      13       3        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBANK6           100      0       0      16        0.0%
+BANK6              100      0       0      17        0.0%
+BITBANK7           100      0       0      18        0.0%
+BANK7              100      0       0      19        0.0%
+BITBANK8           100      0       0      20        0.0%
+BANK8              100      0       0      21        0.0%
+BITBANK9           100      0       0      22        0.0%
+BANK9              100      0       0      23        0.0%
+BITBANK10          100      0       0      24        0.0%
+BANK10             100      0       0      25        0.0%
+BITBANK11          100      0       0      26        0.0%
+BANK11             100      0       0      27        0.0%
+BITBANK12          100      0       0      28        0.0%
+BANK12             100      0       0      29        0.0%
+BITBANK13          100      0       0      30        0.0%
+BANK13             100      0       0      31        0.0%
+BITBANK14           B0      0       0      32        0.0%
+BANK14              B0      0       0      33        0.0%
+BITBIGSFRhh          D      0       0      34        0.0%
+BITBIGSFRhlhh       18      0       0      35        0.0%
+BITBIGSFRhll         1      0       0      36        0.0%
+BITBIGSFRlhh         2      0       0      37        0.0%
+BITBIGSFRlhl        34      0       0      38        0.0%
+BITBIGSFRllhhhh      4      0       0      39        0.0%
+BITBIGSFRllhhhl      4      0       0      40        0.0%
+BITBIGSFRllhhll      1      0       0      41        0.0%
+BITBIGSFRllhlh      3D      0       0      42        0.0%
+BITBIGSFRllhllh      5      0       0      43        0.0%
+BITBIGSFRllhlll      2      0       0      44        0.0%
+BITBIGSFRlllh       5A      0       0      45        0.0%
+BITBIGSFRllll       31      0       0      46        0.0%
+ABS                  0      0      13      47        0.0%
+BIGRAM             EAF      0       0      48        0.0%
+BIGSFR               0      0       0     200        0.0%
+BITSFR_2             0      0       0     200        0.0%
+SFR_2                0      0       0     200        0.0%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.36 build 20220127204148 
+Symbol Table                                                                                   Sun Oct 23 14:59:32 2022
+
+                                      l21 020E                                        l24 0236  
+                                      l91 0268                                        l67 00DC  
+                                      bsr 000FE0                           _timer0ReloadVal 0010  
+                                     l130 0112                                       l155 025E  
+                                     l180 027C                                       l193 0272  
+                                     l199 01F8                                       l901 00AE  
+                                     l903 00B4                                       l905 00C0  
+                                     l907 00C2                                       l909 00C4  
+                                     l895 0224                                       l897 0260  
+                                     l899 0092                                       tosl 000FFD  
+                                     wreg 000FE8                             _INT1_CallBack 0178  
+                                    l1031 026A                                      l1041 01E8  
+                                    l1033 01D4                                      l1043 01F6  
+                                    l1035 01D8                                      l1027 0256  
+                                    l1051 00FE                                      l1029 0274  
+                                    l1037 01E4                                      l1053 0100  
+                                    l1045 00DE                                      l1061 01FE  
+                                    l1039 01E6                                      l1055 0102  
+                                    l1047 00E0                                      l1063 0202  
+                                    l1071 0214                                      l1057 010E  
+                                    l1049 00E8                                      l1065 0206  
+                                    l1073 0216                                      l1067 020A  
+                                    l1059 01FA                                      l1075 0218  
+                                    l1077 021A                                      l1069 0210  
+                                    _LATA 000F89                                      _LATB 000F8A  
+                                    _LATC 000F8B                                      _LATD 000F8C  
+                                    _LATE 000F8D                                      i2l98 013E  
+                           _INT2_CallBack 014A                                      _main 0210  
+                                    btemp 0014                 ?_INT2_SetInterruptHandler 0008  
+                                    start 008E                              ___param_bank 000000  
+                 __end_of_TMR0_Initialize 0114                          __end_of_INT1_ISR 028E  
+                        __end_of_INT2_ISR 0286            ??_TMR0_DefaultInterruptHandler 0001  
+           __end_of_OSCILLATOR_Initialize 0238                                     ?_main 0001  
+                                   _T0CON 000FD5                                     i1l103 0054  
+                                   i1l107 0076                                     i1l173 028C  
+                                   i1l190 0176                                     i1l183 0290  
+                                   i1l177 01A4                                     i1l186 0284  
+                                   i1l196 028E                                     i2l152 01D2  
+                                   i2l148 0246                                     i2l158 0292  
+                                   i1l941 0178                                     i1l943 018A  
+                                   i1l945 014A                                     i1l971 0286  
+                                   i1l947 015C                                     i1l973 0288  
+                                   i1l967 027E                                     i1l991 004E  
+                                   i1l969 0280                                     i1l993 0062  
+                                   i1l985 002E                                     i1l995 0070  
+                                   i1l987 003C                                     i1l997 0074  
+                                   i1l989 004A                                     i2l937 01A6  
+                                   i2l961 023A                                     i2l939 01B8  
+                                   i2l963 023E                                     i2l965 0242  
+                                   i2l981 0138                                     i2l959 0238  
+                                   i2l983 013C                                     i2l977 011C  
+                                   i2l979 012A                                     _TMR0H 000FD7  
+                                   _TMR0L 000FD6                                     _TRISA 000F92  
+                                   _TRISB 000F93                                     _TRISC 000F94  
+                                   _TRISD 000F95                                     _TRISE 000F96  
+               ?_TMR0_SetInterruptHandler 0008                          __end_of_TMR0_ISR 0248  
+                          ?_INT1_CallBack 0001            ??_INT1_DefaultInterruptHandler 0003  
+                          ?_INT2_CallBack 0001                  _INT1_SetInterruptHandler 0274  
+                                   pclath 000FFA                                     pclatu 000FFB  
+                                   ttemp5 0015                                     ttemp6 0018  
+                                   ttemp7 001C                                     status 000FD8  
+                                   wtemp8 0015            ?_INTERRUPT_InterruptManagerLow 0001  
+                         __initialization 0248                              __end_of_main 0224  
+                                  ??_main 000C                             __activetblptr 000002  
+                                  _ANCON0 000F48                                    _ANCON1 000F49  
+                                  _ODCON1 000F42                                    _ODCON2 000F41  
+                                  _ODCON3 000F40                                    _OSCCON 000FD3  
+                                  _RPINR1 000EE1                                    _RPINR2 000EE2  
+                                  i1u3_20 018A                                    i1u3_21 0186  
+                                  i1u4_28 0190                                    i1u5_20 015C  
+                                  i1u4_29 01A4                                    i1u5_21 0158  
+                                  i2u1_40 01B8                                    i2u1_41 01B4  
+                                  i1u6_28 0162                                    i1u6_29 0176  
+                                  i2u2_48 01BE                                    i2u2_49 01D2  
+                                  i1u9_20 003C                                    i1u9_21 0038  
+                                  i2u7_40 012A                                    i2u7_41 0126  
+                                  i2u8_40 0138                                    i2u8_41 0134  
+                        ?_TMR0_Initialize 0001                                    isa$std 000001  
+    __end_of_INT2_DefaultInterruptHandler 0290              _INT2_DefaultInterruptHandler 028E  
+                         ??_INT1_CallBack 0003                                    tblptru 000FF8  
+                         ??_INT2_CallBack 0003                     __end_of_TMR0_CallBack 01D4  
+INT2_SetInterruptHandler@InterruptHandler 0008  INT1_SetInterruptHandler@InterruptHandler 0008  
+TMR0_SetInterruptHandler@InterruptHandler 0008          ??_INTERRUPT_InterruptManagerHigh 0001  
+         ?_INTERRUPT_InterruptManagerHigh 0001                         _SYSTEM_Initialize 01FA  
+                              __accesstop 0060                   __end_of__initialization 0248  
+                               ?_INT1_ISR 0001                                 ?_INT2_ISR 0001  
+                      ?_SYSTEM_Initialize 0001                             ___rparam_used 000001  
+                          __pcstackCOMRAM 0001                       ??_SYSTEM_Initialize 000C  
+                               ?_TMR0_ISR 0001          __end_of_INT2_SetInterruptHandler 0274  
+         fp__INT2_DefaultInterruptHandler 0000             ?_INT2_DefaultInterruptHandler 0001  
+               __end_of_SYSTEM_Initialize 0210                                ??_INT1_ISR 0003  
+                              ??_INT2_ISR 0003                                __pnvCOMRAM 000C  
+        __end_of_TMR0_SetInterruptHandler 0260                                ??_TMR0_ISR 0001  
+              ??_INT1_SetInterruptHandler 000A                                   _REFOCON 000F3D  
+                                 _OSCCON2 000F87                                   i1u10_20 004A  
+                                 i1u10_21 0046                                   i1u11_20 0062  
+                                 i1u11_21 005E                                   i1u12_20 0070  
+                                 i1u12_21 006C                                   _OSCTUNE 000F9B  
+                                 __Hparam 0000                                   __Lparam 0000  
+                                 __pcinit 0248                                   __ramtop 0F00  
+                                 __ptext0 0210                                   __ptext1 01FA  
+                                 __ptext2 00DE                                   __ptext3 0256  
+                                 __ptext4 0092                                   __ptext5 0224  
+                                 __ptext6 0260                                   __ptext7 01D4  
+                                 __ptext8 026A                                   __ptext9 0274  
+                               _T0CONbits 000FD5                     _OSCILLATOR_Initialize 0224  
+                ??_PIN_MANAGER_Initialize 0008                            __pintcode_body 0114  
+                    end_of_initialization 0248                  _INT2_SetInterruptHandler 026A  
+          ??_INT2_DefaultInterruptHandler 0003                             __Lmediumconst 0000  
+                                 int_func 0114                  _TMR0_SetInterruptHandler 0256  
+                   _INT1_InterruptHandler 000E                                 _TRISEbits 000F96  
+            __end_of_INTERRUPT_Initialize 026A                    ?_OSCILLATOR_Initialize 0001  
+                     start_initialization 0248                     __end_of_INT1_CallBack 01A6  
+                   __end_of_INT2_CallBack 0178                __end_of_EXT_INT_Initialize 01FA  
+                   _INT2_InterruptHandler 000C                     _TMR0_InterruptHandler 0012  
+                  _PIN_MANAGER_Initialize 0092                                 __pintcode 0008  
+                             __pintcodelo 0018                ??_INT2_SetInterruptHandler 000A  
+                           _TMR0_CallBack 01A6                      _INTERRUPT_Initialize 0260  
+                       ??_TMR0_Initialize 000A                                  _INT1_ISR 0286  
+                                _INT2_ISR 027E                                  _LATAbits 000F89  
+                                _LATCbits 000F8B                 ?_INT1_SetInterruptHandler 0008  
+              ??_TMR0_SetInterruptHandler 000A                                  _RCONbits 000FD0  
+                                _TMR0_ISR 0238                            ?_TMR0_CallBack 0001  
+                             _INTCON2bits 000FF1                               _INTCON3bits 000FF0  
+                   ?_INTERRUPT_Initialize 0001                                  __Hrparam 0000  
+                                __Lrparam 0000                   ??_OSCILLATOR_Initialize 0008  
+         ??_INTERRUPT_InterruptManagerLow 0003                                  __ptext11 027E  
+                                __ptext20 0292                                  __ptext12 014A  
+                                __ptext21 0000                                  __ptext13 028E  
+                                __ptext14 0286                                  __ptext15 0178  
+                                __ptext16 0290                                  __ptext18 0238  
+                                __ptext19 01A6      __end_of_TMR0_DefaultInterruptHandler 0294  
+            _TMR0_DefaultInterruptHandler 0292                                  isa$xinst 000000  
+                                int$flags 0014      __end_of_INT1_DefaultInterruptHandler 0292  
+            _INT1_DefaultInterruptHandler 0290                                _INTCONbits 000FF2  
+                         ??_TMR0_CallBack 0001                    ??_INTERRUPT_Initialize 0008  
+                      _EXT_INT_Initialize 01D4                                  intlevel1 0000  
+                                intlevel2 0000                   ?_PIN_MANAGER_Initialize 0001  
+                     ?_EXT_INT_Initialize 0001           fp__TMR0_DefaultInterruptHandler 0000  
+           ?_TMR0_DefaultInterruptHandler 0001    __end_of_INTERRUPT_InterruptManagerHigh 014A  
+          _INTERRUPT_InterruptManagerHigh 0008                      ??_EXT_INT_Initialize 000A  
+         fp__INT1_DefaultInterruptHandler 0000             ?_INT1_DefaultInterruptHandler 0001  
+                         _TMR0_Initialize 00DE          __end_of_INT1_SetInterruptHandler 027E  
+   __end_of_INTERRUPT_InterruptManagerLow 008E             _INTERRUPT_InterruptManagerLow 0018  
+          __end_of_PIN_MANAGER_Initialize 00DE  

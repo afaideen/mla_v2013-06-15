@@ -39,7 +39,7 @@
 // this definition is very helpful in the debugging process
 /*********************************************************************/
 #ifndef MIWI_DEMO_KIT
-#define ENABLE_CONSOLE
+//#define ENABLE_CONSOLE
 #endif
 //#define USE_IRQ0_AS_INTERRUPT //for MRF89XA
 
