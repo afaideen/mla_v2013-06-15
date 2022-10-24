@@ -59,7 +59,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC18F-J_DFP" vendor="Microchip" version="1.1.24"/>
+        <pack name="PIC18F-J_DFP" vendor="Microchip" version="1.3.35"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -630,13 +630,18 @@
       <Tool>
         <property key="debugoptions.debug-startup" value="Use system settings"/>
         <property key="debugoptions.reset-behaviour" value="Use system settings"/>
-        <property key="design.file" value="proteus_sim/PIC18 Explorer Board.DSN"/>
+        <property key="design.file"
+                  value="../proteus_design/miwi_demo_kit/PIC18F46J13.DSN"/>
         <property key="lastid" value=""/>
         <property key="target.ip.address" value="localhost"/>
         <property key="target.ip.port" value="8000"/>
       </Tool>
       <VSMViewerPlatformTool>
-        <property key="design.file" value="proteus_sim/PIC18 Explorer Board.DSN"/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
+        <property key="design.file"
+                  value="../proteus_design/miwi_demo_kit/PIC18F46J13.DSN"/>
+        <property key="lastid" value=""/>
         <property key="target.ip.address" value="localhost"/>
         <property key="target.ip.port" value="8000"/>
       </VSMViewerPlatformTool>
@@ -672,7 +677,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC18F-J_DFP" vendor="Microchip" version="1.1.24"/>
+        <pack name="PIC18F-J_DFP" vendor="Microchip" version="1.3.35"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -1314,7 +1319,8 @@
         <property key="codecoverage.outputfile" value=""/>
         <property key="debugoptions.debug-startup" value="Use system settings"/>
         <property key="debugoptions.reset-behaviour" value="Use system settings"/>
-        <property key="design.file" value="proteus_sim/PIC18 Explorer Board.DSN"/>
+        <property key="design.file"
+                  value="../proteus_design/miwi_demo_kit/PIC18F46J50.DSN"/>
         <property key="lastid" value=""/>
         <property key="oscillator.auxfrequency" value="120"/>
         <property key="oscillator.auxfrequencyunit" value="Mega"/>
@@ -1794,7 +1800,8 @@
         <property key="warningmessagebreakoptions.warningmessages" value="holdstate"/>
       </Tool>
       <VSMViewerPlatformTool>
-        <property key="design.file" value="proteus_sim/PIC18 Explorer Board.DSN"/>
+        <property key="design.file"
+                  value="../proteus_design/miwi_demo_kit/PIC18F46J50.DSN"/>
         <property key="target.ip.address" value="localhost"/>
         <property key="target.ip.port" value="8000"/>
       </VSMViewerPlatformTool>
