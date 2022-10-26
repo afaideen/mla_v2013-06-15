@@ -56,9 +56,12 @@
 #define __HELPERS_C
 
 #include <stdarg.h>
-#include "TCPIP Stack/TCPIP.h"
-//#include "GenericTypeDefs.h"
-//#include "TCPIP Stack/Helpers.h"
+//#include "TCPIP Stack/TCPIP.h"
+#include "Compiler.h"
+#include "GenericTypeDefs.h"
+#include "HardwareProfile.h"
+
+#include "Helpers.h"
 
 
 
@@ -444,76 +447,76 @@ void UnencodeURL(BYTE* URL)
   	TRUE - an IP address was successfully decoded
   	FALSE - no IP address could be found, or the format was incorrect
   ***************************************************************************/
-BOOL StringToIPAddress(BYTE* str, IP_ADDR* IPAddress)
-{
-	DWORD_VAL dwVal;
-	BYTE i, charLen, currentOctet;
-
-	charLen = 0;
-	currentOctet = 0;
-	dwVal.Val = 0;
-	while((i = *str++))
-	{
-		if(currentOctet > 3u)
-			break;
-
-		i -= '0';
-		
-
-		// Validate the character is a numerical digit or dot, depending on location
-		if(charLen == 0u)
-		{
-			if(i > 9u)
-				return FALSE;
-		}
-		else if(charLen == 3u)
-		{
-			if(i != (BYTE)('.' - '0'))
-				return FALSE;
-
-			if(dwVal.Val > 0x00020505ul)
-				return FALSE;
-
-			IPAddress->v[currentOctet++] = dwVal.v[2]*((BYTE)100) + dwVal.v[1]*((BYTE)10) + dwVal.v[0];
-			charLen = 0;
-			dwVal.Val = 0;
-			continue;
-		}
-		else
-		{
-			if(i == (BYTE)('.' - '0'))
-			{
-				if(dwVal.Val > 0x00020505ul)
-					return FALSE;
-
-				IPAddress->v[currentOctet++] = dwVal.v[2]*((BYTE)100) + dwVal.v[1]*((BYTE)10) + dwVal.v[0];
-				charLen = 0;
-				dwVal.Val = 0;
-				continue;
-			}
-			if(i > 9u)
-				return FALSE;
-		}
-
-		charLen++;
-		dwVal.Val <<= 8;
-		dwVal.v[0] = i;
-	}
-
-	// Make sure the very last character is a valid termination character 
-	// (i.e., not more hostname, which could be legal and not an IP 
-	// address as in "10.5.13.233.picsaregood.com"
-	if(i != 0u && i != '/' && i != '\r' && i != '\n' && i != ' ' && i != '\t' && i != ':')
-		return FALSE;
-
-	// Verify and convert the last octet and return the result
-	if(dwVal.Val > 0x00020505ul)
-		return FALSE;
-
-	IPAddress->v[3] = dwVal.v[2]*((BYTE)100) + dwVal.v[1]*((BYTE)10) + dwVal.v[0];
-
-	return TRUE;
-}
+//BOOL StringToIPAddress(BYTE* str, IP_ADDR* IPAddress)
+//{
+//	DWORD_VAL dwVal;
+//	BYTE i, charLen, currentOctet;
+//
+//	charLen = 0;
+//	currentOctet = 0;
+//	dwVal.Val = 0;
+//	while((i = *str++))
+//	{
+//		if(currentOctet > 3u)
+//			break;
+//
+//		i -= '0';
+//		
+//
+//		// Validate the character is a numerical digit or dot, depending on location
+//		if(charLen == 0u)
+//		{
+//			if(i > 9u)
+//				return FALSE;
+//		}
+//		else if(charLen == 3u)
+//		{
+//			if(i != (BYTE)('.' - '0'))
+//				return FALSE;
+//
+//			if(dwVal.Val > 0x00020505ul)
+//				return FALSE;
+//
+//			IPAddress->v[currentOctet++] = dwVal.v[2]*((BYTE)100) + dwVal.v[1]*((BYTE)10) + dwVal.v[0];
+//			charLen = 0;
+//			dwVal.Val = 0;
+//			continue;
+//		}
+//		else
+//		{
+//			if(i == (BYTE)('.' - '0'))
+//			{
+//				if(dwVal.Val > 0x00020505ul)
+//					return FALSE;
+//
+//				IPAddress->v[currentOctet++] = dwVal.v[2]*((BYTE)100) + dwVal.v[1]*((BYTE)10) + dwVal.v[0];
+//				charLen = 0;
+//				dwVal.Val = 0;
+//				continue;
+//			}
+//			if(i > 9u)
+//				return FALSE;
+//		}
+//
+//		charLen++;
+//		dwVal.Val <<= 8;
+//		dwVal.v[0] = i;
+//	}
+//
+//	// Make sure the very last character is a valid termination character 
+//	// (i.e., not more hostname, which could be legal and not an IP 
+//	// address as in "10.5.13.233.picsaregood.com"
+//	if(i != 0u && i != '/' && i != '\r' && i != '\n' && i != ' ' && i != '\t' && i != ':')
+//		return FALSE;
+//
+//	// Verify and convert the last octet and return the result
+//	if(dwVal.Val > 0x00020505ul)
+//		return FALSE;
+//
+//	IPAddress->v[3] = dwVal.v[2]*((BYTE)100) + dwVal.v[1]*((BYTE)10) + dwVal.v[0];
+//
+//	return TRUE;
+//}
 
 /*****************************************************************************
   Function:
@@ -540,78 +543,78 @@ BOOL StringToIPAddress(BYTE* str, IP_ADDR* IPAddress)
   Remarks:
 	This function is aliased to StringToIPAddress on non-PIC18 platforms.
   ***************************************************************************/
-#if defined(__18CXX)
-BOOL ROMStringToIPAddress(ROM BYTE* str, IP_ADDR* IPAddress)
-{
-	DWORD_VAL dwVal;
-	BYTE i, charLen, currentOctet;
-
-	charLen = 0;
-	currentOctet = 0;
-	dwVal.Val = 0;
-	while(i = *str++)
-	{
-		if(currentOctet > 3u)
-			break;
-
-		i -= '0';
-		
-
-		// Validate the character is a numerical digit or dot, depending on location
-		if(charLen == 0u)
-		{
-			if(i > 9u)
-				return FALSE;
-		}
-		else if(charLen == 3u)
-		{
-			if(i != (BYTE)('.' - '0'))
-				return FALSE;
-
-			if(dwVal.Val > 0x00020505ul)
-				return FALSE;
-
-			IPAddress->v[currentOctet++] = dwVal.v[2]*((BYTE)100) + dwVal.v[1]*((BYTE)10) + dwVal.v[0];
-			charLen = 0;
-			dwVal.Val = 0;
-			continue;
-		}
-		else
-		{
-			if(i == (BYTE)('.' - '0'))
-			{
-				if(dwVal.Val > 0x00020505ul)
-					return FALSE;
-
-				IPAddress->v[currentOctet++] = dwVal.v[2]*((BYTE)100) + dwVal.v[1]*((BYTE)10) + dwVal.v[0];
-				charLen = 0;
-				dwVal.Val = 0;
-				continue;
-			}
-			if(i > 9u)
-				return FALSE;
-		}
-
-		charLen++;
-		dwVal.Val <<= 8;
-		dwVal.v[0] = i;
-	}
-
-	// Make sure the very last character is a valid termination character 
-	// (i.e., not more hostname, which could be legal and not an IP 
-	// address as in "10.5.13.233.picsaregood.com"
-	if(i != 0u && i != '/' && i != '\r' && i != '\n' && i != ' ' && i != '\t')
-		return FALSE;
-
-	// Verify and convert the last octet and return the result
-	if(dwVal.Val > 0x00020505ul)
-		return FALSE;
-
-	IPAddress->v[3] = dwVal.v[2]*((BYTE)100) + dwVal.v[1]*((BYTE)10) + dwVal.v[0];
-
-	return TRUE;
-}
-#endif
+//#if defined(__18CXX)
+//BOOL ROMStringToIPAddress(ROM BYTE* str, IP_ADDR* IPAddress)
+//{
+//	DWORD_VAL dwVal;
+//	BYTE i, charLen, currentOctet;
+//
+//	charLen = 0;
+//	currentOctet = 0;
+//	dwVal.Val = 0;
+//	while(i = *str++)
+//	{
+//		if(currentOctet > 3u)
+//			break;
+//
+//		i -= '0';
+//		
+//
+//		// Validate the character is a numerical digit or dot, depending on location
+//		if(charLen == 0u)
+//		{
+//			if(i > 9u)
+//				return FALSE;
+//		}
+//		else if(charLen == 3u)
+//		{
+//			if(i != (BYTE)('.' - '0'))
+//				return FALSE;
+//
+//			if(dwVal.Val > 0x00020505ul)
+//				return FALSE;
+//
+//			IPAddress->v[currentOctet++] = dwVal.v[2]*((BYTE)100) + dwVal.v[1]*((BYTE)10) + dwVal.v[0];
+//			charLen = 0;
+//			dwVal.Val = 0;
+//			continue;
+//		}
+//		else
+//		{
+//			if(i == (BYTE)('.' - '0'))
+//			{
+//				if(dwVal.Val > 0x00020505ul)
+//					return FALSE;
+//
+//				IPAddress->v[currentOctet++] = dwVal.v[2]*((BYTE)100) + dwVal.v[1]*((BYTE)10) + dwVal.v[0];
+//				charLen = 0;
+//				dwVal.Val = 0;
+//				continue;
+//			}
+//			if(i > 9u)
+//				return FALSE;
+//		}
+//
+//		charLen++;
+//		dwVal.Val <<= 8;
+//		dwVal.v[0] = i;
+//	}
+//
+//	// Make sure the very last character is a valid termination character 
+//	// (i.e., not more hostname, which could be legal and not an IP 
+//	// address as in "10.5.13.233.picsaregood.com"
+//	if(i != 0u && i != '/' && i != '\r' && i != '\n' && i != ' ' && i != '\t')
+//		return FALSE;
+//
+//	// Verify and convert the last octet and return the result
+//	if(dwVal.Val > 0x00020505ul)
+//		return FALSE;
+//
+//	IPAddress->v[3] = dwVal.v[2]*((BYTE)100) + dwVal.v[1]*((BYTE)10) + dwVal.v[0];
+//
+//	return TRUE;
+//}
+//#endif
 
 
 

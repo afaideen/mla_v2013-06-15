@@ -249,8 +249,8 @@ int main(void)
     while(1)
     {
         t3 = MiWi_TickGet();
-        if( MiWi_TickGetDiff(t3, t2) > 5 * ONE_SECOND )
-//        if( MiWi_TickGetDiff(t3, t2) > 0.5 * ONE_SECOND )
+//        if( MiWi_TickGetDiff(t3, t2) > 5 * ONE_SECOND )
+        if( MiWi_TickGetDiff(t3, t2) > 0.5 * ONE_SECOND )
         {
             t2 = MiWi_TickGet();
             LED_1 ^= 1;

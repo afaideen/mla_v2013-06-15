@@ -171,10 +171,14 @@
 #define EUI_2 0x66
 #define EUI_1 0x77
 #ifdef NWK_ROLE_COORDINATOR
-    #define EUI_0 0x01
+//    #define EUI_0 0x01
+//    #define EUI_0 0x02
+//    #define EUI_0 0x03
+    #define EUI_0 0x04
 #elif defined(NWK_ROLE_END_DEVICE)
 
-#define EUI_0 0x02
+//#define EUI_0 0x02
+#define EUI_0 0x03
 #endif
 
 #define ENABLE_EEPROM
@@ -198,7 +202,8 @@
 // with any PAN ID.
 /*********************************************************************/
 #ifdef NWK_ROLE_COORDINATOR
-    #define MY_PAN_ID                       0xFFFF
+//    #define MY_PAN_ID                       0xFFFF
+    #define MY_PAN_ID                       0x1234
 #elif defined NWK_ROLE_END_DEVICE
 //    #define MY_PAN_ID                       0x1234
     #define MY_PAN_ID                       0xFFFF// PAN ID used by end device must be the same with coordinator

@@ -1,76 +1,3 @@
-/****************************************************************************
-* FileName:		main.c
-* Dependencies: none   
-* Processor:	PIC18, PIC24F, PIC32, dsPIC30, dsPIC33
-*               tested with 18F4620, dsPIC33FJ256GP710	
-* Complier:     Microchip C18 v3.04 or higher
-*				Microchip C30 v2.03 or higher	
-*               Microchip C32 v1.02 or higher
-* Company:		Microchip Technology, Inc.
-*
-* Copyright and Disclaimer Notice for MiWi DE Software:
-*
-* Copyright � 2007-2012 Microchip Technology Inc.  All rights reserved.
-*
-* Microchip licenses to you the right to use, modify, copy and distribute 
-* Software only when embedded on a Microchip microcontroller or digital 
-* signal controller and used with a Microchip radio frequency transceiver, 
-* which are integrated into your product or third party product (pursuant 
-* to the terms in the accompanying license agreement).   
-*
-* You should refer to the license agreement accompanying this Software for 
-* additional information regarding your rights and obligations.
-*
-* SOFTWARE AND DOCUMENTATION ARE PROVIDED �AS IS� WITHOUT WARRANTY OF ANY 
-* KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY 
-* WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A 
-* PARTICULAR PURPOSE. IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE 
-* LIABLE OR OBLIGATED UNDER CONTRACT, NEGLIGENCE, STRICT LIABILITY, 
-* CONTRIBUTION, BREACH OF WARRANTY, OR OTHER LEGAL EQUITABLE THEORY ANY 
-* DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING BUT NOT LIMITED TO 
-* ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR CONSEQUENTIAL DAMAGES, 
-* LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS, 
-* TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES (INCLUDING BUT 
-* NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
-*
-****************************************************************************
-* File Description:
-*
-*  This is the simple example that demonstrate the simple programming
-*  interface of MiWi Development Environment (DE). As you may see in
-*  the demo code, besides application specific code, all wireless
-*  communicate code is less than 30 lines. This simple example must be 
-*  used with node 2 of simple example.
-*  In this simple example, following features have been demonstrated:
-*   - Hand Shake
-*       A hand-shaking process has been demonstrated by establishing
-*       connection with a peer device.
-*   - Receiving Message
-*       This example demonstrate how to check received message and 
-*       available information for the received data. Finally, this
-*       example also show how to process the message
-*   - Transmitting Message
-*       This example demonstrate how to transmit message by broadcast
-*       or unicast
-*   - Security
-*       This example demonstrate how to require the protocol stack
-*       to encrypt the outgoing message. It also shows how the 
-*       protocol stack automatically decrypt the incoming message
-*       and provide the security status to the application layer.
-*
-* Detailed demo flow chart and execution instructions can be found in
-*   MiWi DE help file located at directory <MLA Install Directory>/
-*   Microchip/Help. From the content tab, find the document about
-*   Simple Example at <ROOT> -> "Demos" -> "Running Demos" -> 
-*   "Basic Demos" -> "Simple Example".
-*
-* Change History:
-*  Rev   Date         Author    Description
-*  0.1   1/03/2008    yfy       Initial revision
-*  2.0   4/15/2009    yfy       MiMAC and MiApp revision
-*  3.1   5/28/2010    yfy       MiWi DE 3.1
-*  4.1   1/31/2012    yfy       MiWi DE 4.2, simplified demo interface
-**************************************************************************/
 
 /************************ HEADERS ****************************************/
 #include "ConfigApp.h"
@@ -79,10 +6,14 @@
 #include "DemoOutput.h"
 #include "HardwareProfile.h"
 #include "TimeDelay.h"
+#include <string.h>
 
 BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl);
 BOOL CreateNewConnectionAtChannel(BYTE channel);
+float ReadTempSensorBoard(void);
+void ftoa(float f, unsigned char *buff);
 
+extern BYTE myLongAddress[MY_ADDRESS_LENGTH];
 /************************** VARIABLES ************************************/
 #define LIGHT   0x01
 #define SWITCH  0x02
@@ -167,12 +98,17 @@ int main(void)
     BYTE TxNum = 0;
     BYTE RxNum = 0;
     MIWI_TICK t2, t3;
+    BYTE mydata[9];
+    BYTE buff[7];
+    float tpr_data;
     
     /*******************************************************************/
     // Initialize the system
     /*******************************************************************/
-    BoardInit();      
+    BoardInit();
+#ifndef WIRELESS_EVAL_BOARD    
     ConsoleInit(); 
+#endif
     DemoOutput_Greeting();
     
     LED_1 = 0;
@@ -213,10 +149,13 @@ int main(void)
     MiApp_ConnectionMode(ENABLE_ALL_CONN);
 //    DemoOutput_Channel(myChannel, 0);
 
-//    CreateNewConnectionAtChannel(myChannel);
+    if(myLongAddress[0] == 1){
+        CreateNewConnectionAtChannel(myChannel);
 //    CreateNewConnectionWithLeastNoise(0b0000000011111111);
 //    CreateNewConnectionWithLeastNoise(0b0000000011111111);
 //    CreateNewConnectionWithLeastNoise(ALL_CHANNEL);
+    }
+    else{
 
     //Uncomment for original below
     /*******************************************************************/
@@ -231,51 +170,53 @@ int main(void)
     //      within the radio range; indirect mode means connection 
     //      may or may not in the radio range. 
     /*******************************************************************/
-    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+        i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+
+        /*******************************************************************/
+        // Display current opertion on LCD of demo board, if applicable
+        /*******************************************************************/
+        if( i != 0xFF )
+        {
+            DemoOutput_Channel(myChannel, 1);
+        }
+        else
+        {
+            /*******************************************************************/
+            // If no network can be found and join, we need to start a new 
+            // network by calling function MiApp_StartConnection
+            //
+            // The first parameter is the mode of start connection. There are 
+            // two valid connection modes:
+            //   - START_CONN_DIRECT        start the connection on current 
+            //                              channel
+            //   - START_CONN_ENERGY_SCN    perform an energy scan first, 
+            //                              before starting the connection on 
+            //                              the channel with least noise
+            //   - START_CONN_CS_SCN        perform a carrier sense scan 
+            //                              first, before starting the 
+            //                              connection on the channel with 
+            //                              least carrier sense noise. Not
+            //                              supported for current radios
+            //
+            // The second parameter is the scan duration, which has the same 
+            //     definition in Energy Scan. 10 is roughly 1 second. 9 is a 
+            //     half second and 11 is 2 seconds. Maximum scan duration is 
+            //     14, or roughly 16 seconds.
+            //
+            // The third parameter is the channel map. Bit 0 of the 
+            //     double word parameter represents channel 0. For the 2.4GHz 
+            //     frequency band, all possible channels are channel 11 to 
+            //     channel 26. As the result, the bit map is 0x07FFF800. Stack 
+            //     will filter out all invalid channels, so the application 
+            //     only needs to pay attention to the channels that are not 
+            //     preferred.
+            /*******************************************************************/
+            Printf("\r\nStart connection...");
+            MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
+            DemoOutput_Channel(myChannel, 0);
+            DelayMs(500);
+        }
     
-    /*******************************************************************/
-    // Display current opertion on LCD of demo board, if applicable
-    /*******************************************************************/
-    if( i != 0xFF )
-    {
-        DemoOutput_Channel(myChannel, 1);
-    }
-    else
-    {
-        /*******************************************************************/
-        // If no network can be found and join, we need to start a new 
-        // network by calling function MiApp_StartConnection
-        //
-        // The first parameter is the mode of start connection. There are 
-        // two valid connection modes:
-        //   - START_CONN_DIRECT        start the connection on current 
-        //                              channel
-        //   - START_CONN_ENERGY_SCN    perform an energy scan first, 
-        //                              before starting the connection on 
-        //                              the channel with least noise
-        //   - START_CONN_CS_SCN        perform a carrier sense scan 
-        //                              first, before starting the 
-        //                              connection on the channel with 
-        //                              least carrier sense noise. Not
-        //                              supported for current radios
-        //
-        // The second parameter is the scan duration, which has the same 
-        //     definition in Energy Scan. 10 is roughly 1 second. 9 is a 
-        //     half second and 11 is 2 seconds. Maximum scan duration is 
-        //     14, or roughly 16 seconds.
-        //
-        // The third parameter is the channel map. Bit 0 of the 
-        //     double word parameter represents channel 0. For the 2.4GHz 
-        //     frequency band, all possible channels are channel 11 to 
-        //     channel 26. As the result, the bit map is 0x07FFF800. Stack 
-        //     will filter out all invalid channels, so the application 
-        //     only needs to pay attention to the channels that are not 
-        //     preferred.
-        /*******************************************************************/
-        Printf("\r\nStart connection...");
-        MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
-        DemoOutput_Channel(myChannel, 0);
-        DelayMs(500);
     }
     
     /*******************************************************************/
@@ -302,8 +243,10 @@ int main(void)
             t2 = MiWi_TickGet();
             LED_1 ^= 1;
         }
-        else
-            Nop();
+        
+        tpr_data = ReadTempSensorBoard();
+        ftoa(tpr_data,&buff[0]);
+        sprintf(mydata,"t1=%s", buff);
         /*******************************************************************/
         // Function MiApp_MessageAvailable returns a boolean to indicate if 
         // a packet has been received by the transceiver. If a packet has 
@@ -377,9 +320,11 @@ int main(void)
                     //  MiApp_WriteData
                     /*******************************************************************/
                     MiApp_FlushTx();   
-                    for(i = 0; i < 11; i++)
+                    
+                    
+                    for(i = 0; i < sizeof(mydata); i++)
                     {
-                        MiApp_WriteData(DE[(TxSynCount2%6)][i]);
+                        MiApp_WriteData(mydata[i]);
                     }
                     TxSynCount2++;
                     
@@ -417,108 +362,3 @@ int main(void)
     }
 }
 
-//BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl, BYTE channel)
-BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl)
-{  
-    BOOL connstat = FALSE;
-    DWORD scan_chnl_;
-//    //Pre-condition compulsary to init channel setting
-//    // Set default channel
-//    if( MiApp_SetChannel(channel) == FALSE )
-//    {
-//        DemoOutput_ChannelError(channel);
-//        #if defined(__18CXX)
-//            return;
-//        #else
-//            return 0;
-//        #endif
-//    }
-    
-//    scan_chnl = 0b0000000011111000 << 11;
-    scan_chnl_ = scan_chnl << 11;
-//  scan_chnl = 0xFFFF << 11; //move the 16-bit 0xFFFF to the left by 11 bits. Scan from channel bit 11 to bit 26. bit0-bit10, bit27-bit31 are considered invalid. 
-    
-    while(!connstat){
-        Printf("\r\nCreate connection...");
-        //    MiApp_StartConnection(START_CONN_CS_SCN , 10, 0);//not yet available
-        connstat = MiApp_StartConnection(START_CONN_ENERGY_SCN , 10, scan_chnl_);//create connection with least noise energy
-
-    }
-    return connstat;
-}
-BOOL CreateNewConnectionAtChannel(BYTE channel)
-{
-    BOOL connstat;
-    // Set default channel
-    if( MiApp_SetChannel(channel) == FALSE )
-    {
-        DemoOutput_ChannelError(channel);
-        #if defined(__18CXX)
-            return;
-        #else
-            return 0;
-        #endif
-    }
-    DemoOutput_Channel(myChannel, 0);
-    Printf("\r\nCreate connection...");
-    
-    
-    connstat = MiApp_StartConnection(START_CONN_DIRECT, 10, 0xFFFFFFFF);//create connection at selected channel/myChannel
-//    BOOL connstat = MiApp_StartConnection(START_CONN_DIRECT, 0, 0);//also okay!
-    return connstat;
-}
-
-BYTE JoinAvailableChannel(BYTE channel)
-{
-    BYTE i;
-    
-    
-       /*******************************************************************/
-    // Function MiApp_EstablishConnection try to establish a new 
-    // connection with peer device. 
-    // The first parameter is the index to the active scan result, 
-    //      which is acquired by discovery process (active scan). If 
-    //      the value of the index is 0xFF, try to establish a 
-    //      connection with any peer.
-    // The second parameter is the mode to establish connection, 
-    //      either direct or indirect. Direct mode means connection 
-    //      within the radio range; indirect mode means connection 
-    //      may or may not in the radio range. 
-    /*******************************************************************/
-
-    if( channel >= 11 && channel <= 26)
-    {
-        // Set default channel
-        if( MiApp_SetChannel(channel) == FALSE )
-        {
-            DemoOutput_ChannelError(channel);
-            #if defined(__18CXX)
-                return;
-            #else
-                return 0;
-            #endif
-        }
-
-//            i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
-            while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
-    }
-    else
-        while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
-
-    
-    /*******************************************************************/
-    // Display current operation on LCD of demo board, if applicable
-    /*******************************************************************/
-#if defined(ENABLE_ACTIVE_SCAN)
-    if( i != 0xFF )
-    {
-        //Join channel successful
-        DemoOutput_Channel(ActiveScanResults[i].Channel, 1);
-    }
-    else
-#endif
-        DemoOutput_Channel(channel, 0);
-    
-    
-    return i;
-}

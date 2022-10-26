@@ -35,4 +35,4 @@ MP_AS_DIR="C:\Program Files (x86)\Microchip\mplabc18\v3.46\bin\..\mpasm"
 MP_LD_DIR="C:\Program Files (x86)\Microchip\mplabc18\v3.46\bin"
 MP_AR_DIR="C:\Program Files (x86)\Microchip\mplabc18\v3.46\bin"
 # MP_BC_DIR is not defined
-DFP_DIR=C:/Users/afaid/.mchp_packs/Microchip/PIC18F-J_DFP/1.1.24
+DFP_DIR=C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18F-J_DFP/1.4.41

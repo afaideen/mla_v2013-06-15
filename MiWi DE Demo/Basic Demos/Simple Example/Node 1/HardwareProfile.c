@@ -133,6 +133,8 @@
 BOOL PUSH_BUTTON_pressed;
 MIWI_TICK PUSH_BUTTON_press_time;
 
+void init_atod(void);
+
 /*********************************************************************
  * Function:        void BoardInit( void )
  *
@@ -531,6 +533,7 @@ void BoardInit(void)
         
     
         LCDInit();
+        init_atod();
         
     #elif defined(PIC18_EXPLORER)
         // primary external oscillator
@@ -637,6 +640,86 @@ void BoardInit(void)
     #else
         #error "Unknown demo board.  Please properly initialize the part for the board."
     #endif
+}
+
+void init_atod(void)
+{
+
+	TRISBbits.TRISB4 = 1;
+	TRISBbits.TRISB5 = 1;
+
+//	AD1PCFGbits.PCFG0 = 0;
+//	AD1PCFGbits.PCFG1 = 0;
+//	AD1PCFGbits.PCFG2 = 0;
+//	AD1PCFGbits.PCFG3 = 0;
+	AD1PCFGbits.PCFG4 = 0;  //RB4 AN4 : temperature EXP16
+	AD1PCFGbits.PCFG5 = 0;  //RB5 AN5 : potentiometer
+//	
+//	AD1PCFGbits.PCFG8 = 0;
+//	AD1PCFGbits.PCFG9 = 0;
+//    AD1PCFGbits.PCFG10 = 0; //AN10 : temperature
+//	AD1PCFGbits.PCFG11 = 0; //AN11 : potentiometer
+//	AD1PCFGbits.PCFG14 = 0;
+//	AD1PCFGbits.PCFG15 = 0;
+	// ADC
+	AD1CHS = 0;	
+//	AD1CON1 = 0x84E4;			// Turn on, auto sample start, auto-convert, 12 bit mode (on parts with a 12bit A/D)
+    AD1CON1bits.ON = 1;
+    AD1CON1bits.SIDL = 0;
+    AD1CON1bits.FORM = 0b100;
+    AD1CON1bits.SSRC = 0b111;
+    AD1CON1bits.CLRASAM = 0;
+    AD1CON1bits.ASAM = 1;
+    AD1CON1bits.SAMP = 0;
+    AD1CON1bits.DONE = 0;
+    
+//	AD1CON2 = 0x0404;			// AVdd, AVss, int every 2 conversions, MUXA only, scan
+	AD1CON2bits.VCFG = 0b000;
+	AD1CON2bits.OFFCAL = 0;
+	AD1CON2bits.CSCNA = 1;
+	AD1CON2bits.BUFS = 0;
+//	AD1CON2bits.SMPI = 0xff;
+	AD1CON2bits.SMPI = 0b1111;
+	AD1CON2bits.BUFM = 0;
+	AD1CON2bits.ALTS = 0;
+    
+//	AD1CON3 = 0x1003;			// 16 Tad auto-sample, Tad = 3*Tcy
+    AD1CON3bits.ADRC = 0;
+    AD1CON3bits.SAMC = 0b10000;
+    AD1CON3bits.ADCS = 0b00000011;
+    
+    
+//	AD1CSSL = 0xffff;
+	AD1CSSL = 0x0;
+	AD1CSSLbits.CSSL4 = 1;
+	AD1CSSLbits.CSSL5 = 1;
+}
+
+//Read AN4 temperature reading TC1047A
+//V = 1.7/125 * T + 0.5
+//T = (V - 0.5) * 125 / 1.7
+float ReadTempSensorBoard(void)
+{
+    float analog_val, temperature, b_fraction;
+    unsigned int a, val;
+
+    analog_val = ADC1BUF4/(1023.0)*3.3 - 0.03;
+
+    
+    temperature = analog_val - 0.5;
+    temperature = temperature * 125/1.7;
+//    a = (int)(temperature);
+//    b_fraction = temperature - a;
+//    val = b_fraction > 0.5 ? a + 1 : a;
+//    return (BYTE)val;
+    return temperature;
+}
+
+void ftoa(float f, unsigned char *buff)
+{
+    
+    sprintf(buff, "%.1f", f);
+    
 }
 
 

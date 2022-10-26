@@ -1,7 +1,9 @@
 
 
-
 #include "MiWiHelper.h"
+#include "WirelessProtocols/MCHP_API.h"
+
+#if defined(MIWI_HELPER)
 
 //BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl, BYTE channel)
 BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl)
@@ -54,6 +56,7 @@ BOOL CreateNewConnectionAtChannel(BYTE channel)
     return connstat;
 }
 
+#ifdef ENABLE_ACTIVE_SCAN
 BYTE AutoSearchActiveConnection(DWORD scan_chnl)
 {
     BYTE j, OperatingChannel = 0xFF;
@@ -105,6 +108,8 @@ BYTE AutoSearchActiveConnection(DWORD scan_chnl)
     return OperatingChannel;
 }
 
+#endif
+
 BYTE JoinAvailableChannel(BYTE channel)
 {
     BYTE i;
@@ -149,7 +154,11 @@ BYTE JoinAvailableChannel(BYTE channel)
     if( i != 0xFF )
     {
         //Join channel successful
-        DemoOutput_Channel(ActiveScanResults[i].Channel, 1);//Connected peer
+        #if defined(ENABLE_ACTIVE_SCAN)
+            DemoOutput_Channel(ActiveScanResults[i].Channel, 1);//Connected peer
+        #else
+            DemoOutput_Channel(channel, 1);//Connected peer
+        #endif  
     }
     else
         DemoOutput_Channel(channel, 0);//Connecting peer
@@ -157,3 +166,5 @@ BYTE JoinAvailableChannel(BYTE channel)
     
     return i;
 }
+
+#endif  //MIWI_HELPER

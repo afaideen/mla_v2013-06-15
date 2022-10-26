@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../bsp_wireless_eval_board/LCD_ST7032.c ../bsp_wireless_eval_board/BSP_MiWiDemoBd.c ../DemoOutput.c ../main.c ../../../../../Microchip/Common/TimeDelay.c ../../../../../Microchip/WirelessProtocols/MiWi/MiWi.c ../../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c ../../../../../Microchip/WirelessProtocols/P2P/P2P.c ../../../../../Microchip/WirelessProtocols/Console.c ../../../../../Microchip/WirelessProtocols/EEPROM.c ../../../../../Microchip/WirelessProtocols/LCDBlocking.c ../../../../../Microchip/WirelessProtocols/MSPI.c ../../../../../Microchip/WirelessProtocols/NVM.c ../../../../../Microchip/WirelessProtocols/SymbolTime.c ../../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c ../../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c ../../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c ../../../../../Microchip/Transceivers/crc.c ../../../../../Microchip/Transceivers/security.c
+SOURCEFILES_QUOTED_IF_SPACED=../bsp_wireless_eval_board/LCD_ST7032.c ../bsp_wireless_eval_board/BSP_MiWiDemoBd.c ../DemoOutput.c ../main_test.c ../../../../../Microchip/Common/TimeDelay.c ../../../../../Microchip/WirelessProtocols/MiWi/MiWi.c ../../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c ../../../../../Microchip/WirelessProtocols/P2P/P2P.c ../../../../../Microchip/WirelessProtocols/Console.c ../../../../../Microchip/WirelessProtocols/EEPROM.c ../../../../../Microchip/WirelessProtocols/LCDBlocking.c ../../../../../Microchip/WirelessProtocols/MSPI.c ../../../../../Microchip/WirelessProtocols/NVM.c ../../../../../Microchip/WirelessProtocols/SymbolTime.c ../../../../../Microchip/WirelessProtocols/MiWiHelper.c ../../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c ../../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c ../../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c ../../../../../Microchip/Transceivers/crc.c ../../../../../Microchip/Transceivers/security.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o ${OBJECTDIR}/_ext/1472/DemoOutput.o ${OBJECTDIR}/_ext/1472/main.o ${OBJECTDIR}/_ext/257748679/TimeDelay.o ${OBJECTDIR}/_ext/1688839406/MiWi.o ${OBJECTDIR}/_ext/967918303/MiWiPRO.o ${OBJECTDIR}/_ext/84067474/P2P.o ${OBJECTDIR}/_ext/1994828495/Console.o ${OBJECTDIR}/_ext/1994828495/EEPROM.o ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o ${OBJECTDIR}/_ext/1994828495/MSPI.o ${OBJECTDIR}/_ext/1994828495/NVM.o ${OBJECTDIR}/_ext/1994828495/SymbolTime.o ${OBJECTDIR}/_ext/2087253717/MRF24J40.o ${OBJECTDIR}/_ext/486793731/MRF49XA.o ${OBJECTDIR}/_ext/486674567/MRF89XA.o ${OBJECTDIR}/_ext/702228253/crc.o ${OBJECTDIR}/_ext/702228253/security.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o.d ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o.d ${OBJECTDIR}/_ext/1472/DemoOutput.o.d ${OBJECTDIR}/_ext/1472/main.o.d ${OBJECTDIR}/_ext/257748679/TimeDelay.o.d ${OBJECTDIR}/_ext/1688839406/MiWi.o.d ${OBJECTDIR}/_ext/967918303/MiWiPRO.o.d ${OBJECTDIR}/_ext/84067474/P2P.o.d ${OBJECTDIR}/_ext/1994828495/Console.o.d ${OBJECTDIR}/_ext/1994828495/EEPROM.o.d ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o.d ${OBJECTDIR}/_ext/1994828495/MSPI.o.d ${OBJECTDIR}/_ext/1994828495/NVM.o.d ${OBJECTDIR}/_ext/1994828495/SymbolTime.o.d ${OBJECTDIR}/_ext/2087253717/MRF24J40.o.d ${OBJECTDIR}/_ext/486793731/MRF49XA.o.d ${OBJECTDIR}/_ext/486674567/MRF89XA.o.d ${OBJECTDIR}/_ext/702228253/crc.o.d ${OBJECTDIR}/_ext/702228253/security.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o ${OBJECTDIR}/_ext/1472/DemoOutput.o ${OBJECTDIR}/_ext/1472/main_test.o ${OBJECTDIR}/_ext/257748679/TimeDelay.o ${OBJECTDIR}/_ext/1688839406/MiWi.o ${OBJECTDIR}/_ext/967918303/MiWiPRO.o ${OBJECTDIR}/_ext/84067474/P2P.o ${OBJECTDIR}/_ext/1994828495/Console.o ${OBJECTDIR}/_ext/1994828495/EEPROM.o ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o ${OBJECTDIR}/_ext/1994828495/MSPI.o ${OBJECTDIR}/_ext/1994828495/NVM.o ${OBJECTDIR}/_ext/1994828495/SymbolTime.o ${OBJECTDIR}/_ext/1994828495/MiWiHelper.o ${OBJECTDIR}/_ext/2087253717/MRF24J40.o ${OBJECTDIR}/_ext/486793731/MRF49XA.o ${OBJECTDIR}/_ext/486674567/MRF89XA.o ${OBJECTDIR}/_ext/702228253/crc.o ${OBJECTDIR}/_ext/702228253/security.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o.d ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o.d ${OBJECTDIR}/_ext/1472/DemoOutput.o.d ${OBJECTDIR}/_ext/1472/main_test.o.d ${OBJECTDIR}/_ext/257748679/TimeDelay.o.d ${OBJECTDIR}/_ext/1688839406/MiWi.o.d ${OBJECTDIR}/_ext/967918303/MiWiPRO.o.d ${OBJECTDIR}/_ext/84067474/P2P.o.d ${OBJECTDIR}/_ext/1994828495/Console.o.d ${OBJECTDIR}/_ext/1994828495/EEPROM.o.d ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o.d ${OBJECTDIR}/_ext/1994828495/MSPI.o.d ${OBJECTDIR}/_ext/1994828495/NVM.o.d ${OBJECTDIR}/_ext/1994828495/SymbolTime.o.d ${OBJECTDIR}/_ext/1994828495/MiWiHelper.o.d ${OBJECTDIR}/_ext/2087253717/MRF24J40.o.d ${OBJECTDIR}/_ext/486793731/MRF49XA.o.d ${OBJECTDIR}/_ext/486674567/MRF89XA.o.d ${OBJECTDIR}/_ext/702228253/crc.o.d ${OBJECTDIR}/_ext/702228253/security.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o ${OBJECTDIR}/_ext/1472/DemoOutput.o ${OBJECTDIR}/_ext/1472/main.o ${OBJECTDIR}/_ext/257748679/TimeDelay.o ${OBJECTDIR}/_ext/1688839406/MiWi.o ${OBJECTDIR}/_ext/967918303/MiWiPRO.o ${OBJECTDIR}/_ext/84067474/P2P.o ${OBJECTDIR}/_ext/1994828495/Console.o ${OBJECTDIR}/_ext/1994828495/EEPROM.o ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o ${OBJECTDIR}/_ext/1994828495/MSPI.o ${OBJECTDIR}/_ext/1994828495/NVM.o ${OBJECTDIR}/_ext/1994828495/SymbolTime.o ${OBJECTDIR}/_ext/2087253717/MRF24J40.o ${OBJECTDIR}/_ext/486793731/MRF49XA.o ${OBJECTDIR}/_ext/486674567/MRF89XA.o ${OBJECTDIR}/_ext/702228253/crc.o ${OBJECTDIR}/_ext/702228253/security.o
+OBJECTFILES=${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o ${OBJECTDIR}/_ext/1472/DemoOutput.o ${OBJECTDIR}/_ext/1472/main_test.o ${OBJECTDIR}/_ext/257748679/TimeDelay.o ${OBJECTDIR}/_ext/1688839406/MiWi.o ${OBJECTDIR}/_ext/967918303/MiWiPRO.o ${OBJECTDIR}/_ext/84067474/P2P.o ${OBJECTDIR}/_ext/1994828495/Console.o ${OBJECTDIR}/_ext/1994828495/EEPROM.o ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o ${OBJECTDIR}/_ext/1994828495/MSPI.o ${OBJECTDIR}/_ext/1994828495/NVM.o ${OBJECTDIR}/_ext/1994828495/SymbolTime.o ${OBJECTDIR}/_ext/1994828495/MiWiHelper.o ${OBJECTDIR}/_ext/2087253717/MRF24J40.o ${OBJECTDIR}/_ext/486793731/MRF49XA.o ${OBJECTDIR}/_ext/486674567/MRF89XA.o ${OBJECTDIR}/_ext/702228253/crc.o ${OBJECTDIR}/_ext/702228253/security.o
 
 # Source Files
-SOURCEFILES=../bsp_wireless_eval_board/LCD_ST7032.c ../bsp_wireless_eval_board/BSP_MiWiDemoBd.c ../DemoOutput.c ../main.c ../../../../../Microchip/Common/TimeDelay.c ../../../../../Microchip/WirelessProtocols/MiWi/MiWi.c ../../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c ../../../../../Microchip/WirelessProtocols/P2P/P2P.c ../../../../../Microchip/WirelessProtocols/Console.c ../../../../../Microchip/WirelessProtocols/EEPROM.c ../../../../../Microchip/WirelessProtocols/LCDBlocking.c ../../../../../Microchip/WirelessProtocols/MSPI.c ../../../../../Microchip/WirelessProtocols/NVM.c ../../../../../Microchip/WirelessProtocols/SymbolTime.c ../../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c ../../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c ../../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c ../../../../../Microchip/Transceivers/crc.c ../../../../../Microchip/Transceivers/security.c
+SOURCEFILES=../bsp_wireless_eval_board/LCD_ST7032.c ../bsp_wireless_eval_board/BSP_MiWiDemoBd.c ../DemoOutput.c ../main_test.c ../../../../../Microchip/Common/TimeDelay.c ../../../../../Microchip/WirelessProtocols/MiWi/MiWi.c ../../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c ../../../../../Microchip/WirelessProtocols/P2P/P2P.c ../../../../../Microchip/WirelessProtocols/Console.c ../../../../../Microchip/WirelessProtocols/EEPROM.c ../../../../../Microchip/WirelessProtocols/LCDBlocking.c ../../../../../Microchip/WirelessProtocols/MSPI.c ../../../../../Microchip/WirelessProtocols/NVM.c ../../../../../Microchip/WirelessProtocols/SymbolTime.c ../../../../../Microchip/WirelessProtocols/MiWiHelper.c ../../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c ../../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c ../../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c ../../../../../Microchip/Transceivers/crc.c ../../../../../Microchip/Transceivers/security.c
 
 
 
@@ -106,7 +106,7 @@ ${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o: ../bsp_wireless_eval_board/LCD_ST7032
 	@${MKDIR} "${OBJECTDIR}/_ext/1198648459" 
 	@${RM} ${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o   ../bsp_wireless_eval_board/LCD_ST7032.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o   ../bsp_wireless_eval_board/LCD_ST7032.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -114,7 +114,7 @@ ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o: ../bsp_wireless_eval_board/BSP_Mi
 	@${MKDIR} "${OBJECTDIR}/_ext/1198648459" 
 	@${RM} ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o   ../bsp_wireless_eval_board/BSP_MiWiDemoBd.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o   ../bsp_wireless_eval_board/BSP_MiWiDemoBd.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -122,23 +122,23 @@ ${OBJECTDIR}/_ext/1472/DemoOutput.o: ../DemoOutput.c  nbproject/Makefile-${CND_C
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/DemoOutput.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/DemoOutput.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1472/DemoOutput.o   ../DemoOutput.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1472/DemoOutput.o   ../DemoOutput.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/DemoOutput.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/DemoOutput.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1472/main.o: ../main.c  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/_ext/1472/main_test.o: ../main_test.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
-	@${RM} ${OBJECTDIR}/_ext/1472/main.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1472/main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1472/main.o   ../main.c 
-	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/main.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	@${RM} ${OBJECTDIR}/_ext/1472/main_test.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1472/main_test.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1472/main_test.o   ../main_test.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/main_test.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/main_test.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/_ext/257748679/TimeDelay.o: ../../../../../Microchip/Common/TimeDelay.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/257748679" 
 	@${RM} ${OBJECTDIR}/_ext/257748679/TimeDelay.o.d 
 	@${RM} ${OBJECTDIR}/_ext/257748679/TimeDelay.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/257748679/TimeDelay.o   ../../../../../Microchip/Common/TimeDelay.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/257748679/TimeDelay.o   ../../../../../Microchip/Common/TimeDelay.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/257748679/TimeDelay.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/257748679/TimeDelay.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -146,7 +146,7 @@ ${OBJECTDIR}/_ext/1688839406/MiWi.o: ../../../../../Microchip/WirelessProtocols/
 	@${MKDIR} "${OBJECTDIR}/_ext/1688839406" 
 	@${RM} ${OBJECTDIR}/_ext/1688839406/MiWi.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1688839406/MiWi.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1688839406/MiWi.o   ../../../../../Microchip/WirelessProtocols/MiWi/MiWi.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1688839406/MiWi.o   ../../../../../Microchip/WirelessProtocols/MiWi/MiWi.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1688839406/MiWi.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1688839406/MiWi.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -154,7 +154,7 @@ ${OBJECTDIR}/_ext/967918303/MiWiPRO.o: ../../../../../Microchip/WirelessProtocol
 	@${MKDIR} "${OBJECTDIR}/_ext/967918303" 
 	@${RM} ${OBJECTDIR}/_ext/967918303/MiWiPRO.o.d 
 	@${RM} ${OBJECTDIR}/_ext/967918303/MiWiPRO.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/967918303/MiWiPRO.o   ../../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/967918303/MiWiPRO.o   ../../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/967918303/MiWiPRO.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/967918303/MiWiPRO.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -162,7 +162,7 @@ ${OBJECTDIR}/_ext/84067474/P2P.o: ../../../../../Microchip/WirelessProtocols/P2P
 	@${MKDIR} "${OBJECTDIR}/_ext/84067474" 
 	@${RM} ${OBJECTDIR}/_ext/84067474/P2P.o.d 
 	@${RM} ${OBJECTDIR}/_ext/84067474/P2P.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/84067474/P2P.o   ../../../../../Microchip/WirelessProtocols/P2P/P2P.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/84067474/P2P.o   ../../../../../Microchip/WirelessProtocols/P2P/P2P.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/84067474/P2P.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/84067474/P2P.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -170,7 +170,7 @@ ${OBJECTDIR}/_ext/1994828495/Console.o: ../../../../../Microchip/WirelessProtoco
 	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/Console.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/Console.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/Console.o   ../../../../../Microchip/WirelessProtocols/Console.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/Console.o   ../../../../../Microchip/WirelessProtocols/Console.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/Console.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/Console.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -178,7 +178,7 @@ ${OBJECTDIR}/_ext/1994828495/EEPROM.o: ../../../../../Microchip/WirelessProtocol
 	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/EEPROM.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/EEPROM.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/EEPROM.o   ../../../../../Microchip/WirelessProtocols/EEPROM.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/EEPROM.o   ../../../../../Microchip/WirelessProtocols/EEPROM.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/EEPROM.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/EEPROM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -186,7 +186,7 @@ ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o: ../../../../../Microchip/WirelessPro
 	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o   ../../../../../Microchip/WirelessProtocols/LCDBlocking.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o   ../../../../../Microchip/WirelessProtocols/LCDBlocking.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/LCDBlocking.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -194,7 +194,7 @@ ${OBJECTDIR}/_ext/1994828495/MSPI.o: ../../../../../Microchip/WirelessProtocols/
 	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/MSPI.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/MSPI.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/MSPI.o   ../../../../../Microchip/WirelessProtocols/MSPI.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/MSPI.o   ../../../../../Microchip/WirelessProtocols/MSPI.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/MSPI.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/MSPI.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -202,7 +202,7 @@ ${OBJECTDIR}/_ext/1994828495/NVM.o: ../../../../../Microchip/WirelessProtocols/N
 	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/NVM.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/NVM.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/NVM.o   ../../../../../Microchip/WirelessProtocols/NVM.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/NVM.o   ../../../../../Microchip/WirelessProtocols/NVM.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/NVM.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/NVM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -210,15 +210,23 @@ ${OBJECTDIR}/_ext/1994828495/SymbolTime.o: ../../../../../Microchip/WirelessProt
 	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/SymbolTime.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/SymbolTime.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/SymbolTime.o   ../../../../../Microchip/WirelessProtocols/SymbolTime.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/SymbolTime.o   ../../../../../Microchip/WirelessProtocols/SymbolTime.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/SymbolTime.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/SymbolTime.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	
+${OBJECTDIR}/_ext/1994828495/MiWiHelper.o: ../../../../../Microchip/WirelessProtocols/MiWiHelper.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
+	@${RM} ${OBJECTDIR}/_ext/1994828495/MiWiHelper.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1994828495/MiWiHelper.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/MiWiHelper.o   ../../../../../Microchip/WirelessProtocols/MiWiHelper.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/MiWiHelper.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/MiWiHelper.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/_ext/2087253717/MRF24J40.o: ../../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/2087253717" 
 	@${RM} ${OBJECTDIR}/_ext/2087253717/MRF24J40.o.d 
 	@${RM} ${OBJECTDIR}/_ext/2087253717/MRF24J40.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/2087253717/MRF24J40.o   ../../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/2087253717/MRF24J40.o   ../../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/2087253717/MRF24J40.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/2087253717/MRF24J40.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -226,7 +234,7 @@ ${OBJECTDIR}/_ext/486793731/MRF49XA.o: ../../../../../Microchip/Transceivers/MRF
 	@${MKDIR} "${OBJECTDIR}/_ext/486793731" 
 	@${RM} ${OBJECTDIR}/_ext/486793731/MRF49XA.o.d 
 	@${RM} ${OBJECTDIR}/_ext/486793731/MRF49XA.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/486793731/MRF49XA.o   ../../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/486793731/MRF49XA.o   ../../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/486793731/MRF49XA.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/486793731/MRF49XA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -234,7 +242,7 @@ ${OBJECTDIR}/_ext/486674567/MRF89XA.o: ../../../../../Microchip/Transceivers/MRF
 	@${MKDIR} "${OBJECTDIR}/_ext/486674567" 
 	@${RM} ${OBJECTDIR}/_ext/486674567/MRF89XA.o.d 
 	@${RM} ${OBJECTDIR}/_ext/486674567/MRF89XA.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/486674567/MRF89XA.o   ../../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/486674567/MRF89XA.o   ../../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/486674567/MRF89XA.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/486674567/MRF89XA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -242,7 +250,7 @@ ${OBJECTDIR}/_ext/702228253/crc.o: ../../../../../Microchip/Transceivers/crc.c  
 	@${MKDIR} "${OBJECTDIR}/_ext/702228253" 
 	@${RM} ${OBJECTDIR}/_ext/702228253/crc.o.d 
 	@${RM} ${OBJECTDIR}/_ext/702228253/crc.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/702228253/crc.o   ../../../../../Microchip/Transceivers/crc.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/702228253/crc.o   ../../../../../Microchip/Transceivers/crc.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/702228253/crc.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/702228253/crc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -250,7 +258,7 @@ ${OBJECTDIR}/_ext/702228253/security.o: ../../../../../Microchip/Transceivers/se
 	@${MKDIR} "${OBJECTDIR}/_ext/702228253" 
 	@${RM} ${OBJECTDIR}/_ext/702228253/security.o.d 
 	@${RM} ${OBJECTDIR}/_ext/702228253/security.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/702228253/security.o   ../../../../../Microchip/Transceivers/security.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/702228253/security.o   ../../../../../Microchip/Transceivers/security.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/702228253/security.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/702228253/security.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -259,7 +267,7 @@ ${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o: ../bsp_wireless_eval_board/LCD_ST7032
 	@${MKDIR} "${OBJECTDIR}/_ext/1198648459" 
 	@${RM} ${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o   ../bsp_wireless_eval_board/LCD_ST7032.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o   ../bsp_wireless_eval_board/LCD_ST7032.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1198648459/LCD_ST7032.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -267,7 +275,7 @@ ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o: ../bsp_wireless_eval_board/BSP_Mi
 	@${MKDIR} "${OBJECTDIR}/_ext/1198648459" 
 	@${RM} ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o   ../bsp_wireless_eval_board/BSP_MiWiDemoBd.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o   ../bsp_wireless_eval_board/BSP_MiWiDemoBd.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1198648459/BSP_MiWiDemoBd.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -275,23 +283,23 @@ ${OBJECTDIR}/_ext/1472/DemoOutput.o: ../DemoOutput.c  nbproject/Makefile-${CND_C
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/DemoOutput.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/DemoOutput.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1472/DemoOutput.o   ../DemoOutput.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1472/DemoOutput.o   ../DemoOutput.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/DemoOutput.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/DemoOutput.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1472/main.o: ../main.c  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/_ext/1472/main_test.o: ../main_test.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
-	@${RM} ${OBJECTDIR}/_ext/1472/main.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1472/main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1472/main.o   ../main.c 
-	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/main.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	@${RM} ${OBJECTDIR}/_ext/1472/main_test.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1472/main_test.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1472/main_test.o   ../main_test.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/main_test.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/main_test.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/_ext/257748679/TimeDelay.o: ../../../../../Microchip/Common/TimeDelay.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/257748679" 
 	@${RM} ${OBJECTDIR}/_ext/257748679/TimeDelay.o.d 
 	@${RM} ${OBJECTDIR}/_ext/257748679/TimeDelay.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/257748679/TimeDelay.o   ../../../../../Microchip/Common/TimeDelay.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/257748679/TimeDelay.o   ../../../../../Microchip/Common/TimeDelay.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/257748679/TimeDelay.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/257748679/TimeDelay.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -299,7 +307,7 @@ ${OBJECTDIR}/_ext/1688839406/MiWi.o: ../../../../../Microchip/WirelessProtocols/
 	@${MKDIR} "${OBJECTDIR}/_ext/1688839406" 
 	@${RM} ${OBJECTDIR}/_ext/1688839406/MiWi.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1688839406/MiWi.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1688839406/MiWi.o   ../../../../../Microchip/WirelessProtocols/MiWi/MiWi.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1688839406/MiWi.o   ../../../../../Microchip/WirelessProtocols/MiWi/MiWi.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1688839406/MiWi.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1688839406/MiWi.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -307,7 +315,7 @@ ${OBJECTDIR}/_ext/967918303/MiWiPRO.o: ../../../../../Microchip/WirelessProtocol
 	@${MKDIR} "${OBJECTDIR}/_ext/967918303" 
 	@${RM} ${OBJECTDIR}/_ext/967918303/MiWiPRO.o.d 
 	@${RM} ${OBJECTDIR}/_ext/967918303/MiWiPRO.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/967918303/MiWiPRO.o   ../../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/967918303/MiWiPRO.o   ../../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/967918303/MiWiPRO.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/967918303/MiWiPRO.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -315,7 +323,7 @@ ${OBJECTDIR}/_ext/84067474/P2P.o: ../../../../../Microchip/WirelessProtocols/P2P
 	@${MKDIR} "${OBJECTDIR}/_ext/84067474" 
 	@${RM} ${OBJECTDIR}/_ext/84067474/P2P.o.d 
 	@${RM} ${OBJECTDIR}/_ext/84067474/P2P.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/84067474/P2P.o   ../../../../../Microchip/WirelessProtocols/P2P/P2P.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/84067474/P2P.o   ../../../../../Microchip/WirelessProtocols/P2P/P2P.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/84067474/P2P.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/84067474/P2P.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -323,7 +331,7 @@ ${OBJECTDIR}/_ext/1994828495/Console.o: ../../../../../Microchip/WirelessProtoco
 	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/Console.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/Console.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/Console.o   ../../../../../Microchip/WirelessProtocols/Console.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/Console.o   ../../../../../Microchip/WirelessProtocols/Console.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/Console.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/Console.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -331,7 +339,7 @@ ${OBJECTDIR}/_ext/1994828495/EEPROM.o: ../../../../../Microchip/WirelessProtocol
 	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/EEPROM.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/EEPROM.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/EEPROM.o   ../../../../../Microchip/WirelessProtocols/EEPROM.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/EEPROM.o   ../../../../../Microchip/WirelessProtocols/EEPROM.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/EEPROM.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/EEPROM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -339,7 +347,7 @@ ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o: ../../../../../Microchip/WirelessPro
 	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o   ../../../../../Microchip/WirelessProtocols/LCDBlocking.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o   ../../../../../Microchip/WirelessProtocols/LCDBlocking.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/LCDBlocking.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/LCDBlocking.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -347,7 +355,7 @@ ${OBJECTDIR}/_ext/1994828495/MSPI.o: ../../../../../Microchip/WirelessProtocols/
 	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/MSPI.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/MSPI.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/MSPI.o   ../../../../../Microchip/WirelessProtocols/MSPI.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/MSPI.o   ../../../../../Microchip/WirelessProtocols/MSPI.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/MSPI.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/MSPI.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -355,7 +363,7 @@ ${OBJECTDIR}/_ext/1994828495/NVM.o: ../../../../../Microchip/WirelessProtocols/N
 	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/NVM.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/NVM.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/NVM.o   ../../../../../Microchip/WirelessProtocols/NVM.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/NVM.o   ../../../../../Microchip/WirelessProtocols/NVM.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/NVM.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/NVM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -363,15 +371,23 @@ ${OBJECTDIR}/_ext/1994828495/SymbolTime.o: ../../../../../Microchip/WirelessProt
 	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/SymbolTime.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1994828495/SymbolTime.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/SymbolTime.o   ../../../../../Microchip/WirelessProtocols/SymbolTime.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/SymbolTime.o   ../../../../../Microchip/WirelessProtocols/SymbolTime.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/SymbolTime.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/SymbolTime.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	
+${OBJECTDIR}/_ext/1994828495/MiWiHelper.o: ../../../../../Microchip/WirelessProtocols/MiWiHelper.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/1994828495" 
+	@${RM} ${OBJECTDIR}/_ext/1994828495/MiWiHelper.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1994828495/MiWiHelper.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1994828495/MiWiHelper.o   ../../../../../Microchip/WirelessProtocols/MiWiHelper.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1994828495/MiWiHelper.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1994828495/MiWiHelper.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/_ext/2087253717/MRF24J40.o: ../../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/2087253717" 
 	@${RM} ${OBJECTDIR}/_ext/2087253717/MRF24J40.o.d 
 	@${RM} ${OBJECTDIR}/_ext/2087253717/MRF24J40.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/2087253717/MRF24J40.o   ../../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/2087253717/MRF24J40.o   ../../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/2087253717/MRF24J40.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/2087253717/MRF24J40.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -379,7 +395,7 @@ ${OBJECTDIR}/_ext/486793731/MRF49XA.o: ../../../../../Microchip/Transceivers/MRF
 	@${MKDIR} "${OBJECTDIR}/_ext/486793731" 
 	@${RM} ${OBJECTDIR}/_ext/486793731/MRF49XA.o.d 
 	@${RM} ${OBJECTDIR}/_ext/486793731/MRF49XA.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/486793731/MRF49XA.o   ../../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/486793731/MRF49XA.o   ../../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/486793731/MRF49XA.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/486793731/MRF49XA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -387,7 +403,7 @@ ${OBJECTDIR}/_ext/486674567/MRF89XA.o: ../../../../../Microchip/Transceivers/MRF
 	@${MKDIR} "${OBJECTDIR}/_ext/486674567" 
 	@${RM} ${OBJECTDIR}/_ext/486674567/MRF89XA.o.d 
 	@${RM} ${OBJECTDIR}/_ext/486674567/MRF89XA.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/486674567/MRF89XA.o   ../../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/486674567/MRF89XA.o   ../../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/486674567/MRF89XA.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/486674567/MRF89XA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -395,7 +411,7 @@ ${OBJECTDIR}/_ext/702228253/crc.o: ../../../../../Microchip/Transceivers/crc.c  
 	@${MKDIR} "${OBJECTDIR}/_ext/702228253" 
 	@${RM} ${OBJECTDIR}/_ext/702228253/crc.o.d 
 	@${RM} ${OBJECTDIR}/_ext/702228253/crc.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/702228253/crc.o   ../../../../../Microchip/Transceivers/crc.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/702228253/crc.o   ../../../../../Microchip/Transceivers/crc.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/702228253/crc.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/702228253/crc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -403,7 +419,7 @@ ${OBJECTDIR}/_ext/702228253/security.o: ../../../../../Microchip/Transceivers/se
 	@${MKDIR} "${OBJECTDIR}/_ext/702228253" 
 	@${RM} ${OBJECTDIR}/_ext/702228253/security.o.d 
 	@${RM} ${OBJECTDIR}/_ext/702228253/security.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/702228253/security.o   ../../../../../Microchip/Transceivers/security.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DMIWI_DEMO_KIT -DMIWI_HELPER -I"../" -I"../../../../../Microchip/Include" -I"../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1" -ms -o- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/702228253/security.o   ../../../../../Microchip/Transceivers/security.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/702228253/security.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/702228253/security.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	

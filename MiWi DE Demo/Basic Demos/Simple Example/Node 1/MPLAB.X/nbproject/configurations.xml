@@ -88,9 +88,11 @@
         <itemPath>../HardwareProfile.c</itemPath>
         <itemPath>../DemoOutput.c</itemPath>
         <itemPath>../main.c</itemPath>
+        <itemPath>../main_test.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="Common" projectFiles="true">
         <itemPath>../../../../../Microchip/Common/TimeDelay.c</itemPath>
+        <itemPath>../Helpers.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="Protocols" projectFiles="true">
         <logicalFolder name="f2" displayName="MiWi" projectFiles="true">
@@ -108,6 +110,7 @@
         <itemPath>../../../../../Microchip/WirelessProtocols/MSPI.c</itemPath>
         <itemPath>../../../../../Microchip/WirelessProtocols/NVM.c</itemPath>
         <itemPath>../../../../../Microchip/WirelessProtocols/SymbolTime.c</itemPath>
+        <itemPath>../../../../../Microchip/WirelessProtocols/MiWiHelper.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f4" displayName="Transceivers" projectFiles="true">
         <logicalFolder name="f1" displayName="MRF24J40" projectFiles="true">
@@ -131,7 +134,9 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>../../Node 2/bsp_wireless_eval_board</Elem>
-    <Elem>../bsp_wireless_eval_board</Elem>
+    <Elem>../../../../../Microchip/WirelessProtocols</Elem>
+    <Elem>..</Elem>
+    <Elem>../../../../../Microchip/TCPIP Stack</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -141,13 +146,13 @@
         <targetDevice>PIC18F87J11</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>RealICEPlatformTool</platformTool>
+        <platformTool>noID</platformTool>
         <languageToolchain>C18</languageToolchain>
         <languageToolchainVersion>3.46</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC18F-J_DFP" vendor="Microchip" version="1.1.24"/>
+        <pack name="PIC18F-J_DFP" vendor="Microchip" version="1.4.41"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -176,6 +181,42 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../bsp_wireless_eval_board/BSP_MiWiDemoBd.c"
+            ex="true"
+            overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
+      </item>
+      <item path="../bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.c"
+            ex="true"
+            overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
+      </item>
+      <item path="../bsp_wireless_eval_board/LCD_ST7032.c"
+            ex="true"
+            overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
+      </item>
       <C18>
         <property key="code-model" value="ms"/>
         <property key="data-model" value="oa-"/>
@@ -197,7 +238,7 @@
         <property key="extra-include-directories"
                   value="../;../../../../../Microchip/Include;../../../../../MiWi DE Demo/Basic Demos/Simple Example/Node 1"/>
         <property key="optimization-master" value="Disable all"/>
-        <property key="preprocessor-macros" value=""/>
+        <property key="preprocessor-macros" value="PIC18_EXPLORER"/>
         <property key="procedural-abstraction-passes" value="0"/>
         <property key="storage-class" value="sca"/>
         <property key="verbose" value="false"/>
@@ -241,6 +282,8 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
@@ -299,6 +342,8 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
@@ -1142,8 +1187,20 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../bsp_wireless_eval_board/BSP_MiWiDemoBd.c"
+            ex="true"
+            overriding="false">
+        <C32>
+        </C32>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32Global>
+        </C32Global>
+      </item>
       <item path="../bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.c"
-            ex="false"
+            ex="true"
             overriding="false">
         <C32>
         </C32>
@@ -1167,7 +1224,7 @@
         </C32Global>
       </item>
       <item path="../bsp_wireless_eval_board/LCD_ST7032.c"
-            ex="false"
+            ex="true"
             overriding="false">
         <C32>
         </C32>
@@ -1190,6 +1247,8 @@
         <C32Global>
         </C32Global>
       </item>
+      <item path="../main.c" ex="true" overriding="false">
+      </item>
       <C32>
         <property key="additional-warnings" value="false"/>
         <property key="enable-app-io" value="false"/>
@@ -1206,7 +1265,7 @@
         <property key="place-data-into-section" value="false"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
-        <property key="preprocessor-macros" value="EXPLORER16"/>
+        <property key="preprocessor-macros" value="EXPLORER16;MIWI_HELPER"/>
         <property key="strict-ansi" value="false"/>
         <property key="support-ansi" value="false"/>
         <property key="use-indirect-calls" value="false"/>
@@ -1446,6 +1505,7 @@
         <property key="UART1" value="true"/>
         <property key="UART2" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
         <property key="hwtoolclock.units" value="mips"/>
@@ -1596,6 +1656,16 @@
         <C32Global>
         </C32Global>
       </item>
+      <item path="../main.c" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32Global>
+        </C32Global>
+      </item>
       <C32>
         <property key="additional-warnings" value="false"/>
         <property key="enable-app-io" value="false"/>
@@ -1612,7 +1682,7 @@
         <property key="place-data-into-section" value="false"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
-        <property key="preprocessor-macros" value="WIRELESS_EVAL_BOARD"/>
+        <property key="preprocessor-macros" value="WIRELESS_EVAL_BOARD;MIWI_HELPER"/>
         <property key="strict-ansi" value="false"/>
         <property key="support-ansi" value="false"/>
         <property key="use-indirect-calls" value="false"/>
@@ -1780,8 +1850,7 @@
         <property key="UART5" value="true"/>
         <property key="UART6" value="true"/>
         <property key="USB" value="true"/>
-        <property key="debugoptions.useswbreakpoints" value="false"/>
-        <property key="firmware.download.all" value="false"/>
+        <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
         <property key="hwtoolclock.units" value="mips"/>
@@ -1876,7 +1945,7 @@
         <property key="UART5" value="true"/>
         <property key="UART6" value="true"/>
         <property key="USB" value="true"/>
-        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
@@ -1970,6 +2039,8 @@
         <C18LanguageToolchain>
         </C18LanguageToolchain>
       </item>
+      <item path="../Helpers.c" ex="true" overriding="false">
+      </item>
       <item path="../bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.c"
             ex="true"
             overriding="false">
@@ -2018,6 +2089,8 @@
         <C18LanguageToolchain>
         </C18LanguageToolchain>
       </item>
+      <item path="../main.c" ex="true" overriding="false">
+      </item>
       <C18>
         <property key="code-model" value="ms"/>
         <property key="data-model" value="oa-"/>
@@ -2039,7 +2112,7 @@
         <property key="extra-include-directories"
                   value="..\;..\..\..\..\..\Microchip\Include;..\..\..\..\..\MiWi DE Demo\Basic Demos\Simple Example\Node 1"/>
         <property key="optimization-master" value="Disable all"/>
-        <property key="preprocessor-macros" value="MIWI_DEMO_KIT"/>
+        <property key="preprocessor-macros" value="MIWI_DEMO_KIT;MIWI_HELPER"/>
         <property key="procedural-abstraction-passes" value="4"/>
         <property key="storage-class" value="sca"/>
         <property key="verbose" value="false"/>

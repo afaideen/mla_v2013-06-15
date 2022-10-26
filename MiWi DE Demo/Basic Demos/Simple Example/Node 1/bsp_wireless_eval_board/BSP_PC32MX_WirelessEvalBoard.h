@@ -62,7 +62,6 @@
 // PIC32MX processor
 #define GetSystemClock()		(CLOCK_FREQ)      // Hz
 #define GetInstructionClock()	(GetSystemClock()/1)
-//#define GetInstructionClock()	(GetSystemClock()/4)
 //#define GetPeripheralClock()	(GetInstructionClock()/1)	// Set your divider according to your Peripheral Bus Frequency configuration fuse setting
 #define GetPeripheralClock()	(GetInstructionClock()/4)	// Set your divider according to your Peripheral Bus Frequency configuration fuse setting
 
@@ -305,7 +304,7 @@
 //----------------------------
 // UART I/O pins
 //----------------------------
-#define BAUD_RATE       (19200)		// bps
+#define BAUD_RATE       115200//(19200)		// bps
 // Select which UART the STACK_USE_UART and STACK_USE_UART2TCP_BRIDGE 
 // options will use.  You can change these to U1BRG, U1MODE, etc. if you 
 // want to use the UART1 module instead of UART2.

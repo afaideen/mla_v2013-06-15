@@ -13,7 +13,9 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>../../Node 2/bsp_wireless_eval_board</sourceRootElem>
-                <sourceRootElem>../bsp_wireless_eval_board</sourceRootElem>
+                <sourceRootElem>../../../../../Microchip/WirelessProtocols</sourceRootElem>
+                <sourceRootElem>..</sourceRootElem>
+                <sourceRootElem>../../../../../Microchip/TCPIP Stack</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

@@ -56,7 +56,7 @@
 #include "HardwareProfile.h"
 
 #ifndef BAUD_RATE
-    #define BAUD_RATE 19200
+    #define BAUD_RATE 115200//19200
 #endif
 
 /************************ DEFINITIONS ******************************/

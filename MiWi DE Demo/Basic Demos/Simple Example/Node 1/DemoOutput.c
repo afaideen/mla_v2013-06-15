@@ -313,3 +313,11 @@ void DemoOutput_UnicastFail(void)
     LCDDisplay((char *)" Unicast Failed", 0, TRUE);
 }    
 
+
+
+void DemoOutput_Rescan(void)
+{
+    Printf("\r\nNo Suitable PAN, Rescanning...");
+}    
+
+

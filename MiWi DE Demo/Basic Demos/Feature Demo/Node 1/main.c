@@ -301,7 +301,7 @@ int main(void)
             //     only needs to pay attention to the channels that are not 
             //     preferred.
             /*******************************************************************/
-            putsUART("\r\nCreate connection...");
+//            putsUART("\r\nCreate connection...");
             MiApp_StartConnection(START_CONN_ENERGY_SCN, 10, 0xFFFFFFFF);//original
 //            MiApp_StartConnection(START_CONN_ENERGY_SCN, 11, 0xFFFFFFFF);
 //            MiApp_StartConnection(START_CONN_DIRECT, 11, 0xFFFFFFFF);

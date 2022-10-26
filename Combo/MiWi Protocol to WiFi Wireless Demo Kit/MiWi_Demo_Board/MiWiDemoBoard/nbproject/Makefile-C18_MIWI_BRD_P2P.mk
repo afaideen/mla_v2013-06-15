@@ -102,7 +102,7 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/_ext/1472/Demo.o: ../Demo.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1472/Demo.o: ../Demo.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/Demo.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/Demo.o 
@@ -110,7 +110,7 @@ ${OBJECTDIR}/_ext/1472/Demo.o: ../Demo.c  nbproject/Makefile-${CND_CONF}.mk
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/Demo.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/Demo.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o: ../BSP_MiWiDemoBd.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o: ../BSP_MiWiDemoBd.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o 
@@ -118,7 +118,7 @@ ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o: ../BSP_MiWiDemoBd.c  nbproject/Makefile
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1472/LCD_ST7032.o: ../LCD_ST7032.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1472/LCD_ST7032.o: ../LCD_ST7032.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/LCD_ST7032.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/LCD_ST7032.o 
@@ -126,7 +126,7 @@ ${OBJECTDIR}/_ext/1472/LCD_ST7032.o: ../LCD_ST7032.c  nbproject/Makefile-${CND_C
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/LCD_ST7032.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/LCD_ST7032.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1472/MAC_EEProm.o: ../MAC_EEProm.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1472/MAC_EEProm.o: ../MAC_EEProm.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/MAC_EEProm.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/MAC_EEProm.o 
@@ -134,7 +134,7 @@ ${OBJECTDIR}/_ext/1472/MAC_EEProm.o: ../MAC_EEProm.c  nbproject/Makefile-${CND_C
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/MAC_EEProm.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/MAC_EEProm.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/2048740170/TimeDelay.o: ../../../../Microchip/Common/TimeDelay.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/2048740170/TimeDelay.o: ../../../../Microchip/Common/TimeDelay.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/2048740170" 
 	@${RM} ${OBJECTDIR}/_ext/2048740170/TimeDelay.o.d 
 	@${RM} ${OBJECTDIR}/_ext/2048740170/TimeDelay.o 
@@ -142,7 +142,7 @@ ${OBJECTDIR}/_ext/2048740170/TimeDelay.o: ../../../../Microchip/Common/TimeDelay
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/2048740170/TimeDelay.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/2048740170/TimeDelay.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/546296802/MSPI.o: ../../../../Microchip/WirelessProtocols/MSPI.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/546296802/MSPI.o: ../../../../Microchip/WirelessProtocols/MSPI.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/546296802" 
 	@${RM} ${OBJECTDIR}/_ext/546296802/MSPI.o.d 
 	@${RM} ${OBJECTDIR}/_ext/546296802/MSPI.o 
@@ -150,7 +150,7 @@ ${OBJECTDIR}/_ext/546296802/MSPI.o: ../../../../Microchip/WirelessProtocols/MSPI
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/546296802/MSPI.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/546296802/MSPI.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/546296802/SymbolTime.o: ../../../../Microchip/WirelessProtocols/SymbolTime.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/546296802/SymbolTime.o: ../../../../Microchip/WirelessProtocols/SymbolTime.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/546296802" 
 	@${RM} ${OBJECTDIR}/_ext/546296802/SymbolTime.o.d 
 	@${RM} ${OBJECTDIR}/_ext/546296802/SymbolTime.o 
@@ -158,7 +158,7 @@ ${OBJECTDIR}/_ext/546296802/SymbolTime.o: ../../../../Microchip/WirelessProtocol
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/546296802/SymbolTime.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/546296802/SymbolTime.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1850237697/MiWi.o: ../../../../Microchip/WirelessProtocols/MiWi/MiWi.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1850237697/MiWi.o: ../../../../Microchip/WirelessProtocols/MiWi/MiWi.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1850237697" 
 	@${RM} ${OBJECTDIR}/_ext/1850237697/MiWi.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1850237697/MiWi.o 
@@ -166,7 +166,7 @@ ${OBJECTDIR}/_ext/1850237697/MiWi.o: ../../../../Microchip/WirelessProtocols/MiW
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1850237697/MiWi.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1850237697/MiWi.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1179125038/MiWiPRO.o: ../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1179125038/MiWiPRO.o: ../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1179125038" 
 	@${RM} ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o 
@@ -174,7 +174,7 @@ ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o: ../../../../Microchip/WirelessProtocols/
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1179125038/MiWiPRO.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/355958077/P2P.o: ../../../../Microchip/WirelessProtocols/P2P/P2P.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/355958077/P2P.o: ../../../../Microchip/WirelessProtocols/P2P/P2P.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/355958077" 
 	@${RM} ${OBJECTDIR}/_ext/355958077/P2P.o.d 
 	@${RM} ${OBJECTDIR}/_ext/355958077/P2P.o 
@@ -182,7 +182,7 @@ ${OBJECTDIR}/_ext/355958077/P2P.o: ../../../../Microchip/WirelessProtocols/P2P/P
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/355958077/P2P.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/355958077/P2P.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1452631451/NVM.o: ../LocalFiles/NVM.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1452631451/NVM.o: ../LocalFiles/NVM.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1452631451" 
 	@${RM} ${OBJECTDIR}/_ext/1452631451/NVM.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1452631451/NVM.o 
@@ -190,7 +190,7 @@ ${OBJECTDIR}/_ext/1452631451/NVM.o: ../LocalFiles/NVM.c  nbproject/Makefile-${CN
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1452631451/NVM.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1452631451/NVM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/594816914/crc.o: ../../../../Microchip/Transceivers/crc.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/594816914/crc.o: ../../../../Microchip/Transceivers/crc.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/594816914" 
 	@${RM} ${OBJECTDIR}/_ext/594816914/crc.o.d 
 	@${RM} ${OBJECTDIR}/_ext/594816914/crc.o 
@@ -198,7 +198,7 @@ ${OBJECTDIR}/_ext/594816914/crc.o: ../../../../Microchip/Transceivers/crc.c  nbp
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/594816914/crc.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/594816914/crc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/594816914/security.o: ../../../../Microchip/Transceivers/security.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/594816914/security.o: ../../../../Microchip/Transceivers/security.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/594816914" 
 	@${RM} ${OBJECTDIR}/_ext/594816914/security.o.d 
 	@${RM} ${OBJECTDIR}/_ext/594816914/security.o 
@@ -206,7 +206,7 @@ ${OBJECTDIR}/_ext/594816914/security.o: ../../../../Microchip/Transceivers/secur
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/594816914/security.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/594816914/security.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1767688028/MRF24J40.o: ../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1767688028/MRF24J40.o: ../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1767688028" 
 	@${RM} ${OBJECTDIR}/_ext/1767688028/MRF24J40.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1767688028/MRF24J40.o 
@@ -214,7 +214,7 @@ ${OBJECTDIR}/_ext/1767688028/MRF24J40.o: ../../../../Microchip/Transceivers/MRF2
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1767688028/MRF24J40.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1767688028/MRF24J40.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/56957362/MRF49XA.o: ../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/56957362/MRF49XA.o: ../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/56957362" 
 	@${RM} ${OBJECTDIR}/_ext/56957362/MRF49XA.o.d 
 	@${RM} ${OBJECTDIR}/_ext/56957362/MRF49XA.o 
@@ -222,7 +222,7 @@ ${OBJECTDIR}/_ext/56957362/MRF49XA.o: ../../../../Microchip/Transceivers/MRF49XA
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/56957362/MRF49XA.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/56957362/MRF49XA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/56838198/MRF89XA.o: ../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/56838198/MRF89XA.o: ../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/56838198" 
 	@${RM} ${OBJECTDIR}/_ext/56838198/MRF89XA.o.d 
 	@${RM} ${OBJECTDIR}/_ext/56838198/MRF89XA.o 
@@ -231,7 +231,7 @@ ${OBJECTDIR}/_ext/56838198/MRF89XA.o: ../../../../Microchip/Transceivers/MRF89XA
 	@${FIXDEPS} "${OBJECTDIR}/_ext/56838198/MRF89XA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 else
-${OBJECTDIR}/_ext/1472/Demo.o: ../Demo.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1472/Demo.o: ../Demo.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/Demo.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/Demo.o 
@@ -239,7 +239,7 @@ ${OBJECTDIR}/_ext/1472/Demo.o: ../Demo.c  nbproject/Makefile-${CND_CONF}.mk
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/Demo.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/Demo.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o: ../BSP_MiWiDemoBd.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o: ../BSP_MiWiDemoBd.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o 
@@ -247,7 +247,7 @@ ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o: ../BSP_MiWiDemoBd.c  nbproject/Makefile
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1472/LCD_ST7032.o: ../LCD_ST7032.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1472/LCD_ST7032.o: ../LCD_ST7032.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/LCD_ST7032.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/LCD_ST7032.o 
@@ -255,7 +255,7 @@ ${OBJECTDIR}/_ext/1472/LCD_ST7032.o: ../LCD_ST7032.c  nbproject/Makefile-${CND_C
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/LCD_ST7032.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/LCD_ST7032.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1472/MAC_EEProm.o: ../MAC_EEProm.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1472/MAC_EEProm.o: ../MAC_EEProm.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/MAC_EEProm.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/MAC_EEProm.o 
@@ -263,7 +263,7 @@ ${OBJECTDIR}/_ext/1472/MAC_EEProm.o: ../MAC_EEProm.c  nbproject/Makefile-${CND_C
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/MAC_EEProm.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/MAC_EEProm.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/2048740170/TimeDelay.o: ../../../../Microchip/Common/TimeDelay.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/2048740170/TimeDelay.o: ../../../../Microchip/Common/TimeDelay.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/2048740170" 
 	@${RM} ${OBJECTDIR}/_ext/2048740170/TimeDelay.o.d 
 	@${RM} ${OBJECTDIR}/_ext/2048740170/TimeDelay.o 
@@ -271,7 +271,7 @@ ${OBJECTDIR}/_ext/2048740170/TimeDelay.o: ../../../../Microchip/Common/TimeDelay
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/2048740170/TimeDelay.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/2048740170/TimeDelay.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/546296802/MSPI.o: ../../../../Microchip/WirelessProtocols/MSPI.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/546296802/MSPI.o: ../../../../Microchip/WirelessProtocols/MSPI.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/546296802" 
 	@${RM} ${OBJECTDIR}/_ext/546296802/MSPI.o.d 
 	@${RM} ${OBJECTDIR}/_ext/546296802/MSPI.o 
@@ -279,7 +279,7 @@ ${OBJECTDIR}/_ext/546296802/MSPI.o: ../../../../Microchip/WirelessProtocols/MSPI
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/546296802/MSPI.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/546296802/MSPI.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/546296802/SymbolTime.o: ../../../../Microchip/WirelessProtocols/SymbolTime.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/546296802/SymbolTime.o: ../../../../Microchip/WirelessProtocols/SymbolTime.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/546296802" 
 	@${RM} ${OBJECTDIR}/_ext/546296802/SymbolTime.o.d 
 	@${RM} ${OBJECTDIR}/_ext/546296802/SymbolTime.o 
@@ -287,7 +287,7 @@ ${OBJECTDIR}/_ext/546296802/SymbolTime.o: ../../../../Microchip/WirelessProtocol
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/546296802/SymbolTime.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/546296802/SymbolTime.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1850237697/MiWi.o: ../../../../Microchip/WirelessProtocols/MiWi/MiWi.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1850237697/MiWi.o: ../../../../Microchip/WirelessProtocols/MiWi/MiWi.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1850237697" 
 	@${RM} ${OBJECTDIR}/_ext/1850237697/MiWi.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1850237697/MiWi.o 
@@ -295,7 +295,7 @@ ${OBJECTDIR}/_ext/1850237697/MiWi.o: ../../../../Microchip/WirelessProtocols/MiW
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1850237697/MiWi.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1850237697/MiWi.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1179125038/MiWiPRO.o: ../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1179125038/MiWiPRO.o: ../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1179125038" 
 	@${RM} ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o 
@@ -303,7 +303,7 @@ ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o: ../../../../Microchip/WirelessProtocols/
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1179125038/MiWiPRO.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/355958077/P2P.o: ../../../../Microchip/WirelessProtocols/P2P/P2P.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/355958077/P2P.o: ../../../../Microchip/WirelessProtocols/P2P/P2P.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/355958077" 
 	@${RM} ${OBJECTDIR}/_ext/355958077/P2P.o.d 
 	@${RM} ${OBJECTDIR}/_ext/355958077/P2P.o 
@@ -311,7 +311,7 @@ ${OBJECTDIR}/_ext/355958077/P2P.o: ../../../../Microchip/WirelessProtocols/P2P/P
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/355958077/P2P.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/355958077/P2P.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1452631451/NVM.o: ../LocalFiles/NVM.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1452631451/NVM.o: ../LocalFiles/NVM.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1452631451" 
 	@${RM} ${OBJECTDIR}/_ext/1452631451/NVM.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1452631451/NVM.o 
@@ -319,7 +319,7 @@ ${OBJECTDIR}/_ext/1452631451/NVM.o: ../LocalFiles/NVM.c  nbproject/Makefile-${CN
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1452631451/NVM.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1452631451/NVM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/594816914/crc.o: ../../../../Microchip/Transceivers/crc.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/594816914/crc.o: ../../../../Microchip/Transceivers/crc.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/594816914" 
 	@${RM} ${OBJECTDIR}/_ext/594816914/crc.o.d 
 	@${RM} ${OBJECTDIR}/_ext/594816914/crc.o 
@@ -327,7 +327,7 @@ ${OBJECTDIR}/_ext/594816914/crc.o: ../../../../Microchip/Transceivers/crc.c  nbp
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/594816914/crc.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/594816914/crc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/594816914/security.o: ../../../../Microchip/Transceivers/security.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/594816914/security.o: ../../../../Microchip/Transceivers/security.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/594816914" 
 	@${RM} ${OBJECTDIR}/_ext/594816914/security.o.d 
 	@${RM} ${OBJECTDIR}/_ext/594816914/security.o 
@@ -335,7 +335,7 @@ ${OBJECTDIR}/_ext/594816914/security.o: ../../../../Microchip/Transceivers/secur
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/594816914/security.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/594816914/security.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/1767688028/MRF24J40.o: ../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1767688028/MRF24J40.o: ../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1767688028" 
 	@${RM} ${OBJECTDIR}/_ext/1767688028/MRF24J40.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1767688028/MRF24J40.o 
@@ -343,7 +343,7 @@ ${OBJECTDIR}/_ext/1767688028/MRF24J40.o: ../../../../Microchip/Transceivers/MRF2
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1767688028/MRF24J40.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1767688028/MRF24J40.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/56957362/MRF49XA.o: ../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/56957362/MRF49XA.o: ../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/56957362" 
 	@${RM} ${OBJECTDIR}/_ext/56957362/MRF49XA.o.d 
 	@${RM} ${OBJECTDIR}/_ext/56957362/MRF49XA.o 
@@ -351,7 +351,7 @@ ${OBJECTDIR}/_ext/56957362/MRF49XA.o: ../../../../Microchip/Transceivers/MRF49XA
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/56957362/MRF49XA.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/56957362/MRF49XA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/56838198/MRF89XA.o: ../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/56838198/MRF89XA.o: ../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/56838198" 
 	@${RM} ${OBJECTDIR}/_ext/56838198/MRF89XA.o.d 
 	@${RM} ${OBJECTDIR}/_ext/56838198/MRF89XA.o 

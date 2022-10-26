@@ -307,7 +307,7 @@
 //----------------------------
 // UART I/O pins
 //----------------------------
-#define BAUD_RATE       (19200)		// bps
+#define BAUD_RATE       (115200)		// bps
 // Select which UART the STACK_USE_UART and STACK_USE_UART2TCP_BRIDGE 
 // options will use.  You can change these to U1BRG, U1MODE, etc. if you 
 // want to use the UART1 module instead of UART2.

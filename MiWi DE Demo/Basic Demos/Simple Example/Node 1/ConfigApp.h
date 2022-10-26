@@ -140,6 +140,9 @@
 #define EUI_2 0x66
 #define EUI_1 0x77
 #define EUI_0 0x01
+//#define EUI_0 0x02
+//#define EUI_0 0x03
+//#define EUI_0 0x04
 
 /*********************************************************************/
 // TX_BUFFER_SIZE defines the maximum size of application payload
@@ -158,6 +161,7 @@
 // random PAN ID.
 /*********************************************************************/
 #define MY_PAN_ID                       0x1234
+//#define MY_PAN_ID                       0xffff
 
 /*********************************************************************/
 // ADDITIONAL_NODE_ID_SIZE defines the size of additional payload

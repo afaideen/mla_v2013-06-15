@@ -302,7 +302,7 @@ void BoardInit(void) {
     EE_nCS_TRIS = 0;
 
     // UART Initialization
-#if defined(STACK_USE_UART)
+
     UARTTX_TRIS = 0;
     UARTRX_TRIS = 1;
     UMODE = 0x8000; // Set UARTEN.  Note: this must be done before setting UTXEN
@@ -319,10 +319,10 @@ void BoardInit(void) {
 #endif
 
     UBRG = CLOSEST_UBRG_VALUE;
-#endif
-#ifdef ENABLE_CONSOLE
-    ConsoleInit();
-#endif
+
+//#ifdef ENABLE_CONSOLE
+//    ConsoleInit();
+//#endif
     init_atod();
     
     /*******************************************************************/
@@ -348,8 +348,10 @@ void ConfigureFlash_SPI() {
 
 void init_atod(void)
 {
-//	TRISBbits.TRISB4 = 1;
-//	TRISBbits.TRISB5 = 1;
+
+	TRISBbits.TRISB10 = 1;
+	TRISBbits.TRISB11 = 1;
+
 //	AD1PCFGbits.PCFG0 = 0;
 //	AD1PCFGbits.PCFG1 = 0;
 //	AD1PCFGbits.PCFG2 = 0;
@@ -395,6 +397,31 @@ void init_atod(void)
 	AD1CSSL = 0x0;
 	AD1CSSLbits.CSSL10 = 1;
 	AD1CSSLbits.CSSL11 = 1;
+}
+
+//Read AN10
+float ReadTempSensorBoard(void)
+{
+    float analog_val, temperature, b_fraction;
+    unsigned int a, val;
+
+    analog_val = ADC1BUFA/(1023.0)*3.3 - 0.03;
+
+    
+    temperature = analog_val - 0.5;
+    temperature = temperature / 0.01;
+//    a = (int)(temperature);
+//    b_fraction = temperature - a;
+//    val = b_fraction > 0.5 ? a + 1 : a;
+//    return (BYTE)val;
+    return temperature;
+}
+
+void ftoa(float f, unsigned char *buff)
+{
+    
+    sprintf(buff, "%.1f", f);
+    
 }
 
 

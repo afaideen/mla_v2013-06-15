@@ -51,6 +51,13 @@
 #include "LCD_ST7032.h"
 #include "HardwareProfile.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+WORD Read_VBGVoltage(void);
+void Delay10us( UINT32 tenMicroSecondCounter );
+
 // Config Bit Settings to get 16 MHz: Internal 8 MHz / 2 = 4 * 12 = 48 / 3 = 16
 #pragma config OSC = INTOSCPLL, WDTEN = OFF, XINST = ON, WDTPS = 2048, PLLDIV = 2, CPUDIV = OSC3_PLL3
 
@@ -363,3 +370,149 @@ void UserInterruptHandler(void)
         DelayMs(5);
     }  */ 
 }
+
+#if defined(__18CXX) && !defined(HI_TECH_C)	
+/*********************************************************************
+* Function:         BYTE ReadTempSensor(WORD VBGResult)
+*
+* PreCondition:     Proper reference voltage value has been determined.
+*
+* Input:		    WORD VBGResult - Reference voltage for temp calculation.
+*
+* Output:		    BYTE temp
+*
+* Side Effects:	    none
+*
+* Overview:		    Following routine reads the on board Tempature Sensor and
+*                   calculates the temp value. 
+*
+* Note:			    
+**********************************************************************/
+#define NUM_TEMP_SAMPLES            4
+float ReadTempSensorBoard()
+{
+	WORD tempValue;
+	double temp;
+	BYTE tempHere;
+	BYTE i = 0;
+    float tempAverage = 0;
+    BYTE tempArray[NUM_TEMP_SAMPLES];
+    WORD VBGResult;
+   
+	VBGResult = Read_VBGVoltage();		
+
+    
+     
+    // Configure the ADC register settings
+
+    ADCON0 = 0x04;
+    ADCON1 = 0xBD;
+    
+    PIR1bits.ADIF = 0;
+    PIE1bits.ADIE = 0;
+
+/*
+	ADCON0bits.ADON = 1;
+	Delay10us(10);					// Wait Acquisition time
+	
+	ADCON0bits.GO = 1;	
+	while(ADCON0bits.DONE);
+ 
+ 	tempValue = ADRES;
+	ADCON0bits.ADON = 0;
+	 	   
+	temp = (1200.0/VBGResult);
+	temp = (temp * tempValue);				
+	temp = (temp - 500.0)/10.0;
+
+    return (BYTE) temp;
+*/	
+   
+    do
+    {
+
+       
+    	ADCON0bits.ADON = 1;
+    	Delay10us(10);					// Wait Acquisition time
+    	ADCON0bits.GO = 1;	    	
+    	while(ADCON0bits.DONE);
+        
+
+        
+    	temp = (1200.0/VBGResult);
+
+    	tempValue = ADRES;
+
+    	temp = (temp * tempValue);				
+    	temp = (temp - 500.0)/10.0;
+    	
+    	tempArray[i] = (BYTE) temp;
+
+	    ADCON0bits.ADON = 0;
+
+	    Delay10us(1);
+	    i++;
+	} while(i < NUM_TEMP_SAMPLES);
+	
+
+    for(i = 0; i < NUM_TEMP_SAMPLES; i++)
+    {
+        tempAverage = ( tempAverage + tempArray[i] );
+    }
+    tempAverage = ( tempAverage / NUM_TEMP_SAMPLES );
+//    tempHere = (BYTE) tempAverage;
+//    tempAverage = (tempAverage - tempHere) * 10;
+//    
+//    if(tempAverage >= 5)
+//        tempHere = tempHere + 1;
+//        
+//    return (BYTE)tempHere;    
+    return tempAverage;    
+
+
+}
+
+    				
+/*********************************************************************
+* Function:         WORD Read_VBGVoltage(void)
+*
+* PreCondition:     none
+*
+* Input:		    none
+*
+* Output:		    ADRES
+*
+* Side Effects:	    none
+*
+* Overview:		    Reads the band gap voltage and compares with reference voltage
+*					to arrive at the current voltage level
+*
+* Note:			    
+**********************************************************************/
+WORD Read_VBGVoltage(void)
+{
+    ADCON0 = 0x3D;				// Configures the channel as VBG
+    ADCON1 = 0xBD;				// Program the acquisition time
+    ANCON1bits.VBGEN = 1;		// Enable Band gap reference voltage
+    
+    Delay10us(1000);			//Wait for the Band Gap Settling time
+    
+    PIR1bits.ADIF = 0;
+    PIE1bits.ADIE = 0;			//Disable ADC interrupts
+    							//This routine uses the polling based mechanism
+    ADCON0bits.GO = 1;		    //Start A/D conversion    
+    while(ADCON0bits.DONE);
+    
+    ADCON0bits.ADON = 0;	    // Turn ADC OFF
+    ANCON1bits.VBGEN = 0;	    // Disable Bandgap
+    
+    return ADRES;
+}
+
+void ftoa(float f, unsigned char *buff)
+{
+    
+    sprintf(buff, "%.1f", f);
+    
+}
+#endif
