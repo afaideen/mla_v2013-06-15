@@ -1,9 +1,26 @@
 
-
+#include "GenericTypeDefs.h"
 #include "MiWiHelper.h"
 #include "WirelessProtocols/MCHP_API.h"
 
 #if defined(MIWI_HELPER)
+
+BOOL MiWiHelper_SendData(BYTE conn_index, BYTE *data)
+{
+    BYTE i;
+    MiApp_FlushTx();
+    for(i = 0; i < strlen(data); i++)
+    {
+        MiApp_WriteData(data[i]);
+    }
+    if( MiApp_UnicastConnection(conn_index, TRUE) == FALSE )
+    {
+        return FALSE;
+    }
+    else{
+        return TRUE;
+    }
+}
 
 //BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl, BYTE channel)
 BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl)

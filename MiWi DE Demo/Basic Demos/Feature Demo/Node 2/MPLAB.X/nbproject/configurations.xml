@@ -175,14 +175,38 @@
       <item path="../bsp_wireless_eval_board/BSP_MiWiDemoBd.c"
             ex="true"
             overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
       <item path="../bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.c"
             ex="true"
             overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
       <item path="../bsp_wireless_eval_board/LCD_ST7032.c"
             ex="true"
             overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
       <C18>
         <property key="code-model" value="ms"/>
@@ -1322,6 +1346,14 @@
         <property key="warningmessagebreakoptions.warningmessages" value="holdstate"/>
       </Tool>
       <item path="main_test.c" ex="true" overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
     </conf>
     <conf name="PICDEM_Z" type="2">

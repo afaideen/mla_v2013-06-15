@@ -11,12 +11,18 @@
 BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl);
 BOOL CreateNewConnectionAtChannel(BYTE channel);
 float ReadTempSensorBoard(void);
-void ftoa(float f, unsigned char *buff);
+void ftoa(float f, unsigned char *buff, BYTE size);
+BOOL MiWiHelper_SendData(BYTE conn_index, BYTE *data);
 
 extern BYTE myLongAddress[MY_ADDRESS_LENGTH];
+
+#if (DEBUG_LEVEL > 0)
+    static BYTE msg[100] = {0};
+#endif
 /************************** VARIABLES ************************************/
 #define LIGHT   0x01
 #define SWITCH  0x02
+#define POTEY   0x03
 
 /*************************************************************************/
 // AdditionalNodeID variable array defines the additional 
@@ -56,6 +62,27 @@ BYTE myChannel = 26;//GOOD
 
 BYTE tempAddr[8] = {0xAA,0xAA,0xAA,0xAA,0xAA,0xAA,0xAA,0xAA};
 extern DWORD_VAL OutgoingFrameCounter; 
+
+typedef struct{
+    BYTE    name[16];
+    float   value;
+    
+}SENSOR;
+
+
+typedef struct{
+    BYTE        role;
+    SENSOR      sensor[2];
+    BYTE        channel;
+   
+    BYTE        myLongAddress[MY_ADDRESS_LENGTH];
+    WORD_VAL    myShortAddress;
+    WORD_VAL    myPANID;
+    BYTE        myParent;
+    
+}APPDATA ;
+
+APPDATA appData;
 
 /*********************************************************************
 * Function:         void main(void)
@@ -97,18 +124,19 @@ int main(void)
     BYTE TxSynCount2 = 0;
     BYTE TxNum = 0;
     BYTE RxNum = 0;
-    MIWI_TICK t2, t3;
-    BYTE mydata[9];
-    BYTE buff[7];
-    float tpr_data;
+    MIWI_TICK t1;
+    BYTE mydata[30];
+    BYTE buff[8];
+    BYTE sensor_name_tpr[] = "temperature";
+
     
     /*******************************************************************/
     // Initialize the system
     /*******************************************************************/
     BoardInit();
-#ifndef WIRELESS_EVAL_BOARD    
-    ConsoleInit(); 
-#endif
+//#ifndef WIRELESS_EVAL_BOARD    
+//    ConsoleInit(); 
+//#endif
     DemoOutput_Greeting();
     
     LED_1 = 0;
@@ -151,12 +179,16 @@ int main(void)
 
     if(myLongAddress[0] == 1){
         CreateNewConnectionAtChannel(myChannel);
+        appData.role = ROLE_PAN_COORDINATOR;
 //    CreateNewConnectionWithLeastNoise(0b0000000011111111);
 //    CreateNewConnectionWithLeastNoise(0b0000000011111111);
 //    CreateNewConnectionWithLeastNoise(ALL_CHANNEL);
     }
     else{
-
+        if(myLongAddress[0] == 2)
+            appData.role = ROLE_COORDINATOR;
+        else
+            appData.role = ROLE_FFD_END_DEVICE;
     //Uncomment for original below
     /*******************************************************************/
     // Function MiApp_EstablishConnection try to establish a new 
@@ -233,20 +265,33 @@ int main(void)
     // Turn on LED 1 to indicate connection established
     LED_1 = 1;
     DemoOutput_Instruction();
-    
+    strcpy(appData.sensor[0].name, sensor_name_tpr);
+    appData.myParent = myParent;
+    appData.myPANID = myPANID;
+    appData.myShortAddress = myShortAddress;
+    appData.myLongAddress[0] = myLongAddress[0];
+    appData.myLongAddress[1] = myLongAddress[1];
+    appData.myLongAddress[2] = myLongAddress[2];
+    appData.myLongAddress[3] = myLongAddress[3];
+    appData.myLongAddress[4] = myLongAddress[4];
+    appData.myLongAddress[5] = myLongAddress[5];
+    appData.myLongAddress[6] = myLongAddress[6];
+    appData.myLongAddress[7] = myLongAddress[7];
     while(1)
     {
         ClrWdt();
-        t3 = MiWi_TickGet();
-        if( MiWi_TickGetDiff(t3, t2) > 0.5 * ONE_SECOND )
+        if( MiWi_TickGetDiff(MiWi_TickGet(), t1) > 0.5 * ONE_SECOND )
         {
-            t2 = MiWi_TickGet();
+            t1 = MiWi_TickGet();
             LED_1 ^= 1;
         }
         
-        tpr_data = ReadTempSensorBoard();
-        ftoa(tpr_data,&buff[0]);
-        sprintf(mydata,"t1=%s", buff);
+        
+        appData.sensor[0].value = ReadTempSensorBoard();
+        
+        ftoa(appData.sensor[0].value,&buff[0], sizeof(buff));
+        memset(mydata, 0, sizeof(mydata));
+        sprintf(mydata,"addr=%02x%02x%02x%02x,t1=%s,\r\n", myLongAddress[0],myLongAddress[1],myLongAddress[2],myLongAddress[3],buff);
         /*******************************************************************/
         // Function MiApp_MessageAvailable returns a boolean to indicate if 
         // a packet has been received by the transceiver. If a packet has 
@@ -264,7 +309,7 @@ int main(void)
             
             // Toggle LED2 to indicate receiving a packet.
             LED_2 ^= 1;
-            
+        
             /*******************************************************************/
             // Function MiApp_DiscardMessage is used to release the current 
             //  received packet.
@@ -272,6 +317,38 @@ int main(void)
             //  next received frame 
             /*******************************************************************/        
             MiApp_DiscardMessage();
+            
+            //check if msg comes from children or parent
+            if( rxMessage.SourceAddress[1] != 0x00 && appData.role == ROLE_COORDINATOR )
+            {
+                //Forward data from children to parent
+                memset(mydata, 0, sizeof(mydata));
+                memcpy(mydata, rxMessage.Payload, rxMessage.PayloadSize);
+                
+                if(appData.myParent != 0xff)//not 0xff
+                {
+                    //meaning has parent
+                    //forward data to parent 
+                    if(  MiWiHelper_SendData(0, mydata) == FALSE )
+                    {
+                        DemoOutput_UnicastFail();
+                    }
+                    else
+                    {
+    #if (DEBUG_LEVEL > 0)
+                        sprintf(msg,"Forward secured Unicast Packet with RSSI %02X from %02X%02X: %s", 
+                                rxMessage.PacketRSSI,rxMessage.SourceAddress[1],rxMessage.SourceAddress[0],mydata);
+                        Printf(msg);
+    #endif
+                        TxNum++;
+                    }                   
+                    DemoOutput_UpdateTxRx(TxNum, RxNum);
+                    
+                    
+                }
+                
+                
+            }
         }
         else
         {

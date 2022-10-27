@@ -535,6 +535,30 @@ void BoardInit(void)
         LCDInit();
         init_atod();
         
+        // UART Initialization
+
+        UARTTX_TRIS = 0;
+        UARTRX_TRIS = 1;
+        UMODE = 0x8000; // Set UARTEN.  Note: this must be done before setting UTXEN
+        USTA = 0x00001400; // RXEN set, TXEN set
+    #define CLOSEST_UBRG_VALUE      ( (GetPeripheralClock()+8ul*BAUD_RATE)/16/BAUD_RATE-1 )
+    #define BAUD_ACTUAL             ( GetPeripheralClock()/16/(CLOSEST_UBRG_VALUE+1) )
+
+    #define BAUD_ERROR              ((BAUD_ACTUAL > BAUD_RATE) ? BAUD_ACTUAL-BAUD_RATE : BAUD_RATE-BAUD_ACTUAL)
+    #define BAUD_ERROR_PRECENT      ((BAUD_ERROR*100+BAUD_RATE/2)/BAUD_RATE)
+    #if (BAUD_ERROR_PRECENT > 3)
+    #warning UART frequency error is worse than 3%
+    #elif (BAUD_ERROR_PRECENT > 2)
+    #warning UART frequency error is worse than 2%
+    #elif (BAUD_ERROR_PRECENT > 1)
+    #warning UART frequency error is worse than 1%
+    #else
+    #warning UART frequency error is less than 1%
+
+    #endif
+
+        UBRG = CLOSEST_UBRG_VALUE;
+        
     #elif defined(PIC18_EXPLORER)
         // primary external oscillator
         OSCCON = 0x70;      
@@ -715,9 +739,9 @@ float ReadTempSensorBoard(void)
     return temperature;
 }
 
-void ftoa(float f, unsigned char *buff)
+void ftoa(float f, unsigned char *buff, BYTE size)
 {
-    
+    memset(buff, 0, size);
     sprintf(buff, "%.1f", f);
     
 }

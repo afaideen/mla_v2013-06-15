@@ -33,7 +33,7 @@
 // following codes defines the platforms as well as the hardware 
 // configuration
 /*********************************************************************/
-
+#define DEBUG_LEVEL     1
 /*********************************************************************/
 // ENABLE_CONSOLE will enable the print out on the hyper terminal
 // this definition is very helpful in the debugging process
@@ -77,7 +77,11 @@
         // coordinator. This definition cannot be defined with 
         // NWK_ROLE_END_DEVICE.
         /*********************************************************************/
+#if defined(MIWI_DEMO_KIT)
+        #define NWK_ROLE_END_DEVICE
+#else
         #define NWK_ROLE_COORDINATOR
+#endif
 
 
 
@@ -139,10 +143,15 @@
 #define EUI_3 0x55
 #define EUI_2 0x66
 #define EUI_1 0x77
-#define EUI_0 0x01
-//#define EUI_0 0x02
-//#define EUI_0 0x03
-//#define EUI_0 0x04
+
+#ifdef WIRELESS_EVAL_BOARD
+    #define EUI_0 0x01
+#elif EXPLORER16
+    #define EUI_0 0x02
+#elif MIWI_DEMO_KIT
+    #define EUI_0 0x03
+    //#define EUI_0 0x04
+#endif
 
 /*********************************************************************/
 // TX_BUFFER_SIZE defines the maximum size of application payload

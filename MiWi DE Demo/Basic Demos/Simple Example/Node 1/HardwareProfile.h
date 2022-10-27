@@ -437,6 +437,35 @@
     	#define LCD_RS_IO			(LATBbits.LATB15)
     	#define LCD_E_TRIS			(TRISDbits.TRISD4)
     	#define LCD_E_IO			(LATDbits.LATD4)
+
+        //----------------------------
+        // UART I/O pins
+        //----------------------------
+        #define BAUD_RATE       (115200)//(19200)		// bps
+        // Select which UART the STACK_USE_UART and STACK_USE_UART2TCP_BRIDGE 
+        // options will use.  You can change these to U1BRG, U1MODE, etc. if you 
+        // want to use the UART1 module instead of UART2.
+        #define UBRG					U2BRG
+        #define UMODE					U2MODE
+        #define USTA					U2STA
+        #define BusyUART()				BusyUART2()
+        #define CloseUART()				CloseUART2()
+        #define ConfigIntUART(a)		ConfigIntUART2(a)
+        #define DataRdyUART()			DataRdyUART2()
+        #define OpenUART(a,b,c)			OpenUART2(a,b,c)
+        #define ReadUART()				ReadUART2()
+        #define WriteUART(a)			WriteUART2(a)
+        #define getsUART(a,b,c)			getsUART2(a,b,c)
+
+        #define putsUART(a)			    putsUART2(a)
+        #define getcUART()				getcUART2()
+        #define putcUART(a)				do{while(BusyUART()); WriteUART(a); while(BusyUART()); }while(0)
+        #define putrsUART(a)			putsUART(a)	
+
+        #define UARTTX_TRIS			(TRISFbits.TRISF5)
+        #define UARTTX_IO			(PORTFbits.RF5)
+        #define UARTRX_TRIS			(TRISFbits.TRISF4)
+        #define UARTRX_IO			(PORTFbits.RF4)
     
     #elif defined(WIRELESS_EVAL_BOARD)
         #include "bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.h"
@@ -471,6 +500,7 @@
     #elif defined(__PIC32MX__)
         #ifndef WIRELESS_EVAL_BOARD
         #define GetInstructionClock()	(CLOCK_FREQ)
+        #define GetPeripheralClock()	(GetInstructionClock()/4)
         #endif
     #endif
 

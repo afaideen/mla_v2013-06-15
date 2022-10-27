@@ -57,6 +57,7 @@
 
 WORD Read_VBGVoltage(void);
 void Delay10us( UINT32 tenMicroSecondCounter );
+void DelayMs( UINT16 ms );
 
 // Config Bit Settings to get 16 MHz: Internal 8 MHz / 2 = 4 * 12 = 48 / 3 = 16
 #pragma config OSC = INTOSCPLL, WDTEN = OFF, XINST = ON, WDTPS = 2048, PLLDIV = 2, CPUDIV = OSC3_PLL3
@@ -263,6 +264,8 @@ MIWI_TICK switch1PressTime;
     // Initialize the LCD
     /*******************************************************************/
     LCDInit();
+    
+//    DelayMs(11000);
 
 }
  
@@ -511,8 +514,14 @@ WORD Read_VBGVoltage(void)
 
 void ftoa(float f, unsigned char *buff)
 {
-    
+#ifdef __C32__
     sprintf(buff, "%.1f", f);
+#else
+    int whole, decimal;
+    whole = (int)f; //whole part
+    decimal=(f-whole)*10; //decimal part
+    sprintf(buff,"%d.%1d",whole,decimal); //Convert to string
+#endif
     
 }
 #endif
