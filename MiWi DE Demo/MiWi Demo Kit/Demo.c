@@ -69,7 +69,8 @@
 /*************************************************************************/
 
 // Possible channel numbers are from 0 to 31
-BYTE myChannel = 26;
+//BYTE myChannel = 26;
+BYTE myChannel = 11;
 
 #define MiWi_CHANNEL        0x04000000                          //Channel 26 bitmap
 
@@ -258,7 +259,7 @@ CreateorJoin:
                             }
                         else if(switch_val == SW2)
                             {
-                                select_channel = select_channel+1;
+                                select_channel = select_channel + 1;
                                 #if defined(MRF24J40)
                                     if(select_channel == 27) 
                                         select_channel = 11;
@@ -298,6 +299,7 @@ CreateorJoin:
 	    //      DISABLE_ALL_CONN:   Disable all connections. 
 	    /*******************************************************************/
 	    MiApp_ConnectionMode(ENABLE_ALL_CONN);
+//	    MiApp_ConnectionMode(ENABLE_ACTIVE_SCAN_RSP);
 	    
 	    /*******************************************************************/
 	    // Ask User to Create or Join a Network

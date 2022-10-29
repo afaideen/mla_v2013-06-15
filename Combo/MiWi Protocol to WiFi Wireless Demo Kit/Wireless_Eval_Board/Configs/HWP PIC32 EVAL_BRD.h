@@ -75,6 +75,7 @@
 #define LED1_TRIS           TRISEbits.TRISE6
 #define LED2                LATEbits.LATE7
 #define LED2_TRIS           TRISEbits.TRISE7
+#define LED6_IO              LED0
 
 #define LEDS_OFF()          {LED0_OFF(); LED1_OFF(); LED2_OFF();}
 #define LEDS_ON()           {LED0_ON(); LED1_ON(); LED2_ON();}
@@ -88,6 +89,7 @@
 #define LED2_OFF()          {LATECLR = BIT_7;}
 #define LED2_ON()           {LATESET = BIT_7;}
 #define LED2_INV()          LATEINV = BIT_7;
+
 
 #define BUTTON0_TRIS        (TRISDbits.TRISD6)	// Ref SW0
 #define	BUTTON0_IO          (PORTDbits.RD6)
@@ -111,7 +113,8 @@
 #define LCD_SPICON1bits     (SPI3CONbits)
 #define LCD_MAX_SPI_FREQ    (100000ul)	// Hz
 // 25LC256 I/O pins
-#define EEPROM_ADDRESS_APPCONFIG    128 //0-127 reserved for data miwi config. network wifi config starts at 128 to 511. Address at 512 used for miwi room info
+//#define EEPROM_ADDRESS_APPCONFIG    0x0000 //0-127 reserved for data miwi config. network wifi config starts at 128 to 511. Address at 512 used for miwi room info
+#define EEPROM_ADDRESS_APPCONFIG    256//0x0000 //0-127 reserved for data miwi config. network wifi config starts at 128 to 511. Address at 512 used for miwi room info
 #define EEPROM_CS_TRIS		(TRISBbits.TRISB14)
 #define EEPROM_CS_IO		(LATBbits.LATB14)
 #define EEPROM_SCK_TRIS		(TRISDbits.TRISD10)

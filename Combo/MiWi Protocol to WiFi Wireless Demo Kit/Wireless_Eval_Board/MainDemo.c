@@ -273,7 +273,7 @@ int main(void)
 
     // Initialize application specific hardware
     InitializeBoard();
-
+    InitAppConfig();
     // Initiates board setup process if button is depressed
     // on startup
     if (BUTTON1_IO == 0u) {
@@ -322,17 +322,27 @@ int main(void)
         LCDDisplay((char *) "ERROR: Unable to Set Channel..", 0, TRUE);
         while (1);
     }
+    BYTE msg[16] = {0};
+    sprintf(msg,"Channel: %d",myChannel);
+    putsUART2(msg);
 
     /*******************************************************************/
     //  Set the connection mode. The possible connection modes are:
     //      ENABLE_ALL_CONN:    Enable all kinds of connection
     //      ENABLE_PREV_CONN:   Only allow connection already exists in
     //                          connection table
-    //      ENABL_ACTIVE_SCAN_RSP:  Allow response to Active scan
+    //      ENABLE_ACTIVE_SCAN_RSP:  Allow response to Active scan
     //      DISABLE_ALL_CONN:   Disable all connections.
     /*******************************************************************/
     MiApp_ConnectionMode(ENABLE_ALL_CONN);
 
+    MiApp_StartConnection(START_CONN_DIRECT, 10, 0xFFFFFFFF);
+//    DWORD scan_chn;
+//    BYTE num_nodes;
+////    scan_chn = 1 << 11|1 << 13|1 << 15;
+//    scan_chn = 1 << 11;
+//    num_nodes = MiApp_SearchConnection(10, scan_chn);//10 - 1sec , 13 - 7.8s
+    Nop();
     /*******************************************************************/
     // Function MiApp_EstablishConnection try to establish a new
     // connection with peer device.
@@ -345,46 +355,47 @@ int main(void)
     //      within the radio range; indirect mode means connection
     //      may or may not in the radio range.
     /*******************************************************************/
-    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
-
-    /*******************************************************************/
-    // Display current opertion on LCD of demo board, if applicable
-    /*******************************************************************/
-    if (i != 0xFF) {
-        ; // Connected Peer on Channel
-    } else {
-        /*******************************************************************/
-        // If no network can be found and join, we need to start a new
-        // network by calling function MiApp_StartConnection
-        //
-        // The first parameter is the mode of start connection. There are
-        // two valid connection modes:
-        //   - START_CONN_DIRECT        start the connection on current
-        //                              channel
-        //   - START_CONN_ENERGY_SCN    perform an energy scan first,
-        //                              before starting the connection on
-        //                              the channel with least noise
-        //   - START_CONN_CS_SCN        perform a carrier sense scan
-        //                              first, before starting the
-        //                              connection on the channel with
-        //                              least carrier sense noise. Not
-        //                              supported for current radios
-        //
-        // The second parameter is the scan duration, which has the same
-        //     definition in Energy Scan. 10 is roughly 1 second. 9 is a
-        //     half second and 11 is 2 seconds. Maximum scan duration is
-        //     14, or roughly 16 seconds.
-        //
-        // The third parameter is the channel map. Bit 0 of the
-        //     double word parameter represents channel 0. For the 2.4GHz
-        //     frequency band, all possible channels are channel 11 to
-        //     channel 26. As the result, the bit map is 0x07FFF800. Stack
-        //     will filter out all invalid channels, so the application
-        //     only needs to pay attention to the channels that are not
-        //     preferred.
-        /*******************************************************************/
-        MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
-    }
+////    original below
+//    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+//
+//    /*******************************************************************/
+//    // Display current opertion on LCD of demo board, if applicable
+//    /*******************************************************************/
+//    if (i != 0xFF) {
+//        ; // Connected Peer on Channel
+//    } else {
+//        /*******************************************************************/
+//        // If no network can be found and join, we need to start a new
+//        // network by calling function MiApp_StartConnection
+//        //
+//        // The first parameter is the mode of start connection. There are
+//        // two valid connection modes:
+//        //   - START_CONN_DIRECT        start the connection on current
+//        //                              channel
+//        //   - START_CONN_ENERGY_SCN    perform an energy scan first,
+//        //                              before starting the connection on
+//        //                              the channel with least noise
+//        //   - START_CONN_CS_SCN        perform a carrier sense scan
+//        //                              first, before starting the
+//        //                              connection on the channel with
+//        //                              least carrier sense noise. Not
+//        //                              supported for current radios
+//        //
+//        // The second parameter is the scan duration, which has the same
+//        //     definition in Energy Scan. 10 is roughly 1 second. 9 is a
+//        //     half second and 11 is 2 seconds. Maximum scan duration is
+//        //     14, or roughly 16 seconds.
+//        //
+//        // The third parameter is the channel map. Bit 0 of the
+//        //     double word parameter represents channel 0. For the 2.4GHz
+//        //     frequency band, all possible channels are channel 11 to
+//        //     channel 26. As the result, the bit map is 0x07FFF800. Stack
+//        //     will filter out all invalid channels, so the application
+//        //     only needs to pay attention to the channels that are not
+//        //     preferred.
+//        /*******************************************************************/
+//        MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
+//    }
 
     // Turn OFF LCD after setting up MiWi Connection
     LCDBacklightOFF();
@@ -414,7 +425,7 @@ int main(void)
     }
     
     // Initialize Stack and application related NV variables into AppConfig.
-    InitAppConfig();
+//    InitAppConfig();
     putsUART2("\r\nAppConfig initialized...OK\r\n");
 
     
@@ -1017,9 +1028,9 @@ static void InitializeBoard(void) {
 
     UBRG = CLOSEST_UBRG_VALUE;
 #endif
-#ifdef ENABLE_CONSOLE
-    ConsoleInit();
-#endif
+//#ifdef ENABLE_CONSOLE
+//    ConsoleInit();
+//#endif
 
 }
 

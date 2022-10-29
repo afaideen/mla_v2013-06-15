@@ -16,6 +16,7 @@
                 <sourceRootElem>../../../../Microchip/WirelessProtocols</sourceRootElem>
                 <sourceRootElem>../../../../Microchip/Include/Transceivers</sourceRootElem>
                 <sourceRootElem>../../../../Microchip/Include/WirelessProtocols</sourceRootElem>
+                <sourceRootElem>..</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

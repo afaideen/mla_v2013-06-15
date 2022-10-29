@@ -174,8 +174,8 @@
 /*********************************************************************/
 // MY_PAN_ID defines the PAN identifier
 /*********************************************************************/
-#define MY_PAN_ID                       0x1111  // commission PANID
-//#define MY_PAN_ID                       0x1234  // commission PANID
+//#define MY_PAN_ID                       0xffff  // commission PANID
+#define MY_PAN_ID                       0x1234  // commission PANID
 
 /*********************************************************************/
 // ADDITIONAL_NODE_ID_SIZE defines the size of additional payload

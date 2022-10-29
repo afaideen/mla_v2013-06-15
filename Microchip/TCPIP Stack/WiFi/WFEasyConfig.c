@@ -219,6 +219,9 @@ static int WFEasyConfigProcess(void)
  
     #if defined (EZ_CONFIG_STORE)
     SaveAppConfig(&AppConfig);
+//    NVM_VALIDATION_STRUCT NVMValidationStruct;
+//    XEEReadArray(EEPROM_ADDRESS_APPCONFIG, (BYTE*)&NVMValidationStruct, sizeof(NVMValidationStruct));
+//    XEEReadArray(EEPROM_ADDRESS_APPCONFIG + sizeof(NVMValidationStruct), (BYTE*)&AppConfig, sizeof(AppConfig));
     #endif
 
     /* Set wlan mode */

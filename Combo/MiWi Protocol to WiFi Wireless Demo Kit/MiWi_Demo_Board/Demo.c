@@ -89,7 +89,7 @@
 /*************************************************************************/
 
 // Possible channel numbers are from 0 to 31
-BYTE myChannel = 15;
+BYTE myChannel = 11;
 
 
 
@@ -236,8 +236,9 @@ void MainDisplay(void)
 void main(void)
 {   
     BYTE i, j;
-    MIWI_TICK startTick, currentTick;
+    MIWI_TICK startTick, currentTick, t1;
     BYTE FlashCount = 0;
+    WORD tmp = 0xFFFF;
 
     /*******************************************************************/
     // Initialize Hardware
@@ -252,15 +253,23 @@ void main(void)
  	for(i = 0; i < TRACKER_SIZE; i++)
  	{
      	BroadcastTracker[i].isValid = FALSE;
-        }
+    }
  	
-    MiApp_ProtocolInit(TRUE);
+    MiApp_ProtocolInit(FALSE);
+//    MiApp_ProtocolInit(TRUE);//original
+    
+////////    add modification    ////////////
+    myPANID.Val = MY_PAN_ID;
+    MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);    
+    MiApp_SetChannel(11);
+//    
+//////////////////////////////////////////
     
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
        
-    MainDisplay();
+//   //original
     
     /*******************************************************************/
     //  Set the connection mode. The possible connection modes are:
@@ -270,10 +279,20 @@ void main(void)
     //      ENABLE_ACTIVE_SCAN_RSP:  Allow response to Active scan
     //      DISABLE_ALL_CONN:   Disable all connections. 
     /*******************************************************************/
-    MiApp_ConnectionMode(ENABLE_ACTIVE_SCAN_RSP);
+//    MiApp_ConnectionMode(ENABLE_ACTIVE_SCAN_RSP);//original works with P2P
+    //For MIWI need to enable both below!
+    MiApp_ConnectionMode(ENABLE_ALL_CONN);  //for MIWI
+    MiApp_StartConnection(START_CONN_DIRECT, 10, 0);    //for MIWI
+    
+     MainDisplay();
 
 	while(1)
 	{
+        if( MiWi_TickGetDiff(MiWi_TickGet(), t1) > 0.5 * ONE_SECOND )
+        {
+            t1 = MiWi_TickGet();
+            LED0 ^= 1;
+        }
     	
     	if(SW0_PORT == 0)
     	{
@@ -291,7 +310,7 @@ void main(void)
             while (1) {
                 if (SW0_PORT == 0) {
 
-                    WORD tmp = 0xFFFF;
+//                    WORD tmp = 0xFFFF;    //original
 
                     while(SW0_PORT == 0);
                     myPANID.Val = MY_PAN_ID;

@@ -51,15 +51,25 @@
 #ifndef __STORAGE_H
 #define __STORAGE_H
 
+#include "HardwareProfile.h"
+#include "GenericTypeDefs.h"
+#include "Compiler.h"
+#include "TCPIPConfig.h"
+#include "StackTsk.h"
+
+//extern APP_CONFIG AppConfig;
+
 #define MAX_NUM_ROOMS   10
 #define ROOM_NAME_LENGTH  20
 //#define ROOM_RECORD_BEGIN 10 //original
-#define ROOM_RECORD_BEGIN 10 + 512//EEPROM_ADDRESS_APPCONFIG + sizeof(AppConfig)
+//#define ROOM_RECORD_BEGIN 10 + 512//EEPROM_ADDRESS_APPCONFIG + sizeof(AppConfig)
+#define ROOM_RECORD_BEGIN   512 + 512//EEPROM_ADDRESS_APPCONFIG + sizeof(AppConfig)
+//#define ROOM_RECORD_BEGIN 10 + EEPROM_ADDRESS_APPCONFIG + sizeof(AppConfig)
 #define ROOM_RECORD_SIZE sizeof(ROOM_RECORD)
 #define BLANK_REC   (0xFF)
 #define VALID_REC   (0x01)
 
-#include "HardwareProfile.h"
+//#include "HardwareProfile.h"
 
     typedef struct
     {
