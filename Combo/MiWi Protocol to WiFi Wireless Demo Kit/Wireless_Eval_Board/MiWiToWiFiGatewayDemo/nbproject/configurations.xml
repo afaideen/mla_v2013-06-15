@@ -274,6 +274,7 @@
       <itemPath>../MPFSImg2.c</itemPath>
       <itemPath>../SelfTestMode.c</itemPath>
       <itemPath>../GenericTCPClient.c</itemPath>
+      <itemPath>../MainDemoTest.c.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -2422,6 +2423,8 @@
         </C32-LD>
         <C32Global>
         </C32Global>
+      </item>
+      <item path="../MainDemo.c" ex="true" overriding="false">
       </item>
       <item path="../MiWi_SPI.c" ex="true" overriding="false">
         <C32>

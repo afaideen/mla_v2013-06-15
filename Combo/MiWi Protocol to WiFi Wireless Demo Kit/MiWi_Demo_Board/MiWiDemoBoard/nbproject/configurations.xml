@@ -55,6 +55,7 @@
         <itemPath>../BSP_MiWiDemoBd.c</itemPath>
         <itemPath>../LCD_ST7032.c</itemPath>
         <itemPath>../MAC_EEProm.c</itemPath>
+        <itemPath>../DemoTest.c.c</itemPath>
       </logicalFolder>
       <logicalFolder name="Common" displayName="Common" projectFiles="true">
         <itemPath>../../../../Microchip/Common/TimeDelay.c</itemPath>
@@ -549,6 +550,8 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../Demo.c" ex="true" overriding="false">
+      </item>
       <C18>
         <property key="code-model" value="ms"/>
         <property key="data-model" value="oa-"/>
@@ -617,6 +620,7 @@
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
         <property key="hwtoolclock.units" value="mips"/>

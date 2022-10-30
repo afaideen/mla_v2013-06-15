@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../Demo.c ../BSP_MiWiDemoBd.c ../LCD_ST7032.c ../MAC_EEProm.c ../../../../Microchip/Common/TimeDelay.c ../../../../Microchip/WirelessProtocols/MSPI.c ../../../../Microchip/WirelessProtocols/SymbolTime.c ../../../../Microchip/WirelessProtocols/MiWi/MiWi.c ../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c ../../../../Microchip/WirelessProtocols/P2P/P2P.c ../LocalFiles/NVM.c ../../../../Microchip/Transceivers/crc.c ../../../../Microchip/Transceivers/security.c ../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c ../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c ../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c
+SOURCEFILES_QUOTED_IF_SPACED=../BSP_MiWiDemoBd.c ../LCD_ST7032.c ../MAC_EEProm.c ../../../../Microchip/Common/TimeDelay.c ../../../../Microchip/WirelessProtocols/MSPI.c ../../../../Microchip/WirelessProtocols/SymbolTime.c ../../../../Microchip/WirelessProtocols/MiWi/MiWi.c ../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c ../../../../Microchip/WirelessProtocols/P2P/P2P.c ../LocalFiles/NVM.c ../../../../Microchip/Transceivers/crc.c ../../../../Microchip/Transceivers/security.c ../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c ../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c ../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c ../DemoTest.c.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1472/Demo.o ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o ${OBJECTDIR}/_ext/1472/LCD_ST7032.o ${OBJECTDIR}/_ext/1472/MAC_EEProm.o ${OBJECTDIR}/_ext/2048740170/TimeDelay.o ${OBJECTDIR}/_ext/546296802/MSPI.o ${OBJECTDIR}/_ext/546296802/SymbolTime.o ${OBJECTDIR}/_ext/1850237697/MiWi.o ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o ${OBJECTDIR}/_ext/355958077/P2P.o ${OBJECTDIR}/_ext/1452631451/NVM.o ${OBJECTDIR}/_ext/594816914/crc.o ${OBJECTDIR}/_ext/594816914/security.o ${OBJECTDIR}/_ext/1767688028/MRF24J40.o ${OBJECTDIR}/_ext/56957362/MRF49XA.o ${OBJECTDIR}/_ext/56838198/MRF89XA.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1472/Demo.o.d ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o.d ${OBJECTDIR}/_ext/1472/LCD_ST7032.o.d ${OBJECTDIR}/_ext/1472/MAC_EEProm.o.d ${OBJECTDIR}/_ext/2048740170/TimeDelay.o.d ${OBJECTDIR}/_ext/546296802/MSPI.o.d ${OBJECTDIR}/_ext/546296802/SymbolTime.o.d ${OBJECTDIR}/_ext/1850237697/MiWi.o.d ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o.d ${OBJECTDIR}/_ext/355958077/P2P.o.d ${OBJECTDIR}/_ext/1452631451/NVM.o.d ${OBJECTDIR}/_ext/594816914/crc.o.d ${OBJECTDIR}/_ext/594816914/security.o.d ${OBJECTDIR}/_ext/1767688028/MRF24J40.o.d ${OBJECTDIR}/_ext/56957362/MRF49XA.o.d ${OBJECTDIR}/_ext/56838198/MRF89XA.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o ${OBJECTDIR}/_ext/1472/LCD_ST7032.o ${OBJECTDIR}/_ext/1472/MAC_EEProm.o ${OBJECTDIR}/_ext/2048740170/TimeDelay.o ${OBJECTDIR}/_ext/546296802/MSPI.o ${OBJECTDIR}/_ext/546296802/SymbolTime.o ${OBJECTDIR}/_ext/1850237697/MiWi.o ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o ${OBJECTDIR}/_ext/355958077/P2P.o ${OBJECTDIR}/_ext/1452631451/NVM.o ${OBJECTDIR}/_ext/594816914/crc.o ${OBJECTDIR}/_ext/594816914/security.o ${OBJECTDIR}/_ext/1767688028/MRF24J40.o ${OBJECTDIR}/_ext/56957362/MRF49XA.o ${OBJECTDIR}/_ext/56838198/MRF89XA.o ${OBJECTDIR}/_ext/1472/DemoTest.c.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o.d ${OBJECTDIR}/_ext/1472/LCD_ST7032.o.d ${OBJECTDIR}/_ext/1472/MAC_EEProm.o.d ${OBJECTDIR}/_ext/2048740170/TimeDelay.o.d ${OBJECTDIR}/_ext/546296802/MSPI.o.d ${OBJECTDIR}/_ext/546296802/SymbolTime.o.d ${OBJECTDIR}/_ext/1850237697/MiWi.o.d ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o.d ${OBJECTDIR}/_ext/355958077/P2P.o.d ${OBJECTDIR}/_ext/1452631451/NVM.o.d ${OBJECTDIR}/_ext/594816914/crc.o.d ${OBJECTDIR}/_ext/594816914/security.o.d ${OBJECTDIR}/_ext/1767688028/MRF24J40.o.d ${OBJECTDIR}/_ext/56957362/MRF49XA.o.d ${OBJECTDIR}/_ext/56838198/MRF89XA.o.d ${OBJECTDIR}/_ext/1472/DemoTest.c.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/1472/Demo.o ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o ${OBJECTDIR}/_ext/1472/LCD_ST7032.o ${OBJECTDIR}/_ext/1472/MAC_EEProm.o ${OBJECTDIR}/_ext/2048740170/TimeDelay.o ${OBJECTDIR}/_ext/546296802/MSPI.o ${OBJECTDIR}/_ext/546296802/SymbolTime.o ${OBJECTDIR}/_ext/1850237697/MiWi.o ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o ${OBJECTDIR}/_ext/355958077/P2P.o ${OBJECTDIR}/_ext/1452631451/NVM.o ${OBJECTDIR}/_ext/594816914/crc.o ${OBJECTDIR}/_ext/594816914/security.o ${OBJECTDIR}/_ext/1767688028/MRF24J40.o ${OBJECTDIR}/_ext/56957362/MRF49XA.o ${OBJECTDIR}/_ext/56838198/MRF89XA.o
+OBJECTFILES=${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o ${OBJECTDIR}/_ext/1472/LCD_ST7032.o ${OBJECTDIR}/_ext/1472/MAC_EEProm.o ${OBJECTDIR}/_ext/2048740170/TimeDelay.o ${OBJECTDIR}/_ext/546296802/MSPI.o ${OBJECTDIR}/_ext/546296802/SymbolTime.o ${OBJECTDIR}/_ext/1850237697/MiWi.o ${OBJECTDIR}/_ext/1179125038/MiWiPRO.o ${OBJECTDIR}/_ext/355958077/P2P.o ${OBJECTDIR}/_ext/1452631451/NVM.o ${OBJECTDIR}/_ext/594816914/crc.o ${OBJECTDIR}/_ext/594816914/security.o ${OBJECTDIR}/_ext/1767688028/MRF24J40.o ${OBJECTDIR}/_ext/56957362/MRF49XA.o ${OBJECTDIR}/_ext/56838198/MRF89XA.o ${OBJECTDIR}/_ext/1472/DemoTest.c.o
 
 # Source Files
-SOURCEFILES=../Demo.c ../BSP_MiWiDemoBd.c ../LCD_ST7032.c ../MAC_EEProm.c ../../../../Microchip/Common/TimeDelay.c ../../../../Microchip/WirelessProtocols/MSPI.c ../../../../Microchip/WirelessProtocols/SymbolTime.c ../../../../Microchip/WirelessProtocols/MiWi/MiWi.c ../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c ../../../../Microchip/WirelessProtocols/P2P/P2P.c ../LocalFiles/NVM.c ../../../../Microchip/Transceivers/crc.c ../../../../Microchip/Transceivers/security.c ../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c ../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c ../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c
+SOURCEFILES=../BSP_MiWiDemoBd.c ../LCD_ST7032.c ../MAC_EEProm.c ../../../../Microchip/Common/TimeDelay.c ../../../../Microchip/WirelessProtocols/MSPI.c ../../../../Microchip/WirelessProtocols/SymbolTime.c ../../../../Microchip/WirelessProtocols/MiWi/MiWi.c ../../../../Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c ../../../../Microchip/WirelessProtocols/P2P/P2P.c ../LocalFiles/NVM.c ../../../../Microchip/Transceivers/crc.c ../../../../Microchip/Transceivers/security.c ../../../../Microchip/Transceivers/MRF24J40/MRF24J40.c ../../../../Microchip/Transceivers/MRF49XA/MRF49XA.c ../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c ../DemoTest.c.c
 
 
 
@@ -102,14 +102,6 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/_ext/1472/Demo.o: ../Demo.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
-	@${RM} ${OBJECTDIR}/_ext/1472/Demo.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1472/Demo.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DCFG_INCLUDE_MIWI_DEMOBRD -DPROTOCOL_MIWI -I".." -I"../../../" -I"../../../../Microchip/Include" -I"../../../../Microchip/Include/Transceivers" -I"../../../../Microchip/Include/WirelessProtocols/P2P" -I"../../../../Microchip/Include/Transceivers/MRF24J40" -I"../../../../Microchip/Include/WirelessProtocols" -I"../../../../Microchip/Include/Transceivers/MRF49XA" -I"../../../../Microchip/Include/WirelessProtocols/MiWi" -I"../../../../Microchip/Include/Transceivers/MRF89XA" -I"../../../../Microchip/Include/WirelessProtocols" -ms -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1472/Demo.o   ../Demo.c 
-	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/Demo.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/Demo.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
-	
 ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o: ../BSP_MiWiDemoBd.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o.d 
@@ -230,15 +222,15 @@ ${OBJECTDIR}/_ext/56838198/MRF89XA.o: ../../../../Microchip/Transceivers/MRF89XA
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/56838198/MRF89XA.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/56838198/MRF89XA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-else
-${OBJECTDIR}/_ext/1472/Demo.o: ../Demo.c  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/_ext/1472/DemoTest.c.o: ../DemoTest.c.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
-	@${RM} ${OBJECTDIR}/_ext/1472/Demo.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1472/Demo.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DCFG_INCLUDE_MIWI_DEMOBRD -DPROTOCOL_MIWI -I".." -I"../../../" -I"../../../../Microchip/Include" -I"../../../../Microchip/Include/Transceivers" -I"../../../../Microchip/Include/WirelessProtocols/P2P" -I"../../../../Microchip/Include/Transceivers/MRF24J40" -I"../../../../Microchip/Include/WirelessProtocols" -I"../../../../Microchip/Include/Transceivers/MRF49XA" -I"../../../../Microchip/Include/WirelessProtocols/MiWi" -I"../../../../Microchip/Include/Transceivers/MRF89XA" -I"../../../../Microchip/Include/WirelessProtocols" -ms -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1472/Demo.o   ../Demo.c 
-	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/Demo.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/Demo.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	@${RM} ${OBJECTDIR}/_ext/1472/DemoTest.c.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1472/DemoTest.c.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -p$(MP_PROCESSOR_OPTION) -DCFG_INCLUDE_MIWI_DEMOBRD -DPROTOCOL_MIWI -I".." -I"../../../" -I"../../../../Microchip/Include" -I"../../../../Microchip/Include/Transceivers" -I"../../../../Microchip/Include/WirelessProtocols/P2P" -I"../../../../Microchip/Include/Transceivers/MRF24J40" -I"../../../../Microchip/Include/WirelessProtocols" -I"../../../../Microchip/Include/Transceivers/MRF49XA" -I"../../../../Microchip/Include/WirelessProtocols/MiWi" -I"../../../../Microchip/Include/Transceivers/MRF89XA" -I"../../../../Microchip/Include/WirelessProtocols" -ms -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1472/DemoTest.c.o   ../DemoTest.c.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/DemoTest.c.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/DemoTest.c.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
+else
 ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o: ../BSP_MiWiDemoBd.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/BSP_MiWiDemoBd.o.d 
@@ -358,6 +350,14 @@ ${OBJECTDIR}/_ext/56838198/MRF89XA.o: ../../../../Microchip/Transceivers/MRF89XA
 	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DCFG_INCLUDE_MIWI_DEMOBRD -DPROTOCOL_MIWI -I".." -I"../../../" -I"../../../../Microchip/Include" -I"../../../../Microchip/Include/Transceivers" -I"../../../../Microchip/Include/WirelessProtocols/P2P" -I"../../../../Microchip/Include/Transceivers/MRF24J40" -I"../../../../Microchip/Include/WirelessProtocols" -I"../../../../Microchip/Include/Transceivers/MRF49XA" -I"../../../../Microchip/Include/WirelessProtocols/MiWi" -I"../../../../Microchip/Include/Transceivers/MRF89XA" -I"../../../../Microchip/Include/WirelessProtocols" -ms -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/56838198/MRF89XA.o   ../../../../Microchip/Transceivers/MRF89XA/MRF89XA.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/56838198/MRF89XA.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/56838198/MRF89XA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	
+${OBJECTDIR}/_ext/1472/DemoTest.c.o: ../DemoTest.c.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
+	@${RM} ${OBJECTDIR}/_ext/1472/DemoTest.c.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1472/DemoTest.c.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -DCFG_INCLUDE_MIWI_DEMOBRD -DPROTOCOL_MIWI -I".." -I"../../../" -I"../../../../Microchip/Include" -I"../../../../Microchip/Include/Transceivers" -I"../../../../Microchip/Include/WirelessProtocols/P2P" -I"../../../../Microchip/Include/Transceivers/MRF24J40" -I"../../../../Microchip/Include/WirelessProtocols" -I"../../../../Microchip/Include/Transceivers/MRF49XA" -I"../../../../Microchip/Include/WirelessProtocols/MiWi" -I"../../../../Microchip/Include/Transceivers/MRF89XA" -I"../../../../Microchip/Include/WirelessProtocols" -ms -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa- --extended -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/1472/DemoTest.c.o   ../DemoTest.c.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/_ext/1472/DemoTest.c.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/DemoTest.c.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 endif
 

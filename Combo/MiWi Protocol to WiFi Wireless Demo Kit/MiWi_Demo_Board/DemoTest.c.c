@@ -75,6 +75,7 @@
 #include "MAC_EEProm.h"
 #include "Transceivers/MCHP_MAC.h"
 #include "WirelessProtocols/NVM.h"
+#include "LocalFiles/NVM.h"
 
 // Demo Version
 #define MAJOR_REV       1
@@ -250,19 +251,25 @@ void main(void)
     /*******************************************************************/
     LCDInit();
  	
- 	for(i = 0; i < TRACKER_SIZE; i++)
- 	{
-     	BroadcastTracker[i].isValid = FALSE;
-    }
+// 	for(i = 0; i < TRACKER_SIZE; i++)
+// 	{
+//     	BroadcastTracker[i].isValid = FALSE;
+//    }
  	
     
-//    MiApp_ProtocolInit(TRUE);//original
+    MiApp_ProtocolInit(TRUE);//original
+    
     
 ////////    add modification    ////////////
-    MiApp_ProtocolInit(FALSE);
-    myPANID.Val = MY_PAN_ID;
-    MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);    
-    MiApp_SetChannel(11);
+//    MiApp_ProtocolInit(FALSE);
+//    myPANID.Val = MY_PAN_ID;
+//    MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);    
+//    MiApp_SetChannel(11);
+    
+//    nvmGetMyPANID(myPANID.v);
+//    MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);  
+//    nvmGetCurrentChannel(&currentChannel);
+//    MiApp_SetChannel(currentChannel);
 //    
 //////////////////////////////////////////
     
@@ -286,20 +293,18 @@ void main(void)
     //For MIWI need to enable both below!
 //    MiApp_ConnectionMode(ENABLE_ACTIVE_SCAN_RSP);  //for MIWI
     MiApp_ConnectionMode(ENABLE_ALL_CONN);  //for MIWI
-    MiApp_StartConnection(START_CONN_DIRECT, 10, 0);    //for MIWI
+    
+//    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+//    if (i != 0xFF) {
+//        Nop(); // Connected Peer on Channel
+//    } else {
+        //Create network
+        MiApp_StartConnection(START_CONN_DIRECT, 10, 0);    //for MIWI
+//    }
 #endif
     
     MainDisplay();
      
-//    /*******************************************************************/
-//    // Wait for a Node to Join Network then proceed to Demo's
-//    /*******************************************************************/               
-//    while(!ConnectionTable[0].status.bits.isValid)
-//    {
-//        if(MiApp_MessageAvailable())
-//            MiApp_DiscardMessage();
-//    }    
-//    MiApp_DiscardMessage();
 
 	while(1)
 	{
@@ -352,25 +357,26 @@ void main(void)
             BOOL validPacket = TRUE;
             BYTE index = 0xFF;
             
+            MiApp_DiscardMessage();  
             if( rxMessage.flags.bits.broadcast )
             {
-                for(i = 0; i < TRACKER_SIZE; i++)
-                {
-                    if( BroadcastTracker[i].isValid &&
-                        BroadcastTracker[i].seqNum == rxMessage.Payload[2] &&
-                        isSameAddress( BroadcastTracker[i].sourceAddr, rxMessage.SourceAddress ) == TRUE )
-                    {
-                        index = i;
-                        BroadcastTracker[index].counter++;
-                        break;
-                    }    
-                }
+//                for(i = 0; i < TRACKER_SIZE; i++)
+//                {
+//                    if( BroadcastTracker[i].isValid &&
+//                        BroadcastTracker[i].seqNum == rxMessage.Payload[2] &&
+//                        isSameAddress( BroadcastTracker[i].sourceAddr, rxMessage.SourceAddress ) == TRUE )
+//                    {
+//                        index = i;
+//                        BroadcastTracker[index].counter++;
+//                        break;
+//                    }    
+//                }
             }    
             
             
             // handling received message
-            if( index > TRACKER_SIZE )
-            {
+//            if( index > TRACKER_SIZE )
+//            {
                 if( rxMessage.Payload[3] == 0 || 
                     TRUE == isSameAddress( myLongAddress, &(rxMessage.Payload[4])) )
                 {
@@ -392,6 +398,7 @@ void main(void)
                                 {
                                     case 0x01:  // flash light
                                         {
+                                            //identify
                                             FlashCount = rxMessage.Payload[PayloadIndex];
                                             if(FlashCount == 0)
                                                LED0 = LED1 = LED2 = 0;
@@ -400,29 +407,36 @@ void main(void)
                                         
                                     case 0x02:  // set channel and PANID
                                         {
+                                            //configure channel and PANID
                                             WORD tmp = 0xFFFF;
 
                                             FlashCount = 0;
                                             LED0 = LED1 = LED2 = 0;
                                             
-                                            #if !defined(PROTOCOL_P2P)
-                                            MiApp_ProtocolInit(FALSE);
-                                            #endif
+//                                            #if !defined(PROTOCOL_P2P)
+//                                            MiApp_ProtocolInit(FALSE);
+//                                            #endif
                                             
                                             currentChannel = rxMessage.Payload[PayloadIndex];
                                             MiApp_SetChannel(currentChannel);
+                                            nvmPutCurrentChannel(&currentChannel);
+                                            nvmGetCurrentChannel(&currentChannel);
                                             
                                         	myPANID.v[0] = rxMessage.Payload[PayloadIndex+1];
                                         	myPANID.v[1] = rxMessage.Payload[PayloadIndex+2];
                                             MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);
-                                        	nvmPutMyPANID(myPANID.v);
-                                        	MainDisplay();
-                                            
-                                        #if !defined(PROTOCOL_P2P)
+//                                            MiMAC_SetAltAddress(myShortAddress.v, myPANID.v);
                                           
-                                            MiApp_ConnectionMode(ENABLE_ALL_CONN);
-                                            MiApp_StartConnection(START_CONN_DIRECT, 0, 0);
-                                        #endif
+                                        	nvmPutMyPANID(myPANID.v);
+                                            nvmGetMyPANID(myPANID.v);
+                                            
+//                                        #if !defined(PROTOCOL_P2P)
+//                                          
+//                                            MiApp_ConnectionMode(ENABLE_ALL_CONN);
+//                                            MiApp_StartConnection(START_CONN_DIRECT, 0, 0);
+//                                        #endif
+                                        	MainDisplay();
+                                            Nop();
                                             
                                         }
                                         break; 
@@ -492,50 +506,50 @@ void main(void)
                     }  
                 }
                 
-                if( validPacket )
-                {
-                    // save the broadcast tracker
-                    for(j = 0; j < TRACKER_SIZE; j++)
-                    {
-                        if( BroadcastTracker[j].isValid == FALSE )
-                        {
-                            index = j;
-                            break;
-                        }    
-                    }    
-                    if( index < TRACKER_SIZE )
-                    {
-                        BroadcastTracker[index].isValid = TRUE;
-                        for(j = 0; j < MY_ADDRESS_LENGTH; j++)
-                        {
-                            BroadcastTracker[index].sourceAddr[j] = rxMessage.SourceAddress[j];
-                        }    
-                        BroadcastTracker[index].seqNum = rxMessage.Payload[2];
-                        BroadcastTracker[index].expireTick = MiWi_TickGet();
-                        BroadcastTracker[index].counter = 0;
-                    }    
-                }    
-            }    
+//                if( validPacket )
+//                {
+//                    // save the broadcast tracker
+//                    for(j = 0; j < TRACKER_SIZE; j++)
+//                    {
+//                        if( BroadcastTracker[j].isValid == FALSE )
+//                        {
+//                            index = j;
+//                            break;
+//                        }    
+//                    }    
+//                    if( index < TRACKER_SIZE )
+//                    {
+//                        BroadcastTracker[index].isValid = TRUE;
+//                        for(j = 0; j < MY_ADDRESS_LENGTH; j++)
+//                        {
+//                            BroadcastTracker[index].sourceAddr[j] = rxMessage.SourceAddress[j];
+//                        }    
+//                        BroadcastTracker[index].seqNum = rxMessage.Payload[2];
+//                        BroadcastTracker[index].expireTick = MiWi_TickGet();
+//                        BroadcastTracker[index].counter = 0;
+//                    }    
+//                }    
+//            }    
 
             
             
             
             // handle rebroadcast
-            if( validPacket && rxMessage.flags.bits.broadcast )
-            {
-                if( index > TRACKER_SIZE || BroadcastTracker[index].counter < REBROADCAST_COUNT )
-                {
-                    // rebroadcast
-                    MiApp_FlushTx();
-                    for(i = 0; i < rxMessage.PayloadSize; i++)
-                    {
-                        MiApp_WriteData(rxMessage.Payload[i]);
-                    }         
-                    MiApp_BroadcastPacket( rxMessage.flags.bits.secEn );
-                }    
-            } 
+//            if( validPacket && rxMessage.flags.bits.broadcast )
+//            {
+//                if( index > TRACKER_SIZE || BroadcastTracker[index].counter < REBROADCAST_COUNT )
+//                {
+//                    // rebroadcast
+//                    MiApp_FlushTx();
+//                    for(i = 0; i < rxMessage.PayloadSize; i++)
+//                    {
+//                        MiApp_WriteData(rxMessage.Payload[i]);
+//                    }         
+//                    MiApp_BroadcastPacket( rxMessage.flags.bits.secEn );
+//                }    
+//            } 
             
-            MiApp_DiscardMessage();   
+//            MiApp_DiscardMessage();   
         }    
         
         
@@ -555,15 +569,15 @@ void main(void)
             }
         }
         
-        for(i = 0; i < TRACKER_SIZE; i++)
-        {
-            if( BroadcastTracker[i].isValid )
-            {
-                if( MiWi_TickGetDiff(currentTick, BroadcastTracker[i].expireTick) > TRACKER_EXPIRATION )
-                {
-                    BroadcastTracker[i].isValid = FALSE;
-                }    
-            }    
-        }    
+//        for(i = 0; i < TRACKER_SIZE; i++)
+//        {
+//            if( BroadcastTracker[i].isValid )
+//            {
+//                if( MiWi_TickGetDiff(currentTick, BroadcastTracker[i].expireTick) > TRACKER_EXPIRATION )
+//                {
+//                    BroadcastTracker[i].isValid = FALSE;
+//                }    
+//            }    
+//        }    
 	}
 }

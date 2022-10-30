@@ -51,6 +51,7 @@
     #include "WirelessProtocols/MSPI.h"
     #include "WirelessProtocols/Console.h"
     #include "ConfigApp.h"
+#include "TimeDelay.h"
     
     extern void MacroNop(void);
       
@@ -174,7 +175,7 @@
                 
                 RFIE = 0;
             #endif
-            
+            DelayMs(10);
             EE_nCS = 0;
             
             #if MCHP_EEPROM < MCHP_4KBIT
@@ -208,6 +209,7 @@
             #else
                 RFIE = oldRFIE;
             #endif
+                Delay10us(10);
         }
 
     	void NVMWrite(BYTE *source, WORD addr, WORD count)
@@ -276,7 +278,7 @@ EEPROM_NEXT_PAGE:
             #else
                 RFIE = oldRFIE;
             #endif
-            
+            Delay10us(10);
         }
     #endif
  

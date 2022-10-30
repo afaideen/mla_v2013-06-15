@@ -91,9 +91,9 @@
 #define LED2_INV()          LATEINV = BIT_7;
 
 
-#define BUTTON0_TRIS        (TRISDbits.TRISD6)	// Ref SW0
+#define BUTTON0_TRIS        (TRISDbits.TRISD6)	// Ref SW1
 #define	BUTTON0_IO          (PORTDbits.RD6)
-#define BUTTON1_TRIS        (TRISDbits.TRISD5)	// Ref SW1
+#define BUTTON1_TRIS        (TRISDbits.TRISD5)	// Ref SW0
 #define	BUTTON1_IO          (PORTDbits.RD5)
 #define BUTTON2_TRIS        (TRISDbits.TRISD4)	// Ref SW2
 #define	BUTTON2_IO          (PORTDbits.RD4)

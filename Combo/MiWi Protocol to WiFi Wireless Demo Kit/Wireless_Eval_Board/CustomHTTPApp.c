@@ -204,8 +204,9 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
 	BYTE *ptr, *ptr1, *ptr2, *ptr3, *temp;
 	BYTE filename[32];
 	
-	BYTE code;
-    WORD scan_chnl, channel, panId;
+	BYTE code, v;
+    WORD scan_chnl = 11;
+    WORD channel, panId;
     WORD tmp = 0xFFFF;
     ROOM_RECORD roomInfo;
 
@@ -280,12 +281,14 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
 
 //                    MiApp_ProtocolInit(FALSE);
 //                    MiApp_SetChannel(scan_chnl);  //original
-//                    MiApp_SetChannel(atoi((const char *)ptr1));
+                    MiApp_SetChannel(atoi((const char *)ptr1));
+//                    MiApp_ConnectionMode(ENABLE_ALL_CONN);
+//                    MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
 
                     // Scan for Nodes (request 10 = 1 sec.)
-                    num_nodes = MiApp_SearchConnection(10, scan_chnl);
+                    // Scan for Nodes (request 12 = 3.9 sec.)
                     // Scan for Nodes (request 13 = ~ 7.8 sec.)
-//                    num_nodes = MiApp_SearchConnection(13, scan_chnl);
+                    num_nodes = MiApp_SearchConnection(11, scan_chnl);
                     
                     Nop();
                     break;
@@ -317,17 +320,15 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
                     ptr2 = HTTPGetROMArg(curHTTP.data, (ROM BYTE *)"roomChan");
                     scan_chnl = atoi((const char *)ptr2);
                     
-//                    MiApp_SetChannel(scan_chnl);//original
+                    MiApp_SetChannel(scan_chnl);//original
                     
                     myPANID.Val = ActiveScanResults[nodeIdx].PANID.Val;
                     MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);
                     
 #if !defined(PROTOCOL_P2P)
-                    MiApp_ProtocolInit(FALSE);
-                    MiApp_SetChannel(scan_chnl);
-                    MiApp_ConnectionMode(ENABLE_ALL_CONN);
-                    BYTE v;
-                    v = MiApp_EstablishConnection(nodeIdx, CONN_MODE_DIRECT);
+//                    v = 0xff;
+                    v = MiApp_EstablishConnection(0xff, CONN_MODE_DIRECT);
+//                    while( 0xff == MiApp_EstablishConnection(nodeIdx, CONN_MODE_DIRECT) );
 #endif
 
                     MiApp_FlushTx();
@@ -343,12 +344,14 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
 #if defined(PROTOCOL_P2P)
                     MiApp_UnicastAddress( ActiveScanResults[nodeIdx].Address, TRUE, FALSE);//original
 #else
-                    if(MiApp_UnicastConnection( nodeIdx, TRUE) == TRUE)
-                        Nop();
+                    MiApp_BroadcastPacket(FALSE);
+//                    if(MiApp_UnicastConnection( nodeIdx, TRUE) == TRUE)
+//                        Nop();
 #endif
                     break;
 
-                case '3':   // Configure Node
+                case '3':   
+                    // Configure Node
                     ptr1 = HTTPGetROMArg(curHTTP.data, (ROM BYTE *)"nodeIdx");
                     // Get Node Information
                     nodeIdx = atoi((const char *)ptr1);
@@ -363,13 +366,13 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
                     MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);
                     flashON = (!flashON);
                     
-#if !defined(PROTOCOL_P2P)
-                    MiApp_ProtocolInit(FALSE);
-                    MiApp_SetChannel(channel);
-                    MiApp_ConnectionMode(ENABLE_ALL_CONN);
-//                    BYTE v;
-                    v = MiApp_EstablishConnection(nodeIdx, CONN_MODE_DIRECT);
-#endif
+//#if !defined(PROTOCOL_P2P)
+//                    MiApp_ProtocolInit(FALSE);
+//                    MiApp_SetChannel(channel);
+//                    MiApp_ConnectionMode(ENABLE_ALL_CONN);
+////                    BYTE v;
+//                    v = MiApp_EstablishConnection(0xff, CONN_MODE_DIRECT);
+//#endif
                     
                     MiApp_FlushTx();
                     MiApp_WriteData(0x01);
@@ -383,8 +386,25 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
 #if defined(PROTOCOL_P2P)
                     MiApp_UnicastAddress( ActiveScanResults[nodeIdx].Address, TRUE, FALSE);//original
 #else
-                    if(MiApp_UnicastConnection( nodeIdx, TRUE) == TRUE)
-                        Nop();
+                    MiApp_BroadcastPacket(FALSE);
+//                    if(MiApp_UnicastConnection( nodeIdx, TRUE) == TRUE)
+//                    {
+//                        
+//                        MiApp_ProtocolInit(FALSE);
+//                        MiApp_SetChannel(channel);
+//                        MiApp_ConnectionMode(ENABLE_ALL_CONN);
+//                        MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
+                        
+//                        v = 0xff;
+//                        v = MiApp_EstablishConnection(nodeIdx, CONN_MODE_DIRECT);
+//                        while( 0xff == MiApp_EstablishConnection(nodeIdx, CONN_MODE_DIRECT) );
+//                        Nop();
+//                    }
+//                    DelayMs(5);
+//                    MiApp_ProtocolInit(FALSE);
+//                    MiApp_SetChannel(channel);
+//                    MiApp_ConnectionMode(ENABLE_ALL_CONN);
+//                    MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
 #endif
 
                     break;
@@ -406,6 +426,8 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
                     break;
 
                 case '6':   // Control Lights
+
+                    
                     ptr1 = HTTPGetROMArg(curHTTP.data, (ROM BYTE *)"roomChan");
                     scan_chnl = atoi((const char *)ptr1);
 
@@ -419,6 +441,9 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
 
                     myPANID.Val = panId;
                     MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);
+                    
+                    
+                    v = MiApp_EstablishConnection(0xff, CONN_MODE_DIRECT);
 
                     MiApp_FlushTx();
                     MiApp_WriteData(0x02);

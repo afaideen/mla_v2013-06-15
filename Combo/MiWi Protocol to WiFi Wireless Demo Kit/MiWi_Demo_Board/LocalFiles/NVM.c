@@ -51,6 +51,7 @@
     #include "WirelessProtocols/MSPI.h"
     #include "WirelessProtocols/Console.h"
     #include "ConfigApp.h"
+#include "TimeDelay.h"
     
     extern void MacroNop(void);
             
@@ -165,6 +166,7 @@
         ********************************************************************/        
     	void NVMRead(BYTE *dest, WORD addr, WORD count)
         {
+            
             #if defined(__18CXX)
                 BYTE oldGIEH = INTCONbits.GIEH;
                 
@@ -174,7 +176,8 @@
                 
                 RFIE = 0;
             #endif
-            
+            Delay10us(10);
+            DelayMs(10);
             EE_nCS = 0;
             
             #if MCHP_EEPROM < MCHP_4KBIT
@@ -202,6 +205,8 @@
                 count--;
             }
             EE_nCS = 1;
+            Delay10us(10);
+            DelayMs(1);
             
             #if defined(__18CXX)
                 INTCONbits.GIEH = oldGIEH;
@@ -214,6 +219,7 @@
         {
             BYTE PageCounter = 0;
             //BYTE i;
+            
             #if defined(__18CXX)
                 BYTE oldGIEH = INTCONbits.GIEH;   
                 INTCONbits.GIEH = 0;
@@ -221,7 +227,8 @@
                 BYTE oldRFIE = RFIE;
                 RFIE = 0;
             #endif
-           
+           Delay10us(10);
+           DelayMs(1);
             
 EEPROM_NEXT_PAGE:
             do
@@ -270,7 +277,8 @@ EEPROM_NEXT_PAGE:
                 }
             }
             EE_nCS = 1;
-            
+            Delay10us(10);
+            DelayMs(1);
             #if defined(__18CXX)
                 INTCONbits.GIEH = oldGIEH;
             #else

@@ -333,7 +333,8 @@ int main(void)
     /*******************************************************************/
     MiApp_ConnectionMode(ENABLE_ALL_CONN);
 
-    MiApp_StartConnection(START_CONN_DIRECT, 10, 0xFFFFFFFF);//create network
+//    MiApp_StartConnection(START_CONN_DIRECT, 10, 0xFFFFFFFF);//create network
+//    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);//join network
     
 //    Testing
 //    DWORD scan_chn;
@@ -342,6 +343,7 @@ int main(void)
 ////    scan_chn = 1 << 11;
 //    scan_chn = 1 << 12;
 //    num_nodes = MiApp_SearchConnection(12, scan_chn);//10 - 1sec , 13 - 7.8s
+    
     Nop();
     /*******************************************************************/
     // Function MiApp_EstablishConnection try to establish a new
@@ -355,47 +357,55 @@ int main(void)
     //      within the radio range; indirect mode means connection
     //      may or may not in the radio range.
     /*******************************************************************/
-////    original below
-//    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
-//
-//    /*******************************************************************/
-//    // Display current opertion on LCD of demo board, if applicable
-//    /*******************************************************************/
-//    if (i != 0xFF) {
-//        ; // Connected Peer on Channel
-//    } else {
-//        /*******************************************************************/
-//        // If no network can be found and join, we need to start a new
-//        // network by calling function MiApp_StartConnection
-//        //
-//        // The first parameter is the mode of start connection. There are
-//        // two valid connection modes:
-//        //   - START_CONN_DIRECT        start the connection on current
-//        //                              channel
-//        //   - START_CONN_ENERGY_SCN    perform an energy scan first,
-//        //                              before starting the connection on
-//        //                              the channel with least noise
-//        //   - START_CONN_CS_SCN        perform a carrier sense scan
-//        //                              first, before starting the
-//        //                              connection on the channel with
-//        //                              least carrier sense noise. Not
-//        //                              supported for current radios
-//        //
-//        // The second parameter is the scan duration, which has the same
-//        //     definition in Energy Scan. 10 is roughly 1 second. 9 is a
-//        //     half second and 11 is 2 seconds. Maximum scan duration is
-//        //     14, or roughly 16 seconds.
-//        //
-//        // The third parameter is the channel map. Bit 0 of the
-//        //     double word parameter represents channel 0. For the 2.4GHz
-//        //     frequency band, all possible channels are channel 11 to
-//        //     channel 26. As the result, the bit map is 0x07FFF800. Stack
-//        //     will filter out all invalid channels, so the application
-//        //     only needs to pay attention to the channels that are not
-//        //     preferred.
-//        /*******************************************************************/
-//        MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
-//    }
+//    original below
+    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+    DelayMs(1000);
+    /*******************************************************************/
+    // Display current opertion on LCD of demo board, if applicable
+    /*******************************************************************/
+    if (i != 0xFF) {
+        // Connected Peer on Channel
+        sprintf((char *) LCDText, (char*) "Peer connected");
+//        sprintf((char *) &(LCDText[16]), (char*) "SW0:Yes  SW2:No");
+        LCDUpdate();
+        DelayMs(1000);
+    } else {
+        /*******************************************************************/
+        // If no network can be found and join, we need to start a new
+        // network by calling function MiApp_StartConnection
+        //
+        // The first parameter is the mode of start connection. There are
+        // two valid connection modes:
+        //   - START_CONN_DIRECT        start the connection on current
+        //                              channel
+        //   - START_CONN_ENERGY_SCN    perform an energy scan first,
+        //                              before starting the connection on
+        //                              the channel with least noise
+        //   - START_CONN_CS_SCN        perform a carrier sense scan
+        //                              first, before starting the
+        //                              connection on the channel with
+        //                              least carrier sense noise. Not
+        //                              supported for current radios
+        //
+        // The second parameter is the scan duration, which has the same
+        //     definition in Energy Scan. 10 is roughly 1 second. 9 is a
+        //     half second and 11 is 2 seconds. Maximum scan duration is
+        //     14, or roughly 16 seconds.
+        //
+        // The third parameter is the channel map. Bit 0 of the
+        //     double word parameter represents channel 0. For the 2.4GHz
+        //     frequency band, all possible channels are channel 11 to
+        //     channel 26. As the result, the bit map is 0x07FFF800. Stack
+        //     will filter out all invalid channels, so the application
+        //     only needs to pay attention to the channels that are not
+        //     preferred.
+        /*******************************************************************/
+        MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
+        sprintf((char *) LCDText, (char*) "Creating net..");
+//        sprintf((char *) &(LCDText[16]), (char*) "SW0:Yes  SW2:No");
+        LCDUpdate();
+        DelayMs(1000);
+    }
 
     // Turn OFF LCD after setting up MiWi Connection
     LCDBacklightOFF();
