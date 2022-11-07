@@ -82,7 +82,7 @@
 //#define STACK_USE_TELNET_SERVER			// Telnet server
 #define STACK_USE_ANNOUNCE				// Microchip Embedded Ethernet Device Discoverer server/client
 #define STACK_USE_DNS					// Domain Name Service Client for resolving hostname strings to IP addresses
-#define STACK_USE_DNS_SERVER			// Domain Name Service Server for redirection to the local device
+//#define STACK_USE_DNS_SERVER			// Domain Name Service Server for redirection to the local device
 #define STACK_USE_NBNS					// NetBIOS Name Service Server for repsonding to NBNS hostname broadcast queries
 #define STACK_USE_REBOOT_SERVER			// Module for resetting this PIC remotely.  Primarily useful for a Bootloader.
 #define STACK_USE_SNTP_CLIENT			// Simple Network Time Protocol for obtaining current date/time from Internet
@@ -90,8 +90,8 @@
 //#define STACK_USE_TCP_PERFORMANCE_TEST	// Module for testing TCP TX performance characteristics
 //#define STACK_USE_DYNAMICDNS_CLIENT		// Dynamic DNS client updater module
 //#define STACK_USE_BERKELEY_API			// Berekely Sockets APIs are available
-#define STACK_USE_ZEROCONF_LINK_LOCAL	// Zeroconf IPv4 Link-Local Addressing
-#define STACK_USE_ZEROCONF_MDNS_SD		// Zeroconf mDNS and mDNS service discovery
+//#define STACK_USE_ZEROCONF_LINK_LOCAL	// Zeroconf IPv4 Link-Local Addressing
+//#define STACK_USE_ZEROCONF_MDNS_SD		// Zeroconf mDNS and mDNS service discovery
 
 
 // =======================================================================

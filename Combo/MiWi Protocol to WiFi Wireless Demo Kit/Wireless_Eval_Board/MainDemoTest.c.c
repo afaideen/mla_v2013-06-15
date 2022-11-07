@@ -339,10 +339,19 @@ int main(void)
 //    Testing
 //    DWORD scan_chn;
 //    BYTE num_nodes;
+//    WORD tmp = 0xFFFF;
 ////    scan_chn = 1 << 11|1 << 13|1 << 15;
-////    scan_chn = 1 << 11;
-//    scan_chn = 1 << 12;
+//    scan_chn = 1 << 11;
+////    scan_chn = 1 << 11 | 1 << 12;
 //    num_nodes = MiApp_SearchConnection(12, scan_chn);//10 - 1sec , 13 - 7.8s
+//    
+//    if( !num_nodes )
+//    {
+////        MiApp_SetChannel(currentChannel);
+//        myPANID.Val = 0xabcd;
+//        MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val); 
+//        num_nodes = MiApp_SearchConnection(12, scan_chn);//10 - 1sec , 13 - 7.8s
+//    }
     
     Nop();
     /*******************************************************************/
@@ -515,7 +524,11 @@ int main(void)
     LEDS_OFF();
     MIWI_TICK t3;
     while (1) {
-
+        if(MiApp_MessageAvailable())
+        {
+            MiApp_DiscardMessage();
+        }
+                
         /*******************************************************************/
         // Check Button Events
         /*******************************************************************/
@@ -1094,6 +1107,7 @@ static void InitAppConfig(void) {
         // For now, assign this as 192.168.1.3
         //#if (MY_DEFAULT_NETWORK_TYPE == WF_SOFT_AP)
             AppConfig.MyIPAddr.Val = 192ul | 168ul<<8ul | 1ul<<16ul | 3ul<<24ul;
+//            AppConfig.MyIPAddr.Val = 192ul | 168ul<<8ul | 0ul<<16ul | 102ul<<24ul;
             AppConfig.DefaultIPAddr.Val = AppConfig.MyIPAddr.Val;
             AppConfig.MyMask.Val = 255ul | 255ul<<8ul | 0ul<<16ul | 0ul<<24ul;
             AppConfig.DefaultMask.Val = AppConfig.MyMask.Val;

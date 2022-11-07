@@ -417,9 +417,9 @@ float ReadTempSensorBoard(void)
     return temperature;
 }
 
-void ftoa(float f, unsigned char *buff)
+void ftoa(float f, unsigned char *buff, BYTE size)
 {
-    
+    memset(buff, 0, size);
     sprintf(buff, "%.1f", f);
     
 }

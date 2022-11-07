@@ -512,16 +512,15 @@ WORD Read_VBGVoltage(void)
     return ADRES;
 }
 
-void ftoa(float f, unsigned char *buff)
+void ftoa(float f, unsigned char *buff, BYTE size)
 {
-#ifdef __C32__
-    sprintf(buff, "%.1f", f);
-#else
+
     int whole, decimal;
     whole = (int)f; //whole part
     decimal=(f-whole)*10; //decimal part
+    memset(buff, 0, size);
     sprintf(buff,"%d.%1d",whole,decimal); //Convert to string
-#endif
+
     
 }
 #endif

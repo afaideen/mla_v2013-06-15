@@ -77,6 +77,10 @@
 #include "WirelessProtocols/NVM.h"
 #include "LocalFiles/NVM.h"
 
+extern BYTE ConfigureControl(void);
+extern void Factory_Reset(void);
+extern BYTE commissioning_running(void);
+
 // Demo Version
 #define MAJOR_REV       1
 #define MINOR_REV       2	
@@ -93,9 +97,6 @@
 BYTE myChannel = 11;
 
 
-
-#define COMMISSION          0x01
-#define CONTROL_CODE        0x02
 #define TRACKER_SIZE        15
 #define REBROADCAST_COUNT   2
 #define TRACKER_EXPIRATION  ((ONE_SECOND)*2)
@@ -234,12 +235,14 @@ void MainDisplay(void)
 *
 * Note:			    
 **********************************************************************/
+BYTE FlashCount = 0;
 void main(void)
 {   
     BYTE i, j;
     MIWI_TICK startTick, currentTick, t1;
-    BYTE FlashCount = 0;
+    
     WORD tmp = 0xFFFF;
+    BYTE configured = 0;
 
     /*******************************************************************/
     // Initialize Hardware
@@ -251,20 +254,15 @@ void main(void)
     /*******************************************************************/
     LCDInit();
  	
-// 	for(i = 0; i < TRACKER_SIZE; i++)
-// 	{
-//     	BroadcastTracker[i].isValid = FALSE;
-//    }
- 	
     
-    MiApp_ProtocolInit(TRUE);//original
+//    MiApp_ProtocolInit(TRUE);//original
     
     
 ////////    add modification    ////////////
-//    MiApp_ProtocolInit(FALSE);
-//    myPANID.Val = MY_PAN_ID;
-//    MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);    
-//    MiApp_SetChannel(11);
+    MiApp_ProtocolInit(FALSE);
+    myPANID.Val = MY_PAN_ID;
+    MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);    
+    MiApp_SetChannel(11);
     
 //    nvmGetMyPANID(myPANID.v);
 //    MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);  
@@ -293,7 +291,7 @@ void main(void)
     //For MIWI need to enable both below!
 //    MiApp_ConnectionMode(ENABLE_ACTIVE_SCAN_RSP);  //for MIWI
     MiApp_ConnectionMode(ENABLE_ALL_CONN);  //for MIWI
-    
+
 //    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
 //    if (i != 0xFF) {
 //        Nop(); // Connected Peer on Channel
@@ -306,7 +304,7 @@ void main(void)
     MainDisplay();
      
 
-	while(1)
+	while(!configured)
 	{
         if( MiWi_TickGetDiff(MiWi_TickGet(), t1) > 0.5 * ONE_SECOND )
         {
@@ -314,270 +312,12 @@ void main(void)
             LED0 ^= 1;
         }
     	
-    	if(SW0_PORT == 0)
-    	{
-        	MainDisplay();
-        }   	
-    	
-    	if(SW1_PORT == 0)
-    	{
-            while(SW1_PORT == 0);
-            LCDErase();
-            sprintf((char *) LCDText, (far rom char*) "Commission Mode?");
-            sprintf((char *) &(LCDText[16]), (far rom char*) "SW1:Yes  SW2:No");
-            LCDUpdate();
-
-            while (1) {
-                if (SW0_PORT == 0) {
-
-//                    WORD tmp = 0xFFFF;    //original
-
-                    while(SW0_PORT == 0);
-                    myPANID.Val = MY_PAN_ID;
-                    MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);
-                    nvmPutMyPANID(myPANID.v);
-                    currentChannel = 11;
-                    MiApp_SetChannel(currentChannel);
-                    MainDisplay();
-                    break;
-                } else if (SW1_PORT == 0) {
-                    while(SW1_PORT == 0);
-                    MainDisplay();
-                    break;
-                }
-
-
-            }
+    	configured = commissioning_running();
+        Nop();
            
-        }   	
-
-
-        if( MiApp_MessageAvailable() )
-        {
-            BOOL validPacket = TRUE;
-            BYTE index = 0xFF;
-            
-            MiApp_DiscardMessage();  
-            if( rxMessage.flags.bits.broadcast )
-            {
-//                for(i = 0; i < TRACKER_SIZE; i++)
-//                {
-//                    if( BroadcastTracker[i].isValid &&
-//                        BroadcastTracker[i].seqNum == rxMessage.Payload[2] &&
-//                        isSameAddress( BroadcastTracker[i].sourceAddr, rxMessage.SourceAddress ) == TRUE )
-//                    {
-//                        index = i;
-//                        BroadcastTracker[index].counter++;
-//                        break;
-//                    }    
-//                }
-            }    
-            
-            
-            // handling received message
-//            if( index > TRACKER_SIZE )
-//            {
-                if( rxMessage.Payload[3] == 0 || 
-                    TRUE == isSameAddress( myLongAddress, &(rxMessage.Payload[4])) )
-                {
-                    BYTE PayloadIndex;
-                    
-                    if( rxMessage.Payload[3] == 0 )
-                    {
-                        PayloadIndex = 4;
-                    }
-                    else
-                    {
-                        PayloadIndex = 12;
-                    }        
-                    switch( rxMessage.Payload[0] )
-                    {
-                        case COMMISSION:
-                            {
-                                switch( rxMessage.Payload[1] )
-                                {
-                                    case 0x01:  // flash light
-                                        {
-                                            //identify
-                                            FlashCount = rxMessage.Payload[PayloadIndex];
-                                            if(FlashCount == 0)
-                                               LED0 = LED1 = LED2 = 0;
-                                        }
-                                        break;
-                                        
-                                    case 0x02:  // set channel and PANID
-                                        {
-                                            //configure channel and PANID
-                                            WORD tmp = 0xFFFF;
-
-                                            FlashCount = 0;
-                                            LED0 = LED1 = LED2 = 0;
-                                            
-//                                            #if !defined(PROTOCOL_P2P)
-//                                            MiApp_ProtocolInit(FALSE);
-//                                            #endif
-                                            
-                                            currentChannel = rxMessage.Payload[PayloadIndex];
-                                            MiApp_SetChannel(currentChannel);
-                                            nvmPutCurrentChannel(&currentChannel);
-                                            nvmGetCurrentChannel(&currentChannel);
-                                            
-                                        	myPANID.v[0] = rxMessage.Payload[PayloadIndex+1];
-                                        	myPANID.v[1] = rxMessage.Payload[PayloadIndex+2];
-                                            MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);
-//                                            MiMAC_SetAltAddress(myShortAddress.v, myPANID.v);
-                                          
-                                        	nvmPutMyPANID(myPANID.v);
-                                            nvmGetMyPANID(myPANID.v);
-                                            
-//                                        #if !defined(PROTOCOL_P2P)
-//                                          
-//                                            MiApp_ConnectionMode(ENABLE_ALL_CONN);
-//                                            MiApp_StartConnection(START_CONN_DIRECT, 0, 0);
-//                                        #endif
-                                        	MainDisplay();
-                                            Nop();
-                                            
-                                        }
-                                        break; 
-                                        
-                                    default:
-                                        break;       
-                                }    
-                            }
-                            break;    
-                        
-                        
-                        
-                        case CONTROL_CODE:
-                            {
-                                switch( rxMessage.Payload[1] )
-                                {
-                                    case 0x00:
-                                        {
-                                            //Light off
-                                            BKLIGHT = 0;
-                                            LED0 = LED1 = LED2 = 0;
-                                            
-                                        }
-                                        break;
-                                        
-                                    case 0x01:
-                                        {
-                                            //Light on
-                                            BKLIGHT = 1;
-                                            LED0 = LED1 = LED2 = 1;
-                                            
-                                        }
-                                        break;
-                                        
-                                    case 0xFF:
-                                        {
-                                            //Recommission
-                                            if( (rxMessage.Payload[PayloadIndex] == 'M') &&
-                                                (rxMessage.Payload[PayloadIndex+1] == 'i') &&
-                                                (rxMessage.Payload[PayloadIndex+2] == 'W') &&
-                                                (rxMessage.Payload[PayloadIndex+3] == 'i') )
-                                            {
-                                                WORD tmp = 0xFFFF;
-            
-                                            	myPANID.Val = MY_PAN_ID;
-                                                MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);
-                                            	nvmPutMyPANID(myPANID.v);
-                                            	currentChannel = 11;
-                                            	MiApp_SetChannel(currentChannel);
-                                            	MainDisplay();
-                                            }    
-                                        } 
-                                        break;   
-                                        
-                                    default:
-                                        
-                                        break;        
-                                }    
-                            }
-                            break;    
-                        
-                        default:
-                           
-                            validPacket = FALSE;
-                            break;
-                        
-                    }  
-                }
-                
-//                if( validPacket )
-//                {
-//                    // save the broadcast tracker
-//                    for(j = 0; j < TRACKER_SIZE; j++)
-//                    {
-//                        if( BroadcastTracker[j].isValid == FALSE )
-//                        {
-//                            index = j;
-//                            break;
-//                        }    
-//                    }    
-//                    if( index < TRACKER_SIZE )
-//                    {
-//                        BroadcastTracker[index].isValid = TRUE;
-//                        for(j = 0; j < MY_ADDRESS_LENGTH; j++)
-//                        {
-//                            BroadcastTracker[index].sourceAddr[j] = rxMessage.SourceAddress[j];
-//                        }    
-//                        BroadcastTracker[index].seqNum = rxMessage.Payload[2];
-//                        BroadcastTracker[index].expireTick = MiWi_TickGet();
-//                        BroadcastTracker[index].counter = 0;
-//                    }    
-//                }    
-//            }    
-
-            
-            
-            
-            // handle rebroadcast
-//            if( validPacket && rxMessage.flags.bits.broadcast )
-//            {
-//                if( index > TRACKER_SIZE || BroadcastTracker[index].counter < REBROADCAST_COUNT )
-//                {
-//                    // rebroadcast
-//                    MiApp_FlushTx();
-//                    for(i = 0; i < rxMessage.PayloadSize; i++)
-//                    {
-//                        MiApp_WriteData(rxMessage.Payload[i]);
-//                    }         
-//                    MiApp_BroadcastPacket( rxMessage.flags.bits.secEn );
-//                }    
-//            } 
-            
-//            MiApp_DiscardMessage();   
-        }    
-        
-        
-
-
-    	
-        currentTick = MiWi_TickGet();
-        if( FlashCount > 0 )
-        {
-            if( MiWi_TickGetDiff(currentTick, startTick) > ONE_SECOND/2 )
-            {
-                startTick.Val = currentTick.Val;
-                LED0 ^= 1;
-                LED1 ^= 1;
-                LED2 ^= 1;
-                
-            }
-        }
-        
-//        for(i = 0; i < TRACKER_SIZE; i++)
-//        {
-//            if( BroadcastTracker[i].isValid )
-//            {
-//                if( MiWi_TickGetDiff(currentTick, BroadcastTracker[i].expireTick) > TRACKER_EXPIRATION )
-//                {
-//                    BroadcastTracker[i].isValid = FALSE;
-//                }    
-//            }    
-//        }    
 	}
+    
+    //commissioning completed
+    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+    Nop();
 }
