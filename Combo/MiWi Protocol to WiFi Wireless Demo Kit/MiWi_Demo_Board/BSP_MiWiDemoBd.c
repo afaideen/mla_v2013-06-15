@@ -55,6 +55,10 @@
 // Config Bit Settings to get 16 MHz: Internal 8 MHz / 2 = 4 * 12 = 48 / 3 = 16
 #pragma config OSC = INTOSCPLL, WDTEN = OFF, XINST = ON, WDTPS = 2048, PLLDIV = 2, CPUDIV = OSC3_PLL3
 
+WORD Read_VBGVoltage(void);
+float ReadTempSensorBoard(void);
+void ftoa(float f, unsigned char *buff, unsigned char size);
+
 
 #define DEBOUNCE_TIME       0x00002FFF
 #define SWITCH_NOT_PRESSED  0
@@ -291,6 +295,225 @@ BYTE ButtonPressed(void)
     }
     
     return result;
+}
+
+BYTE ButtonPressed_(void)
+{
+    static MIWI_TICK t_sw[2];
+    BYTE status = SWITCH_NOT_PRESSED;
+    
+    if(!SW0_PORT)
+    {
+        if( MiWi_TickGetDiff(MiWi_TickGet(), t_sw[0]) > 0.25 * ONE_SECOND )
+        {
+            t_sw[0] = MiWi_TickGet();
+            status = SWITCH0_PRESSED;
+            return status;
+
+        }
+
+    }
+    else
+        status = SWITCH_NOT_PRESSED;
+        
+                
+    if(!SW1_PORT)
+    {
+        if( MiWi_TickGetDiff(MiWi_TickGet(), t_sw[1]) > 0.25 * ONE_SECOND )
+        {
+            t_sw[1] = MiWi_TickGet();
+            status = SWITCH1_PRESSED;
+            return status;
+        }
+
+    }
+    else
+        status = SWITCH_NOT_PRESSED;
+    
+    return status;
+    
+}
+
+/*********************************************************************
+ * Function:        void LCDTRXCount(BYTE txCount, BYTE rxCount)
+ *
+ * PreCondition:    LCD has been initialized
+ *
+ * Input:           txCount - the total number of transmitted messages
+ *                  rxCount - the total number of received messages
+ *
+ * Output:          None
+ *
+ * Side Effects:    None
+ *
+ * Overview:        This function display the total numbers of TX and
+ *                  RX messages on the LCD, if applicable.
+ *
+ * Note:            This routine is only effective if Explorer16 or
+ *                  PIC18 Explorer demo boards are used
+ ********************************************************************/
+void LCDTRXCount(BYTE txCount, BYTE rxCount)
+{
+    
+    LCDErase();
+    #if defined(PIC18_EXPLORER) || defined(EIGHT_BIT_WIRELESS_BOARD) || defined(MIWI_DEMO_KIT)
+        sprintf((char *)LCDText, (far rom char*)"TX Messages: %3d", txCount);
+        sprintf((char *)&(LCDText[16]), (far rom char*)"RX Messages: %3d", rxCount);
+    #else
+        sprintf((char *)LCDText, (const char*)"TX Messages: %d", txCount);
+        sprintf((char *)&(LCDText[16]), (const char*)"RX Messages: %d", rxCount);
+    #endif
+    LCDUpdate();    
+   
+}
+
+/*********************************************************************
+* Function:         BYTE ReadTempSensor(WORD VBGResult)
+*
+* PreCondition:     Proper reference voltage value has been determined.
+*
+* Input:		    WORD VBGResult - Reference voltage for temp calculation.
+*
+* Output:		    BYTE temp
+*
+* Side Effects:	    none
+*
+* Overview:		    Following routine reads the on board Tempature Sensor and
+*                   calculates the temp value. 
+*
+* Note:			    
+**********************************************************************/
+#define NUM_TEMP_SAMPLES            4
+float ReadTempSensorBoard(void)
+{
+	WORD tempValue;
+	double temp;
+	BYTE tempHere;
+	BYTE i = 0;
+    float tempAverage = 0;
+    BYTE tempArray[NUM_TEMP_SAMPLES];
+    WORD VBGResult;
+   
+	VBGResult = Read_VBGVoltage();		
+
+    
+     
+    // Configure the ADC register settings
+
+    ADCON0 = 0x04;
+    ADCON1 = 0xBD;
+    
+    PIR1bits.ADIF = 0;
+    PIE1bits.ADIE = 0;
+
+/*
+	ADCON0bits.ADON = 1;
+	Delay10us(10);					// Wait Acquisition time
+	
+	ADCON0bits.GO = 1;	
+	while(ADCON0bits.DONE);
+ 
+ 	tempValue = ADRES;
+	ADCON0bits.ADON = 0;
+	 	   
+	temp = (1200.0/VBGResult);
+	temp = (temp * tempValue);				
+	temp = (temp - 500.0)/10.0;
+
+    return (BYTE) temp;
+*/	
+   
+    do
+    {
+
+       
+    	ADCON0bits.ADON = 1;
+    	Delay10us(10);					// Wait Acquisition time
+    	ADCON0bits.GO = 1;	    	
+    	while(ADCON0bits.DONE);
+        
+
+        
+    	temp = (1200.0/VBGResult);
+
+    	tempValue = ADRES;
+
+    	temp = (temp * tempValue);				
+    	temp = (temp - 500.0)/10.0;
+    	
+    	tempArray[i] = (BYTE) temp;
+
+	    ADCON0bits.ADON = 0;
+
+	    Delay10us(1);
+	    i++;
+	} while(i < NUM_TEMP_SAMPLES);
+	
+
+    for(i = 0; i < NUM_TEMP_SAMPLES; i++)
+    {
+        tempAverage = ( tempAverage + tempArray[i] );
+    }
+    tempAverage = ( tempAverage / NUM_TEMP_SAMPLES );
+//    tempHere = (BYTE) tempAverage;
+//    tempAverage = (tempAverage - tempHere) * 10;
+//    
+//    if(tempAverage >= 5)
+//        tempHere = tempHere + 1;
+//        
+//    return (BYTE)tempHere;    
+    return tempAverage;    
+
+
+}
+
+    				
+/*********************************************************************
+* Function:         WORD Read_VBGVoltage(void)
+*
+* PreCondition:     none
+*
+* Input:		    none
+*
+* Output:		    ADRES
+*
+* Side Effects:	    none
+*
+* Overview:		    Reads the band gap voltage and compares with reference voltage
+*					to arrive at the current voltage level
+*
+* Note:			    
+**********************************************************************/
+WORD Read_VBGVoltage(void)
+{
+    ADCON0 = 0x3D;				// Configures the channel as VBG
+    ADCON1 = 0xBD;				// Program the acquisition time
+    ANCON1bits.VBGEN = 1;		// Enable Band gap reference voltage
+    
+    Delay10us(1000);			//Wait for the Band Gap Settling time
+    
+    PIR1bits.ADIF = 0;
+    PIE1bits.ADIE = 0;			//Disable ADC interrupts
+    							//This routine uses the polling based mechanism
+    ADCON0bits.GO = 1;		    //Start A/D conversion    
+    while(ADCON0bits.DONE);
+    
+    ADCON0bits.ADON = 0;	    // Turn ADC OFF
+    ANCON1bits.VBGEN = 0;	    // Disable Bandgap
+    
+    return ADRES;
+}
+
+void ftoa(float f, unsigned char *buff, BYTE size)
+{
+
+    int whole, decimal;
+    whole = (int)f; //whole part
+    decimal=(f-whole)*10; //decimal part
+    memset(buff, 0, size);
+    sprintf(buff,"%d.%1d",whole,decimal); //Convert to string
+
+    
 }
   
 

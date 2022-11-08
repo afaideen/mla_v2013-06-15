@@ -179,6 +179,7 @@
 	
 	// HI TECH specific defines
 	#if defined(COMPILER_HITECH_PICC18) || defined(COMPILER_HITECH_PICC)
+
 	    #define ROM                 	const
 		#define rom
         #ifndef Nop()

@@ -229,7 +229,7 @@ void _general_exception_handler(unsigned cause, unsigned status) {
 // Global variables
 UINT8 ConnectionProfileID;
 #endif
-
+BYTE mybuff[30];
 /*********************************************************************
 * Function:         void main(void)
 *
@@ -309,8 +309,8 @@ int main(void)
     // Initialize the MiWi Protocol Stack. The only input parameter indicates
     // if previous network configuration should be restored.
     /*******************************************************************/
-    MiApp_ProtocolInit(FALSE);
-//    MiApp_ProtocolInit(TRUE);
+//    MiApp_ProtocolInit(FALSE);
+    MiApp_ProtocolInit(TRUE);
     putsUART2("\r\nMiApp_ProtocolInit...OK\r\n");
     /*******************************************************************/
     // Set Device Communication Channel
@@ -367,18 +367,18 @@ int main(void)
     //      may or may not in the radio range.
     /*******************************************************************/
 //    original below
-    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
-    DelayMs(1000);
-    /*******************************************************************/
-    // Display current opertion on LCD of demo board, if applicable
-    /*******************************************************************/
-    if (i != 0xFF) {
-        // Connected Peer on Channel
-        sprintf((char *) LCDText, (char*) "Peer connected");
-//        sprintf((char *) &(LCDText[16]), (char*) "SW0:Yes  SW2:No");
-        LCDUpdate();
-        DelayMs(1000);
-    } else {
+//    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+//    DelayMs(1000);
+//    /*******************************************************************/
+//    // Display current opertion on LCD of demo board, if applicable
+//    /*******************************************************************/
+//    if (i != 0xFF) {
+//        // Connected Peer on Channel
+//        sprintf((char *) LCDText, (char*) "Peer connected");
+////        sprintf((char *) &(LCDText[16]), (char*) "SW0:Yes  SW2:No");
+//        LCDUpdate();
+//     
+//    } else {
         /*******************************************************************/
         // If no network can be found and join, we need to start a new
         // network by calling function MiApp_StartConnection
@@ -413,9 +413,9 @@ int main(void)
         sprintf((char *) LCDText, (char*) "Creating net..");
 //        sprintf((char *) &(LCDText[16]), (char*) "SW0:Yes  SW2:No");
         LCDUpdate();
-        DelayMs(1000);
-    }
-
+        
+//    }
+    DelayMs(1000);
     // Turn OFF LCD after setting up MiWi Connection
     LCDBacklightOFF();
     
@@ -523,9 +523,66 @@ int main(void)
 
     LEDS_OFF();
     MIWI_TICK t3;
+    
+    BYTE TxNum = 0;
+    BYTE RxNum = 0;
+    BYTE j, mychildren[CONNECTION_SIZE] = {0xff};
+    for(j = 0; j < CONNECTION_SIZE; j++)
+    {
+        if(ConnectionTable[j].status.bits.isValid == 0)
+            mychildren[j] = 0xff;
+        else
+        {
+            mychildren[j] = 0x01;
+            memset(mybuff,0,sizeof(mybuff));
+            sprintf(mybuff,"My child - PANID:0x%04x,AltAddr:0x%04x,Addr:%c%c%c%c%c%c%c%c\r\n",
+                    ConnectionTable[j].PANID.Val,
+                    ConnectionTable[j].AltAddress.Val,
+                    ConnectionTable[j].Address[7],                        
+                    ConnectionTable[j].Address[6],                        
+                    ConnectionTable[j].Address[5],                        
+                    ConnectionTable[j].Address[4],                        
+                    ConnectionTable[j].Address[3],                        
+                    ConnectionTable[j].Address[2],                        
+                    ConnectionTable[j].Address[1],                        
+                    ConnectionTable[j].Address[0]                       
+                    );
+            putsUART(mybuff);
+        }
+    }
     while (1) {
+        for(j = 0; j < CONNECTION_SIZE; j++)
+        {
+            if( ConnectionTable[j].status.bits.isValid && mychildren[j] == 0xff )
+            {
+                mychildren[j] = 0x01;
+                memset(mybuff,0,sizeof(mybuff));
+                sprintf(mybuff,"New child - PANID:0x%04x,AltAddr:0x%04x,Addr:%c%c%c%c%c%c%c%c\r\n",
+                        ConnectionTable[j].PANID.Val,
+                        ConnectionTable[j].AltAddress.Val,
+                        ConnectionTable[j].Address[7],                        
+                        ConnectionTable[j].Address[6],                        
+                        ConnectionTable[j].Address[5],                        
+                        ConnectionTable[j].Address[4],                        
+                        ConnectionTable[j].Address[3],                        
+                        ConnectionTable[j].Address[2],                        
+                        ConnectionTable[j].Address[1],                        
+                        ConnectionTable[j].Address[0]                       
+                        );
+                putsUART(mybuff);
+            }
+        }
         if(MiApp_MessageAvailable())
         {
+             /*******************************************************************/
+            // If a packet has been received, handle the information available 
+            // in rxMessage.
+            /*******************************************************************/
+            DemoOutput_HandleMessage();
+            DemoOutput_UpdateTxRx(TxNum, ++RxNum);
+            
+            // Toggle LED2 to indicate receiving a packet.
+            LED_2 ^= 1;
             MiApp_DiscardMessage();
         }
                 
@@ -1060,6 +1117,38 @@ static void InitializeBoard(void) {
 
 }
 
+/*********************************************************************
+ * Function:        void LCDTRXCount(BYTE txCount, BYTE rxCount)
+ *
+ * PreCondition:    LCD has been initialized
+ *
+ * Input:           txCount - the total number of transmitted messages
+ *                  rxCount - the total number of received messages
+ *
+ * Output:          None
+ *
+ * Side Effects:    None
+ *
+ * Overview:        This function display the total numbers of TX and
+ *                  RX messages on the LCD, if applicable.
+ *
+ * Note:            This routine is only effective if Explorer16 or
+ *                  PIC18 Explorer demo boards are used
+ ********************************************************************/
+void LCDTRXCount(BYTE txCount, BYTE rxCount)
+{
+    
+    LCDErase();
+    #if defined(PIC18_EXPLORER) || defined(EIGHT_BIT_WIRELESS_BOARD) || defined(MIWI_DEMO_KIT)
+        sprintf((char *)LCDText, (far rom char*)"TX Messages: %3d", txCount);
+        sprintf((char *)&(LCDText[16]), (far rom char*)"RX Messages: %3d", rxCount);
+    #else
+        sprintf((char *)LCDText, (const char*)"TX Messages: %d", txCount);
+        sprintf((char *)&(LCDText[16]), (const char*)"RX Messages: %d", rxCount);
+    #endif
+    LCDUpdate();    
+   
+}
 
 
 #if 1 // debug soft AP

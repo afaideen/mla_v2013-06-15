@@ -77,6 +77,10 @@
 #define LED2_TRIS           TRISEbits.TRISE7
 #define LED6_IO              LED0
 
+#define LED_0               LED0
+#define LED_1               LED1
+#define LED_2               LED2
+
 #define LEDS_OFF()          {LED0_OFF(); LED1_OFF(); LED2_OFF();}
 #define LEDS_ON()           {LED0_ON(); LED1_ON(); LED2_ON();}
 

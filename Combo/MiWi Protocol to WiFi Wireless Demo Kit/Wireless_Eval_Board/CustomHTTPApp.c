@@ -60,6 +60,7 @@
 #include "TCPIP Stack/WFConsoleMsgHandler.h"
 #include "WirelessProtocols/MCHP_API.h"
 #include "Storage.h"
+#include "LCD_ST7032.h"
 
 /****************************************************************************
   Section:
@@ -325,11 +326,11 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
                     myPANID.Val = ActiveScanResults[nodeIdx].PANID.Val;
                     MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);
                     
-#if !defined(PROTOCOL_P2P)
-//                    v = 0xff;
-                    v = MiApp_EstablishConnection(0xff, CONN_MODE_DIRECT);
-//                    while( 0xff == MiApp_EstablishConnection(nodeIdx, CONN_MODE_DIRECT) );
-#endif
+//#if !defined(PROTOCOL_P2P)
+////                    v = 0xff;
+//                    v = MiApp_EstablishConnection(0xff, CONN_MODE_DIRECT);
+////                    while( 0xff == MiApp_EstablishConnection(nodeIdx, CONN_MODE_DIRECT) );
+//#endif
 
                     MiApp_FlushTx();
                     MiApp_WriteData(0x01);
@@ -386,7 +387,16 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
 #if defined(PROTOCOL_P2P)
                     MiApp_UnicastAddress( ActiveScanResults[nodeIdx].Address, TRUE, FALSE);//original
 #else
-                    MiApp_BroadcastPacket(FALSE);
+                    if(MiApp_BroadcastPacket(FALSE))
+                    {
+//                        MiApp_RemoveConnection(0);
+//                        LCDBacklightON();
+//                        CreateNewConnectionAtChannel(channel);
+//                        DelayMs(1000);
+//                        DemoOutput_Instruction();
+//                        LCDBacklightOFF();
+                    }
+                    
 //                    if(MiApp_UnicastConnection( nodeIdx, TRUE) == TRUE)
 //                    {
 //                        
@@ -443,7 +453,7 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
                     MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);
                     
                     
-                    v = MiApp_EstablishConnection(0xff, CONN_MODE_DIRECT);
+//                    v = MiApp_EstablishConnection(0xff, CONN_MODE_DIRECT);
 
                     MiApp_FlushTx();
                     MiApp_WriteData(0x02);

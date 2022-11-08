@@ -1,16 +1,16 @@
-/********************************************************************
-* FileName:		HardwareProfile.h
-* Dependencies:    
-* Processor:	PIC18, PIC24, PIC32, dsPIC30, dsPIC33
+/****************************************************************************
+* FileName:		DemoOutput.h
+* Dependencies: none   
+* Processor:	PIC18, PIC24F, PIC32, dsPIC30, dsPIC33
 *               tested with 18F4620, dsPIC33FJ256GP710	
 * Complier:     Microchip C18 v3.04 or higher
 *				Microchip C30 v2.03 or higher	
-*               Microchip C32 v1.02 or higher	
+*               Microchip C32 v1.02 or higher
 * Company:		Microchip Technology, Inc.
 *
-* Copyright and Disclaimer Notice
+* Copyright and Disclaimer Notice for MiWi DE Software:
 *
-* Copyright © 2007-2010 Microchip Technology Inc.  All rights reserved.
+* Copyright © 2007-2012 Microchip Technology Inc.  All rights reserved.
 *
 * Microchip licenses to you the right to use, modify, copy and distribute 
 * Software only when embedded on a Microchip microcontroller or digital 
@@ -33,41 +33,28 @@
 * TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES (INCLUDING BUT 
 * NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
 *
-*********************************************************************
+****************************************************************************
 * File Description:
 *
-*  This file defines functions used for demo board hardware
+*  This is the output for the demo. The output information is displayed on
+*  hyper terminal and LCD screen if demo board has one.
 *
 * Change History:
 *  Rev   Date         Author    Description
-*  1.0   2/02/2011    ccs       Initial revision
-********************************************************************/
+*  4.1   1/31/2012    yfy       MiWi DE 4.2, simplified demo interface
+**************************************************************************/
 
-#ifndef _HARDWARE_PROFILE_H
-    #define _HARDWARE_PROFILE_H
 
-    /*********************************************************************/
-    // Choose one of the demo board that support the demo out of the box
-    /*********************************************************************/
-    //#define EIGHT_BIT_WIRELESS_BOARD
-    #define MIWI_CARD_DEMO_BOARD
-    #define MIWI_DEMO_KIT
- 
-    #include "GenericTypeDefs.h"
-    #include "ConfigApp.h"
- 
-   
-    #include "BSP_MiWiCardDemoBd.h"
- 
-    
-    
-    #define SW0             1
-    #define SW1             2	
-    
-    // Following definition is for delay functionality
-    #define GetInstructionClock()	(CLOCK_FREQ/4)
+extern ROM const BYTE MiWi[6][21];
+extern ROM const BYTE DE[6][11];
 
-    BYTE ButtonPressed(void);
-    void BoardInit(void);
-	
-#endif
+
+void DemoOutput_Greeting(void);
+void DemoOutput_Channel(BYTE channel, BYTE step);
+void DemoOutput_Instruction(void);
+void DemoOutput_HandleMessage(void);
+void DemoOutput_UpdateTxRx(BYTE TxNum, BYTE RxNum);
+void DemoOutput_ChannelError(BYTE channel);
+void DemoOutput_UnicastFail(void);
+
+

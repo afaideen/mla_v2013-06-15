@@ -130,6 +130,7 @@
       <itemPath>../Storage.h</itemPath>
       <itemPath>../HTTPPrint.h</itemPath>
       <itemPath>../SelfTestMode.h</itemPath>
+      <itemPath>C:/Program Files (x86)/Microchip/mplabc18/v3.46/h/p18f46j50.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LibraryFiles"
                    displayName="Library Files"
@@ -146,6 +147,10 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f2" displayName="external" projectFiles="true">
+        <itemPath>../DemoOutput.c</itemPath>
+        <itemPath>../../../../Microchip/WirelessProtocols/MiWiHelper.c</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1" displayName="Helper" projectFiles="true">
         <itemPath>Helper/MyHelper.c</itemPath>
       </logicalFolder>
@@ -291,6 +296,7 @@
     <Elem>../../../../Microchip/Include/Transceivers</Elem>
     <Elem>../../../../Microchip/Include/WirelessProtocols</Elem>
     <Elem>..</Elem>
+    <Elem>C:/Program Files (x86)/Microchip/mplabc18/v3.46/h</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -2345,10 +2351,16 @@
             overriding="false">
         <C32>
         </C32>
+        <C32-AR>
+        </C32-AR>
         <C32-AS>
         </C32-AS>
+        <C32-CO>
+        </C32-CO>
         <C32-LD>
         </C32-LD>
+        <C32CPP>
+        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -2357,10 +2369,16 @@
             overriding="false">
         <C32>
         </C32>
+        <C32-AR>
+        </C32-AR>
         <C32-AS>
         </C32-AS>
+        <C32-CO>
+        </C32-CO>
         <C32-LD>
         </C32-LD>
+        <C32CPP>
+        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -2369,10 +2387,16 @@
             overriding="false">
         <C32>
         </C32>
+        <C32-AR>
+        </C32-AR>
         <C32-AS>
         </C32-AS>
+        <C32-CO>
+        </C32-CO>
         <C32-LD>
         </C32-LD>
+        <C32CPP>
+        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -2381,10 +2405,16 @@
             overriding="false">
         <C32>
         </C32>
+        <C32-AR>
+        </C32-AR>
         <C32-AS>
         </C32-AS>
+        <C32-CO>
+        </C32-CO>
         <C32-LD>
         </C32-LD>
+        <C32CPP>
+        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -2393,10 +2423,16 @@
             overriding="false">
         <C32>
         </C32>
+        <C32-AR>
+        </C32-AR>
         <C32-AS>
         </C32-AS>
+        <C32-CO>
+        </C32-CO>
         <C32-LD>
         </C32-LD>
+        <C32CPP>
+        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -2405,10 +2441,16 @@
             overriding="false">
         <C32>
         </C32>
+        <C32-AR>
+        </C32-AR>
         <C32-AS>
         </C32-AS>
+        <C32-CO>
+        </C32-CO>
         <C32-LD>
         </C32-LD>
+        <C32CPP>
+        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -2417,30 +2459,48 @@
             overriding="false">
         <C32>
         </C32>
+        <C32-AR>
+        </C32-AR>
         <C32-AS>
         </C32-AS>
+        <C32-CO>
+        </C32-CO>
         <C32-LD>
         </C32-LD>
+        <C32CPP>
+        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
       <item path="../MainDemo.c" ex="true" overriding="false">
         <C32>
         </C32>
+        <C32-AR>
+        </C32-AR>
         <C32-AS>
         </C32-AS>
+        <C32-CO>
+        </C32-CO>
         <C32-LD>
         </C32-LD>
+        <C32CPP>
+        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
       <item path="../MiWi_SPI.c" ex="true" overriding="false">
         <C32>
         </C32>
+        <C32-AR>
+        </C32-AR>
         <C32-AS>
         </C32-AS>
+        <C32-CO>
+        </C32-CO>
         <C32-LD>
         </C32-LD>
+        <C32CPP>
+        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -2463,7 +2523,7 @@
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="preprocessor-macros"
-                  value="PROTOCOL_MIWI;CFG_INCLUDE_PIC32_EVAL_BOARD;_SUPPRESS_PLIB_WARNING"/>
+                  value="PROTOCOL_MIWI;CFG_INCLUDE_PIC32_EVAL_BOARD;_SUPPRESS_PLIB_WARNING;MIWI_HELPER;WIRELESS_EVAL_BOARD"/>
         <property key="strict-ansi" value="false"/>
         <property key="support-ansi" value="false"/>
         <property key="tentative-definitions" value=""/>
@@ -2639,6 +2699,7 @@
         <property key="UART6" value="true"/>
         <property key="USB" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
         <property key="hwtoolclock.units" value="mips"/>

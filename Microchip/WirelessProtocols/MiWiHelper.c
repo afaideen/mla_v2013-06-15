@@ -4,6 +4,13 @@
 #include "WirelessProtocols/MCHP_API.h"
 
 #if defined(MIWI_HELPER)
+extern void DemoOutput_ChannelError(BYTE channel);
+extern void DemoOutput_Channel(BYTE channel, BYTE Step);
+extern void LCDDisplay(char *text, BYTE value, BOOL delay);
+extern BYTE DemoOutput_ActiveScanResults(BYTE num);
+extern void DemoOutput_Rescan(void);
+
+BOOL MiWiHelper_SendData(BYTE conn_index, BYTE *data);
 
 BOOL MiWiHelper_SendData(BYTE conn_index, BYTE *data)
 {
@@ -59,14 +66,14 @@ BOOL CreateNewConnectionAtChannel(BYTE channel)
     {
         DemoOutput_ChannelError(channel);
         #if defined(__18CXX)
-            return;
+            return FALSE;
         #else
             return 0;
         #endif
     }
     DemoOutput_Channel(channel, 0);
     Printf("\r\nCreate connection...");
-    
+    MiApp_ConnectionMode(ENABLE_ALL_CONN);
     
     connstat = MiApp_StartConnection(START_CONN_DIRECT, 10, 0xFFFFFFFF);//create connection at selected channel/myChannel
 //    BOOL connstat = MiApp_StartConnection(START_CONN_DIRECT, 0, 0);//also okay!
@@ -152,14 +159,14 @@ BYTE JoinAvailableChannel(BYTE channel)
         {
             DemoOutput_ChannelError(channel);
             #if defined(__18CXX)
-                return;
+                return 0xff;
             #else
                 return 0;
             #endif
         }
 
-//        i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
-            while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
+        i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+//            while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
     }
     else
         while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );//active scanning all channels available
@@ -177,8 +184,11 @@ BYTE JoinAvailableChannel(BYTE channel)
             DemoOutput_Channel(channel, 1);//Connected peer
         #endif  
     }
-    else
+    else{
         DemoOutput_Channel(channel, 0);//Connecting peer
+        //Join fail then creating network
+        MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
+    }
     
     
     return i;

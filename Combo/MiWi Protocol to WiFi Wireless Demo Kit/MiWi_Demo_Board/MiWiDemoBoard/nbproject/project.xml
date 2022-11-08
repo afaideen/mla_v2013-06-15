@@ -14,6 +14,7 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>../</sourceRootElem>
+                <sourceRootElem>../../../../Microchip/WirelessProtocols</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
@@ -26,6 +27,10 @@
                 </confElem>
                 <confElem>
                     <name>C18_MIWI_BRD_MIWI</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>C18_MIWI_BRD_MIWI_TEST</name>
                     <type>2</type>
                 </confElem>
             </confList>

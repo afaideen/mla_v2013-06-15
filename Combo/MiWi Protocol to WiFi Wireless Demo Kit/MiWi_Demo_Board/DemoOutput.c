@@ -50,6 +50,9 @@
 #include "WirelessProtocols/LCDBlocking.h"
 #include "WirelessProtocols/MCHP_API.h"
 
+extern void LCDDisplay(char *text, BYTE value, BOOL delay);
+extern void LCDTRXCount(BYTE txCount, BYTE rxCount);
+
 /*************************************************************************/
 // the following two variable arrays are the data to be transmitted
 // in this demo. They are bit map of English word "MiWi" and "DE"
@@ -223,6 +226,7 @@ void DemoOutput_Channel(BYTE channel, BYTE Step)
     if( Step == 0 )
     {
 //        LCDDisplay((char *)"Connecting Peer  on Channel %d ", channel, TRUE);
+//        LCDDisplay((char *)"Creating network  on Ch %d ", channel, TRUE);
         LCDDisplay((char *)"Creating network  on Ch %d ", channel, TRUE);
         Printf("\r\nConnecting Peer on Channel ");
         PrintDec(channel);
@@ -314,5 +318,6 @@ void DemoOutput_UnicastFail(void)
 }    
 
 
+  
 
 

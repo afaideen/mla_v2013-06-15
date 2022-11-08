@@ -230,7 +230,7 @@
 // ENABLE_ACTIVE_SCAN will enable the device to do an active scan to 
 // to detect current existing connection. 
 /*********************************************************************/
-//#define ENABLE_ACTIVE_SCAN
+#define ENABLE_ACTIVE_SCAN
 
 
 /*********************************************************************/

@@ -125,10 +125,14 @@
         #define LED0_TRIS           TRISCbits.TRISC2
         #define LED1                LATAbits.LATA6
         #define LED1_TRIS           TRISAbits.TRISA6
-	#define LED2                LATAbits.LATA7
-	#define LED2_TRIS           TRISAbits.TRISA7
-	#define BKLIGHT             LATEbits.LATE1
-	#define BKLIGHT_TRIS        TRISEbits.TRISE1
+        #define LED2                LATAbits.LATA7
+        #define LED2_TRIS           TRISAbits.TRISA7
+        #define LED_0               LED0 
+        #define LED_1               LED1 
+        #define LED_2               LED2 
+
+        #define BKLIGHT             LATEbits.LATE1
+        #define BKLIGHT_TRIS        TRISEbits.TRISE1
 		
 
         // External EEPROM Pin Definitions

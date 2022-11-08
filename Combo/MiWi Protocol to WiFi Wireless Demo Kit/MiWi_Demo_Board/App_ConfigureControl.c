@@ -4,6 +4,7 @@
 #include "WirelessProtocols/NVM.h"
 #include "ConfigApp.h"
 #include "LCD_ST7032.h"
+#include "TimeDelay.h"
 
 extern void MainDisplay(void);
 BYTE ConfigureControl(void);
@@ -80,6 +81,7 @@ BYTE ConfigureControl(void)
 
                         case 0x02:  // set channel and PANID
                             {
+                                //Commissioning configuration
                                 //configure channel and PANID
                                 WORD tmp = 0xFFFF;
 
@@ -196,7 +198,8 @@ BYTE commissioning_running(void)
     {
         while(SW1_PORT == 0);
         Factory_Reset();
-
+        DelayMs(1000);
+        Reset();
     }   	
 
 
@@ -204,7 +207,7 @@ BYTE commissioning_running(void)
     {
         BOOL validPacket = TRUE;
         BYTE index = 0xFF;
-
+       
         MiApp_DiscardMessage();  
         if( rxMessage.flags.bits.broadcast )
         {

@@ -50,6 +50,8 @@
 #include "WirelessProtocols/LCDBlocking.h"
 #include "WirelessProtocols/MCHP_API.h"
 
+extern void LCDDisplay(char *text, BYTE value, BOOL delay);
+extern void LCDTRXCount(BYTE txCount, BYTE rxCount);
 /*************************************************************************/
 // the following two variable arrays are the data to be transmitted
 // in this demo. They are bit map of English word "MiWi" and "DE"
@@ -313,6 +315,6 @@ void DemoOutput_UnicastFail(void)
     LCDDisplay((char *)" Unicast Failed", 0, TRUE);
 }    
 
-
+   
 
 

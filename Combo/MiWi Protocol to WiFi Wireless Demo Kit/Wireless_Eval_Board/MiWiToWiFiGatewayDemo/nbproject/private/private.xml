@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="18">
-        <file>
-            <url>file:/D:/microchip_solutions_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemo.c</url>
-            <bookmark id="4">
-                <name/>
-                <line>524</line>
-                <key/>
-            </bookmark>
-            <bookmark id="3">
-                <name/>
-                <line>840</line>
-                <key/>
-            </bookmark>
-        </file>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="19">
         <file>
             <url>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemoTest.c.c</url>
             <bookmark id="15">
@@ -27,9 +14,14 @@
                 <line>369</line>
                 <key/>
             </bookmark>
+            <bookmark id="19">
+                <name/>
+                <line>581</line>
+                <key/>
+            </bookmark>
             <bookmark id="18">
                 <name/>
-                <line>1110</line>
+                <line>1199</line>
                 <key/>
             </bookmark>
         </file>
@@ -37,32 +29,32 @@
             <url>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/CustomHTTPApp.c</url>
             <bookmark id="17">
                 <name/>
-                <line>283</line>
+                <line>284</line>
                 <key/>
             </bookmark>
             <bookmark id="7">
                 <name/>
-                <line>286</line>
+                <line>287</line>
                 <key/>
             </bookmark>
             <bookmark id="10">
                 <name/>
-                <line>309</line>
+                <line>310</line>
                 <key/>
             </bookmark>
             <bookmark id="11">
                 <name/>
-                <line>332</line>
+                <line>333</line>
                 <key/>
             </bookmark>
             <bookmark id="13">
                 <name/>
-                <line>437</line>
+                <line>447</line>
                 <key/>
             </bookmark>
             <bookmark id="12">
                 <name/>
-                <line>1406</line>
+                <line>1416</line>
                 <key/>
             </bookmark>
         </file>
@@ -71,6 +63,27 @@
             <bookmark id="9">
                 <name/>
                 <line>3710</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>file:/D:/microchip_solutions_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/CustomHTTPApp.c</url>
+            <bookmark id="1">
+                <name/>
+                <line>281</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>file:/D:/microchip_solutions_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemo.c</url>
+            <bookmark id="4">
+                <name/>
+                <line>524</line>
+                <key/>
+            </bookmark>
+            <bookmark id="3">
+                <name/>
+                <line>840</line>
                 <key/>
             </bookmark>
         </file>
@@ -87,14 +100,6 @@
             <bookmark id="2">
                 <name/>
                 <line>1047</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>file:/D:/microchip_solutions_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/CustomHTTPApp.c</url>
-            <bookmark id="1">
-                <name/>
-                <line>281</line>
                 <key/>
             </bookmark>
         </file>
@@ -119,6 +124,8 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/CustomHTTPApp.c</file>
+            <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/DemoOutput.c</file>
             <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemoTest.c.c</file>
         </group>
     </open-files>
