@@ -65,6 +65,7 @@
       
         #if defined(PROTOCOL_MIWI)
             WORD        nvmMyShortAddress;
+            BYTE        nvmMyLongAddress;
             WORD        nvmMyParent;
             
             #ifdef NWK_ROLE_COORDINATOR
@@ -276,9 +277,10 @@ EEPROM_NEXT_PAGE:
                     goto EEPROM_NEXT_PAGE;
                 }
             }
-            EE_nCS = 1;
             Delay10us(10);
             DelayMs(1);
+            EE_nCS = 1;
+           
             #if defined(__18CXX)
                 INTCONbits.GIEH = oldGIEH;
             #else

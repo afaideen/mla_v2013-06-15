@@ -1,7 +1,8 @@
 
 
 #include "HardwareProfile.h"
-#include "WirelessProtocols/NVM.h"
+//#include "WirelessProtocols/NVM.h"
+#include "LocalFiles/NVM.h"
 #include "ConfigApp.h"
 #include "LCD_ST7032.h"
 #include "TimeDelay.h"
@@ -35,6 +36,21 @@ void Factory_Reset(void)
             nvmPutMyPANID(myPANID.v);
             currentChannel = 11;
             MiApp_SetChannel(currentChannel);
+            nvmPutCurrentChannel(&currentChannel);
+
+            
+            myLongAddress[0] = EUI_0;
+            myLongAddress[1] = EUI_1;
+            myLongAddress[2] = EUI_2;
+            myLongAddress[3] = EUI_3;
+            myLongAddress[4] = EUI_4;
+            myLongAddress[5] = EUI_5;
+            myLongAddress[6] = EUI_6;
+            myLongAddress[7] = EUI_7;          
+    
+            nvmPutMyLongAddress(myLongAddress);
+//            nvmGetMyLongAddress(myLongAddress);
+            Nop();
             MainDisplay();
             break;
         } else if (SW1_PORT == 0) {
@@ -194,13 +210,7 @@ BYTE commissioning_running(void)
         MainDisplay();
     }   	
 
-    if(SW1_PORT == 0)
-    {
-        while(SW1_PORT == 0);
-        Factory_Reset();
-        DelayMs(1000);
-        Reset();
-    }   	
+    
 
 
     if( MiApp_MessageAvailable() )

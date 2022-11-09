@@ -4800,7 +4800,8 @@ BOOL MiApp_StartConnection(BYTE Mode, BYTE ScanDuration, DWORD ChannelMap)
                     myPANID.v[0] = TMRL;
                     myPANID.v[1] = TMRL+0x51;
                 #else
-                    #if defined(ENABLE_NETWORK_FREEZER)
+//                    #if defined(ENABLE_NETWORK_FREEZER)
+                    #if defined(ENABLE_NVM)
                     nvmGetMyPANID(myPANID.v);
 //                    myPANID.Val = MY_PAN_ID;
                     #else

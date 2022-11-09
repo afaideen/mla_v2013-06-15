@@ -104,7 +104,7 @@
         // ENABLE_MIWI_ACKNOWLEDGEMENT enables the MiWi stack to acknowledge
         // the data packet from the application layer.
         /*********************************************************************/
-        //#define ENABLE_MIWI_ACKNOWLEDGEMENT
+        #define ENABLE_MIWI_ACKNOWLEDGEMENT
 
 
         /*********************************************************************/

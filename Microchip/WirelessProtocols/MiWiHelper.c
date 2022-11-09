@@ -138,8 +138,8 @@ BYTE JoinAvailableChannel(BYTE channel)
 {
     BYTE i;
     Printf("Joining available channel...");
-    
-       /*******************************************************************/
+     MiApp_ConnectionMode(ENABLE_ALL_CONN); 
+    /*******************************************************************/
     // Function MiApp_EstablishConnection try to establish a new 
     // connection with peer device. 
     // The first parameter is the index to the active scan result, 
@@ -166,7 +166,7 @@ BYTE JoinAvailableChannel(BYTE channel)
         }
 
         i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
-//            while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
+//        while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
     }
     else
         while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );//active scanning all channels available
@@ -179,7 +179,9 @@ BYTE JoinAvailableChannel(BYTE channel)
     {
         //Join channel successful
         #if defined(ENABLE_ACTIVE_SCAN)
-            DemoOutput_Channel(ActiveScanResults[i].Channel, 1);//Connected peer
+//            DemoOutput_Channel(ActiveScanResults[i-1].Channel, 1);//Connected peer
+            DemoOutput_Channel(ActiveScanResults[myParent].Channel, 1);//Connected peer
+//            DemoOutput_Channel(channel, 1);//Connected peer
         #else
             DemoOutput_Channel(channel, 1);//Connected peer
         #endif  

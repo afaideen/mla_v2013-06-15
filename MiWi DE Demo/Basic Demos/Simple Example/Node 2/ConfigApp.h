@@ -187,14 +187,14 @@
 // TX_BUFFER_SIZE defines the maximum size of application payload
 // which is to be transmitted
 /*********************************************************************/
-#define TX_BUFFER_SIZE 40
+#define TX_BUFFER_SIZE 60
 
 
 /*********************************************************************/
 // RX_BUFFER_SIZE defines the maximum size of application payload
 // which is to be received
 /*********************************************************************/
-#define RX_BUFFER_SIZE 40
+#define RX_BUFFER_SIZE 60
 
 
 /*********************************************************************/

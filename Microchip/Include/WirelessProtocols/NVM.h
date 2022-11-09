@@ -10,7 +10,7 @@
 *
 * Copyright and Disclaimer Notice
 *
-* Copyright © 2007-2010 Microchip Technology Inc.  All rights reserved.
+* Copyright ï¿½ 2007-2010 Microchip Technology Inc.  All rights reserved.
 *
 * Microchip licenses to you the right to use, modify, copy and distribute 
 * Software only when embedded on a Microchip microcontroller or digital 
@@ -21,7 +21,7 @@
 * You should refer to the license agreement accompanying this Software for 
 * additional information regarding your rights and obligations.
 *
-* SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS” WITHOUT WARRANTY OF ANY 
+* SOFTWARE AND DOCUMENTATION ARE PROVIDED ï¿½AS ISï¿½ WITHOUT WARRANTY OF ANY 
 * KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY 
 * WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A 
 * PARTICULAR PURPOSE. IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE 
@@ -156,6 +156,7 @@
                             
             #if defined(PROTOCOL_MIWI)
                 extern WORD        nvmMyShortAddress;
+                extern BYTE        nvmMyLongAddress;
                 extern WORD        nvmMyParent;
                 
                 #ifdef NWK_ROLE_COORDINATOR
@@ -202,6 +203,9 @@
 
                 #define nvmGetMyShortAddress( x )       NVMRead( (BYTE *)x, nvmMyShortAddress, 2)
                 #define nvmPutMyShortAddress( x )       NVMWrite((BYTE *)x, nvmMyShortAddress, 2)
+
+                #define nvmGetMyLongAddress( x )       NVMRead( (BYTE *)x, nvmMyLongAddress, MY_ADDRESS_LENGTH)
+                #define nvmPutMyLongAddress( x )       NVMWrite((BYTE *)x, nvmMyLongAddress, MY_ADDRESS_LENGTH)
                 
                 #define nvmGetMyParent( x )             NVMRead( (BYTE *)x, nvmMyParent, 1)
                 #define nvmPutMyParent( x )             NVMWrite((BYTE *)x, nvmMyParent, 1)

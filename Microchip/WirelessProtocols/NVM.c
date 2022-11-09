@@ -279,6 +279,7 @@ EEPROM_NEXT_PAGE:
                 RFIE = oldRFIE;
             #endif
             Delay10us(10);
+            Delay10us(1);
         }
     #endif
  

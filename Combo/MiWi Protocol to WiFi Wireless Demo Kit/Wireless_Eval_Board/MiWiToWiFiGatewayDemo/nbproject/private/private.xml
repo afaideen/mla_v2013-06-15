@@ -124,9 +124,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/CustomHTTPApp.c</file>
-            <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/DemoOutput.c</file>
-            <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemoTest.c.c</file>
+            <file>file:/D:/github/microchip/mla_v2013-06-15/Microchip/WirelessProtocols/MiWiHelper.c</file>
         </group>
     </open-files>
 </project-private>

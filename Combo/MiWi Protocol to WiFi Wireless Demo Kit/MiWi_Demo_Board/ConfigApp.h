@@ -102,6 +102,7 @@
         // NWK_ROLE_END_DEVICE.
         /*********************************************************************/
         #define NWK_ROLE_COORDINATOR
+//        #define NWK_ROLE_END_DEVICE
 
 
 
@@ -155,7 +156,17 @@
 #define EUI_3 'k'
 #define EUI_2 'e'
 #define EUI_1 'r'
-#define EUI_0 '0'
+//#define EUI_0 '0'
+#define EUI_0 '1'
+
+//#define EUI_7 0x55
+//#define EUI_6 0xaa
+//#define EUI_5 0x55
+//#define EUI_4 0xaa
+//#define EUI_3 0x55
+//#define EUI_2 0x01
+//#define EUI_1 0x02
+//#define EUI_0 0x03
 
 #define ENABLE_EEPROM
 
@@ -163,19 +174,20 @@
 // TX_BUFFER_SIZE defines the maximum size of application payload
 // which is to be transmitted
 /*********************************************************************/
-#define TX_BUFFER_SIZE 40
+#define TX_BUFFER_SIZE 60
 
 /*********************************************************************/
 // RX_BUFFER_SIZE defines the maximum size of application payload
 // which is to be received
 /*********************************************************************/
-#define RX_BUFFER_SIZE 40
+#define RX_BUFFER_SIZE  TX_BUFFER_SIZE
 
 /*********************************************************************/
 // MY_PAN_ID defines the PAN identifier
 /*********************************************************************/
-//#define MY_PAN_ID                       0xffff  // commission PANID
-#define MY_PAN_ID                       0x1234  // commission PANID
+#define MY_PAN_ID                       0xffff  // commission PANID. client may conect coordinator with different PANID. will follow parent automatically.
+//#define MY_PAN_ID                       0x1234  // commission PANID
+//#define MY_PAN_ID                       0xabcd  // commission PANID
 
 /*********************************************************************/
 // ADDITIONAL_NODE_ID_SIZE defines the size of additional payload
@@ -253,7 +265,9 @@
 // the messages
 /*********************************************************************/
 #ifndef SIMPLE_EXAMPLE
-    #define ENABLE_INDIRECT_MESSAGE
+    #if defined(NWK_ROLE_COORDINATOR)
+        #define ENABLE_INDIRECT_MESSAGE
+    #endif
 #endif
 
 /*********************************************************************/
@@ -311,7 +325,7 @@
 
 #if defined(ENABLE_NETWORK_FREEZER)
     #define ENABLE_NVM
-//	#define ENABLE_NVM_MAC
+//	#define ENABLE_NVM_MAC  //useless problematic!
 #endif
 
 #if defined(ENABLE_ACTIVE_SCAN) && defined(TARGET_SMALL)
