@@ -205,9 +205,9 @@
                 *dest++ = EESPIGet();
                 count--;
             }
-            EE_nCS = 1;
             Delay10us(10);
             DelayMs(1);
+            EE_nCS = 1;
             
             #if defined(__18CXX)
                 INTCONbits.GIEH = oldGIEH;
@@ -229,7 +229,7 @@
                 RFIE = 0;
             #endif
            Delay10us(10);
-           DelayMs(1);
+           DelayMs(5);
             
 EEPROM_NEXT_PAGE:
             do
@@ -278,7 +278,7 @@ EEPROM_NEXT_PAGE:
                 }
             }
             Delay10us(10);
-            DelayMs(1);
+            DelayMs(5);
             EE_nCS = 1;
            
             #if defined(__18CXX)
@@ -487,6 +487,7 @@ EEPROM_NEXT_PAGE:
             #if defined(PROTOCOL_MIWI)
 
                 result &= NVMalloc(2, &nvmMyShortAddress);
+                result &= NVMalloc(MY_ADDRESS_LENGTH, &nvmMyLongAddress);
                 result &= NVMalloc(1, &nvmMyParent);
                 
                 #if defined(NWK_ROLE_COORDINATOR)

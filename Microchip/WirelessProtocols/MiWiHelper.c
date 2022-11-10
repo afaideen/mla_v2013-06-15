@@ -179,8 +179,8 @@ BYTE JoinAvailableChannel(BYTE channel)
     {
         //Join channel successful
         #if defined(ENABLE_ACTIVE_SCAN)
-//            DemoOutput_Channel(ActiveScanResults[i-1].Channel, 1);//Connected peer
-            DemoOutput_Channel(ActiveScanResults[myParent].Channel, 1);//Connected peer
+            DemoOutput_Channel(ActiveScanResults[0].Channel, 1);//Connected peer
+//            DemoOutput_Channel(ActiveScanResults[myParent].Channel, 1);//Connected peer
 //            DemoOutput_Channel(channel, 1);//Connected peer
         #else
             DemoOutput_Channel(channel, 1);//Connected peer

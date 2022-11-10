@@ -37,6 +37,7 @@ void Factory_Reset(void)
             currentChannel = 11;
             MiApp_SetChannel(currentChannel);
             nvmPutCurrentChannel(&currentChannel);
+//            nvmGetCurrentChannel(&currentChannel);
 
             
             myLongAddress[0] = EUI_0;
@@ -48,7 +49,7 @@ void Factory_Reset(void)
             myLongAddress[6] = EUI_6;
             myLongAddress[7] = EUI_7;          
     
-            nvmPutMyLongAddress(myLongAddress);
+            nvmPutMyLongAddress(&myLongAddress);
 //            nvmGetMyLongAddress(myLongAddress);
             Nop();
             MainDisplay();

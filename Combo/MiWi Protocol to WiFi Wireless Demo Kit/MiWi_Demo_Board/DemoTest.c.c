@@ -260,7 +260,9 @@ typedef struct __attribute__((__packed__)){
 #pragma udata udata1
 APPDATA appData;
    
+#pragma udata mydata
 BYTE mydata[TX_BUFFER_SIZE];
+
 BYTE TxNum = 0;
 BYTE RxNum = 0;
 /*********************************************************************
@@ -322,7 +324,7 @@ void main(void)
         
     }
     
-//    MiApp_ProtocolInit(TRUE);//original
+    MiApp_ProtocolInit(TRUE);//original
     
     
 ////////    add modification    ////////////
@@ -337,23 +339,21 @@ void main(void)
 //    MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);  
 //    nvmGetCurrentChannel(&currentChannel);
 //    MiApp_SetChannel(currentChannel);
+    
    
-    nvmGetConnMode(&ConnMode);
-    nvmGetConnectionTable(ConnectionTable);
-    nvmGetMyShortAddress(myShortAddress.v);    
-//    nvmPutMyLongAddress(myLongAddress);
-
-    nvmGetMyLongAddress(myLongAddress);
-    Nop();
-    nvmGetMyParent(&myParent);
-    #if defined(NWK_ROLE_COORDINATOR)
-        nvmGetRoutingTable(RoutingTable);
-        nvmGetKnownCoordinators(&knownCoordinators);
-        nvmGetRole(&role);
-    #endif
-    nvmGetMyPANID(myPANID.v);
-    nvmGetCurrentChannel(&currentChannel);
-    MiApp_ProtocolInit(FALSE);
+//    nvmGetConnMode(&ConnMode);
+//    nvmGetConnectionTable(ConnectionTable);
+//    nvmGetMyShortAddress(myShortAddress.v); 
+//    nvmGetMyLongAddress(&myLongAddress);
+//    nvmGetMyParent(&myParent);
+//    #if defined(NWK_ROLE_COORDINATOR)
+//        nvmGetRoutingTable(RoutingTable);
+//        nvmGetKnownCoordinators(&knownCoordinators);
+//        nvmGetRole(&role);
+//    #endif
+//    nvmGetMyPANID(myPANID.v);
+//    nvmGetCurrentChannel(&currentChannel);
+//    MiApp_ProtocolInit(FALSE);
     
 //////////////////////////////////////////
     

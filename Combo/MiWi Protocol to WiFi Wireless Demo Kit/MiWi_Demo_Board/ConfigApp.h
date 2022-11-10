@@ -156,8 +156,8 @@
 #define EUI_3 'k'
 #define EUI_2 'e'
 #define EUI_1 'r'
-//#define EUI_0 '0'
-#define EUI_0 '1'
+#define EUI_0 '0'
+//#define EUI_0 '1'
 
 //#define EUI_7 0x55
 //#define EUI_6 0xaa

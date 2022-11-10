@@ -1,0 +1,1 @@
+ $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DPIC32MX795F512L_PIM -I".." -I"../../../../Microchip/Include"   -DXPRJ_PIC32MX795F512L_PIM=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)    D:\microchip_solutions_v2013-06-15\Microchip\USB\CDC Device Driver\usb_function_cdc.c

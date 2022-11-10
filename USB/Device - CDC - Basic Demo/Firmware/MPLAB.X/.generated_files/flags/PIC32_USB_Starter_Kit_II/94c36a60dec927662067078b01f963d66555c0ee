@@ -1,0 +1,1 @@
+ $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DPIC32_USB_STARTER_KIT -I".." -I"../../../../Microchip/Include"   -DXPRJ_PIC32_USB_Starter_Kit_II=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  D:\microchip_solutions_v2013-06-15\Microchip\USB\CDC Device Driver\usb_function_cdc.c
