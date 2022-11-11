@@ -166,6 +166,7 @@ BYTE JoinAvailableChannel(BYTE channel)
         }
 
         i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+//        i = MiApp_EstablishConnection(0xFF, CONN_MODE_INDIRECT);
 //        while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
     }
     else

@@ -311,7 +311,7 @@ void main(void)
     // Initialize the LCD
     /*******************************************************************/
     LCDInit();
- 	
+    
     for(j=0; j < CONNECTION_SIZE; j++)
     {
         for( i = 0; i < MY_ADDRESS_LENGTH; i++)
@@ -324,38 +324,8 @@ void main(void)
         
     }
     
-    MiApp_ProtocolInit(TRUE);//original
-    
-    
-////////    add modification    ////////////
-//    currentChannel = 11;
-//    MiApp_ProtocolInit(FALSE);
-//    myPANID.Val = MY_PAN_ID;
-//    MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);    
-//    MiApp_SetChannel(currentChannel);
-    
-    
-//    nvmGetMyPANID(myPANID.v);
-//    MiMAC_SetAltAddress((BYTE *)&tmp, (BYTE *)&myPANID.Val);  
-//    nvmGetCurrentChannel(&currentChannel);
-//    MiApp_SetChannel(currentChannel);
-    
-   
-//    nvmGetConnMode(&ConnMode);
-//    nvmGetConnectionTable(ConnectionTable);
-//    nvmGetMyShortAddress(myShortAddress.v); 
-//    nvmGetMyLongAddress(&myLongAddress);
-//    nvmGetMyParent(&myParent);
-//    #if defined(NWK_ROLE_COORDINATOR)
-//        nvmGetRoutingTable(RoutingTable);
-//        nvmGetKnownCoordinators(&knownCoordinators);
-//        nvmGetRole(&role);
-//    #endif
-//    nvmGetMyPANID(myPANID.v);
-//    nvmGetCurrentChannel(&currentChannel);
-//    MiApp_ProtocolInit(FALSE);
-    
-//////////////////////////////////////////
+//    MiApp_ProtocolInit(TRUE);//original
+    MiApp_ProtocolInit(FALSE);//original
     
     LED0 = 0;
     LED1 = 0;
@@ -364,7 +334,6 @@ void main(void)
     MainDisplay();
     CheckConfiguration();
     
-   //original
     
     /*******************************************************************/
     //  Set the connection mode. The possible connection modes are:
@@ -425,7 +394,7 @@ void main(void)
             // Toggle LED2 to indicate receiving a packet.
             LED_2 ^= 1;
             MiApp_DiscardMessage();
-            ProcessDataReceived();
+//            ProcessDataReceived();
             
         }
         else
@@ -463,6 +432,7 @@ void ScanButton(void)
     BYTE i;
     BYTE TxSynCount = 0;
     BYTE TxSynCount2 = 0;
+    WORD mydest_parent_addr = 0x0000;
     /*******************************************************************/
     // If no packet received, now we can check if we want to send out
     // any information.
@@ -533,7 +503,10 @@ void ScanButton(void)
             //  input parameter of destination address.
             /*******************************************************************/
 //                    if( MiApp_UnicastConnection(0, TRUE) == FALSE )
-            if( MiApp_UnicastConnection(myParent, TRUE) == FALSE )
+//            if( MiApp_UnicastConnection(myParent, TRUE) == FALSE )
+            
+            if( MiApp_UnicastAddress(&mydest_parent_addr, FALSE, TRUE) == FALSE ) //For hopping
+//            if( MiApp_UnicastAddress(&mydest_longaddr, TRUE, TRUE) == FALSE ) //For hopping
             {
                 DemoOutput_UnicastFail();
             }

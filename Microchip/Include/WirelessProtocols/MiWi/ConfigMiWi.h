@@ -114,7 +114,7 @@
         // timeout is handled in MiMAC layer.
         /*********************************************************************/
 //        #define MIWI_ACK_TIMEOUT                (ONE_SECOND)
-        #define MIWI_ACK_TIMEOUT                (3 * ONE_SECOND)
+        #define MIWI_ACK_TIMEOUT                (2 * ONE_SECOND)
     
     
         /*********************************************************************/

@@ -104,7 +104,7 @@
         BYTE myLongAddress[MY_ADDRESS_LENGTH] = {EUI_0,EUI_1};    
     #endif
 
-    BYTE            currentChannel = 0;             // current operating channel for the device
+    BYTE            currentChannel = 11;             // current operating channel for the device
     BYTE            ConnMode = 0;
     typedef union
     {
@@ -3660,8 +3660,8 @@ EndOfSearchLoop:
                 {
                     return FALSE;
                 }
-                
-                nvmGetMyPANID(myPANID.v);
+                if( myPANID.Val != 0xffff )
+                    nvmGetMyPANID(myPANID.v);
                 nvmGetConnMode(&ConnMode);
                 MiWiCapacityInfo.bits.ConnMode = ConnMode;
                 nvmGetConnectionTable(ConnectionTable);
