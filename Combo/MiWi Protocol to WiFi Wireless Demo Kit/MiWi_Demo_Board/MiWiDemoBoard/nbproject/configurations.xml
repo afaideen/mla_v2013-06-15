@@ -356,7 +356,17 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="../DemoTest.c.c" ex="true" overriding="false">
+      <item path="../Demo.c" ex="true" overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
+      </item>
+      <item path="../DemoTest.c.c" ex="false" overriding="false">
         <C18>
         </C18>
         <C18-AS>
@@ -369,8 +379,8 @@
       <C18>
         <property key="code-model" value="ms"/>
         <property key="data-model" value="oa-"/>
-        <property key="default-char-unsigned" value="false"/>
-        <property key="enable-all-optimizations" value="true"/>
+        <property key="default-char-unsigned" value="true"/>
+        <property key="enable-all-optimizations" value="false"/>
         <property key="enable-int-promotion" value="false"/>
         <property key="enable-multi-bank-stack-model" value="false"/>
         <property key="enable-ob" value="false"/>
@@ -386,9 +396,9 @@
         <property key="enable-ow" value="true"/>
         <property key="extra-include-directories"
                   value="..;../../../;../../../../Microchip/Include;../../../../Microchip/Include/Transceivers;../../../../Microchip/Include/WirelessProtocols/P2P;../../../../Microchip/Include/Transceivers/MRF24J40;../../../../Microchip/Include/WirelessProtocols;../../../../Microchip/Include/Transceivers/MRF49XA;../../../../Microchip/Include/WirelessProtocols/MiWi;../../../../Microchip/Include/Transceivers/MRF89XA;../../../../Microchip/Include/WirelessProtocols"/>
-        <property key="optimization-master" value="Debug friendly"/>
+        <property key="optimization-master" value="Disable all"/>
         <property key="preprocessor-macros"
-                  value="CFG_INCLUDE_MIWI_DEMOBRD;PROTOCOL_MIWI_PRO"/>
+                  value="CFG_INCLUDE_MIWI_DEMOBRD;PROTOCOL_MIWI_PRO;MIWI_HELPER"/>
         <property key="procedural-abstraction-passes" value="0"/>
         <property key="storage-class" value="sca"/>
         <property key="verbose" value="false"/>

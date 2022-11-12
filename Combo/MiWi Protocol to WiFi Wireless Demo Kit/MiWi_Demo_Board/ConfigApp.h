@@ -160,14 +160,6 @@
 //#define EUI_0 '1'
 //#define EUI_0 '2'
 
-//#define EUI_7 0x55
-//#define EUI_6 0xaa
-//#define EUI_5 0x55
-//#define EUI_4 0xaa
-//#define EUI_3 0x55
-//#define EUI_2 0x01
-//#define EUI_1 0x02
-//#define EUI_0 0x03
 
 #define ENABLE_EEPROM
 
@@ -326,7 +318,7 @@
 
 #if defined(ENABLE_NETWORK_FREEZER)
     #define ENABLE_NVM
-//	#define ENABLE_NVM_MAC  //useless problematic!
+//	#define ENABLE_NVM_MAC  
 #endif
 
 #if defined(ENABLE_ACTIVE_SCAN) && defined(TARGET_SMALL)

@@ -77,6 +77,7 @@
         
         #if defined(PROTOCOL_MIWI_PRO)
             WORD        nvmMyShortAddress;
+            BYTE        nvmMyLongAddress;
             WORD        nvmMyParent;
             
             #ifdef NWK_ROLE_COORDINATOR
@@ -500,6 +501,7 @@ EEPROM_NEXT_PAGE:
             #if defined(PROTOCOL_MIWI_PRO)
 
                 result &= NVMalloc(2, &nvmMyShortAddress);
+                result &= NVMalloc(MY_ADDRESS_LENGTH, &nvmMyLongAddress);
                 result &= NVMalloc(1, &nvmMyParent);
                 
                 #if defined(NWK_ROLE_COORDINATOR)

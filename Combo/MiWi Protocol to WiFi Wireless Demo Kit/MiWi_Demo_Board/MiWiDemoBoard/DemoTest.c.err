@@ -1,3 +1,4 @@
+Warning[2066] D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c 417 : type qualifier mismatch in assignment
 Warning[2054] D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c 508 : suspicious pointer conversion
 Warning[2066] D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c 567 : type qualifier mismatch in assignment
 Warning[2066] D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c 568 : type qualifier mismatch in assignment

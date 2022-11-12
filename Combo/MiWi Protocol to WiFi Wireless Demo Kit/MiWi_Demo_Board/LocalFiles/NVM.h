@@ -85,7 +85,8 @@
             #define MCHP_512KBIT            10
             #define MCHP_1MBIT              11
     
-            #define MCHP_EEPROM             MCHP_4KBIT
+            #define MCHP_EEPROM             MCHP_2KBIT
+//            #define MCHP_EEPROM             MCHP_4KBIT    //original but maybe mistake
             
             
             #if MCHP_EEPROM == 0
@@ -168,6 +169,7 @@
         
             #if defined(PROTOCOL_MIWI_PRO)
                 extern WORD        nvmMyShortAddress;
+                extern BYTE        nvmMyLongAddress;
                 extern WORD        nvmMyParent;
                 
                 #ifdef NWK_ROLE_COORDINATOR
@@ -229,6 +231,9 @@
 
                 #define nvmGetMyShortAddress( x )       NVMRead( (BYTE *)x, nvmMyShortAddress, 2)
                 #define nvmPutMyShortAddress( x )       NVMWrite((BYTE *)x, nvmMyShortAddress, 2)
+
+                #define nvmGetMyLongAddress( x )       NVMRead( (BYTE *)x, nvmMyLongAddress, MY_ADDRESS_LENGTH)
+                #define nvmPutMyLongAddress( x )       NVMWrite((BYTE *)x, nvmMyLongAddress, MY_ADDRESS_LENGTH)
                 
                 #define nvmGetMyParent( x )             NVMRead( (BYTE *)x, nvmMyParent, 1)
                 #define nvmPutMyParent( x )             NVMWrite((BYTE *)x, nvmMyParent, 1)

@@ -104,7 +104,7 @@
         BYTE myLongAddress[MY_ADDRESS_LENGTH] = {EUI_0,EUI_1};    
     #endif
 
-    BYTE            currentChannel = 0;             // current operating channel for the device
+    BYTE            currentChannel = 11;             // current operating channel for the device
     BYTE            ConnMode = 0;
     typedef union
     {
@@ -1680,7 +1680,7 @@ ASSIGN_COORDINATOR_SHORT_ADDRESS:
                                     {
                                         MiApp_WriteData(MACRxPacket.Payload[i]);
                                     }
-                                    
+                                    LED1 ^= 1;
                                     if( (destShortAddress.v[1] == myShortAddress.v[1]) &&
                                         (TxBuffer[11] == MIWI_PRO_STACK_REPORT_TYPE) &&
                                         (TxBuffer[12] == ACK_REPORT_TYPE) )
@@ -1705,6 +1705,7 @@ ASSIGN_COORDINATOR_SHORT_ADDRESS:
                                     }
                                     else
                                     {
+                                        LED2 ^= 1;
                                         RouteMessage(destPANID, destShortAddress, MACRxPacket.flags.bits.secEn);
                                     }   
                                 }
@@ -1875,7 +1876,8 @@ HANDLE_COMMAND_PACKET:
                                 if( MACRxPacket.Payload[1] & 0x40 )
                                 {
                                     // if this device is a potential coordinator                                        
-                                    if( role != ROLE_PAN_COORDINATOR )
+                                    if( role != ROLE_PAN_COORDINATOR )    //original 
+//                                    if( role == ROLE_FFD_END_DEVICE )
                                     {
                                         MiApp_FlushTx();
                                         MiApp_WriteData(MIWI_PRO_STACK_REPORT_TYPE);    //Report Type
@@ -5098,7 +5100,8 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
     {
         if( ActiveScanIndex == 0xFF )
         {
-            while( MiApp_SearchConnection(10, ((DWORD)0x00000001)<<currentChannel) == 0 )
+//            while( MiApp_SearchConnection(10, ((DWORD)0x00000001)<<currentChannel) == 0 )
+            while( i = MiApp_SearchConnection(11, ((DWORD)0x00000001)<<currentChannel) == 0 )
             {
                 if( --retry == 0 )
                 {

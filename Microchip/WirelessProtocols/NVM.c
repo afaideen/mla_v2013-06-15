@@ -65,6 +65,7 @@
       
         #if defined(PROTOCOL_MIWI)
             WORD        nvmMyShortAddress;
+            BYTE        nvmMyLongAddress;
             WORD        nvmMyParent;
             
             #ifdef NWK_ROLE_COORDINATOR
@@ -76,6 +77,7 @@
         
         #if defined(PROTOCOL_MIWI_PRO)
             WORD        nvmMyShortAddress;
+            BYTE        nvmMyLongAddress;
             WORD        nvmMyParent;
             
             #ifdef NWK_ROLE_COORDINATOR
@@ -166,6 +168,7 @@
         ********************************************************************/        
     	void NVMRead(BYTE *dest, WORD addr, WORD count)
         {
+            
             #if defined(__18CXX)
                 BYTE oldGIEH = INTCONbits.GIEH;
                 
@@ -175,6 +178,7 @@
                 
                 RFIE = 0;
             #endif
+            Delay10us(10);
             DelayMs(10);
             EE_nCS = 0;
             
@@ -202,6 +206,8 @@
                 *dest++ = EESPIGet();
                 count--;
             }
+            Delay10us(10);
+            DelayMs(1);
             EE_nCS = 1;
             
             #if defined(__18CXX)
@@ -209,13 +215,13 @@
             #else
                 RFIE = oldRFIE;
             #endif
-                Delay10us(10);
         }
 
     	void NVMWrite(BYTE *source, WORD addr, WORD count)
         {
             BYTE PageCounter = 0;
             //BYTE i;
+            
             #if defined(__18CXX)
                 BYTE oldGIEH = INTCONbits.GIEH;   
                 INTCONbits.GIEH = 0;
@@ -223,8 +229,9 @@
                 BYTE oldRFIE = RFIE;
                 RFIE = 0;
             #endif
+           Delay10us(10);
+           DelayMs(5);
            
-            
 EEPROM_NEXT_PAGE:
             do
             {
@@ -271,6 +278,8 @@ EEPROM_NEXT_PAGE:
                     goto EEPROM_NEXT_PAGE;
                 }
             }
+            Delay10us(10);
+            DelayMs(5);
             EE_nCS = 1;
             
             #if defined(__18CXX)
@@ -278,8 +287,7 @@ EEPROM_NEXT_PAGE:
             #else
                 RFIE = oldRFIE;
             #endif
-            Delay10us(10);
-            Delay10us(1);
+            
         }
     #endif
  
@@ -480,6 +488,7 @@ EEPROM_NEXT_PAGE:
             #if defined(PROTOCOL_MIWI)
 
                 result &= NVMalloc(2, &nvmMyShortAddress);
+                result &= NVMalloc(MY_ADDRESS_LENGTH, &nvmMyLongAddress);
                 result &= NVMalloc(1, &nvmMyParent);
                 
                 #if defined(NWK_ROLE_COORDINATOR)
@@ -492,6 +501,7 @@ EEPROM_NEXT_PAGE:
             #if defined(PROTOCOL_MIWI_PRO)
 
                 result &= NVMalloc(2, &nvmMyShortAddress);
+                result &= NVMalloc(MY_ADDRESS_LENGTH, &nvmMyLongAddress);
                 result &= NVMalloc(1, &nvmMyParent);
                 
                 #if defined(NWK_ROLE_COORDINATOR)

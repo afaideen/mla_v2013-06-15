@@ -168,6 +168,7 @@
         
             #if defined(PROTOCOL_MIWI_PRO)
                 extern WORD        nvmMyShortAddress;
+                extern BYTE        nvmMyLongAddress;
                 extern WORD        nvmMyParent;
                 
                 #ifdef NWK_ROLE_COORDINATOR
@@ -229,6 +230,9 @@
 
                 #define nvmGetMyShortAddress( x )       NVMRead( (BYTE *)x, nvmMyShortAddress, 2)
                 #define nvmPutMyShortAddress( x )       NVMWrite((BYTE *)x, nvmMyShortAddress, 2)
+                
+                #define nvmGetMyLongAddress( x )       NVMRead( (BYTE *)x, nvmMyLongAddress, MY_ADDRESS_LENGTH)
+                #define nvmPutMyLongAddress( x )       NVMWrite((BYTE *)x, nvmMyLongAddress, MY_ADDRESS_LENGTH)
                 
                 #define nvmGetMyParent( x )             NVMRead( (BYTE *)x, nvmMyParent, 1)
                 #define nvmPutMyParent( x )             NVMWrite((BYTE *)x, nvmMyParent, 1)
