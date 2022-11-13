@@ -65,7 +65,7 @@
       
         #if defined(PROTOCOL_MIWI)
             WORD        nvmMyShortAddress;
-            BYTE        nvmMyLongAddress;
+            WORD        nvmMyLongAddress;
             WORD        nvmMyParent;
             
             #ifdef NWK_ROLE_COORDINATOR
@@ -77,7 +77,7 @@
         
         #if defined(PROTOCOL_MIWI_PRO)
             WORD        nvmMyShortAddress;
-            BYTE        nvmMyLongAddress;
+            WORD        nvmMyLongAddress;
             WORD        nvmMyParent;
             
             #ifdef NWK_ROLE_COORDINATOR

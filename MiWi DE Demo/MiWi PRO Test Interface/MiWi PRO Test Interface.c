@@ -397,8 +397,10 @@ int main(void)
     /*******************************************************************/
     // Initialize the system
     /*******************************************************************/
-    BoardInit();         
+    BoardInit();      
+#if defined(EXPLORER16)
     ConsoleInit();   
+#endif
         
     Printf("\r\nStarting Testing Interface for MiWi(TM) PRO Stack ...");
     #if defined(MRF24J40)
@@ -567,6 +569,8 @@ int main(void)
 
     while(1)
     {
+        if(!BUTTON0_IO)
+            Reset();
         /*******************************************************************/
         // Function MiApp_MessageAvailable will return a boolean to indicate 
         // if a message for application layer has been received by the 

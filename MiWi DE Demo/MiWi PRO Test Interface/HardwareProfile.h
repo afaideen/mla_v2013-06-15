@@ -55,7 +55,7 @@
     /*********************************************************************/
     //#define PICDEMZ
 //    #define PIC18_EXPLORER
-    #define EXPLORER16
+//    #define EXPLORER16
     //#define EIGHT_BIT_WIRELESS_BOARD
 
     // there are three ways to use NVM to store data: External EPROM, Data EEPROM and 
@@ -270,7 +270,9 @@
         #define PUSH_BUTTON_1       PORTDbits.RD6
         #define PUSH_BUTTON_2       PORTDbits.RD7
         #define LED_1               LATAbits.LATA7
+        #define LED1                LED_1
         #define LED_2               LATAbits.LATA6
+        #define LED2                LED_2
         
         #define BUTTON_1_TRIS       TRISDbits.TRISD6
         #define BUTTON_2_TRIS       TRISDbits.TRISD7
@@ -286,6 +288,8 @@
         #define EE_nCS              LATDbits.LATD12
         
         #define TMRL TMR2
+    #elif defined(WIRELESS_EVAL_BOARD)
+        #include "BSP_PC32MX_WirelessEvalBoard.h"
     #endif
     
 
@@ -380,7 +384,9 @@
     #elif defined(__C30__) 
         #define GetInstructionClock()	(CLOCK_FREQ/2)
     #elif defined(__PIC32MX__)
-        #define GetInstructionClock()	(CLOCK_FREQ)
+        #if defined(EXPLORER16)
+            #define GetInstructionClock()	(CLOCK_FREQ)
+        #endif
     #endif
 
     BYTE ButtonPressed(void);

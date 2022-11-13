@@ -127,7 +127,8 @@
 // MY_PAN_ID defines the PAN identifier. Use 0xFFFF if prefer a 
 // random PAN ID.
 /*********************************************************************/
-#define MY_PAN_ID                       0x1234
+//#define MY_PAN_ID                       0x1234
+#define MY_PAN_ID                       0x1111
 
 /*********************************************************************/
 // ADDITIONAL_NODE_ID_SIZE defines the size of additional payload
