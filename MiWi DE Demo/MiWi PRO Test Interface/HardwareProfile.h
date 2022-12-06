@@ -269,6 +269,7 @@
         
         #define PUSH_BUTTON_1       PORTDbits.RD6
         #define PUSH_BUTTON_2       PORTDbits.RD7
+        #define BUTTON0_IO          PUSH_BUTTON_2
         #define LED_1               LATAbits.LATA7
         #define LED1                LED_1
         #define LED_2               LATAbits.LATA6

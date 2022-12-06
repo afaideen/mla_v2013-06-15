@@ -11,6 +11,7 @@
         <itemPath>../BSP_MiWiCardDemoBd.h</itemPath>
         <itemPath>../LCD_ST7032.h</itemPath>
         <itemPath>../MAC_EEProm.h</itemPath>
+        <itemPath>../../../../Microchip/WirelessProtocols/MiWiHelper.h</itemPath>
       </logicalFolder>
       <logicalFolder name="Common" displayName="Common" projectFiles="true">
         <itemPath>../../../../Microchip/Include/WirelessProtocols/MSPI.h</itemPath>
@@ -59,8 +60,8 @@
         <itemPath>../BSP_MiWiDemoBd.c</itemPath>
         <itemPath>../LCD_ST7032.c</itemPath>
         <itemPath>../MAC_EEProm.c</itemPath>
-        <itemPath>../DemoTest.c.c</itemPath>
         <itemPath>../App_ConfigureControl.c</itemPath>
+        <itemPath>../DemoTest.c</itemPath>
       </logicalFolder>
       <logicalFolder name="Common" displayName="Common" projectFiles="true">
         <itemPath>../../../../Microchip/Common/TimeDelay.c</itemPath>
@@ -136,7 +137,7 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="../DemoTest.c.c" ex="true" overriding="false">
+      <item path="../DemoTest.c" ex="true" overriding="false">
         <C18>
         </C18>
         <C18-AS>
@@ -366,7 +367,7 @@
         <C18LanguageToolchain>
         </C18LanguageToolchain>
       </item>
-      <item path="../DemoTest.c.c" ex="false" overriding="false">
+      <item path="../DemoTest.c" ex="false" overriding="false">
         <C18>
         </C18>
         <C18-AS>
@@ -444,6 +445,7 @@
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
         <property key="hwtoolclock.units" value="mips"/>

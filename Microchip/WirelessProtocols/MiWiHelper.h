@@ -14,8 +14,9 @@
 
 BOOL CreateNewConnectionWithLeastNoise(DWORD scan_chnl);
 BOOL CreateNewConnectionAtChannel(BYTE channel);
-BYTE JoinAvailableChannel(BYTE channel);
-BYTE AutoSearchActiveConnection(DWORD scan_chnl);
+//BYTE JoinAvailableChannel(BYTE channel);
+BYTE JoinAvailableChannel(DWORD channel, WORD short_addr);
+WORD AutoSearchActiveConnection(DWORD scan_chnl);
 
 #endif	/* MIWIHELPER_H */
 

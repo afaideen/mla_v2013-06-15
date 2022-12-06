@@ -90,7 +90,8 @@ extern void DemoOutput_UnicastFail(void);
 extern void DemoOutput_Instruction(void);
 extern float ReadTempSensorBoard(void);
 extern void ftoa(float f, unsigned char *buff, BYTE size);
-extern BYTE JoinAvailableChannel(BYTE channel);
+//extern BYTE JoinAvailableChannel(BYTE channel);
+extern BYTE JoinAvailableChannel(DWORD channel, WORD short_addr);
 extern BYTE ButtonPressed_(void);
 
 void ProcessDataReceived(void);
@@ -325,7 +326,7 @@ void main(void)
     }
     
 //    MiApp_ProtocolInit(TRUE);//original
-    MiApp_ProtocolInit(FALSE);//original
+    MiApp_ProtocolInit(FALSE);
     
     LED0 = 0;
     LED1 = 0;
@@ -350,7 +351,11 @@ void main(void)
 //    MiApp_ConnectionMode(ENABLE_ACTIVE_SCAN_RSP);  //for MIWI
 //    MiApp_ConnectionMode(ENABLE_ALL_CONN);  //for MIWI
 //    MiApp_ConnectionMode(ENABLE_PREV_CONN);  //for MIWI
-    i = JoinAvailableChannel(currentChannel);
+    currentChannel = 25;
+    i = JoinAvailableChannel(currentChannel, 0x0000);
+//    i = JoinAvailableChannel(currentChannel, 0x0100);
+//    i = JoinAvailableChannel(0xffffffff, 0x0100);
+//    i = JoinAvailableChannel(0xffffffff, 0x0000);//it will scan ch 11-26 looking for PAN Coordinator at address 0x0000
 #endif
     
     DelayMs(1000);
@@ -369,6 +374,7 @@ void main(void)
     appData.myLongAddress[5] = myLongAddress[5];
     appData.myLongAddress[6] = myLongAddress[6];
     appData.myLongAddress[7] = myLongAddress[7];    
+ 
     while(1)
     {
         ClrWdt();
@@ -609,7 +615,7 @@ void Check_SW1(void)
         {
             t_sw1 = MiWi_TickGet();
             LCDErase();                
-            sprintf((char *)&(LCDText), (far rom char*)"PANID:%02x%02x Ch:%02d",myPANID.v[1],myPANID.v[0],myChannel);
+            sprintf((char *)&(LCDText), (far rom char*)"PANID:%02x%02x Ch:%02d",myPANID.v[1],myPANID.v[0],currentChannel);
             sprintf((char *)&(LCDText[16]), (far rom char*)"Address: %02x%02x", myShortAddress.v[1], myShortAddress.v[0]);
             LCDUpdate();
 

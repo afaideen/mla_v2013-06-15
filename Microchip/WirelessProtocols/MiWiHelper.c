@@ -9,6 +9,7 @@ extern void DemoOutput_Channel(BYTE channel, BYTE Step);
 extern void LCDDisplay(char *text, BYTE value, BOOL delay);
 extern BYTE DemoOutput_ActiveScanResults(BYTE num);
 extern void DemoOutput_Rescan(void);
+void DemoOutput_Channel_Addr(BYTE channel, BYTE high_addr, BYTE low_addr);
 
 BOOL MiWiHelper_SendData(BYTE conn_index, BYTE *data);
 
@@ -81,14 +82,15 @@ BOOL CreateNewConnectionAtChannel(BYTE channel)
 }
 
 #ifdef ENABLE_ACTIVE_SCAN
-BYTE AutoSearchActiveConnection(DWORD scan_chnl)
+WORD AutoSearchActiveConnection(DWORD scan_chnl)
 {
-    BYTE j, OperatingChannel = 0xFF;
+    WORD o = 0;
+    BYTE j, OperatingChannel = 0xFF, retry = 3;
     DWORD scan_chnl_;
     Printf("Autosearching...");
 //    LCDDisplay((char *)"Search Ch %d", channel, TRUE);
     LCDDisplay((char *)"Searching...", 0, FALSE);
-    while(1)
+    while(retry)
     {
         /*********************************************************************/
         // Function MiApp_SearchConnection will return the number of existing 
@@ -109,8 +111,11 @@ BYTE AutoSearchActiveConnection(DWORD scan_chnl)
         //     attention to the channels that are not preferred.
         /*********************************************************************/
 //        scan_chnl = 0b0000000011111000 << 11;
-        scan_chnl_ = scan_chnl << 11;
-        j = MiApp_SearchConnection(10, scan_chnl_);
+//        scan_chnl_ = scan_chnl << 11;
+//        scan_chnl_ = 1 << scan_chnl;
+        j = MiApp_SearchConnection(10, scan_chnl);
+//        j = MiApp_SearchConnection(10, scan_chnl_);
+//        j = MiApp_SearchConnection(11, scan_chnl_);
 //        j = MiApp_SearchConnection(10, 0xFFFFFFFF);
         OperatingChannel = DemoOutput_ActiveScanResults(j);
 
@@ -128,17 +133,30 @@ BYTE AutoSearchActiveConnection(DWORD scan_chnl)
             break;
         }
         DemoOutput_Rescan();
+        retry--;
     }
-    return OperatingChannel;
+    o = j;
+    o = o << 8 ;
+    o = o | OperatingChannel;
+//     o = ((WORD)j << 8) | OperatingChannel;
+    return o;
+
 }
 
 #endif
 
-BYTE JoinAvailableChannel(BYTE channel)
+BYTE JoinAvailableChannel(DWORD channel, WORD short_addr)
 {
-    BYTE i;
+    DWORD channel_map;
+    WORD k;
+    WORD_VAL addr;
+    BYTE i, n, j = 0;
+    
+    i = 0xff;
+    addr.Val = short_addr;
     Printf("Joining available channel...");
      MiApp_ConnectionMode(ENABLE_ALL_CONN); 
+//     MiApp_ConnectionMode(ENABLE_PREV_CONN); 
     /*******************************************************************/
     // Function MiApp_EstablishConnection try to establish a new 
     // connection with peer device. 
@@ -150,7 +168,7 @@ BYTE JoinAvailableChannel(BYTE channel)
     //      either direct or indirect. Direct mode means connection 
     //      within the radio range; indirect mode means connection 
     //      may or may not in the radio range. 
-    /*******************************************************************/
+    /*******************************************************************/   
 
     if( channel >= 11 && channel <= 26)
     {
@@ -164,10 +182,41 @@ BYTE JoinAvailableChannel(BYTE channel)
                 return 0;
             #endif
         }
-
-        i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+        if(short_addr != 0x0000)
+        {
+            //convert to channel map
+            if(channel != 0xffffffff)
+            {
+    //            channel_map = (0x00000001&0xffffffff) << channel | (0x00000001&0xffffffff) << 12;
+                channel_map = (0x00000001&0xffffffff) << channel;
+            }
+            else
+                channel_map = 0xffffffff;
+            k = AutoSearchActiveConnection(channel_map);
+            n = k >> 8;
+            channel = (BYTE)k & 0x00ff;
+            
+            for( j = 0; j < n; j++)
+            {
+                if( ActiveScanResults[j].Address[0] == addr.v[0] && ActiveScanResults[j].Address[1] == addr.v[1] )
+                {
+                    i = MiApp_EstablishConnection(j, CONN_MODE_DIRECT);
+                    break;
+                }
+                if( (j == n - 1) && ActiveScanResults[j].Capability.bits.Role == ROLE_COORDINATOR)
+                    i = MiApp_EstablishConnection(j, CONN_MODE_DIRECT);
+            }
+            if(j == n)
+                j = n - 1;
+            if( i == 0xff )
+                i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+        }
+        else{
+            i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
 //        i = MiApp_EstablishConnection(0xFF, CONN_MODE_INDIRECT);
 //        while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );
+            j = 0;
+        }
     }
     else
         while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );//active scanning all channels available
@@ -180,7 +229,8 @@ BYTE JoinAvailableChannel(BYTE channel)
     {
         //Join channel successful
         #if defined(ENABLE_ACTIVE_SCAN)
-            DemoOutput_Channel(ActiveScanResults[0].Channel, 1);//Connected peer
+            DemoOutput_Channel_Addr(ActiveScanResults[j].Channel, ActiveScanResults[j].Address[1], ActiveScanResults[j].Address[0]);
+//            DemoOutput_Channel(ActiveScanResults[0].Channel, 1);//Connected peer
 //            DemoOutput_Channel(ActiveScanResults[myParent].Channel, 1);//Connected peer
 //            DemoOutput_Channel(channel, 1);//Connected peer
         #else

@@ -65,7 +65,8 @@
     #define SW1             2	
     
     // Following definition is for delay functionality
-    #define GetInstructionClock()	(CLOCK_FREQ/4)
+    #define GetInstructionClock()	(CLOCK_FREQ/4)  //original
+//    #define GetInstructionClock()	(CLOCK_FREQ/2)
 
     BYTE ButtonPressed(void);
     void BoardInit(void);

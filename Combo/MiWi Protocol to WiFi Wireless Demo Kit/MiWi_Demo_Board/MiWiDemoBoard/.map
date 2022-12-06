@@ -1,5 +1,5 @@
 MPLINK 4.48, Linker
-Linker Map File - Created Sat Nov 12 17:34:52 2022
+Linker Map File - Created Tue Dec 06 13:26:07 2022
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -10,9 +10,9 @@ Linker Map File - Created Sat Nov 12 17:34:52 2022
        .code__user_putc.o       code   0x00000e    program   0x000002
            .code___init.o       code   0x000010    program   0x000002
     .romdata_MAC_EEProm.o    romdata   0x000012    program   0x000000
-    .idata_DemoTest.c.o_i    romdata   0x000012    program   0x000006
-    .romdata_DemoTest.c.o    romdata   0x000012    program   0x000000
 .romdata_App_ConfigureControl.o    romdata   0x000012    program   0x000000
+      .idata_DemoTest.o_i    romdata   0x000012    program   0x000006
+      .romdata_DemoTest.o    romdata   0x000012    program   0x000000
      .idata_TimeDelay.o_i    romdata   0x000012    program   0x000000
      .romdata_TimeDelay.o    romdata   0x000012    program   0x000000
           .romdata_MSPI.o    romdata   0x000012    program   0x000000
@@ -58,40 +58,40 @@ Linker Map File - Created Sat Nov 12 17:34:52 2022
           .code_MiWiPRO.o       code   0x000064    program   0x007c96
          .code_MRF24J40.o       code   0x007cfa    program   0x001be8
                      PROG       code   0x0098e2    program   0x000954
-       .code_DemoTest.c.o       code   0x00a236    program   0x000914
-         .code_vfprintf.o       code   0x00ab4a    program   0x000816
-   .code_BSP_MiWiDemoBd.o       code   0x00b360    program   0x0005d2
-.code_App_ConfigureControl.o       code   0x00b932    program   0x000482
-              .code_NVM.o       code   0x00bdb4    program   0x000300
-       .code_MiWiHelper.o       code   0x00c0b4    program   0x000294
-       .code_LCD_ST7032.o       code   0x00c348    program   0x0001f6
-        .code_TimeDelay.o       code   0x00c53e    program   0x00017c
-             .stringtable    romdata   0x00c6ba    program   0x000160
-       .code_DemoOutput.o       code   0x00c81a    program   0x000152
-                   STRING       code   0x00c96c    program   0x000132
-       .code_MAC_EEProm.o       code   0x00ca9e    program   0x000108
-    .romdata_DemoOutput.o    romdata   0x00cba6    program   0x0000c0
-               _cinit_scn       code   0x00cc66    program   0x00009e
-       .code_SymbolTime.o       code   0x00cd04    program   0x000086
-          .code_sprintf.o       code   0x00cd8a    program   0x000072
-             .code_putc.o       code   0x00cdfc    program   0x000066
-             .code_MSPI.o       code   0x00ce62    program   0x000066
-       .romdata_MiWiPRO.o    romdata   0x00cec8    program   0x00003c
-                    CTYPE       code   0x00cf04    program   0x000024
-                    .code       code   0x00cf28    program   0x000020
-                    STDIO       code   0x00cf48    program   0x00001c
-             _startup_scn       code   0x00cf64    program   0x00001a
-      .romdata_vfprintf.o    romdata   0x00cf7e    program   0x000011
-.idata_BSP_MiWiDemoBd.o_i    romdata   0x00cf8f    program   0x000000
-.idata_App_ConfigureControl.o_i    romdata   0x00cf8f    program   0x000000
-    .idata_DemoOutput.o_i    romdata   0x00cf8f    program   0x000000
-          .code_c018i_e.o       code   0x00cf90    program   0x000000
-          .code_MRF89XA.o       code   0x00cf90    program   0x000000
-          .code_MRF49XA.o       code   0x00cf90    program   0x000000
-         .code_security.o       code   0x00cf90    program   0x000000
-             .code_MiWi.o       code   0x00cf90    program   0x000000
-              .code_crc.o       code   0x00cf90    program   0x000000
-              .code_P2P.o       code   0x00cf90    program   0x000000
+         .code_DemoTest.o       code   0x00a236    program   0x000926
+         .code_vfprintf.o       code   0x00ab5c    program   0x000816
+   .code_BSP_MiWiDemoBd.o       code   0x00b372    program   0x0005d2
+.code_App_ConfigureControl.o       code   0x00b944    program   0x000482
+       .code_MiWiHelper.o       code   0x00bdc6    program   0x00043c
+              .code_NVM.o       code   0x00c202    program   0x000300
+       .code_LCD_ST7032.o       code   0x00c502    program   0x0001f6
+       .code_DemoOutput.o       code   0x00c6f8    program   0x0001a0
+             .stringtable    romdata   0x00c898    program   0x000180
+        .code_TimeDelay.o       code   0x00ca18    program   0x00017c
+                   STRING       code   0x00cb94    program   0x000132
+       .code_MAC_EEProm.o       code   0x00ccc6    program   0x000108
+    .romdata_DemoOutput.o    romdata   0x00cdce    program   0x0000c0
+               _cinit_scn       code   0x00ce8e    program   0x00009e
+       .code_SymbolTime.o       code   0x00cf2c    program   0x000086
+          .code_sprintf.o       code   0x00cfb2    program   0x000072
+             .code_putc.o       code   0x00d024    program   0x000066
+             .code_MSPI.o       code   0x00d08a    program   0x000066
+       .romdata_MiWiPRO.o    romdata   0x00d0f0    program   0x00003c
+                    CTYPE       code   0x00d12c    program   0x000024
+                    .code       code   0x00d150    program   0x000020
+                    STDIO       code   0x00d170    program   0x00001c
+             _startup_scn       code   0x00d18c    program   0x00001a
+      .romdata_vfprintf.o    romdata   0x00d1a6    program   0x000011
+.idata_BSP_MiWiDemoBd.o_i    romdata   0x00d1b7    program   0x000000
+.idata_App_ConfigureControl.o_i    romdata   0x00d1b7    program   0x000000
+    .idata_DemoOutput.o_i    romdata   0x00d1b7    program   0x000000
+          .code_c018i_e.o       code   0x00d1b8    program   0x000000
+          .code_MRF89XA.o       code   0x00d1b8    program   0x000000
+          .code_MRF49XA.o       code   0x00d1b8    program   0x000000
+         .code_security.o       code   0x00d1b8    program   0x000000
+             .code_MiWi.o       code   0x00d1b8    program   0x000000
+              .code_crc.o       code   0x00d1b8    program   0x000000
+              .code_P2P.o       code   0x00d1b8    program   0x000000
 .config_fff8_BSP_MiWiDemoBd.o    romdata   0x00fff8    program   0x000001
 .config_fff9_BSP_MiWiDemoBd.o    romdata   0x00fff9    program   0x000001
 .config_fffa_BSP_MiWiDemoBd.o    romdata   0x00fffa    program   0x000001
@@ -104,11 +104,11 @@ Linker Map File - Created Sat Nov 12 17:34:52 2022
        __CONNECTION_TABLE      udata   0x000060       data   0x00008c
   .udata_BSP_MiWiDemoBd.o      udata   0x0000ec       data   0x000012
       .udata_SymbolTime.o      udata   0x0000fe       data   0x000002
-      .udata_DemoTest.c.o      udata   0x000100       data   0x0000e4
+        .udata_DemoTest.o      udata   0x000100       data   0x0000e4
         .udata_MRF24J40.o      udata   0x0001e4       data   0x00001a
          .udata_MiWiPRO.o      udata   0x000200       data   0x0000e0
              .udata_NVM.o      udata   0x0002e0       data   0x000019
-      .idata_DemoTest.c.o      idata   0x0002f9       data   0x000006
+        .idata_DemoTest.o      idata   0x0002f9       data   0x000006
       .idata__user_putc.o      idata   0x0002ff       data   0x000000
              .idata_P2P.o      idata   0x0002ff       data   0x000000
              .idata_NVM.o      idata   0x0002ff       data   0x000000
@@ -129,9 +129,6 @@ Linker Map File - Created Sat Nov 12 17:34:52 2022
          .udata_sprintf.o      udata   0x0002ff       data   0x000000
          .idata_sprintf.o      idata   0x0002ff       data   0x000000
         .udata_vfprintf.o      udata   0x0002ff       data   0x000000
-      .udata_MAC_EEProm.o      udata   0x0002ff       data   0x000000
-      .idata_LCD_ST7032.o      idata   0x0002ff       data   0x000000
-  .idata_BSP_MiWiDemoBd.o      idata   0x0002ff       data   0x000000
       .idata_MiWiHelper.o      idata   0x0002ff       data   0x000000
       .udata_MiWiHelper.o      udata   0x0002ff       data   0x000000
       .idata_DemoOutput.o      idata   0x0002ff       data   0x000000
@@ -139,6 +136,7 @@ Linker Map File - Created Sat Nov 12 17:34:52 2022
          .idata_c018i_e.o      idata   0x0002ff       data   0x000000
       .idata_MAC_EEProm.o      idata   0x0002ff       data   0x000000
 .idata_App_ConfigureControl.o      idata   0x0002ff       data   0x000000
+  .idata_BSP_MiWiDemoBd.o      idata   0x0002ff       data   0x000000
        .udata_TimeDelay.o      udata   0x0002ff       data   0x000000
        .idata_TimeDelay.o      idata   0x0002ff       data   0x000000
             .udata_MSPI.o      udata   0x0002ff       data   0x000000
@@ -146,6 +144,8 @@ Linker Map File - Created Sat Nov 12 17:34:52 2022
       .idata_SymbolTime.o      idata   0x0002ff       data   0x000000
             .udata_MiWi.o      udata   0x0002ff       data   0x000000
             .idata_MiWi.o      idata   0x0002ff       data   0x000000
+      .idata_LCD_ST7032.o      idata   0x0002ff       data   0x000000
+      .udata_MAC_EEProm.o      udata   0x0002ff       data   0x000000
              .udata_P2P.o      udata   0x0002ff       data   0x000000
               MAC_RX_BUFF      udata   0x000300       data   0x0000da
       .udata_LCD_ST7032.o      udata   0x0003da       data   0x000021
@@ -175,9 +175,9 @@ Linker Map File - Created Sat Nov 12 17:34:52 2022
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x00cf8e      
+                            0x000000    0x00d1b6      
                             0x00fff8    0x00fffb      
-            53139 out of 65538 program addresses used, program memory utilization is 81%
+            53691 out of 65538 program addresses used, program memory utilization is 81%
 
 
 
@@ -185,57 +185,58 @@ Linker Map File - Created Sat Nov 12 17:34:52 2022
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
     AddNodeToNetworkTable   0x0054f2    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-AutoSearchActiveConnection   0x00c204    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
-                BoardInit   0x00b360    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+AutoSearchActiveConnection   0x00bf16    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+                BoardInit   0x00b372    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
           BroadcastJitter   0x000068    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-            ButtonPressed   0x00b404    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-           ButtonPressed_   0x00b476    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-       CheckConfiguration   0x00a8f0    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-                Check_SW1   0x00aa3e    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-         ConfigureControl   0x00ba56    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
-CreateNewConnectionAtChannel   0x00c1a6    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
-CreateNewConnectionWithLeastNoise   0x00c12e    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+            ButtonPressed   0x00b416    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+           ButtonPressed_   0x00b488    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+       CheckConfiguration   0x00a902    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+                Check_SW1   0x00aa50    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+         ConfigureControl   0x00ba68    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
+CreateNewConnectionAtChannel   0x00beb8    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+CreateNewConnectionWithLeastNoise   0x00be40    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
                    D1616S   0x009f3c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
                 D1616SNEG   0x009f4a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
                  D1616SOK   0x009f46    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
                 D1616SPOS   0x009f5a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
                   D1616SX   0x009f80    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
                   DA1616S   0x009f2c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                       DE   0x00cc24    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-                Delay10us   0x00c53e    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Common\TimeDelay.c
-                  DelayMs   0x00c5fe    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Common\TimeDelay.c
-DemoOutput_ActiveScanResults   0x00c81a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-       DemoOutput_Channel   0x00c880    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-  DemoOutput_ChannelError   0x00c944    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-      DemoOutput_Greeting   0x00c86a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
- DemoOutput_HandleMessage   0x00c8d8    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-   DemoOutput_Instruction   0x00c8c4    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-        DemoOutput_Rescan   0x00c868    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-   DemoOutput_UnicastFail   0x00c956    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-    DemoOutput_UpdateTxRx   0x00c924    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+                       DE   0x00ce4c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+                Delay10us   0x00ca18    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Common\TimeDelay.c
+                  DelayMs   0x00cad8    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Common\TimeDelay.c
+DemoOutput_ActiveScanResults   0x00c6f8    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+       DemoOutput_Channel   0x00c75e    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+  DemoOutput_ChannelError   0x00c870    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+  DemoOutput_Channel_Addr   0x00c7a2    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+      DemoOutput_Greeting   0x00c748    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+ DemoOutput_HandleMessage   0x00c804    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+   DemoOutput_Instruction   0x00c7f0    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+        DemoOutput_Rescan   0x00c746    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+   DemoOutput_UnicastFail   0x00c882    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+    DemoOutput_UpdateTxRx   0x00c850    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
            DumpConnection   0x004a14    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-               EEPROMRead   0x00ca9e    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\MAC_EEProm.c
-            Factory_Reset   0x00b932    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
+               EEPROMRead   0x00ccc6    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\MAC_EEProm.c
+            Factory_Reset   0x00b944    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
                 FindDepth   0x003820    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
           FindRoutingPath   0x003894    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
        HANDLE_DATA_PACKET   0x000200    program     static                          
                   HighISR   0x0092de    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
                HighVector   0x000008    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
              InitMRF24J40   0x007e8e    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
-          InitSymbolTimer   0x00cd04    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\SymbolTime.c
-     JoinAvailableChannel   0x00c2a8    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
-          LCDBacklightOFF   0x00c44e    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-           LCDBacklightON   0x00c44a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-               LCDDisplay   0x00c4ec    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-                 LCDErase   0x00c41c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-                  LCDInit   0x00c38c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-              LCDTRXCount   0x00b5b4    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-                LCDUpdate   0x00c452    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-             LCD_WriteCmd   0x00c348    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-            LCD_WriteData   0x00c36a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+          InitSymbolTimer   0x00cf2c    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\SymbolTime.c
+     JoinAvailableChannel   0x00bfa6    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+          LCDBacklightOFF   0x00c608    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+           LCDBacklightON   0x00c604    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+               LCDDisplay   0x00c6a6    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+                 LCDErase   0x00c5d6    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+                  LCDInit   0x00c546    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+              LCDTRXCount   0x00b5c6    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+                LCDUpdate   0x00c60c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+             LCD_WriteCmd   0x00c502    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+            LCD_WriteData   0x00c524    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
                 LowVector   0x000018    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
                  MacroNop   0x000064    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-              MainDisplay   0x00a236    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+              MainDisplay   0x00a236    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
     MiApp_BroadcastPacket   0x006284    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
      MiApp_ConnectionMode   0x005b14    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
      MiApp_DiscardMessage   0x00627a    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
@@ -259,57 +260,57 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
       MiMAC_SetAltAddress   0x009178    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
          MiMAC_SetChannel   0x009086    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
            MiMAC_SetPower   0x0090e2    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
-                     MiWi   0x00cba6    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-      MiWiHelper_SendData   0x00c0b4    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+                     MiWi   0x00cdce    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+      MiWiHelper_SendData   0x00bdc6    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
              MiWiPROTasks   0x00013e    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-             MiWi_TickGet   0x00cd1a    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\SymbolTime.c
+             MiWi_TickGet   0x00cf42    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\SymbolTime.c
                 MultiCast   0x0062a4    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-                  NVMInit   0x00bfa2    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
-                  NVMRead   0x00bdb4    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
-                 NVMWrite   0x00be56    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
-                 NVMalloc   0x00bf4c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
+                  NVMInit   0x00c3f0    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
+                  NVMRead   0x00c202    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
+                 NVMWrite   0x00c2a4    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
+                 NVMalloc   0x00c39a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
                OpenSocket   0x004bf2    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
         PHYGetLongRAMAddr   0x007e02    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
        PHYGetShortRAMAddr   0x007dc0    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
         PHYSetLongRAMAddr   0x007cfa    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
        PHYSetShortRAMAddr   0x007d7e    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
-      ProcessDataReceived   0x00a86c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-            ProcessSensor   0x00a678    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+      ProcessDataReceived   0x00a87e    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+            ProcessSensor   0x00a68a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                   RESTORE   0x00a184    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                  RESTORE   0x009d46    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div08u.asm
                   RESTORE   0x009f72    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
                   RESTORE   0x00a228    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-              RETQUOTIENT   0x00a218    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-              RETQUOTIENT   0x009f6a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                  RESTORE   0x009d46    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div08u.asm
               RETQUOTIENT   0x00a17c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-      ReadTempSensorBoard   0x00b60a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-         Read_MAC_Address   0x00caea    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\MAC_EEProm.c
-          Read_VBGVoltage   0x00b848    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+              RETQUOTIENT   0x009f6a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+              RETQUOTIENT   0x00a218    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+      ReadTempSensorBoard   0x00b61c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+         Read_MAC_Address   0x00cd12    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\MAC_EEProm.c
+          Read_VBGVoltage   0x00b85a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
              RouteMessage   0x003d62    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
                   SETSIGN   0x009f1a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                 SETUPSTK   0x00a11a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                 SETUPSTK   0x009efa    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
                  SETUPSTK   0x009d04    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div08u.asm
+                 SETUPSTK   0x009efa    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
                  SETUPSTK   0x00a192    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                   SPIGet   0x00ce8a    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
-                  SPIGet2   0x00cebc    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
-                   SPIPut   0x00ce62    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
-                  SPIPut2   0x00ce96    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
+                 SETUPSTK   0x00a11a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                   SPIGet   0x00d0b2    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
+                  SPIGet2   0x00d0e4    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
+                   SPIPut   0x00d08a    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
+                  SPIPut2   0x00d0be    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
       SaveIndirectMessage   0x004f90    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-               ScanButton   0x00a744    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-                 ScanTime   0x00cec8    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+               ScanButton   0x00a756    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+                 ScanTime   0x00d0f0    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
      SearchForLongAddress   0x00542e    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
     SearchForShortAddress   0x0052b2    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
                SendBeacon   0x005356    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
        SendIndirectPacket   0x0041ea    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
             SendMACPacket   0x004124    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
       StartChannelHopping   0x0071c6    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-     UserInterruptHandler   0x00b930    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-              _2jContinue   0x00c9e2    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
-                   _2jEnd   0x00ca88    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-                   _3jEnd   0x00c9ec    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
-              _4jContinue   0x00c9a0    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
-                   _5jEnd   0x00c9aa    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
+     UserInterruptHandler   0x00b942    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+              _2jContinue   0x00cc0a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
+                   _2jEnd   0x00ccb0    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                   _3jEnd   0x00cc14    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
+              _4jContinue   0x00cbc8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
+                   _5jEnd   0x00cbd2    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
               __FpCompare   0x009e2c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\compFP.asm
                  __FpPack   0x009a2c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
             __FpReturnNaN   0x009aae    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
@@ -322,7 +323,7 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
               __FpReturnW   0x009a84    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
               __FpUnPackA   0x009ae6    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\unpackFP.asm
               __FpUnPackB   0x009b16    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\unpackFP.asm
-       ___case_0_lbl00022   0x00bc2a    program     static                          
+       ___case_0_lbl00022   0x00bc3c    program     static                          
      ___case_161_lbl00145   0x0010ac    program     static                          
      ___case_162_lbl00149   0x00128c    program     static                          
      ___case_163_lbl00153   0x001300    program     static                          
@@ -332,13 +333,13 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
      ___case_178_lbl00183   0x00186a    program     static                          
      ___case_179_lbl00185   0x001900    program     static                          
       ___case_17_lbl00179   0x00160c    program     static                          
-       ___case_1_lbl00017   0x00bb04    program     static                          
-       ___case_1_lbl00020   0x00baea    program     static                          
-       ___case_1_lbl00023   0x00bc34    program     static                          
+       ___case_1_lbl00017   0x00bb16    program     static                          
+       ___case_1_lbl00020   0x00bafc    program     static                          
+       ___case_1_lbl00023   0x00bc46    program     static                          
        ___case_1_lbl00348   0x001ef4    program     static                          
-     ___case_255_lbl00028   0x00bc3e    program     static                          
-       ___case_2_lbl00018   0x00bb24    program     static                          
-       ___case_2_lbl00030   0x00bc0c    program     static                          
+     ___case_255_lbl00028   0x00bc50    program     static                          
+       ___case_2_lbl00018   0x00bb36    program     static                          
+       ___case_2_lbl00030   0x00bc1e    program     static                          
        ___case_3_lbl00224   0x001c0a    program     static                          
        ___case_3_lbl00337   0x002768    program     static                          
        ___case_4_lbl00341   0x002e08    program     static                          
@@ -346,18 +347,18 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
       ___case_65_lbl00187   0x00192a    program     static                          
       ___case_66_lbl00190   0x001a54    program     static                          
        ___case_7_lbl00346   0x002e4c    program     static                          
-      ___default_lbl00019   0x00bc08    program     static                          
-      ___default_lbl00029   0x00bce6    program     static                          
-      ___default_lbl00031   0x00bcea    program     static                          
+      ___default_lbl00019   0x00bc1a    program     static                          
+      ___default_lbl00029   0x00bcf8    program     static                          
+      ___default_lbl00031   0x00bcfc    program     static                          
       ___default_lbl00191   0x001a5a    program     static                          
       ___default_lbl00347   0x002e8a    program     static                          
       ___default_lbl00349   0x002e8e    program     static                          
-         ___else_lbl00004   0x00c5c2    program     static                          
-         ___else_lbl00006   0x00c54e    program     static                          
-         ___else_lbl00009   0x00ba3e    program     static                          
-         ___else_lbl00011   0x00c67e    program     static                          
-         ___else_lbl00013   0x00bad0    program     static                          
-         ___else_lbl00030   0x00a66c    program     static                          
+         ___else_lbl00004   0x00ca9c    program     static                          
+         ___else_lbl00006   0x00ca28    program     static                          
+         ___else_lbl00009   0x00ba50    program     static                          
+         ___else_lbl00011   0x00cb58    program     static                          
+         ___else_lbl00013   0x00bae2    program     static                          
+         ___else_lbl00030   0x00a67e    program     static                          
          ___else_lbl00196   0x001a5e    program     static                          
          ___else_lbl00202   0x001a92    program     static                          
          ___else_lbl00212   0x001b20    program     static                          
@@ -370,66 +371,66 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
           ___for_lbl00023   0x00a506    program     static                          
           ___for_lbl00024   0x00a4c8    program     static                          
           ___for_lbl00025   0x00a448    program     static                          
-           ___if_lbl00003   0x00c5f6    program     static                          
-           ___if_lbl00005   0x00c5f6    program     static                          
-           ___if_lbl00007   0x00ba4c    program     static                          
-           ___if_lbl00008   0x00ba4c    program     static                          
-           ___if_lbl00010   0x00c6b2    program     static                          
-           ___if_lbl00012   0x00bad4    program     static                          
-           ___if_lbl00016   0x00bb22    program     static                          
-           ___if_lbl00027   0x00bce4    program     static                          
-           ___if_lbl00028   0x00a642    program     static                          
-           ___if_lbl00029   0x00a66e    program     static                          
-           ___if_lbl00032   0x00bcec    program     static                          
-           ___if_lbl00034   0x00bd0e    program     static                          
-           ___if_lbl00035   0x00bd2a    program     static                          
-           ___if_lbl00036   0x00bd30    program     static                          
-           ___if_lbl00037   0x00bda8    program     static                          
-           ___if_lbl00038   0x00bda8    program     static                          
-           ___if_lbl00056   0x00a9cc    program     static                          
-           ___if_lbl00059   0x00aa16    program     static                          
-           ___if_lbl00060   0x00aa34    program     static                          
-           ___if_lbl00061   0x00aa36    program     static                          
+           ___if_lbl00003   0x00cad0    program     static                          
+           ___if_lbl00005   0x00cad0    program     static                          
+           ___if_lbl00007   0x00ba5e    program     static                          
+           ___if_lbl00008   0x00ba5e    program     static                          
+           ___if_lbl00010   0x00cb8c    program     static                          
+           ___if_lbl00012   0x00bae6    program     static                          
+           ___if_lbl00016   0x00bb34    program     static                          
+           ___if_lbl00027   0x00bcf6    program     static                          
+           ___if_lbl00028   0x00a654    program     static                          
+           ___if_lbl00029   0x00a680    program     static                          
+           ___if_lbl00032   0x00bcfe    program     static                          
+           ___if_lbl00034   0x00bd20    program     static                          
+           ___if_lbl00035   0x00bd3c    program     static                          
+           ___if_lbl00036   0x00bd42    program     static                          
+           ___if_lbl00037   0x00bdba    program     static                          
+           ___if_lbl00038   0x00bdba    program     static                          
+           ___if_lbl00056   0x00a9de    program     static                          
+           ___if_lbl00059   0x00aa28    program     static                          
+           ___if_lbl00060   0x00aa46    program     static                          
+           ___if_lbl00061   0x00aa48    program     static                          
            ___if_lbl00068   0x008a58    program     static                          
            ___if_lbl00351   0x002e9a    program     static                          
-       ___return_lbl00000   0x00ba4e    program     static                          
        ___return_lbl00000   0x000004    program     static                          
-       ___return_lbl00000   0x00c5f6    program     static                          
        ___return_lbl00000   0x000066    program     static                          
-       ___return_lbl00001   0x00cf7c    program     static                          
-       ___return_lbl00002   0x00cd02    program     static                          
+       ___return_lbl00000   0x00ba60    program     static                          
+       ___return_lbl00000   0x00cad0    program     static                          
+       ___return_lbl00001   0x00d1a4    program     static                          
+       ___return_lbl00002   0x00cf2a    program     static                          
        ___return_lbl00007   0x003818    program     static                          
-       ___return_lbl00007   0x00c6b2    program     static                          
-       ___return_lbl00010   0x00bcf0    program     static                          
-       ___return_lbl00016   0x00a670    program     static                          
-       ___return_lbl00033   0x00bdac    program     static                          
-       ___return_lbl00051   0x00aa36    program     static                          
+       ___return_lbl00007   0x00cb8c    program     static                          
+       ___return_lbl00010   0x00bd02    program     static                          
+       ___return_lbl00016   0x00a682    program     static                          
+       ___return_lbl00033   0x00bdbe    program     static                          
+       ___return_lbl00051   0x00aa48    program     static                          
        ___return_lbl00218   0x00000c    program     static                          
        ___return_lbl00219   0x00001c    program     static                          
    ___switchexit_lbl00012   0x002e90    program     static                          
-   ___switchexit_lbl00014   0x00bcec    program     static                          
-   ___switchexit_lbl00015   0x00bc0a    program     static                          
-   ___switchexit_lbl00021   0x00bce8    program     static                          
+   ___switchexit_lbl00014   0x00bcfe    program     static                          
+   ___switchexit_lbl00015   0x00bc1c    program     static                          
+   ___switchexit_lbl00021   0x00bcfa    program     static                          
    ___switchexit_lbl00056   0x001a5c    program     static                          
    ___switchexit_lbl00225   0x002e8c    program     static                          
-        ___while_lbl00001   0x00c5c2    program     static                          
-        ___while_lbl00001   0x00b976    program     static                          
-        ___while_lbl00002   0x00ba4e    program     static                          
-        ___while_lbl00002   0x00c5f6    program     static                          
-        ___while_lbl00003   0x00b97e    program     static                          
-        ___while_lbl00004   0x00b982    program     static                          
-        ___while_lbl00005   0x00ba42    program     static                          
-        ___while_lbl00006   0x00ba46    program     static                          
-        ___while_lbl00008   0x00c67e    program     static                          
-        ___while_lbl00009   0x00c6b2    program     static                          
-        ___while_lbl00026   0x00a5a8    program     static                          
-        ___while_lbl00027   0x00a670    program     static                          
-        ___while_lbl00052   0x00a938    program     static                          
-        ___while_lbl00053   0x00a93c    program     static                          
-        ___while_lbl00054   0x00a948    program     static                          
-        ___while_lbl00055   0x00aa36    program     static                          
-        ___while_lbl00057   0x00a9f0    program     static                          
-        ___while_lbl00058   0x00a9f4    program     static                          
+        ___while_lbl00001   0x00ca9c    program     static                          
+        ___while_lbl00001   0x00b988    program     static                          
+        ___while_lbl00002   0x00ba60    program     static                          
+        ___while_lbl00002   0x00cad0    program     static                          
+        ___while_lbl00003   0x00b990    program     static                          
+        ___while_lbl00004   0x00b994    program     static                          
+        ___while_lbl00005   0x00ba54    program     static                          
+        ___while_lbl00006   0x00ba58    program     static                          
+        ___while_lbl00008   0x00cb58    program     static                          
+        ___while_lbl00009   0x00cb8c    program     static                          
+        ___while_lbl00026   0x00a5ba    program     static                          
+        ___while_lbl00027   0x00a682    program     static                          
+        ___while_lbl00052   0x00a94a    program     static                          
+        ___while_lbl00053   0x00a94e    program     static                          
+        ___while_lbl00054   0x00a95a    program     static                          
+        ___while_lbl00055   0x00aa48    program     static                          
+        ___while_lbl00057   0x00aa02    program     static                          
+        ___while_lbl00058   0x00aa06    program     static                          
                   __addFP   0x0098e6    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\addFP.asm
               __cast08sFP   0x009b46    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\cast08FP.asm
               __cast08uFP   0x009b42    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\cast08FP.asm
@@ -456,80 +457,81 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
                  __mod32u   0x00a1b0    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
                   __mul32   0x009f8a    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\mul32.asm
                   __mulFP   0x00a02c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\mulFP.asm
-                   __pa_0   0x00b20c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_1   0x00b21a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_10   0x00b2a8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_11   0x00b2b8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_12   0x00b2c8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_13   0x00b2d6    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_14   0x00b2f4    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_15   0x00b2fe    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_16   0x00b304    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_17   0x00b314    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_18   0x00b320    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_19   0x00b32e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_2   0x00b22a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_20   0x00b338    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_21   0x00b342    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_22   0x00b34c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_23   0x00b35a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_3   0x00b236    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_4   0x00b24a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_5   0x00b25c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_6   0x00b26c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_7   0x00b27e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_8   0x00b28a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_9   0x00b29c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-               __string_0   0x00c722    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-               __string_0   0x00c742    program     static D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
-               __string_0   0x00c809    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
-               __string_0   0x00c767    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-               __string_1   0x00c756    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-               __string_1   0x00c7f9    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
-               __string_1   0x00c706    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-               __string_1   0x00c7c8    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               __string_2   0x00c7ba    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               __string_2   0x00c74f    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-               __string_2   0x00c6e7    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-               __string_3   0x00c6ca    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-               __string_3   0x00c7af    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               __string_4   0x00c7a1    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               __string_4   0x00c6ba    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-               __string_5   0x00c78a    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               __string_6   0x00c778    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+                   __pa_0   0x00b21e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_1   0x00b22c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_10   0x00b2ba    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_11   0x00b2ca    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_12   0x00b2da    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_13   0x00b2e8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_14   0x00b306    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_15   0x00b310    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_16   0x00b316    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_17   0x00b326    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_18   0x00b332    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_19   0x00b340    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_2   0x00b23c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_20   0x00b34a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_21   0x00b354    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_22   0x00b35e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_23   0x00b36c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_3   0x00b248    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_4   0x00b25c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_5   0x00b26e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_6   0x00b27e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_7   0x00b290    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_8   0x00b29c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_9   0x00b2ae    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+               __string_0   0x00c986    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
+               __string_0   0x00c965    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+               __string_0   0x00c940    program     static D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+               __string_0   0x00c920    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_1   0x00c976    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
+               __string_1   0x00c954    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+               __string_1   0x00c9e7    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+               __string_1   0x00c904    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_2   0x00c9d9    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+               __string_2   0x00c8e5    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_2   0x00c94d    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+               __string_3   0x00c8c5    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_3   0x00c9ce    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+               __string_4   0x00c8a8    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_4   0x00c9c0    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+               __string_5   0x00c9a9    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+               __string_5   0x00c898    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_6   0x00c997    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                   __subFP   0x0098e2    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\addFP.asm
-               __tmplbl_0   0x00bab8    program     static                          
-               __tmplbl_1   0x00ba76    program     static                          
-               __tmplbl_2   0x00bc92    program     static                          
-               __tmplbl_3   0x00bc7c    program     static                          
-               __tmplbl_4   0x00bc66    program     static                          
-               __tmplbl_5   0x00bc52    program     static                          
-               __tmplbl_6   0x00bd90    program     static                          
-            __zero_memory   0x00cf28    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
-                _do_cinit   0x00cc66    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
+               __tmplbl_0   0x00baca    program     static                          
+               __tmplbl_1   0x00ba88    program     static                          
+               __tmplbl_2   0x00bca4    program     static                          
+               __tmplbl_3   0x00bc8e    program     static                          
+               __tmplbl_4   0x00bc78    program     static                          
+               __tmplbl_5   0x00bc64    program     static                          
+               __tmplbl_6   0x00bda2    program     static                          
+            __zero_memory   0x00d150    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
+                _do_cinit   0x00ce8e    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
             _early08uexit   0x009d26    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div08u.asm
             _early16uexit   0x00a13c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
             _early32uexit   0x00a1b4    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
                    _entry   0x000000    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
                    _false   0x00a1f8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                 _startup   0x00cf64    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
-              _usart_putc   0x00cf48    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
+                 _startup   0x00d18c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
+              _usart_putc   0x00d170    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
                _user_putc   0x00000e    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\_user_putc.c
-    commissioning_running   0x00bcf8    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
-                compare_l   0x00cf3e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
-                copy_loop   0x00ccd8    program     static                          
-            copy_one_byte   0x00ccde    program     static                          
+    commissioning_running   0x00bd0a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
+                compare_l   0x00d166    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
+                copy_loop   0x00cf00    program     static                          
+            copy_one_byte   0x00cf06    program     static                          
                 divmod08u   0x009d28    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div08u.asm
                 divmod16u   0x00a13e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
                 divmod32u   0x00a1b6    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                     done   0x00cd02    program     static                          
-             done_copying   0x00ccec    program     static                          
+                     done   0x00cf2a    program     static                          
+             done_copying   0x00cf14    program     static                          
                   endloop   0x009d3e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div08u.asm
                   endloop   0x00a164    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
      findNextNetworkEntry   0x0049ca    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-                     ftoa   0x00b882    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+                     ftoa   0x00b894    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
             isSameAddress   0x005610    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-                  isdigit   0x00cf04    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
+                  isdigit   0x00d12c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
                  jANotInf   0x009928    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\addFP.asm
                  jANotInf   0x00a05e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\mulFP.asm
                  jANotNeg   0x0099bc    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\addFP.asm
@@ -553,10 +555,10 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
                     jDone   0x009c6c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\castFP08.asm
                     jDone   0x009cee    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\castFP16.asm
                       jEQ   0x009e7a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\compFP.asm
-                     jEnd   0x00ca52    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
-                     jEnd   0x00c9f4    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
-                     jEnd   0x00c9b0    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
-                     jEnd   0x00ca8a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                     jEnd   0x00cc7a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
+                     jEnd   0x00cc1c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
+                     jEnd   0x00cbd8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
+                     jEnd   0x00ccb2    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
                     jExch   0x009e86    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\compFP.asm
                     jExit   0x009aa0    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
                     jExit   0x009eea    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\compFP.asm
@@ -566,16 +568,16 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
                    jFinal   0x009eb0    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\compFP.asm
                jFinalSign   0x009a24    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\addFP.asm
                 jHaveZero   0x00a074    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\mulFP.asm
-                    jLoop   0x00c994    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
-                    jLoop   0x00ca1e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strcpy.asm
-                    jLoop   0x00ca48    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
+                    jLoop   0x00cbbc    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
+                    jLoop   0x00cc46    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strcpy.asm
+                    jLoop   0x00cc70    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
                     jLoop   0x009cce    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\castFP16.asm
-                    jLoop   0x00ca72    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                    jLoop   0x00cc9a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
                     jLoop   0x009c54    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\castFP08.asm
-                    jLoop   0x00c9d6    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
+                    jLoop   0x00cbfe    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
                 jLoopExit   0x009cde    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\castFP16.asm
                 jLoopExit   0x009c62    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\castFP08.asm
-                   jMatch   0x00cf24    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
+                   jMatch   0x00d14c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
                      jMax   0x009ca2    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\castFP16.asm
                      jMax   0x009c30    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\castFP08.asm
                   jMaxNeg   0x009c3a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\castFP08.asm
@@ -585,7 +587,7 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
                       jNE   0x009e7e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\compFP.asm
                 jNoAdjust   0x009df2    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\divFP.asm
                   jNoExch   0x009ea6    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\compFP.asm
-                 jNoMatch   0x00cf26    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
+                 jNoMatch   0x00d14e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
              jNotBothZero   0x00994e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\addFP.asm
                   jNotInf   0x009cbe    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\castFP16.asm
                   jNotInf   0x009c44    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\castFP08.asm
@@ -616,27 +618,27 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
                jZero1and2   0x009ace    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
                      loop   0x00a1c4    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
                      loop   0x009d30    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div08u.asm
-                     loop   0x00cf58    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
+                     loop   0x00d180    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
                      loop   0x00a148    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                     loop   0x00cf72    program     static                          
-                   loop_h   0x00cf36    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
-                   loop_l   0x00cf40    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
-                     main   0x00a400    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-                   memcpy   0x00c96c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
-                   memset   0x00c9c2    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
+                     loop   0x00d19a    program     static                          
+                   loop_h   0x00d15e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
+                   loop_l   0x00d168    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
+                     main   0x00a400    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+                   memcpy   0x00cb94    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
+                   memset   0x00cbea    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
       myKeySequenceNumber   0x000007    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
             mySecurityKey   0x00002e    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
           mySecurityLevel   0x000006    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
-                     putc   0x00cdfc    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\putc.c
-                 s_digits   0x00cf7e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-            s_put_n_chars   0x00ab4a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  sprintf   0x00cd8a    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\sprintf.c
-                   strcpy   0x00c9f6    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strcpy.asm
-                   strlen   0x00ca38    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
-                strlenpgm   0x00ca54    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-                     test   0x00cc80    program     static                          
-                 vfprintf   0x00ab7c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-               zero_block   0x00cf36    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
+                     putc   0x00d024    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\putc.c
+                 s_digits   0x00d1a6    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+            s_put_n_chars   0x00ab5c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  sprintf   0x00cfb2    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\sprintf.c
+                   strcpy   0x00cc1e    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strcpy.asm
+                   strlen   0x00cc60    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
+                strlenpgm   0x00cc7c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                     test   0x00cea8    program     static                          
+                 vfprintf   0x00ab8e    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+               zero_block   0x00d15e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                    ADCON0   0x000fc2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                ADCON0bits   0x000fc2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                    ADCON1   0x000fc1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
@@ -658,7 +660,7 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
        AcknowledgementSeq   0x0004fc       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
     ActiveScanResultIndex   0x00020b       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
         ActiveScanResults   0x00020c       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-         AdditionalNodeID   0x0002fb       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+         AdditionalNodeID   0x0002fb       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                   BAUDCON   0x000f7e       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                  BAUDCON1   0x000f7e       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
              BAUDCON1bits   0x000f7e       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
@@ -669,7 +671,7 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
               BAUDCTLbits   0x000f7e       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                       BSR   0x000fe0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                 BankIndex   0x00004f       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
-         BroadcastTracker   0x000100       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+         BroadcastTracker   0x000100       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                   CCP1CON   0x000fba       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
               CCP1CONbits   0x000fba       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                   CCP2CON   0x000fb4       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
@@ -745,7 +747,7 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
                     FSR2H   0x000fda       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                     FSR2L   0x000fd9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                FamilyTree   0x000e86       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-               FlashCount   0x0002fe       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+               FlashCount   0x0002fe       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
      FrequencyAgilityInfo   0x00027a       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
                   HLVDCON   0x000f85       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
               HLVDCONbits   0x000f85       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
@@ -790,7 +792,7 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
       MiWiPROStateMachine   0x00025d       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
             MiWiPROStatus   0x000260       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
      NeighborRoutingTable   0x000e96       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-         NetFreezerEnable   0x0002fa       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+         NetFreezerEnable   0x0002fa       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                    ODCON1   0x000f42       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                ODCON1bits   0x000f42       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                    ODCON2   0x000f41       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
@@ -950,7 +952,7 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
      RoutingUpdateCounter   0x000269       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
         RoutingUpdateTick   0x000265       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
                  RxBuffer   0x000300       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
-                    RxNum   0x0002fd       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+                    RxNum   0x0002fd       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                     SPBRG   0x000fb0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                    SPBRG1   0x000fb0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                    SPBRG2   0x000fab       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
@@ -1045,7 +1047,7 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
                 TXSTAbits   0x000fad       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                  TxBuffer   0x000500       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
                    TxData   0x000248       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-                    TxNum   0x0002fc       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+                    TxNum   0x0002fc       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                     UADDR   0x000f38       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                 UADDRbits   0x000f38       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
                      UCFG   0x000f39       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
@@ -1107,19 +1109,19 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
                 __RETVAL2   0x0003fd       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\cmath18.asm
                 __RETVAL3   0x0003fe       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\cmath18.asm
                   __tmp_0   0x000043       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
                   __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
                   __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Microchip\Common\TimeDelay.c
+                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                   __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
-                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
-                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
-                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
                   __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\MAC_EEProm.c
+                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
+                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
                   __tmp_1   0x00004b       data     static D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
-                  appData   0x000000       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+                  appData   0x000000       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
        backgroundTaskTick   0x000261       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-        connectionAddress   0x0001e1       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+        connectionAddress   0x0001e1       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                 curr_byte   0x000eb9       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
                curr_entry   0x000ebb       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
            currentChannel   0x0004fa       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
@@ -1128,13 +1130,13 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
               defaultHops   0x0004fe       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
            failureCounter   0x000050       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
          indirectMessages   0x000400       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-                myChannel   0x0002f9       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+                myChannel   0x0002f9       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
             myLongAddress   0x0004f2       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
          myNetworkAddress   0x0001fb       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
                   myPANID   0x00024b       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
                  myParent   0x00024d       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
            myShortAddress   0x000249       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-                   mydata   0x0004ae       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+                   mydata   0x0004ae       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
            nextEEPosition   0x0002f7       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
               nvmConnMode   0x0002e4       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
        nvmConnectionTable   0x0002e6       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
@@ -1159,9 +1161,9 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
          switch1PressTime   0x0000f2       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
            switch1Pressed   0x0000f1       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
                        t1   0x00003f       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
-                       t1   0x0004ea       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+                       t1   0x0004ea       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                      t_sw   0x0000f6       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-                    t_sw1   0x0004ee       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+                    t_sw1   0x0004ee       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
           tempLongAddress   0x00024e       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
            tempNodeStatus   0x00025e       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
                 tempPANID   0x000258       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
@@ -1287,8 +1289,8 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
                   jPkLoop   0x009a3a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
              jPkShiftDone   0x009a56    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
                jPkRoundIt   0x009a6c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
-             jPkRoundDone   0x009a84    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
               __FpReturnW   0x009a84    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
+             jPkRoundDone   0x009a84    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
                     jExit   0x009aa0    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
             __FpReturnNaN   0x009aae    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
         __FpReturnSignInf   0x009abc    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\packFP.asm
@@ -1404,8 +1406,8 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
                    _false   0x00a1f8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
               RETQUOTIENT   0x00a218    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
                   RESTORE   0x00a228    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-              MainDisplay   0x00a236    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-                     main   0x00a400    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+              MainDisplay   0x00a236    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+                     main   0x00a400    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
           ___for_lbl00025   0x00a448    program     static                          
           ___for_lbl00021   0x00a450    program     static                          
           ___for_lbl00019   0x00a48a    program     static                          
@@ -1415,235 +1417,237 @@ MiApp_EstablishConnection   0x005d68    program     extern D:\github\microchip\m
           ___for_lbl00023   0x00a506    program     static                          
           ___for_lbl00017   0x00a524    program     static                          
           ___for_lbl00018   0x00a528    program     static                          
-        ___while_lbl00026   0x00a5a8    program     static                          
-           ___if_lbl00028   0x00a642    program     static                          
-         ___else_lbl00030   0x00a66c    program     static                          
-           ___if_lbl00029   0x00a66e    program     static                          
-        ___while_lbl00027   0x00a670    program     static                          
-       ___return_lbl00016   0x00a670    program     static                          
-            ProcessSensor   0x00a678    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               ScanButton   0x00a744    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-      ProcessDataReceived   0x00a86c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-       CheckConfiguration   0x00a8f0    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-        ___while_lbl00052   0x00a938    program     static                          
-        ___while_lbl00053   0x00a93c    program     static                          
-        ___while_lbl00054   0x00a948    program     static                          
-           ___if_lbl00056   0x00a9cc    program     static                          
-        ___while_lbl00057   0x00a9f0    program     static                          
-        ___while_lbl00058   0x00a9f4    program     static                          
-           ___if_lbl00059   0x00aa16    program     static                          
-           ___if_lbl00060   0x00aa34    program     static                          
-           ___if_lbl00061   0x00aa36    program     static                          
-        ___while_lbl00055   0x00aa36    program     static                          
-       ___return_lbl00051   0x00aa36    program     static                          
-                Check_SW1   0x00aa3e    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-            s_put_n_chars   0x00ab4a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                 vfprintf   0x00ab7c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_0   0x00b20c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_1   0x00b21a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_2   0x00b22a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_3   0x00b236    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_4   0x00b24a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_5   0x00b25c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_6   0x00b26c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_7   0x00b27e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_8   0x00b28a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                   __pa_9   0x00b29c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_10   0x00b2a8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_11   0x00b2b8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_12   0x00b2c8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_13   0x00b2d6    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_14   0x00b2f4    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_15   0x00b2fe    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_16   0x00b304    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_17   0x00b314    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_18   0x00b320    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_19   0x00b32e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_20   0x00b338    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_21   0x00b342    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_22   0x00b34c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __pa_23   0x00b35a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                BoardInit   0x00b360    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-            ButtonPressed   0x00b404    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-           ButtonPressed_   0x00b476    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-              LCDTRXCount   0x00b5b4    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-      ReadTempSensorBoard   0x00b60a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-          Read_VBGVoltage   0x00b848    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-                     ftoa   0x00b882    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-     UserInterruptHandler   0x00b930    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-            Factory_Reset   0x00b932    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
-        ___while_lbl00001   0x00b976    program     static                          
-        ___while_lbl00003   0x00b97e    program     static                          
-        ___while_lbl00004   0x00b982    program     static                          
-         ___else_lbl00009   0x00ba3e    program     static                          
-        ___while_lbl00005   0x00ba42    program     static                          
-        ___while_lbl00006   0x00ba46    program     static                          
-           ___if_lbl00007   0x00ba4c    program     static                          
-           ___if_lbl00008   0x00ba4c    program     static                          
-       ___return_lbl00000   0x00ba4e    program     static                          
-        ___while_lbl00002   0x00ba4e    program     static                          
-         ConfigureControl   0x00ba56    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
-               __tmplbl_1   0x00ba76    program     static                          
-               __tmplbl_0   0x00bab8    program     static                          
-         ___else_lbl00013   0x00bad0    program     static                          
-           ___if_lbl00012   0x00bad4    program     static                          
-       ___case_1_lbl00020   0x00baea    program     static                          
-       ___case_1_lbl00017   0x00bb04    program     static                          
-           ___if_lbl00016   0x00bb22    program     static                          
-       ___case_2_lbl00018   0x00bb24    program     static                          
-      ___default_lbl00019   0x00bc08    program     static                          
-   ___switchexit_lbl00015   0x00bc0a    program     static                          
-       ___case_2_lbl00030   0x00bc0c    program     static                          
-       ___case_0_lbl00022   0x00bc2a    program     static                          
-       ___case_1_lbl00023   0x00bc34    program     static                          
-     ___case_255_lbl00028   0x00bc3e    program     static                          
-               __tmplbl_5   0x00bc52    program     static                          
-               __tmplbl_4   0x00bc66    program     static                          
-               __tmplbl_3   0x00bc7c    program     static                          
-               __tmplbl_2   0x00bc92    program     static                          
-           ___if_lbl00027   0x00bce4    program     static                          
-      ___default_lbl00029   0x00bce6    program     static                          
-   ___switchexit_lbl00021   0x00bce8    program     static                          
-      ___default_lbl00031   0x00bcea    program     static                          
-   ___switchexit_lbl00014   0x00bcec    program     static                          
-           ___if_lbl00032   0x00bcec    program     static                          
-       ___return_lbl00010   0x00bcf0    program     static                          
-    commissioning_running   0x00bcf8    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
-           ___if_lbl00034   0x00bd0e    program     static                          
-           ___if_lbl00035   0x00bd2a    program     static                          
-           ___if_lbl00036   0x00bd30    program     static                          
-               __tmplbl_6   0x00bd90    program     static                          
-           ___if_lbl00038   0x00bda8    program     static                          
-           ___if_lbl00037   0x00bda8    program     static                          
-       ___return_lbl00033   0x00bdac    program     static                          
-                  NVMRead   0x00bdb4    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
-                 NVMWrite   0x00be56    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
-                 NVMalloc   0x00bf4c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
-                  NVMInit   0x00bfa2    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
-      MiWiHelper_SendData   0x00c0b4    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
-CreateNewConnectionWithLeastNoise   0x00c12e    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
-CreateNewConnectionAtChannel   0x00c1a6    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
-AutoSearchActiveConnection   0x00c204    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
-     JoinAvailableChannel   0x00c2a8    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
-             LCD_WriteCmd   0x00c348    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-            LCD_WriteData   0x00c36a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-                  LCDInit   0x00c38c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-                 LCDErase   0x00c41c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-           LCDBacklightON   0x00c44a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-          LCDBacklightOFF   0x00c44e    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-                LCDUpdate   0x00c452    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-               LCDDisplay   0x00c4ec    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
-                Delay10us   0x00c53e    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Common\TimeDelay.c
-         ___else_lbl00006   0x00c54e    program     static                          
-        ___while_lbl00001   0x00c5c2    program     static                          
-         ___else_lbl00004   0x00c5c2    program     static                          
-       ___return_lbl00000   0x00c5f6    program     static                          
-        ___while_lbl00002   0x00c5f6    program     static                          
-           ___if_lbl00003   0x00c5f6    program     static                          
-           ___if_lbl00005   0x00c5f6    program     static                          
-                  DelayMs   0x00c5fe    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Common\TimeDelay.c
-        ___while_lbl00008   0x00c67e    program     static                          
-         ___else_lbl00011   0x00c67e    program     static                          
-           ___if_lbl00010   0x00c6b2    program     static                          
-        ___while_lbl00009   0x00c6b2    program     static                          
-       ___return_lbl00007   0x00c6b2    program     static                          
-               __string_4   0x00c6ba    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-               __string_3   0x00c6ca    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-               __string_2   0x00c6e7    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-               __string_1   0x00c706    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-               __string_0   0x00c722    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-               __string_0   0x00c742    program     static D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
-               __string_2   0x00c74f    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-               __string_1   0x00c756    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-               __string_0   0x00c767    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-               __string_6   0x00c778    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               __string_5   0x00c78a    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               __string_4   0x00c7a1    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               __string_3   0x00c7af    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               __string_2   0x00c7ba    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               __string_1   0x00c7c8    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               __string_1   0x00c7f9    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
-               __string_0   0x00c809    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
-DemoOutput_ActiveScanResults   0x00c81a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-        DemoOutput_Rescan   0x00c868    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-      DemoOutput_Greeting   0x00c86a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-       DemoOutput_Channel   0x00c880    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-   DemoOutput_Instruction   0x00c8c4    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
- DemoOutput_HandleMessage   0x00c8d8    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-    DemoOutput_UpdateTxRx   0x00c924    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-  DemoOutput_ChannelError   0x00c944    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-   DemoOutput_UnicastFail   0x00c956    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-                   memcpy   0x00c96c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
-                    jLoop   0x00c994    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
-              _4jContinue   0x00c9a0    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
-                   _5jEnd   0x00c9aa    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
-                     jEnd   0x00c9b0    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
-                   memset   0x00c9c2    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
-                    jLoop   0x00c9d6    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
-              _2jContinue   0x00c9e2    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
-                   _3jEnd   0x00c9ec    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
-                     jEnd   0x00c9f4    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
-                   strcpy   0x00c9f6    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strcpy.asm
-                    jLoop   0x00ca1e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strcpy.asm
-                   strlen   0x00ca38    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
-                    jLoop   0x00ca48    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
-                     jEnd   0x00ca52    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
-                strlenpgm   0x00ca54    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-                    jLoop   0x00ca72    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-                   _2jEnd   0x00ca88    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-                     jEnd   0x00ca8a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-               EEPROMRead   0x00ca9e    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\MAC_EEProm.c
-         Read_MAC_Address   0x00caea    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\MAC_EEProm.c
-                     MiWi   0x00cba6    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-                       DE   0x00cc24    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
-                _do_cinit   0x00cc66    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
-                     test   0x00cc80    program     static                          
-                copy_loop   0x00ccd8    program     static                          
-            copy_one_byte   0x00ccde    program     static                          
-             done_copying   0x00ccec    program     static                          
-                     done   0x00cd02    program     static                          
-       ___return_lbl00002   0x00cd02    program     static                          
-          InitSymbolTimer   0x00cd04    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\SymbolTime.c
-             MiWi_TickGet   0x00cd1a    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\SymbolTime.c
-                  sprintf   0x00cd8a    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\sprintf.c
-                     putc   0x00cdfc    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\putc.c
-                   SPIPut   0x00ce62    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
-                   SPIGet   0x00ce8a    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
-                  SPIPut2   0x00ce96    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
-                  SPIGet2   0x00cebc    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
-                 ScanTime   0x00cec8    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-                  isdigit   0x00cf04    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
-                   jMatch   0x00cf24    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
-                 jNoMatch   0x00cf26    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
-            __zero_memory   0x00cf28    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
-               zero_block   0x00cf36    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
-                   loop_h   0x00cf36    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
-                compare_l   0x00cf3e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
-                   loop_l   0x00cf40    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
-              _usart_putc   0x00cf48    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
-                     loop   0x00cf58    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
-                 _startup   0x00cf64    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
-                     loop   0x00cf72    program     static                          
-       ___return_lbl00001   0x00cf7c    program     static                          
-                 s_digits   0x00cf7e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+        ___while_lbl00026   0x00a5ba    program     static                          
+           ___if_lbl00028   0x00a654    program     static                          
+         ___else_lbl00030   0x00a67e    program     static                          
+           ___if_lbl00029   0x00a680    program     static                          
+       ___return_lbl00016   0x00a682    program     static                          
+        ___while_lbl00027   0x00a682    program     static                          
+            ProcessSensor   0x00a68a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+               ScanButton   0x00a756    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+      ProcessDataReceived   0x00a87e    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+       CheckConfiguration   0x00a902    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+        ___while_lbl00052   0x00a94a    program     static                          
+        ___while_lbl00053   0x00a94e    program     static                          
+        ___while_lbl00054   0x00a95a    program     static                          
+           ___if_lbl00056   0x00a9de    program     static                          
+        ___while_lbl00057   0x00aa02    program     static                          
+        ___while_lbl00058   0x00aa06    program     static                          
+           ___if_lbl00059   0x00aa28    program     static                          
+           ___if_lbl00060   0x00aa46    program     static                          
+           ___if_lbl00061   0x00aa48    program     static                          
+       ___return_lbl00051   0x00aa48    program     static                          
+        ___while_lbl00055   0x00aa48    program     static                          
+                Check_SW1   0x00aa50    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+            s_put_n_chars   0x00ab5c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                 vfprintf   0x00ab8e    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_0   0x00b21e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_1   0x00b22c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_2   0x00b23c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_3   0x00b248    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_4   0x00b25c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_5   0x00b26e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_6   0x00b27e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_7   0x00b290    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_8   0x00b29c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                   __pa_9   0x00b2ae    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_10   0x00b2ba    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_11   0x00b2ca    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_12   0x00b2da    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_13   0x00b2e8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_14   0x00b306    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_15   0x00b310    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_16   0x00b316    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_17   0x00b326    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_18   0x00b332    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_19   0x00b340    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_20   0x00b34a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_21   0x00b354    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_22   0x00b35e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                  __pa_23   0x00b36c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                BoardInit   0x00b372    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+            ButtonPressed   0x00b416    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+           ButtonPressed_   0x00b488    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+              LCDTRXCount   0x00b5c6    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+      ReadTempSensorBoard   0x00b61c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+          Read_VBGVoltage   0x00b85a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+                     ftoa   0x00b894    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+     UserInterruptHandler   0x00b942    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+            Factory_Reset   0x00b944    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
+        ___while_lbl00001   0x00b988    program     static                          
+        ___while_lbl00003   0x00b990    program     static                          
+        ___while_lbl00004   0x00b994    program     static                          
+         ___else_lbl00009   0x00ba50    program     static                          
+        ___while_lbl00005   0x00ba54    program     static                          
+        ___while_lbl00006   0x00ba58    program     static                          
+           ___if_lbl00008   0x00ba5e    program     static                          
+           ___if_lbl00007   0x00ba5e    program     static                          
+       ___return_lbl00000   0x00ba60    program     static                          
+        ___while_lbl00002   0x00ba60    program     static                          
+         ConfigureControl   0x00ba68    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
+               __tmplbl_1   0x00ba88    program     static                          
+               __tmplbl_0   0x00baca    program     static                          
+         ___else_lbl00013   0x00bae2    program     static                          
+           ___if_lbl00012   0x00bae6    program     static                          
+       ___case_1_lbl00020   0x00bafc    program     static                          
+       ___case_1_lbl00017   0x00bb16    program     static                          
+           ___if_lbl00016   0x00bb34    program     static                          
+       ___case_2_lbl00018   0x00bb36    program     static                          
+      ___default_lbl00019   0x00bc1a    program     static                          
+   ___switchexit_lbl00015   0x00bc1c    program     static                          
+       ___case_2_lbl00030   0x00bc1e    program     static                          
+       ___case_0_lbl00022   0x00bc3c    program     static                          
+       ___case_1_lbl00023   0x00bc46    program     static                          
+     ___case_255_lbl00028   0x00bc50    program     static                          
+               __tmplbl_5   0x00bc64    program     static                          
+               __tmplbl_4   0x00bc78    program     static                          
+               __tmplbl_3   0x00bc8e    program     static                          
+               __tmplbl_2   0x00bca4    program     static                          
+           ___if_lbl00027   0x00bcf6    program     static                          
+      ___default_lbl00029   0x00bcf8    program     static                          
+   ___switchexit_lbl00021   0x00bcfa    program     static                          
+      ___default_lbl00031   0x00bcfc    program     static                          
+           ___if_lbl00032   0x00bcfe    program     static                          
+   ___switchexit_lbl00014   0x00bcfe    program     static                          
+       ___return_lbl00010   0x00bd02    program     static                          
+    commissioning_running   0x00bd0a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
+           ___if_lbl00034   0x00bd20    program     static                          
+           ___if_lbl00035   0x00bd3c    program     static                          
+           ___if_lbl00036   0x00bd42    program     static                          
+               __tmplbl_6   0x00bda2    program     static                          
+           ___if_lbl00038   0x00bdba    program     static                          
+           ___if_lbl00037   0x00bdba    program     static                          
+       ___return_lbl00033   0x00bdbe    program     static                          
+      MiWiHelper_SendData   0x00bdc6    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+CreateNewConnectionWithLeastNoise   0x00be40    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+CreateNewConnectionAtChannel   0x00beb8    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+AutoSearchActiveConnection   0x00bf16    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+     JoinAvailableChannel   0x00bfa6    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+                  NVMRead   0x00c202    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
+                 NVMWrite   0x00c2a4    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
+                 NVMalloc   0x00c39a    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
+                  NVMInit   0x00c3f0    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
+             LCD_WriteCmd   0x00c502    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+            LCD_WriteData   0x00c524    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+                  LCDInit   0x00c546    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+                 LCDErase   0x00c5d6    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+           LCDBacklightON   0x00c604    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+          LCDBacklightOFF   0x00c608    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+                LCDUpdate   0x00c60c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+               LCDDisplay   0x00c6a6    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
+DemoOutput_ActiveScanResults   0x00c6f8    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+        DemoOutput_Rescan   0x00c746    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+      DemoOutput_Greeting   0x00c748    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+       DemoOutput_Channel   0x00c75e    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+  DemoOutput_Channel_Addr   0x00c7a2    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+   DemoOutput_Instruction   0x00c7f0    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+ DemoOutput_HandleMessage   0x00c804    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+    DemoOutput_UpdateTxRx   0x00c850    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+  DemoOutput_ChannelError   0x00c870    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+   DemoOutput_UnicastFail   0x00c882    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_5   0x00c898    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_4   0x00c8a8    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_3   0x00c8c5    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_2   0x00c8e5    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_1   0x00c904    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_0   0x00c920    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+               __string_0   0x00c940    program     static D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+               __string_2   0x00c94d    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+               __string_1   0x00c954    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+               __string_0   0x00c965    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+               __string_1   0x00c976    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
+               __string_0   0x00c986    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
+               __string_6   0x00c997    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+               __string_5   0x00c9a9    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+               __string_4   0x00c9c0    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+               __string_3   0x00c9ce    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+               __string_2   0x00c9d9    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+               __string_1   0x00c9e7    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+                Delay10us   0x00ca18    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Common\TimeDelay.c
+         ___else_lbl00006   0x00ca28    program     static                          
+         ___else_lbl00004   0x00ca9c    program     static                          
+        ___while_lbl00001   0x00ca9c    program     static                          
+           ___if_lbl00003   0x00cad0    program     static                          
+           ___if_lbl00005   0x00cad0    program     static                          
+       ___return_lbl00000   0x00cad0    program     static                          
+        ___while_lbl00002   0x00cad0    program     static                          
+                  DelayMs   0x00cad8    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\Common\TimeDelay.c
+        ___while_lbl00008   0x00cb58    program     static                          
+         ___else_lbl00011   0x00cb58    program     static                          
+       ___return_lbl00007   0x00cb8c    program     static                          
+           ___if_lbl00010   0x00cb8c    program     static                          
+        ___while_lbl00009   0x00cb8c    program     static                          
+                   memcpy   0x00cb94    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
+                    jLoop   0x00cbbc    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
+              _4jContinue   0x00cbc8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
+                   _5jEnd   0x00cbd2    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
+                     jEnd   0x00cbd8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memcpy.asm
+                   memset   0x00cbea    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
+                    jLoop   0x00cbfe    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
+              _2jContinue   0x00cc0a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
+                   _3jEnd   0x00cc14    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
+                     jEnd   0x00cc1c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\memset.asm
+                   strcpy   0x00cc1e    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strcpy.asm
+                    jLoop   0x00cc46    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strcpy.asm
+                   strlen   0x00cc60    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
+                    jLoop   0x00cc70    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
+                     jEnd   0x00cc7a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
+                strlenpgm   0x00cc7c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                    jLoop   0x00cc9a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                   _2jEnd   0x00ccb0    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                     jEnd   0x00ccb2    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+               EEPROMRead   0x00ccc6    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\MAC_EEProm.c
+         Read_MAC_Address   0x00cd12    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\MAC_EEProm.c
+                     MiWi   0x00cdce    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+                       DE   0x00ce4c    program     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoOutput.c
+                _do_cinit   0x00ce8e    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
+                     test   0x00cea8    program     static                          
+                copy_loop   0x00cf00    program     static                          
+            copy_one_byte   0x00cf06    program     static                          
+             done_copying   0x00cf14    program     static                          
+                     done   0x00cf2a    program     static                          
+       ___return_lbl00002   0x00cf2a    program     static                          
+          InitSymbolTimer   0x00cf2c    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\SymbolTime.c
+             MiWi_TickGet   0x00cf42    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\SymbolTime.c
+                  sprintf   0x00cfb2    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\sprintf.c
+                     putc   0x00d024    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\putc.c
+                   SPIPut   0x00d08a    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
+                   SPIGet   0x00d0b2    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
+                  SPIPut2   0x00d0be    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
+                  SPIGet2   0x00d0e4    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MSPI.c
+                 ScanTime   0x00d0f0    program     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+                  isdigit   0x00d12c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
+                   jMatch   0x00d14c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
+                 jNoMatch   0x00d14e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
+            __zero_memory   0x00d150    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
+                   loop_h   0x00d15e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
+               zero_block   0x00d15e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
+                compare_l   0x00d166    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
+                   loop_l   0x00d168    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\proc\p18f46j50.asm
+              _usart_putc   0x00d170    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
+                     loop   0x00d180    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
+                 _startup   0x00d18c    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
+                     loop   0x00d19a    program     static                          
+       ___return_lbl00001   0x00d1a4    program     static                          
+                 s_digits   0x00d1a6    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
                __config_0   0x00fff8    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
                __config_1   0x00fff9    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
                __config_2   0x00fffa    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
                __config_3   0x00fffb    program     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
-                  appData   0x000000       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+                  appData   0x000000       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                 startTick   0x000037       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
               currentTick   0x00003b       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
                        t1   0x00003f       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
-                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
                   __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
                   __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Microchip\Common\TimeDelay.c
+                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                   __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\App_ConfigureControl.c
                   __tmp_0   0x000043       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
-                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
-                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
                   __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\MAC_EEProm.c
+                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
+                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiHelper.c
+                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
+                  __tmp_0   0x000043       data     static D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
                   __tmp_1   0x00004b       data     static D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
                 BankIndex   0x00004f       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
            failureCounter   0x000050       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
@@ -1655,8 +1659,8 @@ DemoOutput_ActiveScanResults   0x00c81a    program     extern D:\github\microchi
                      t_sw   0x0000f6       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\BSP_MiWiDemoBd.c
           timerExtension1   0x0000fe       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\SymbolTime.c
           timerExtension2   0x0000ff       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\SymbolTime.c
-         BroadcastTracker   0x000100       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-        connectionAddress   0x0001e1       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+         BroadcastTracker   0x000100       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+        connectionAddress   0x0001e1       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
             MACInitParams   0x0001e4       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
      OutgoingFrameCounter   0x0001e7       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
      tmpSourceLongAddress   0x0001eb       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
@@ -1707,12 +1711,12 @@ DemoOutput_ActiveScanResults   0x00c81a    program     extern D:\github\microchi
             nvmFamilyTree   0x0002f3       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
                   nvmRole   0x0002f5       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
            nextEEPosition   0x0002f7       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LocalFiles\NVM.c
-                myChannel   0x0002f9       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-         NetFreezerEnable   0x0002fa       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-         AdditionalNodeID   0x0002fb       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-                    TxNum   0x0002fc       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-                    RxNum   0x0002fd       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-               FlashCount   0x0002fe       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+                myChannel   0x0002f9       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+         NetFreezerEnable   0x0002fa       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+         AdditionalNodeID   0x0002fb       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+                    TxNum   0x0002fc       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+                    RxNum   0x0002fd       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+               FlashCount   0x0002fe       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
                  RxBuffer   0x000300       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
                   LCDText   0x0003da       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\LCD_ST7032.c
                 __RETVAL0   0x0003fb       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\cmath18.asm
@@ -1720,9 +1724,9 @@ DemoOutput_ActiveScanResults   0x00c81a    program     extern D:\github\microchi
                 __RETVAL2   0x0003fd       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\cmath18.asm
                 __RETVAL3   0x0003fe       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\extended\math\cmath18.asm
          indirectMessages   0x000400       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-                   mydata   0x0004ae       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-                       t1   0x0004ea       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
-                    t_sw1   0x0004ee       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c.c
+                   mydata   0x0004ae       data     extern D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+                       t1   0x0004ea       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
+                    t_sw1   0x0004ee       data     static D:\github\microchip\mla_v2013-06-15\Combo\MiWi Protocol to WiFi Wireless Demo Kit\MiWi_Demo_Board\DemoTest.c
             myLongAddress   0x0004f2       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
            currentChannel   0x0004fa       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
                  ConnMode   0x0004fb       data     extern D:\github\microchip\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c

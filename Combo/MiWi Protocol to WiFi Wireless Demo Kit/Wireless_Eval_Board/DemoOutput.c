@@ -237,7 +237,21 @@ void DemoOutput_Channel(BYTE channel, BYTE Step)
         PrintDec(channel);
         Printf("\r\n");
     }
-}    
+
+} 
+extern BYTE LCDText[16*2+1];
+void DemoOutput_Channel_Addr(BYTE channel, BYTE high_addr, BYTE low_addr)
+{
+    LCDErase();
+    sprintf(LCDText, "Connected Peer  addr:%02x%02x ch:%d", high_addr, low_addr, channel);
+    LCDUpdate();
+    DelayMs(4000);   
+        
+    Printf("\r\nConnected Peer on Channel ");
+    PrintDec(channel);
+    Printf("\r\n");
+    
+} 
 
 void DemoOutput_Instruction(void)
 {

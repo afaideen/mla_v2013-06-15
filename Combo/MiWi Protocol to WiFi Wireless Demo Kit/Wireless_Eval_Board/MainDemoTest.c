@@ -107,7 +107,8 @@
 /*************************************************************************/
 
 // MiWi Possible channel numbers are from 11 to 26 for MRF24J40
-BYTE myChannel = 11;
+//BYTE myChannel = 11;
+BYTE myChannel = 25;
 
 #define MiWi_CHANNEL        MiWi_CHANNEL_11
 
@@ -309,8 +310,8 @@ int main(void)
     // Initialize the MiWi Protocol Stack. The only input parameter indicates
     // if previous network configuration should be restored.
     /*******************************************************************/
-    MiApp_ProtocolInit(FALSE);
-//    MiApp_ProtocolInit(TRUE);
+//    MiApp_ProtocolInit(FALSE);
+    MiApp_ProtocolInit(TRUE);
     putsUART2("\r\nMiApp_ProtocolInit...OK\r\n");
     /*******************************************************************/
     // Set Device Communication Channel
@@ -332,6 +333,7 @@ int main(void)
     //      DISABLE_ALL_CONN:   Disable all connections.
     /*******************************************************************/
     MiApp_ConnectionMode(ENABLE_ALL_CONN);
+//    MiApp_ConnectionMode(ENABLE_PREV_CONN);
 
 //    MiApp_StartConnection(START_CONN_DIRECT, 10, 0xFFFFFFFF);//create network
 //    i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);//join network
@@ -409,10 +411,16 @@ int main(void)
         //     only needs to pay attention to the channels that are not
         //     preferred.
         /*******************************************************************/
-//        i = MiApp_EstablishConnection(0xFF, CONN_MODE_INDIRECT);
-        MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
+//    CreateNewConnectionWithLeastNoise(0xFFFF);
+////        i = MiApp_EstablishConnection(0xFF, CONN_MODE_INDIRECT);
+        i = MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
+//        i = MiApp_StartConnection(START_CONN_ENERGY_SCN, 10, 0xFFFFFFFF);
+        LCDErase();
         sprintf((char *) LCDText, (char*) "Creating net..");
-//        sprintf((char *) &(LCDText[16]), (char*) "SW0:Yes  SW2:No");
+        if(i == TRUE)
+            sprintf((char *) &(LCDText[16]), (char*) "Successful");
+        else
+            sprintf((char *) &(LCDText[16]), (char*) "Fail");
         LCDUpdate();
         
 //    }

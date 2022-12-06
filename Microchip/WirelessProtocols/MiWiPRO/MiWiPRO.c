@@ -5100,8 +5100,8 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
     {
         if( ActiveScanIndex == 0xFF )
         {
-//            while( MiApp_SearchConnection(10, ((DWORD)0x00000001)<<currentChannel) == 0 )
-            while( i = MiApp_SearchConnection(11, ((DWORD)0x00000001)<<currentChannel) == 0 )
+            while( i = MiApp_SearchConnection(10, ((DWORD)0x00000001)<<currentChannel) == 0 )
+//            while( i = MiApp_SearchConnection(11, ((DWORD)0x00000001) << currentChannel) == 0 )
             {
                 if( --retry == 0 )
                 {
