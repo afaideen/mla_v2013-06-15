@@ -102,6 +102,10 @@
 #define BUTTON2_TRIS        (TRISDbits.TRISD4)	// Ref SW2
 #define	BUTTON2_IO          (PORTDbits.RD4)
 
+#define	SW0                 BUTTON1_IO
+#define	SW1                 BUTTON0_IO
+#define	SW2                 BUTTON2_IO
+
 // LCD Pin Definitions
 #define LCD_CS_TRIS         TRISEbits.TRISE0
 #define LCD_CS              LATEbits.LATE0

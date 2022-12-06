@@ -262,6 +262,7 @@ int main(void)
     static DWORD t_eeprom_reset = 0;
     static DWORD dwLastIP = 0;
     static UINT8 updateDisplay = 0;
+    BOOL protocol_init = FALSE;
 
 #if defined (EZ_CONFIG_STORE)
     static DWORD ButtonPushStart = 0;
@@ -310,9 +311,20 @@ int main(void)
     // Initialize the MiWi Protocol Stack. The only input parameter indicates
     // if previous network configuration should be restored.
     /*******************************************************************/
-//    MiApp_ProtocolInit(FALSE);
-    MiApp_ProtocolInit(TRUE);
-    putsUART2("\r\nMiApp_ProtocolInit...OK\r\n");
+    if(!SW2)
+    {
+        protocol_init = FALSE;
+        MiApp_ProtocolInit(FALSE);
+        putsUART2("\r\nMiApp_ProtocolInit...FALSE\r\n");
+        LED0_ON(); 
+    }
+    else
+    {
+        protocol_init = TRUE;
+        MiApp_ProtocolInit(TRUE);
+        putsUART2("\r\nMiApp_ProtocolInit...TRUE\r\n");
+    }
+    
     /*******************************************************************/
     // Set Device Communication Channel
     /*******************************************************************/
@@ -411,6 +423,8 @@ int main(void)
         //     only needs to pay attention to the channels that are not
         //     preferred.
         /*******************************************************************/
+    if( protocol_init == FALSE )
+    {
 //    CreateNewConnectionWithLeastNoise(0xFFFF);
 ////        i = MiApp_EstablishConnection(0xFF, CONN_MODE_INDIRECT);
         i = MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
@@ -423,7 +437,7 @@ int main(void)
             sprintf((char *) &(LCDText[16]), (char*) "Fail");
         LCDUpdate();
         
-//    }
+    }
     DelayMs(1000);
     // Turn OFF LCD after setting up MiWi Connection
     LCDBacklightOFF();

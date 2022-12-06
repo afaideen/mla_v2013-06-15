@@ -302,16 +302,20 @@ void main(void)
     MIWI_TICK startTick, currentTick, t1;        
     WORD tmp = 0xFFFF;    
     BYTE sensor_name_tpr[] = "temperature";
+    BOOL protocol_init = FALSE;
 
     /*******************************************************************/
     // Initialize Hardware
     /*******************************************************************/
 	BoardInit();
-
+    LED0 = 0;
+    LED1 = 0;
+    LED2 = 0;
     /*******************************************************************/
     // Initialize the LCD
     /*******************************************************************/
     LCDInit();
+    
     
     for(j=0; j < CONNECTION_SIZE; j++)
     {
@@ -325,12 +329,9 @@ void main(void)
         
     }
     
-//    MiApp_ProtocolInit(TRUE);//original
-    MiApp_ProtocolInit(FALSE);
+    protocol_init = MiApp_ProtocolInit(TRUE);//original
+//    MiApp_ProtocolInit(FALSE);
     
-    LED0 = 0;
-    LED1 = 0;
-    LED2 = 0;
     
     MainDisplay();
     CheckConfiguration();
@@ -347,15 +348,20 @@ void main(void)
 #if defined(PROTOCOL_P2P)
     MiApp_ConnectionMode(ENABLE_ACTIVE_SCAN_RSP);//original works with P2P
 #else
-    //For MIWI need to enable both below!
-//    MiApp_ConnectionMode(ENABLE_ACTIVE_SCAN_RSP);  //for MIWI
-//    MiApp_ConnectionMode(ENABLE_ALL_CONN);  //for MIWI
-//    MiApp_ConnectionMode(ENABLE_PREV_CONN);  //for MIWI
-    currentChannel = 25;
-    i = JoinAvailableChannel(currentChannel, 0x0000);
-//    i = JoinAvailableChannel(currentChannel, 0x0100);
-//    i = JoinAvailableChannel(0xffffffff, 0x0100);
-//    i = JoinAvailableChannel(0xffffffff, 0x0000);//it will scan ch 11-26 looking for PAN Coordinator at address 0x0000
+    if(!SW0_PORT || protocol_init == FALSE)
+    {
+        currentChannel = 25;
+        MiApp_ProtocolInit(FALSE);
+          //For MIWI need to enable both below!
+    //    MiApp_ConnectionMode(ENABLE_ACTIVE_SCAN_RSP);  //for MIWI
+    //    MiApp_ConnectionMode(ENABLE_ALL_CONN);  //for MIWI
+    //    MiApp_ConnectionMode(ENABLE_PREV_CONN);  //for MIWI
+    
+    //    i = JoinAvailableChannel(currentChannel, 0x0000);
+        i = JoinAvailableChannel(currentChannel, 0x0100);
+    //    i = JoinAvailableChannel(0xffffffff, 0x0100);
+    //    i = JoinAvailableChannel(0xffffffff, 0x0000);//it will scan ch 11-26 looking for PAN Coordinator at address 0x0000
+    }
 #endif
     
     DelayMs(1000);

@@ -224,10 +224,10 @@
         //      TIME_SYNC_SLOTS
         //      COUNTER_CRYSTAL_FREQ
         /*********************************************************************/
-//#ifdef NWK_ROLE_COORDINATOR
+#ifdef NWK_ROLE_COORDINATOR
 
 //        #define ENABLE_TIME_SYNC
-//#endif
+#endif
         /*********************************************************************/
         // TIME_SYNC_SLOTS defines the total number of time slot available 
         // within one duty cycle. As a rule, the number of time slot must be

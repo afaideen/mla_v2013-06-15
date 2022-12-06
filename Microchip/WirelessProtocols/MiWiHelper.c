@@ -194,22 +194,29 @@ BYTE JoinAvailableChannel(DWORD channel, WORD short_addr)
                 channel_map = 0xffffffff;
             k = AutoSearchActiveConnection(channel_map);
             n = k >> 8;
-            channel = (BYTE)k & 0x00ff;
             
-            for( j = 0; j < n; j++)
+            if( n != 0x00 )
             {
-                if( ActiveScanResults[j].Address[0] == addr.v[0] && ActiveScanResults[j].Address[1] == addr.v[1] )
+                channel = (BYTE)k & 0x00ff;
+            
+                for( j = 0; j < n; j++)
                 {
-                    i = MiApp_EstablishConnection(j, CONN_MODE_DIRECT);
-                    break;
+                    if( ActiveScanResults[j].Address[0] == addr.v[0] && ActiveScanResults[j].Address[1] == addr.v[1] )
+                    {
+                        i = MiApp_EstablishConnection(j, CONN_MODE_DIRECT);
+                        break;
+                    }
+                    if( (j == n - 1) && ActiveScanResults[j].Capability.bits.Role == ROLE_COORDINATOR)
+                        i = MiApp_EstablishConnection(j, CONN_MODE_DIRECT);
                 }
-                if( (j == n - 1) && ActiveScanResults[j].Capability.bits.Role == ROLE_COORDINATOR)
-                    i = MiApp_EstablishConnection(j, CONN_MODE_DIRECT);
+                if(j == n)
+                    j = n - 1;
             }
-            if(j == n)
-                j = n - 1;
             if( i == 0xff )
+            {
                 i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
+                j = 0;
+            }
         }
         else{
             i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
@@ -222,6 +229,8 @@ BYTE JoinAvailableChannel(DWORD channel, WORD short_addr)
         while( (i = MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT)) == 0xFF );//active scanning all channels available
 
     
+    LCDBacklightON();
+   
     /*******************************************************************/
     // Display current opertion on LCD of demo board, if applicable
     /*******************************************************************/
@@ -242,7 +251,7 @@ BYTE JoinAvailableChannel(DWORD channel, WORD short_addr)
         //Join fail then creating network
         MiApp_StartConnection(START_CONN_DIRECT, 10, 0);
     }
-    
+    LCDBacklightOFF(); 
     
     return i;
 }
