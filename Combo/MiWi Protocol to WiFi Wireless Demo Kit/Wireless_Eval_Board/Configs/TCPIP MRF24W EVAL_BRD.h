@@ -89,7 +89,7 @@
 //#define STACK_USE_UDP_PERFORMANCE_TEST	// Module for testing UDP TX performance characteristics.  NOTE: Enabling this will cause a huge amount of UDP broadcast packets to flood your network on the discard port.  Use care when enabling this on production networks, especially with VPNs (could tunnel broadcast traffic across a limited bandwidth connection).
 //#define STACK_USE_TCP_PERFORMANCE_TEST	// Module for testing TCP TX performance characteristics
 //#define STACK_USE_DYNAMICDNS_CLIENT		// Dynamic DNS client updater module
-//#define STACK_USE_BERKELEY_API			// Berekely Sockets APIs are available
+#define STACK_USE_BERKELEY_API			// Berekely Sockets APIs are available
 //#define STACK_USE_ZEROCONF_LINK_LOCAL	// Zeroconf IPv4 Link-Local Addressing
 //#define STACK_USE_ZEROCONF_MDNS_SD		// Zeroconf mDNS and mDNS service discovery
 
@@ -291,13 +291,13 @@
 			//{TCP_PURPOSE_TCP_PERFORMANCE_TX, TCP_ETH_RAM, 200, 1},
 			//{TCP_PURPOSE_TCP_PERFORMANCE_RX, TCP_ETH_RAM, 40, 1500},
 			//{TCP_PURPOSE_UART_2_TCP_BRIDGE, TCP_ETH_RAM, 256, 256},
-			{TCP_PURPOSE_HTTP_SERVER, TCP_ETH_RAM, 3076, 1000},
+			//{TCP_PURPOSE_HTTP_SERVER, TCP_ETH_RAM, 3076, 1000},
 			{TCP_PURPOSE_HTTP_SERVER, TCP_ETH_RAM, 3076, 1000},
 			//{TCP_PURPOSE_DEFAULT, TCP_ETH_RAM, 1000, 1000},
 			//{TCP_PURPOSE_BERKELEY_SERVER, TCP_ETH_RAM, 25, 20},
 			//{TCP_PURPOSE_BERKELEY_SERVER, TCP_ETH_RAM, 25, 20},
 			//{TCP_PURPOSE_BERKELEY_SERVER, TCP_ETH_RAM, 25, 20},
-			//{TCP_PURPOSE_BERKELEY_CLIENT, TCP_ETH_RAM, 125, 100},
+			{TCP_PURPOSE_BERKELEY_CLIENT, TCP_ETH_RAM, 330, 330},
 		};
 		#define END_OF_TCP_CONFIGURATION
 	#endif

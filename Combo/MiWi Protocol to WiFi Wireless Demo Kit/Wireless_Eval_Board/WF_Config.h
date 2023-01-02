@@ -149,6 +149,7 @@
  * For now, assign this as 192.168.1.3 (as needed)
  */
     #if defined (MRF24WG)
+//        #define MY_DEFAULT_WIFI_SECURITY_MODE       WF_SECURITY_WPA2_WITH_PASS_PHRASE        /* Open & WEP security supported.     
         #define MY_DEFAULT_WIFI_SECURITY_MODE       WF_SECURITY_OPEN        /* Open & WEP security supported.     
                                                                                  * For WEP security, RF Module FW version 3107
                                                                                  * or the later needs. 

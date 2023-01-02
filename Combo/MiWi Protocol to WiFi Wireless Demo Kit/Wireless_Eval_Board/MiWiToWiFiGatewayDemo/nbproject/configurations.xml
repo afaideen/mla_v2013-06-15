@@ -154,6 +154,11 @@
       <logicalFolder name="f1" displayName="Helper" projectFiles="true">
         <itemPath>Helper/MyHelper.c</itemPath>
       </logicalFolder>
+      <logicalFolder name="f3" displayName="MyApp" projectFiles="true">
+        <itemPath>../BerkeleyTCPClientDemo.c</itemPath>
+        <itemPath>../BerkeleyTCPServerDemo.c</itemPath>
+        <itemPath>../BerkeleyUDPClientDemo.c</itemPath>
+      </logicalFolder>
       <logicalFolder name="TCPIP Stack" displayName="TCPIP Stack" projectFiles="true">
         <itemPath>../../../../Microchip/TCPIP Stack/Announce.c</itemPath>
         <itemPath>../../../../Microchip/TCPIP Stack/ARP.c</itemPath>

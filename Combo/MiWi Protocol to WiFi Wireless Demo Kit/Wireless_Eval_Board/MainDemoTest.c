@@ -451,18 +451,20 @@ int main(void)
     if(!BUTTON2_IO)
     {
         putsUART2("Erasing EEPROM AppConfig...");
-        while(1)
-        {
-            if(!BUTTON2_IO && APP_TIMER_Expired(&t_eeprom_reset, 3.5))
-            {
-                APP_TIMER_Set(&t_eeprom_reset);
-                EraseAppConfig(&AppConfig);
-                break;
-            }else if(BUTTON2_IO){
-                APP_TIMER_Set(t_eeprom_reset);
-                break;
-            }
-        }
+        EraseAppConfig(&AppConfig);
+        Reset();
+//        while(1)
+//        {
+//            if(!BUTTON2_IO && APP_TIMER_Expired(&t_eeprom_reset, 3.5))
+//            {
+//                APP_TIMER_Set(&t_eeprom_reset);
+//                EraseAppConfig(&AppConfig);
+//                break;
+//            }else if(BUTTON2_IO){
+//                APP_TIMER_Set(t_eeprom_reset);
+//                break;
+//            }
+//        }
         
     }
     

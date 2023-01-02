@@ -1,0 +1,84 @@
+
+
+https://api.weatherapi.com/v1/current.json?q=Segamat&key=303fb9ce3b5f40c1ace11052221207
+
+Contoh GET
+
+GET /post/test HTTP/1.1
+Host: 192.168.0.103:5000
+Content-Type: application/json
+Connection: keep-alive
+Accept: */*
+Content-Length: 64
+
+{"key1": "Hi! Are you my server?", "key2": 123.99, "key3": true}HTTP/1.1 200 OK
+Server: Werkzeug/2.2.2 Python/3.10.4
+Date: Mon, 02 Jan 2023 11:53:19 GMT
+Content-Type: application/json
+Content-Length: 94
+Connection: close
+
+{
+  "error": null,
+  "key1": "Hi! I am your server here.",
+  "key2": 123.99,
+  "key3": true
+}
+
+GET /post/test HTTP/1.1
+Content-Type: application/json
+User-Agent: PostmanRuntime/7.29.2
+Accept: */*
+Postman-Token: 9dfc4bf9-5695-4915-a865-d65ed3d2abce
+Host: localhost:5000
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Length: 81
+
+{
+    "key1":"Hi! Are you my server?",
+    "key2":123.99,
+    "key3":true
+
+}HTTP/1.1 200 OK
+Server: Werkzeug/2.2.2 Python/3.10.4
+Date: Mon, 02 Jan 2023 02:27:20 GMT
+Content-Type: application/json
+Content-Length: 77
+Connection: close
+
+{
+  "key1": "Hi! I am your server here.",
+  "key2": 123.99,
+  "key3": true
+}
+
+Contoh POST
+
+POST /post/test HTTP/1.1
+Content-Type: application/json
+User-Agent: PostmanRuntime/7.29.2
+Accept: */*
+Postman-Token: b9a34b7d-1fa4-4156-a9c2-df59cdbf3921
+Host: localhost:5000
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Length: 81
+
+{
+    "key1":"Hi! Are you my server?",
+    "key2":123.99,
+    "key3":true
+
+}HTTP/1.1 200 OK
+Server: Werkzeug/2.2.2 Python/3.10.4
+Date: Mon, 02 Jan 2023 02:18:59 GMT
+Content-Type: application/json
+Content-Length: 77
+Connection: close
+
+{
+  "key1": "Hi! I am your server here.",
+  "key2": 123.99,
+  "key3": true
+}
