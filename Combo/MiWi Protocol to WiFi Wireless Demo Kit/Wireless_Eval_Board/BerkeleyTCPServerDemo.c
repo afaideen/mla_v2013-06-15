@@ -63,6 +63,7 @@
 #define MAX_CLIENT (3) // Maximum number of simultanous connections accepted by the server.
 
 
+
 /*********************************************************************
  * Function:        void BerkeleyTCPServerDemo(void)
  *
@@ -85,7 +86,14 @@ void BerkeleyTCPServerDemo(void)
     struct sockaddr_in addr;
     struct sockaddr_in addRemote;
     int addrlen = sizeof(struct sockaddr_in);
-    char bfr[15];
+//    char bfr[15];
+    char bfr[250];
+    BYTE data_body[] = "{"
+                                "\"key1\": \"Hi! I'm your server here\","
+                                "\"key2\": 128.0123,"
+                                "\"key3\": true"
+                            "}";
+    
     int length;
     int i;
     static enum
@@ -149,14 +157,35 @@ void BerkeleyTCPServerDemo(void)
                 // If this socket is not connected then no need to process anything
                 if(ClientSock[i] == INVALID_SOCKET)
                 	continue;
-
+                memset(bfr, 0, sizeof(bfr)); 
 	            // For all connected sockets, receive and send back the data
-                length = recv( ClientSock[i], bfr, sizeof(bfr), 0);
+                length = recv( ClientSock[i], bfr, sizeof(bfr)-1, 0);
          
                 if( length > 0 )
                 {
-                    bfr[length] = '\0';
-                    send(ClientSock[i], bfr, strlen(bfr), 0);
+//                    bfr[length] = '\0';
+//                    send(ClientSock[i], bfr, strlen(bfr), 0);
+                                      
+                    putsUART(bfr);
+                    if(length < (sizeof(bfr) - 1) )
+                    {
+                        memset(bfr, 0, sizeof(bfr)); 
+                        sprintf(bfr,"HTTP/1.1 200 OK\r\n"
+//                                    "Content-Type: text/plain\r\n"
+                                    "Content-Type: application/json\r\n"
+                                    "Accept: */*\r\n"
+                                    "Host: 192.168.0.105:9764\r\n"
+                                    "Connection: keep-alive\r\n"
+                                    "Content-Length: %d\r\n"
+                                    "\r\n"
+                                    "%s"
+                                    , strlen(data_body)//content-lenth
+                                    , data_body    //data in body     
+                                );
+                        send(ClientSock[i], bfr, strlen(bfr), 0);
+                        putsUART(bfr);
+                    }
+                    
                 }
                 else if( length < 0 )
                 {

@@ -61,8 +61,8 @@
 static ROM BYTE ServerName[] =  "www" WIFI_NET_TEST_DOMAIN;
 #else
 //static ROM BYTE ServerName[] =  "www.google.com";
-static ROM BYTE ServerName[] =  "192.168.0.100";
-//static ROM BYTE ServerName[] =  "192.168.0.103";
+//static ROM BYTE ServerName[] =  "192.168.0.100";
+static ROM BYTE ServerName[] =  "192.168.0.103";
 #endif
 // This is specific to this HTTP Client example
 //static BYTE sendRequest[] = "GET /search?as_q=Microchip&as_sitesearch=microchip.com HTTP/1.0\r\nHost: www.google.com\r\nConnection: close\r\n\r\n";
