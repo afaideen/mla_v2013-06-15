@@ -88,6 +88,7 @@ void BerkeleyTCPServerDemo(void)
     int addrlen = sizeof(struct sockaddr_in);
 //    char bfr[15];
     char bfr[250];
+    BYTE host[21];
     BYTE data_body[] = "{"
                                 "\"key1\": \"Hi! I'm your server here\","
                                 "\"key2\": 128.0123,"
@@ -169,16 +170,19 @@ void BerkeleyTCPServerDemo(void)
                     putsUART(bfr);
                     if(length < (sizeof(bfr) - 1) )
                     {
+                        strcpy(host, getHostInString(&AppConfig.MyIPAddr, PORTNUM));
                         memset(bfr, 0, sizeof(bfr)); 
                         sprintf(bfr,"HTTP/1.1 200 OK\r\n"
 //                                    "Content-Type: text/plain\r\n"
                                     "Content-Type: application/json\r\n"
                                     "Accept: */*\r\n"
-                                    "Host: 192.168.0.105:9764\r\n"
+//                                    "Host: 192.168.0.105:9764\r\n"
+                                    "Host: %s\r\n"
                                     "Connection: keep-alive\r\n"
                                     "Content-Length: %d\r\n"
                                     "\r\n"
                                     "%s"
+                                    , host
                                     , strlen(data_body)//content-lenth
                                     , data_body    //data in body     
                                 );

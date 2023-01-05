@@ -312,8 +312,8 @@
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>RealICEPlatformTool</platformTool>
-        <languageToolchain>C32</languageToolchain>
-        <languageToolchainVersion>2.02</languageToolchainVersion>
+        <languageToolchain>XC32</languageToolchain>
+        <languageToolchainVersion>1.33</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
@@ -350,16 +350,10 @@
             overriding="false">
         <C32>
         </C32>
-        <C32-AR>
-        </C32-AR>
         <C32-AS>
         </C32-AS>
-        <C32-CO>
-        </C32-CO>
         <C32-LD>
         </C32-LD>
-        <C32CPP>
-        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -368,16 +362,10 @@
             overriding="false">
         <C32>
         </C32>
-        <C32-AR>
-        </C32-AR>
         <C32-AS>
         </C32-AS>
-        <C32-CO>
-        </C32-CO>
         <C32-LD>
         </C32-LD>
-        <C32CPP>
-        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -386,16 +374,10 @@
             overriding="false">
         <C32>
         </C32>
-        <C32-AR>
-        </C32-AR>
         <C32-AS>
         </C32-AS>
-        <C32-CO>
-        </C32-CO>
         <C32-LD>
         </C32-LD>
-        <C32CPP>
-        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -404,16 +386,10 @@
             overriding="false">
         <C32>
         </C32>
-        <C32-AR>
-        </C32-AR>
         <C32-AS>
         </C32-AS>
-        <C32-CO>
-        </C32-CO>
         <C32-LD>
         </C32-LD>
-        <C32CPP>
-        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -422,16 +398,10 @@
             overriding="false">
         <C32>
         </C32>
-        <C32-AR>
-        </C32-AR>
         <C32-AS>
         </C32-AS>
-        <C32-CO>
-        </C32-CO>
         <C32-LD>
         </C32-LD>
-        <C32CPP>
-        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -440,16 +410,10 @@
             overriding="false">
         <C32>
         </C32>
-        <C32-AR>
-        </C32-AR>
         <C32-AS>
         </C32-AS>
-        <C32-CO>
-        </C32-CO>
         <C32-LD>
         </C32-LD>
-        <C32CPP>
-        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
@@ -458,53 +422,36 @@
             overriding="false">
         <C32>
         </C32>
-        <C32-AR>
-        </C32-AR>
         <C32-AS>
         </C32-AS>
-        <C32-CO>
-        </C32-CO>
         <C32-LD>
         </C32-LD>
-        <C32CPP>
-        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
       <item path="../MainDemo.c" ex="true" overriding="false">
         <C32>
         </C32>
-        <C32-AR>
-        </C32-AR>
         <C32-AS>
         </C32-AS>
-        <C32-CO>
-        </C32-CO>
         <C32-LD>
         </C32-LD>
-        <C32CPP>
-        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
       <item path="../MiWi_SPI.c" ex="true" overriding="false">
         <C32>
         </C32>
-        <C32-AR>
-        </C32-AR>
         <C32-AS>
         </C32-AS>
-        <C32-CO>
-        </C32-CO>
         <C32-LD>
         </C32-LD>
-        <C32CPP>
-        </C32CPP>
         <C32Global>
         </C32Global>
       </item>
       <C32>
         <property key="additional-warnings" value="true"/>
+        <property key="addresss-attribute-use" value="false"/>
         <property key="enable-app-io" value="false"/>
         <property key="enable-omit-frame-pointer" value="false"/>
         <property key="enable-symbols" value="true"/>
@@ -513,9 +460,10 @@
         <property key="extra-include-directories"
                   value="..;../../../Microchip/Include;../../../../Microchip/Include;../../../../Microchip/Include/TCPIP Stack;../Configs;../LocalFiles;..\..\..\..\TCPIP\WiFi EZConfig"/>
         <property key="generate-16-bit-code" value="false"/>
+        <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="false"/>
         <property key="make-warnings-into-errors" value="false"/>
-        <property key="optimization-level" value=""/>
+        <property key="optimization-level" value="-O1"/>
         <property key="place-data-into-section" value="false"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
@@ -523,6 +471,10 @@
                   value="PROTOCOL_MIWI_PRO;CFG_INCLUDE_PIC32_EVAL_BOARD;_SUPPRESS_PLIB_WARNING;MIWI_HELPER"/>
         <property key="strict-ansi" value="false"/>
         <property key="support-ansi" value="false"/>
+        <property key="toplevel-reordering" value=""/>
+        <property key="unaligned-access" value=""/>
+        <property key="use-cci" value="false"/>
+        <property key="use-iar" value="false"/>
         <property key="use-indirect-calls" value="false"/>
       </C32>
       <C32-AR>
@@ -537,6 +489,8 @@
         <property key="extra-include-directories-for-preprocessor"
                   value="../;../../../Microchip/Include;../../../../Microchip/Include;../../../../Microchip/Include/TCPIPStack;../Configs"/>
         <property key="false-conditionals" value="false"/>
+        <property key="generate-16-bit-code" value="false"/>
+        <property key="generate-micro-compressed-code" value="false"/>
         <property key="keep-locals" value="false"/>
         <property key="list-assembly" value="false"/>
         <property key="list-source" value="false"/>
@@ -552,21 +506,40 @@
         <property key="coverage-enable" value=""/>
       </C32-CO>
       <C32-LD>
+        <property key="additional-options-use-response-files" value="false"/>
+        <property key="additional-options-write-sla" value="false"/>
+        <property key="allocate-dinit" value="false"/>
+        <property key="code-dinit" value="false"/>
+        <property key="ebase-addr" value=""/>
         <property key="enable-check-sections" value="false"/>
         <property key="exclude-floating-point-library" value="false"/>
         <property key="exclude-standard-libraries" value="false"/>
         <property key="extra-lib-directories" value=""/>
+        <property key="fill-flash-options-addr" value=""/>
+        <property key="fill-flash-options-const" value=""/>
+        <property key="fill-flash-options-how" value="0"/>
+        <property key="fill-flash-options-inc-const" value="1"/>
+        <property key="fill-flash-options-increment" value=""/>
+        <property key="fill-flash-options-seq" value=""/>
+        <property key="fill-flash-options-what" value="0"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
+        <property key="generate-micro-compressed-code" value="false"/>
         <property key="heap-size" value="64000"/>
         <property key="input-libraries" value=""/>
+        <property key="kseg-length" value=""/>
+        <property key="kseg-origin" value=""/>
         <property key="linker-symbols" value=""/>
         <property key="map-file" value="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"/>
+        <property key="no-device-startup-code" value="false"/>
         <property key="no-startup-files" value="false"/>
+        <property key="oXC32ld-extra-opts" value=""/>
         <property key="optimization-level" value=""/>
         <property key="preprocessor-macros" value=""/>
         <property key="remove-unused-sections" value="false"/>
         <property key="report-memory-usage" value="false"/>
+        <property key="serial-length" value=""/>
+        <property key="serial-origin" value=""/>
         <property key="stack-size" value="8192"/>
         <property key="symbol-stripping" value=""/>
         <property key="trace-symbols" value=""/>
@@ -602,7 +575,16 @@
         <property key="use-indirect-calls" value="false"/>
       </C32CPP>
       <C32Global>
+        <property key="common-include-directories" value=""/>
+        <property key="gp-relative-option" value=""/>
         <property key="legacy-libc" value="false"/>
+        <property key="mdtcm" value=""/>
+        <property key="mitcm" value=""/>
+        <property key="mstacktcm" value="false"/>
+        <property key="omit-pack-options" value="1"/>
+        <property key="relaxed-math" value="false"/>
+        <property key="save-temps" value="false"/>
+        <property key="wpo-lto" value="false"/>
       </C32Global>
       <RealICEPlatformTool>
         <property key="ADC 1" value="true"/>
@@ -658,7 +640,7 @@
         <property key="UART5" value="true"/>
         <property key="UART6" value="true"/>
         <property key="USB" value="true"/>
-        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
         <property key="hwtoolclock.units" value="mips"/>
@@ -712,7 +694,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC32MX_DFP" vendor="Microchip" version="1.3.231"/>
+        <pack name="PIC32MX_DFP" vendor="Microchip" version="1.5.259"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -995,6 +977,13 @@
                   value="toolpack.updateoptions.uselatestoolpack"/>
         <property key="toolpack.updateoptions.packversion"
                   value="Press to select which tool pack to use"/>
+        <property key="tracecontrol.include.timestamp" value="summarydataenabled"/>
+        <property key="tracecontrol.select" value="0"/>
+        <property key="tracecontrol.stallontracebufferfull" value="false"/>
+        <property key="tracecontrol.timestamp" value="0"/>
+        <property key="tracecontrol.tracebufmax" value="546000"/>
+        <property key="tracecontrol.tracefile" value="defmplabxtrace.log"/>
+        <property key="tracecontrol.traceresetonrun" value="false"/>
         <property key="uart0io.output" value="window"/>
         <property key="uart0io.outputfile" value=""/>
         <property key="uart0io.uartioenabled" value="false"/>

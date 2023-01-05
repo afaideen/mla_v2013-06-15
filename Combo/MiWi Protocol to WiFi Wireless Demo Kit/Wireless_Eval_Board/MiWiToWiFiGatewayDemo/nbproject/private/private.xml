@@ -194,10 +194,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemoTest.c</file>
-            <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/Configs/TCPIP%20MRF24W%20EVAL_BRD.h</file>
-            <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/BerkeleyTCPClientDemo.c</file>
+            <file>file:/D:/github/microchip/mla_v2013-06-15/Microchip/TCPIP%20Stack/Helpers.c</file>
             <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/BerkeleyTCPServerDemo.c</file>
-            <file>file:/D:/github/microchip/mla_v2013-06-15/Microchip/TCPIP%20Stack/TCP.c</file>
+            <file>file:/D:/github/microchip/mla_v2013-06-15/Microchip/TCPIP%20Stack/WiFi/WF_Spi.c</file>
         </group>
     </open-files>
 </project-private>

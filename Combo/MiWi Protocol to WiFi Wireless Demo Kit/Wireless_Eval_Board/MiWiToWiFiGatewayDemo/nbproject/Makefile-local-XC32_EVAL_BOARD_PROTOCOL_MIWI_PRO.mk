@@ -21,18 +21,18 @@ PATH:=C:/Program Files (x86)/Microchip/MPLABX/v5.40/mplab_platform/platform/../m
 # Path to java used to run MPLAB X when this makefile was created
 MP_JAVA_PATH="C:\Program Files (x86)\Microchip\MPLABX\v5.40\sys\java\zulu8.36.0.1-ca-fx-jdk8.0.202-win_x64\jre/bin/"
 OS_CURRENT="$(shell uname -s)"
-MP_CC="C:\Program Files (x86)\Microchip\MPLAB C32 Suite\bin\pic32-gcc.exe"
-# MP_CPPC is not defined
+MP_CC="C:\Program Files (x86)\Microchip\xc32\v1.33\bin\xc32-gcc.exe"
+MP_CPPC="C:\Program Files (x86)\Microchip\xc32\v1.33\bin\xc32-g++.exe"
 # MP_BC is not defined
-MP_AS="C:\Program Files (x86)\Microchip\MPLAB C32 Suite\bin\pic32-as.exe"
-MP_LD="C:\Program Files (x86)\Microchip\MPLAB C32 Suite\bin\pic32-ld.exe"
-MP_AR="C:\Program Files (x86)\Microchip\MPLAB C32 Suite\bin\pic32-ar.exe"
+MP_AS="C:\Program Files (x86)\Microchip\xc32\v1.33\bin\xc32-as.exe"
+MP_LD="C:\Program Files (x86)\Microchip\xc32\v1.33\bin\xc32-ld.exe"
+MP_AR="C:\Program Files (x86)\Microchip\xc32\v1.33\bin\xc32-ar.exe"
 DEP_GEN=${MP_JAVA_PATH}java -jar "C:/Program Files (x86)/Microchip/MPLABX/v5.40/mplab_platform/platform/../mplab_ide/modules/../../bin/extractobjectdependencies.jar"
-MP_CC_DIR="C:\Program Files (x86)\Microchip\MPLAB C32 Suite\bin"
-# MP_CPPC_DIR is not defined
+MP_CC_DIR="C:\Program Files (x86)\Microchip\xc32\v1.33\bin"
+MP_CPPC_DIR="C:\Program Files (x86)\Microchip\xc32\v1.33\bin"
 # MP_BC_DIR is not defined
-MP_AS_DIR="C:\Program Files (x86)\Microchip\MPLAB C32 Suite\bin"
-MP_LD_DIR="C:\Program Files (x86)\Microchip\MPLAB C32 Suite\bin"
-MP_AR_DIR="C:\Program Files (x86)\Microchip\MPLAB C32 Suite\bin"
+MP_AS_DIR="C:\Program Files (x86)\Microchip\xc32\v1.33\bin"
+MP_LD_DIR="C:\Program Files (x86)\Microchip\xc32\v1.33\bin"
+MP_AR_DIR="C:\Program Files (x86)\Microchip\xc32\v1.33\bin"
 # MP_BC_DIR is not defined
 DFP_DIR=C:/Users/afaid/.mchp_packs/Microchip/PIC32MX_DFP/1.3.231

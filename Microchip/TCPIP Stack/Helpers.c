@@ -2180,3 +2180,21 @@ SHORT Replace(BYTE *vExpression, ROM BYTE *vFind, ROM BYTE *vReplacement, WORD w
 	return wFindCount;
 }
 #endif
+
+BYTE *getHostInString(IP_ADDR* IPAddress, WORD portnum)
+{
+    BYTE host[21];
+//    BYTE *host;
+    memset(host, 0, 21);
+    sprintf(host, "%d.%d.%d.%d:%d"
+                                , IPAddress->v[0]
+                                , IPAddress->v[1]
+                                , IPAddress->v[2]
+                                , IPAddress->v[3]
+                                , portnum
+                                );
+    return host;
+}
+
+
+
