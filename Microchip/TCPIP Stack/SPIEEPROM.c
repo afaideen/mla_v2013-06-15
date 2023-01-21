@@ -463,7 +463,7 @@ XEE_RESULT XEEEndWrite(void)
 static void DoWrite(void)
 {
     BYTE i;
-    volatile BYTE vDummy;
+    volatile BYTE __attribute__((__unused__)) vDummy;
     BYTE vSPIONSave;
     #if defined(__18CXX)
     BYTE SPICON1Save;

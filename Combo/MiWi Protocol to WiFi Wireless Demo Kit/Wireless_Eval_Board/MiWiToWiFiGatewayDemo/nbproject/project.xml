@@ -10,7 +10,6 @@
             <header-extensions>h</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <asminc-extensions/>
-            <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>../../../../Microchip/Transceivers</sourceRootElem>
                 <sourceRootElem>../../../../Microchip/WirelessProtocols</sourceRootElem>
@@ -40,6 +39,7 @@
             <formatting>
                 <project-formatting-style>false</project-formatting-style>
             </formatting>
+            <make-dep-projects/>
         </data>
     </configuration>
 </project>

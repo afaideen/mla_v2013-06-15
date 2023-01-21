@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="31">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="35">
         <file>
             <url>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemoTest.c.c</url>
             <bookmark id="15">
@@ -123,6 +123,27 @@
             </bookmark>
         </file>
         <file>
+            <url>file:/D:/github/microchip/mla_v2013-06-15/Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c</url>
+            <bookmark id="32">
+                <name/>
+                <line>4674</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/LocalFiles/MRF24J40.c</url>
+            <bookmark id="34">
+                <name/>
+                <line>265</line>
+                <key/>
+            </bookmark>
+            <bookmark id="33">
+                <name/>
+                <line>1536</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
             <url>file:/D:/microchip_solutions_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemo.c</url>
             <bookmark id="4">
                 <name/>
@@ -153,6 +174,11 @@
             <bookmark id="31">
                 <name/>
                 <line>429</line>
+                <key/>
+            </bookmark>
+            <bookmark id="35">
+                <name/>
+                <line>961</line>
                 <key/>
             </bookmark>
         </file>
@@ -193,10 +219,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemoTest.c</file>
-            <file>file:/D:/github/microchip/mla_v2013-06-15/Microchip/TCPIP%20Stack/Helpers.c</file>
-            <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/BerkeleyTCPServerDemo.c</file>
-            <file>file:/D:/github/microchip/mla_v2013-06-15/Microchip/TCPIP%20Stack/WiFi/WF_Spi.c</file>
+            <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/BerkeleyTCPClientDemo.c</file>
         </group>
     </open-files>
 </project-private>

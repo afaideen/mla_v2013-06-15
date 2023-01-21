@@ -56,13 +56,15 @@
 #include "TCPIP Stack/TCPIP.h"
 
 
-#define PORTNUM 5000//80
+//#define PORTNUM 5000//80
+#define PORTNUM 80
 #ifdef WIFI_NET_TEST
 static ROM BYTE ServerName[] =  "www" WIFI_NET_TEST_DOMAIN;
 #else
 //static ROM BYTE ServerName[] =  "www.google.com";
 //static ROM BYTE ServerName[] =  "192.168.0.100";
-static ROM BYTE ServerName[] =  "192.168.0.103";
+//static ROM BYTE ServerName[] =  "192.168.0.103";
+static ROM BYTE ServerName[] =  "myfreedomaintest.website";
 #endif
 // This is specific to this HTTP Client example
 //static BYTE sendRequest[] = "GET /search?as_q=Microchip&as_sitesearch=microchip.com HTTP/1.0\r\nHost: www.google.com\r\nConnection: close\r\n\r\n";
@@ -99,7 +101,7 @@ void BerkeleyTCPClientDemo(void)
     int i;
     int addrlen;
     static DWORD t1 = 0;
-    unsigned int size_dt;
+    size_t size_dt;
    
     static enum
     {
@@ -144,12 +146,12 @@ void BerkeleyTCPClientDemo(void)
             if((bsdClientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == INVALID_SOCKET )
                 return;
          
-			#if defined(STACK_USE_UART)
-			putrsUART((ROM char*)"\r\n\r\nConnecting using Berkeley Sockets TCP API...\r\n");
-			putrsUART((ROM char*)"   Note: this demo will do nothing if an underlying TCP_PURPOSE_BERKELEY_CLIENT type \r\n"
-								 "   socket is unavailable, as declared by the TCPSocketInitializer[] array in \r\n"
-								 "   TCPIPConfig.h.\r\n\r\n");
-			#endif
+        #if defined(STACK_USE_UART)
+        putrsUART((ROM char*)"\r\n\r\nConnecting using Berkeley Sockets TCP API...\r\n");
+        putrsUART((ROM char*)"   Note: this demo will do nothing if an underlying TCP_PURPOSE_BERKELEY_CLIENT type \r\n"
+                             "   socket is unavailable, as declared by the TCPSocketInitializer[] array in \r\n"
+                             "   TCPIPConfig.h.\r\n\r\n");
+        #endif
          	         
             BSDClientState = BSD_CONNECT;
             break;

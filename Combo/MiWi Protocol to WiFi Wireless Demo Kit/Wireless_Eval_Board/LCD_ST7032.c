@@ -46,6 +46,9 @@
 #include "TimeDelay.h"
 #include <plib.h>
 //#include "WirelessProtocols/MSPI.h"
+//#include <peripheral/spi_3xx_4xx.h>
+// #include <peripheral/spi_5xx_6xx_7xx.h>
+//#   include <peripheral/spi_1xx_2xx.h>
 #include "LCD_ST7032.h"
 
 

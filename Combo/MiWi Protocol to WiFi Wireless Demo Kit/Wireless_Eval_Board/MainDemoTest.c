@@ -859,12 +859,12 @@ void DisplaySSID(void)
     BYTE LCDPos = 16;
     for (i = 0; i < sizeof (IP_ADDR); i++) {
         uitoa((WORD) IPVal.v[i], IPDigit);
-     for (j = 0; j < strlen((char*) IPDigit); j++) {
-        LCDText[LCDPos++] = IPDigit[j];
-    }
-    if (i == sizeof (IP_ADDR) - 1)
-        break;
-    LCDText[LCDPos++] = '.';
+        for (j = 0; j < strlen((char*) IPDigit); j++) {
+           LCDText[LCDPos++] = IPDigit[j];
+       }
+        if (i == sizeof (IP_ADDR) - 1)
+            break;
+        LCDText[LCDPos++] = '.';
     }
     if (LCDPos < 32u)
         LCDText[LCDPos] = 0;
