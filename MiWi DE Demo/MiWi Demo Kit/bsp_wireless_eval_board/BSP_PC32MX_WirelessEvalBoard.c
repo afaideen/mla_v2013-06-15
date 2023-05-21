@@ -378,7 +378,7 @@ void init_atod(void)
 //	AD1CON2 = 0x0404;			// AVdd, AVss, int every 2 conversions, MUXA only, scan
 	AD1CON2bits.VCFG = 0b000;
 	AD1CON2bits.OFFCAL = 0;
-	AD1CON2bits.CSCNA = 1;
+	AD1CON2bits.CSCNA = 1;          //scan inputs
 	AD1CON2bits.BUFS = 0;
 //	AD1CON2bits.SMPI = 0xff;
 	AD1CON2bits.SMPI = 0b1111;
@@ -393,8 +393,8 @@ void init_atod(void)
     
 //	AD1CSSL = 0xffff;
 	AD1CSSL = 0x0;
-	AD1CSSLbits.CSSL10 = 1;
-	AD1CSSLbits.CSSL11 = 1;
+	AD1CSSLbits.CSSL10 = 1;         //scan AN10
+	AD1CSSLbits.CSSL11 = 1;         //scan AN11
 }
 
 

@@ -307,7 +307,7 @@ void main(void)
     /*******************************************************************/
     // Initialize Hardware
     /*******************************************************************/
-	BoardInit();
+    BoardInit();
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
@@ -358,9 +358,9 @@ void main(void)
     //    MiApp_ConnectionMode(ENABLE_PREV_CONN);  //for MIWI
     
     //    i = JoinAvailableChannel(currentChannel, 0x0000);
-        i = JoinAvailableChannel(currentChannel, 0x0100);
+//        i = JoinAvailableChannel(currentChannel, 0x0100);
     //    i = JoinAvailableChannel(0xffffffff, 0x0100);
-    //    i = JoinAvailableChannel(0xffffffff, 0x0000);//it will scan ch 11-26 looking for PAN Coordinator at address 0x0000
+        i = JoinAvailableChannel(0xffffffff, 0x0000);//it will scan ch 11-26 looking for PAN Coordinator at address 0x0000
     }
 #endif
     
@@ -426,7 +426,9 @@ void ProcessSensor(void)
         
     ftoa(appData.sensor[0].value,&buff[0], sizeof(buff));
     memset(mydata, 0, sizeof(mydata));
-    sprintf(mydata,"short_addr=0x%04x,addr=%c%c%c%c%c%c%c%c,t1=%s,\r\n", 
+    //sa --> abv. short address
+    //la --> abv. long address
+    sprintf(mydata,"sa=0x%04x,la=%c%c%c%c%c%c%c%c,t1=%s", 
             myShortAddress.Val,
             myLongAddress[7],
             myLongAddress[6],

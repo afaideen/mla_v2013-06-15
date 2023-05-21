@@ -134,12 +134,12 @@ extern BYTE myLongAddress[];
 **********************************************************************/
 void main(void)
 {   
-    BYTE i, j;
-	BOOL result = TRUE;
-	BYTE switch_val;
-	WORD VBG_Result;
-	
-	NetFreezerEnable = FALSE;
+        BYTE i, j;
+        BOOL result = TRUE;
+        BYTE switch_val;
+        WORD VBG_Result;
+
+        NetFreezerEnable = FALSE;
 
     /*******************************************************************/
     // Initialize Hardware
@@ -166,14 +166,14 @@ void main(void)
  	
  	Read_MAC_Address();
     
-    /*******************************************************************/
-    // If Network Freezer Is Not Enabled User Must Configure the Network
-    /*******************************************************************/
-    if( !NetFreezerEnable )
-	{
-    	/*******************************************************************/
-    	// Display Start-up Splash Screen
-    	/*******************************************************************/
+/*******************************************************************/
+// If Network Freezer Is Not Enabled User Must Configure the Network
+/*******************************************************************/
+if( !NetFreezerEnable )
+{
+        /*******************************************************************/
+        // Display Start-up Splash Screen
+        /*******************************************************************/
         LCDBacklightON();
         
         LCDErase();
@@ -182,10 +182,10 @@ void main(void)
         LCDUpdate();
 
         /*******************************************************************/
-	    // Initialize the MiWi Protocol Stack. The only input parameter indicates
-	    // if previous network configuration should be restored.
-	    /*******************************************************************/		
-	    MiApp_ProtocolInit(FALSE);
+        // Initialize the MiWi Protocol Stack. The only input parameter indicates
+        // if previous network configuration should be restored.
+        /*******************************************************************/		
+        MiApp_ProtocolInit(FALSE);
       
         Nop();
         {
@@ -211,499 +211,488 @@ void main(void)
 CreateorJoin:   
  
         /*******************************************************************/
-        //Ask Use to select channel
+        //Ask User to select channel
         /*******************************************************************/
         LCDErase();
-		sprintf((char *)LCDText, (far rom char*)"SW1:<Sel Ch:%02d>", myChannel);
+        sprintf((char *)LCDText, (far rom char*)"SW1:<Sel Ch:%02d>", myChannel);
         sprintf((char *)&(LCDText[16]), (far rom char*)"SW2: Chnge Chnl");
         LCDUpdate();
         DelayMs(1000);
 
         while(1)
-		{
+        {
 //            BYTE test_val;    //For testing
 //            test_val = ReadTempSensor_WirelessEvalBoard();
-    		switch_val = ButtonPressed();
-            if(switch_val == SW1)
-			{
-                //User selected Default Channel
-                break;
-            }
-            
-            else if(switch_val == SW2)
-			{
-                BYTE select_channel = 0;
-                BOOL update_channel = TRUE;
-
-                #if defined (MRF24J40)
-                    select_channel = 11;
-                #else
-                    select_channel = 27;
-                #endif
-                while(update_channel == TRUE)
+                switch_val = ButtonPressed();
+                if(switch_val == SW1)
                 {
-                    //User Selected Change Channel
-                    LCDErase();
-    		        sprintf((char *)LCDText, (far rom char*)"SW1:<Sel Ch:%02d>", select_channel);
-                    sprintf((char *)&(LCDText[16]), (far rom char*)"SW2: Chnge Chnl");
-                    LCDUpdate();
+                    //User selected Default Channel
+                    break;
+                }            
+                else if(switch_val == SW2)
+                {
+                        BYTE select_channel = 0;
+                        BOOL update_channel = TRUE;
+
+                        #if defined (MRF24J40)
+                            select_channel = 11;
+                        #else
+                            select_channel = 27;
+                        #endif
+                        while(update_channel == TRUE)
+                        {
+                                //User Selected Change Channel
+                                LCDErase();
+                                sprintf((char *)LCDText, (far rom char*)"SW1:<Sel Ch:%02d>", select_channel);
+                                sprintf((char *)&(LCDText[16]), (far rom char*)"SW2: Chnge Chnl");
+                                LCDUpdate();
     
-                    while(1)
-                    {
-                        switch_val = ButtonPressed();
-                        if(switch_val == SW1)
-                            {
-                                myChannel = select_channel;
-                                update_channel = FALSE;
-                                break;
-                            }
-                        else if(switch_val == SW2)
-                            {
-                                select_channel = select_channel + 1;
-                                #if defined(MRF24J40)
-                                    if(select_channel == 27) 
-                                        select_channel = 11;
-                                #elif defined(MRF89XA)
-                                    if(select_channel == 32) select_channel = 0;                                
-                                #else
-                                     #error "MiWi Demo is not supported for this transceiver"
-                                #endif
-                                break;
-                            }
+                                while(1)
+                                {
+                                        switch_val = ButtonPressed();
+                                        if(switch_val == SW1)
+                                        {
+                                                myChannel = select_channel;
+                                                update_channel = FALSE;
+                                                break;
+                                        }
+                                        else if(switch_val == SW2)
+                                        {
+                                                select_channel = select_channel + 1;
+                                                #if defined(MRF24J40)
+                                                    if(select_channel == 27) 
+                                                        select_channel = 11;
+                                                #elif defined(MRF89XA)
+                                                    if(select_channel == 32) select_channel = 0;                                
+                                                #else
+                                                     #error "MiWi Demo is not supported for this transceiver"
+                                                #endif
+                                                break;
+                                        }
                     
-                    } //End of while(1)
-                } //End of while(result==TRUE)
-                break;
-            }   //End of Change Channel (switch_val == SW2)
+                                } //End of while(1)
+                        } //End of while(result==TRUE)
+                        break;
+                }   //End of Change Channel (switch_val == SW2)
 
-        }           
-
-        
+        }
 
         /*******************************************************************/
         // Set Device Communication Channel
         /*******************************************************************/
 
-	    if( MiApp_SetChannel(myChannel) == FALSE )
-	    {
-	        LCDDisplay((char *)"ERROR: Unable toSet Channel..", 0, TRUE);
-	        return;
-	    }
-	    
-	    /*******************************************************************/
-	    //  Set the connection mode. The possible connection modes are:
-	    //      ENABLE_ALL_CONN:    Enable all kinds of connection
-	    //      ENABLE_PREV_CONN:   Only allow connection already exists in 
-	    //                          connection table
-	    //      ENABL_ACTIVE_SCAN_RSP:  Allow response to Active scan
-	    //      DISABLE_ALL_CONN:   Disable all connections. 
-	    /*******************************************************************/
-	    MiApp_ConnectionMode(ENABLE_ALL_CONN);
+        if( MiApp_SetChannel(myChannel) == FALSE )
+        {
+            LCDDisplay((char *)"ERROR: Unable toSet Channel..", 0, TRUE);
+            return;
+        }
+
+        /*******************************************************************/
+        //  Set the connection mode. The possible connection modes are:
+        //      ENABLE_ALL_CONN:    Enable all kinds of connection
+        //      ENABLE_PREV_CONN:   Only allow connection already exists in 
+        //                          connection table
+        //      ENABL_ACTIVE_SCAN_RSP:  Allow response to Active scan
+        //      DISABLE_ALL_CONN:   Disable all connections. 
+        /*******************************************************************/
+        MiApp_ConnectionMode(ENABLE_ALL_CONN);
 //	    MiApp_ConnectionMode(ENABLE_ACTIVE_SCAN_RSP);
-	    
-	    /*******************************************************************/
-	    // Ask User to Create or Join a Network
-	    /*******************************************************************/
-	    LCDDisplay((char *)"SW1: Create NtwkSW2: Join Ntwk  ", 0, FALSE);
-	    DelayMs(1000);
+
+        /*******************************************************************/
+        // Ask User to Create or Join a Network
+        /*******************************************************************/
+        LCDDisplay((char *)"SW1: Create NtwkSW2: Join Ntwk  ", 0, FALSE);
+        DelayMs(1000);
 	    	
-		while(result == TRUE)
-		{
-    		switch_val = ButtonPressed();
-    		
-			/*******************************************************************/
-			// Create a New Network
-			/*******************************************************************/
-			if(switch_val == SW1)
-			{
-				LCDDisplay((char *)"Creating Network", 0, TRUE);
-				
-				MiApp_ProtocolInit(FALSE);
-				MiApp_StartConnection(START_CONN_DIRECT, 0, 0);
+        while(result == TRUE)
+        {
+                switch_val = ButtonPressed();
 
-				LCDDisplay((char *)"Created Network Successfully", 0, TRUE);
-				
-				LCDErase();
-                
-                sprintf((char *)&(LCDText), (far rom char*)"PANID:%02x%02x Ch:%02d",myPANID.v[1],myPANID.v[0],myChannel);
-                sprintf((char *)&(LCDText[16]), (far rom char*)"Address: %02x%02x", myShortAddress.v[1], myShortAddress.v[0]);
-                LCDUpdate();
-     			/*******************************************************************/
-    			// Wait for a Node to Join Network then proceed to Demo's
-    			/*******************************************************************/               
-                while(!ConnectionTable[0].status.bits.isValid)
+                /*******************************************************************/
+                // Create a New Network
+                /*******************************************************************/
+                if(switch_val == SW1)
                 {
-                	if(MiApp_MessageAvailable())
-                	    MiApp_DiscardMessage();
-                }    
-				result = FALSE;
-				
-				
-			}
-			
-			/*******************************************************************/
-			// Join a Network
-			/*******************************************************************/
-			if(switch_val == SW2)
-			{
-				volatile BYTE scanresult;
-				
-				LCDDisplay((char *)"  Scanning for    Networks....", 0, TRUE);
-				LCDDisplay((char *)"Please Select   Network to Join ", 0, TRUE);
-								
-				MiApp_ProtocolInit(FALSE);
+                        LCDDisplay((char *)"Creating Network", 0, TRUE);
 
-                /*******************************************************************/
-                // Perform an active scan
-                /*******************************************************************/
+                        MiApp_ProtocolInit(FALSE);
+                        MiApp_StartConnection(START_CONN_DIRECT, 0, 0);
 
-                if(myChannel < 8)
-                    scanresult = MiApp_SearchConnection(10, (0x00000001 << myChannel));
-                else if(myChannel < 16)
-				    scanresult = MiApp_SearchConnection(10, (0x00000100 << (myChannel-8)));
-                else if(myChannel < 24)
-				    scanresult = MiApp_SearchConnection(10, (0x00010000 << (myChannel-16)));
-                else 
-				    scanresult = MiApp_SearchConnection(10, (0x01000000 << (myChannel-24)));
-                
-               
+                        LCDDisplay((char *)"Created Network Successfully", 0, TRUE);
 
-                /*******************************************************************/
-                // Display Scan Results
-                /*******************************************************************/
-	            if(scanresult > 0)
-	            {
-                  BYTE k;  
-                    
-	                for(j = 0; j < scanresult; j++)
-	                {
-                        BYTE skip_print = FALSE;
-                        if(j > 0)
+                        LCDErase();
+
+                        sprintf((char *)&(LCDText), (far rom char*)"PANID:%02x%02x Ch:%02d",myPANID.v[1],myPANID.v[0],myChannel);
+                        sprintf((char *)&(LCDText[16]), (far rom char*)"Address: %02x%02x", myShortAddress.v[1], myShortAddress.v[0]);
+                        LCDUpdate();
+                        /*******************************************************************/
+                        // Wait for a Node to Join Network then proceed to Demo's
+                        /*******************************************************************/               
+                        while(!ConnectionTable[0].status.bits.isValid)
                         {
-                            
-                            skip_print = FALSE;
-                            for(k = 0; k < j; k++)
-                            {
-                                if((ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]) &
-                                    (ActiveScanResults[j].PANID.v[0] == ActiveScanResults[k].PANID.v[0]))
-                                    {
-                                        skip_print = TRUE;
-                                        break;
-                                    }
-                                
-                            }
-                            if(skip_print == TRUE)
-                            { 
-                                if(j == (scanresult-1)) j = -1;
-                                continue;
-                            }
-                        }
-                        
-						// Display the index on LCD
-						LCDErase();
-						
-						// Display if Network is Cordinator or PAN Cordinator
-						
-						sprintf((char *)LCDText, (far rom char*)"SW1:<PANID:%02x%02x>",ActiveScanResults[j].PANID.v[1], ActiveScanResults[j].PANID.v[0]);
-						
-						
-						sprintf((char *)&(LCDText[16]), (far rom char*)"SW2: Additional");
-						
-						LCDUpdate();
-					
-						while(1)
-						{
-    						switch_val = ButtonPressed();
-    						
-    						/*******************************************************************/
-    						// Connect to Display Network
-    						/*******************************************************************/
-							if(switch_val == SW1)
-							{
-								BYTE Status;
-                                BYTE CoordCount = 0;
-                                MiApp_FlushTx();
-    	                        
-                                for(k = 0 ; k < scanresult ; k++)
-                                {
-                                    if((ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]) &
-                                        (ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]))
-                                    {
-                                        CoordCount++;
-                                    }
-                                }
-                                if(CoordCount > 1)
-                                {
-                                    BYTE nodeIndex = 0;
-                                    BYTE count = 0;
-                                    MiApp_FlushTx();
-                                    MiApp_WriteData(IDENTIFY_MODE);
-                                    MiApp_WriteData(ActiveScanResults[j].PANID.v[1]);
-                                    MiApp_WriteData(ActiveScanResults[j].PANID.v[0]);
-    	                            MiApp_BroadcastPacket(FALSE);
-                                    for(k = 0 ; k < scanresult ; k++)
-                                    {
-                                        if((ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]) &
-                                        (ActiveScanResults[j].PANID.v[0] == ActiveScanResults[k].PANID.v[0]))
-                                        {
-                                                count++;
-                                            	LCDErase();
-						
-                        						// Display Network information
-                        						
-                        					    sprintf((char *)LCDText, (far rom char*)"SW1:<Addr:%02x%02x>",ActiveScanResults[k].Address[1], ActiveScanResults[k].Address[0]);
-                        						
-                        						
-                        						sprintf((char *)&(LCDText[16]), (far rom char*)"SW2: Additional");
-                        						
-                        						LCDUpdate();
-                                                nodeIndex = k;
+                                if(MiApp_MessageAvailable())
+                                    MiApp_DiscardMessage();
+                        }    
+                        result = FALSE;
 
-                                                while(1)
+
+                }
+
+                /*******************************************************************/
+                // Join a Network
+                /*******************************************************************/
+                if(switch_val == SW2)
+                {
+                        volatile BYTE scanresult;
+
+                        LCDDisplay((char *)"  Scanning for    Networks....", 0, TRUE);
+                        LCDDisplay((char *)"Please Select   Network to Join ", 0, TRUE);
+
+                        MiApp_ProtocolInit(FALSE);
+
+                        /*******************************************************************/
+                        // Perform an active scan
+                        /*******************************************************************/
+
+                        if(myChannel < 8)
+                            scanresult = MiApp_SearchConnection(10, (0x00000001 << myChannel));
+                        else if(myChannel < 16)
+                                scanresult = MiApp_SearchConnection(10, (0x00000100 << (myChannel-8)));
+                        else if(myChannel < 24)
+                                scanresult = MiApp_SearchConnection(10, (0x00010000 << (myChannel-16)));
+                        else 
+                                scanresult = MiApp_SearchConnection(10, (0x01000000 << (myChannel-24)));
+//                                scanresult = MiApp_SearchConnection(10, 1<<myChannel);
+
+                        /*******************************************************************/
+                        // Display Scan Results
+                        /*******************************************************************/
+                        if(scanresult > 0)
+                        {
+                                BYTE k;  
+
+                                for(j = 0; j < scanresult; j++)
+                                {
+                                        BYTE skip_print = FALSE;
+                                        if(j > 0)
+                                        {
+
+                                                skip_print = FALSE;
+                                                for(k = 0; k < j; k++)
                                                 {
-                                                    switch_val = ButtonPressed();
-                                                    if(switch_val == SW1)
-                                                    {
-                                                       //Establish connection with the node
-                                                       j = nodeIndex;
-                                                       k = scanresult-1;
-                                                       break;
-                                                    }
-                                                    else if(switch_val == SW2)
-                                                    {
-                                                        //Display Additional node information
-                                                        if((k == (scanresult - 1)) || (count == CoordCount))
-                                                          {
-                                                             k = -1;
-                                                             count = 0;
-                                                          }  
-                                                       break;
-                                                    }
-                                                } //End of while(1) loop
+                                                    if((ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]) &
+                                                        (ActiveScanResults[j].PANID.v[0] == ActiveScanResults[k].PANID.v[0]))
+                                                        {
+                                                            skip_print = TRUE;
+                                                            break;
+                                                        }
+
+                                                }
+                                                if(skip_print == TRUE)
+                                                { 
+                                                    if(j == (scanresult-1)) 
+                                                            j = -1;
+                                                    continue;
+                                                }
                                         }
-                                         
-                                          
-                                    } //End of for(k = 0; ....)
-                                } //End of if (CoordCount > ...)							
-        						/*******************************************************************/
-        						// Establish Connection and Display results of connection
-        						/*******************************************************************/								    
-								Status = MiApp_EstablishConnection(j, CONN_MODE_DIRECT);
-								if(Status == 0xFF)
-								{
-							     	LCDDisplay((char *)"Join Failed!!!", 0, TRUE); 
-									goto CreateorJoin;
-								}
-								else
-								{
-									LCDDisplay((char *)"Joined  Network Successfully..", 0, TRUE);
-									result = FALSE;
-								}
-                                MiApp_FlushTx();
-                                MiApp_WriteData(EXIT_IDENTIFY_MODE);
-                                MiApp_WriteData(myPANID.v[1]);
-                                MiApp_WriteData(myPANID.v[0]);
-    	                        MiApp_BroadcastPacket(FALSE);				
-								break;	
-                                
-							}
-							
-							/*******************************************************************/
-    						// Display Next Network in Scan List
-    						/*******************************************************************/	
-							else if(switch_val == SW2)
-							{
-								if((scanresult-j-1) == 0)
-								    j = -1;
-								    
-								break;
-							}
-						}
-					    /*******************************************************************/
-						// If Connected to a Network Successfully bail out
-						/*******************************************************************/
-						if(result == FALSE)
-						    break;									
-                    }
-							
-					result = FALSE;
-            	}
-				else
-				{
-					LCDDisplay((char *)"No Network FoundSW2: Re-Scan", 0, FALSE);
-				}
-			}
-		}
-	}
-	
-	while(1)
-	{
-        
-    	BYTE pktCMD = 0;
-    	BYTE switch_val, menu_choice = 0;
-    	result = FALSE;
-    	
-    	
-    	LED0 = LED1 = LED2 = 0;
-    	
-        /*******************************************************************/
-        // Ask User which Demo to Run
-        /*******************************************************************/
-        LCDDisplay((char *)"SW1: Range Demo SW2: Other Apps  ", 0, FALSE);
-	   	
-        /*******************************************************************/
-        // Wait for User to Select Demo to Run 
-        /*******************************************************************/
-        while(result == FALSE)
-        {  	
-            // Read Switches
-            switch_val = ButtonPressed();
-            
-        	// Check if MiMAC has any pkt's to processes
-        	if(MiApp_MessageAvailable())
-        	{
-            	pktCMD = rxMessage.Payload[0];
-                if(pktCMD == IDENTIFY_MODE)
-                    {
-                        if((rxMessage.Payload[1] != myPANID.v[1]) || (rxMessage.Payload[2] != myPANID.v[0]))
-                            pktCMD = 0;
-                            
-                    }
-                if(pktCMD == RANGE_DEMO)
-                    {
-                        for(i = 0 ; i< CONNECTION_SIZE ; i++)
-                        {
-                            if(ConnectionTable[i].status.bits.isValid)
-                            {
-                                if((ConnectionTable[i].AltAddress.v[1] == rxMessage.SourceAddress[1]) && (ConnectionTable[i].AltAddress.v[0] == rxMessage.SourceAddress[0]))
-                                {
-                                    ConnectionEntry = i;
-                                    
-                                    break;                           
-                                }
-                            }
-                        }
-                    }
-            	MiApp_DiscardMessage();
-            }
-            if(pktCMD == RANGE_DEMO)
-            {
-                MiApp_FlushTx();
-    	        MiApp_WriteData(RANGE_DEMO);
-    	        MiApp_UnicastConnection(ConnectionEntry, FALSE);
-    	        // Run Range Test Demo
-                RangeDemo();
-                result = TRUE;
-            }
-        	
-        	if((switch_val == SW1) && (menu_choice == 0))
-    		{	
-                BYTE NumberOfConnections = 0;
-                
-                //Reset ConnectionEntry
-                ConnectionEntry = 0;
-                
-                for(i = 0; i < CONNECTION_SIZE; i++)
-                {
-                    if((ConnectionTable[i].status.bits.isValid) && (ConnectionTable[i].status.bits.isFamily))
-                        NumberOfConnections++;
-                }
-                if(NumberOfConnections > 1)
-                {
-                    BOOL result = FALSE;
-                    BYTE ConnectionsCount = 0;
-                    //Select Peer for Range Demo
 
-                    LCDDisplay((char *)"Select Peer Node for Range Test", 0, FALSE);
+                                        // Display the index on LCD
+                                        LCDErase();
 
-                    for(i = 0; i < CONNECTION_SIZE; i++)
-    			    {
-    				    if(ConnectionTable[i].status.bits.isValid)
-                        {
-                            // Display Peer information
-                            LCDErase();
-                            sprintf((char *)LCDText, (far rom char*)"SW1:<Addr:%02x%02x>",ConnectionTable[i].AltAddress.v[1], ConnectionTable[i].AltAddress.v[0]);				
-                            sprintf((char *)&(LCDText[16]), (far rom char*)"SW2: Additional");
-                            LCDUpdate();
-                            ConnectionsCount++;
-                            while(1)
-                            {
-                                switch_val = ButtonPressed();
-                                if(switch_val == SW1)
-                                    {
-                                        ConnectionEntry = i;
-                                        result = TRUE;
-                                        break;
-                                    }
-                                else if(switch_val == SW2)
-                                    {
-                                        if(ConnectionsCount == NumberOfConnections) 
+                                        // Display if Network is Cordinator or PAN Cordinator
+                                        sprintf((char *)LCDText, (far rom char*)"SW1:<PANID:%02x%02x>",ActiveScanResults[j].PANID.v[1], ActiveScanResults[j].PANID.v[0]);
+                                        sprintf((char *)&(LCDText[16]), (far rom char*)"SW2: Additional");
+                                        LCDUpdate();
+
+                                        while(1)
                                         {
-                                            i = -1;
-                                            ConnectionsCount = 0;
-                                        }
-                                        break;
-                                    }
-                            }
-                        }
-                        if(result == TRUE) break;
-                    }  
-                }       
-        		MiApp_FlushTx();
-    	        MiApp_WriteData(RANGE_DEMO);
-    	        MiApp_UnicastConnection(ConnectionEntry, FALSE);
-    	        
-        		// Run Range Test Demo
-                RangeDemo();
-                result = TRUE;
-    		}
-            if((switch_val == SW2))
-            {
-                menu_choice++;
-                if(menu_choice == 3) menu_choice = 0;
-                if(menu_choice == 0)
-                {
-                    LCDDisplay((char *)"SW1: Range Demo SW2: Other Apps  ", 0, FALSE);
-                }
-                else if(menu_choice == 1)
-                {
-                    LCDDisplay((char *)"SW1: Temp Demo  SW2: Other Apps  ", 0, FALSE);
-                }    
-                else if(menu_choice == 2)
-                {
-                    LCDDisplay((char *)"SW1: Node Info  SW2: Other Apps  ", 0, FALSE);
-                }
-                
-            }
-            if((pktCMD == TEMP_DEMO) || ((switch_val == SW1) && (menu_choice == 1)))
-            {
-                MiApp_FlushTx();
-                MiApp_WriteData(TEMP_DEMO);
-                MiApp_BroadcastPacket(FALSE);
+                                                switch_val = ButtonPressed();
 
-                    // Run Temp Sensor Demo
-                TempDemo();
-                result = TRUE;
-            }
-            if((pktCMD == IDENTIFY_MODE) || ((switch_val == SW1) && (menu_choice == 2)))
-            {
-                MIWI_TICK tick1 = MiWi_TickGet();
-                LCDErase();
-                sprintf((char *)&(LCDText), (far rom char*)"PANID:%02x%02x Ch:%02d",myPANID.v[1],myPANID.v[0],myChannel);
-                #if defined(IEEE_802_15_4)
-                    sprintf((char *)&(LCDText[16]), (far rom char*)"Address: %02x%02x", myShortAddress.v[1], myShortAddress.v[0]);
-                #else
-                    sprintf((char *)&(LCDText[16]), (far rom char*)"Addr:%02x%02x/%02x%02x", myShortAddress.v[1], myShortAddress.v[0], myLongAddress[1],myLongAddress[0]);
-                #endif
-                LCDUpdate();
-                pktCMD = 0;
-            }
-            
-            if(pktCMD == EXIT_IDENTIFY_MODE)
-            {               
-                result = TRUE;
-               
-            }
-    	}
-	}
+                                                /*******************************************************************/
+                                                // Connect to Display Network
+                                                /*******************************************************************/
+                                                if(switch_val == SW1)
+                                                {
+                                                        BYTE Status;
+                                                        BYTE CoordCount = 0;
+                                                        MiApp_FlushTx();
+
+                                                        for(k = 0 ; k < scanresult ; k++)
+                                                        {
+                                                                if((ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]) &
+                                                                    (ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]))
+                                                                {
+                                                                    CoordCount++;
+                                                                }
+                                                        }
+                                                        if(CoordCount > 1)
+                                                        {
+                                                                BYTE nodeIndex = 0;
+                                                                BYTE count = 0;
+                                                                MiApp_FlushTx();
+                                                                MiApp_WriteData(IDENTIFY_MODE);
+                                                                MiApp_WriteData(ActiveScanResults[j].PANID.v[1]);
+                                                                MiApp_WriteData(ActiveScanResults[j].PANID.v[0]);
+                                                                MiApp_BroadcastPacket(FALSE);
+                                                                for(k = 0 ; k < scanresult ; k++)
+                                                                {
+                                                                        if( (ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]) &
+                                                                        (ActiveScanResults[j].PANID.v[0] == ActiveScanResults[k].PANID.v[0]) )
+                                                                        {
+                                                                                count++;
+                                                                                LCDErase();
+
+                                                                                // Display Network information
+                                                                                sprintf((char *)LCDText, (far rom char*)"SW1:<Addr:%02x%02x>",ActiveScanResults[k].Address[1], ActiveScanResults[k].Address[0]);
+                                                                                sprintf((char *)&(LCDText[16]), (far rom char*)"SW2: Additional");
+
+                                                                                LCDUpdate();
+                                                                                nodeIndex = k;
+
+                                                                                while(1)
+                                                                                {
+                                                                                        switch_val = ButtonPressed();
+                                                                                        if(switch_val == SW1)
+                                                                                        {
+                                                                                           //Establish connection with the node
+                                                                                           j = nodeIndex;
+                                                                                           k = scanresult-1;
+                                                                                           break;
+                                                                                        }
+                                                                                        else if(switch_val == SW2)
+                                                                                        {
+                                                                                            //Display Additional node information
+                                                                                            if((k == (scanresult - 1)) || (count == CoordCount))
+                                                                                              {
+                                                                                                 k = -1;
+                                                                                                 count = 0;
+                                                                                              }  
+                                                                                           break;
+                                                                                        }
+                                                                                } //End of while(1) loop
+                                                                        }
+                                          
+                                                                } //End of for(k = 0; ....)
+                                                        } //End of if (CoordCount > ...)							
+                                                        /*******************************************************************/
+                                                        // Establish Connection and Display results of connection
+                                                        /*******************************************************************/								    
+                                                        Status = MiApp_EstablishConnection(j, CONN_MODE_DIRECT);
+                                                        if(Status == 0xFF)
+                                                        {
+                                                        LCDDisplay((char *)"Join Failed!!!", 0, TRUE); 
+                                                                goto CreateorJoin;
+                                                        }
+                                                        else
+                                                        {
+                                                                LCDDisplay((char *)"Joined  Network Successfully..", 0, TRUE);
+                                                                result = FALSE;
+                                                        }
+                                                        MiApp_FlushTx();
+                                                        MiApp_WriteData(EXIT_IDENTIFY_MODE);
+                                                        MiApp_WriteData(myPANID.v[1]);
+                                                        MiApp_WriteData(myPANID.v[0]);
+                                                        MiApp_BroadcastPacket(FALSE);				
+                                                        break;	
+                                
+                                                }
+							
+                                                /*******************************************************************/
+                                                // Display Next Network in Scan List
+                                                /*******************************************************************/	
+                                                else if(switch_val == SW2)
+                                                {
+                                                        if((scanresult-j-1) == 0)
+                                                            j = -1;
+
+                                                        break;
+                                                }
+                                        }
+                                        /*******************************************************************/
+                                        // If Connected to a Network Successfully bail out
+                                        /*******************************************************************/
+                                        if(result == FALSE)
+                                            break;									
+                                }
+							
+                                result = FALSE;
+                        }
+                        else
+                        {
+                                LCDDisplay((char *)"No Network FoundSW2: Re-Scan", 0, FALSE);
+                        }
+                }
+        }
+}
+	
+        while(1)
+        {
+        
+                BYTE pktCMD = 0;
+                BYTE switch_val, menu_choice = 0;
+                result = FALSE;
+
+
+                LED0 = LED1 = LED2 = 0;
+    	
+                /*******************************************************************/
+                // Ask User which Demo to Run
+                /*******************************************************************/
+                LCDDisplay((char *)"SW1: Range Demo SW2: Other Apps  ", 0, FALSE);
+
+                /*******************************************************************/
+                // Wait for User to Select Demo to Run 
+                /*******************************************************************/
+                while(result == FALSE)
+                {  	
+                        // Read Switches
+                        switch_val = ButtonPressed();
+
+                        // Check if MiMAC has any pkt's to processes
+                        if(MiApp_MessageAvailable())
+                        {
+                                pktCMD = rxMessage.Payload[0];
+                                if(pktCMD == IDENTIFY_MODE)
+                                {
+                                    if((rxMessage.Payload[1] != myPANID.v[1]) || (rxMessage.Payload[2] != myPANID.v[0]))
+                                        pktCMD = 0;
+
+                                }
+                                if(pktCMD == RANGE_DEMO)
+                                {
+                                        for(i = 0 ; i< CONNECTION_SIZE ; i++)
+                                        {
+                                                if(ConnectionTable[i].status.bits.isValid)
+                                                {
+                                                        if((ConnectionTable[i].AltAddress.v[1] == rxMessage.SourceAddress[1]) && (ConnectionTable[i].AltAddress.v[0] == rxMessage.SourceAddress[0]))
+                                                        {
+                                                                ConnectionEntry = i;
+
+                                                                break;                           
+                                                        }
+                                                }
+                                        }
+                                }
+                                MiApp_DiscardMessage();
+                        }
+                        if(pktCMD == RANGE_DEMO)
+                        {
+                            MiApp_FlushTx();
+                            MiApp_WriteData(RANGE_DEMO);
+                            MiApp_UnicastConnection(ConnectionEntry, FALSE);
+                            // Run Range Test Demo
+                            RangeDemo();
+                            result = TRUE;
+                        }
+        	
+                        if((switch_val == SW1) && (menu_choice == 0))
+                        {	
+                                BYTE NumberOfConnections = 0;
+
+                                //Reset ConnectionEntry
+                                ConnectionEntry = 0;
+                
+                                for(i = 0; i < CONNECTION_SIZE; i++)
+                                {
+                                    if((ConnectionTable[i].status.bits.isValid) && (ConnectionTable[i].status.bits.isFamily))
+                                        NumberOfConnections++;
+                                }
+                                if(NumberOfConnections > 1)
+                                {
+                                        BOOL result = FALSE;
+                                        BYTE ConnectionsCount = 0;
+                                        //Select Peer for Range Demo
+
+                                        LCDDisplay((char *)"Select Peer Node for Range Test", 0, FALSE);
+
+                                        for(i = 0; i < CONNECTION_SIZE; i++)
+                                        {
+                                                if(ConnectionTable[i].status.bits.isValid)
+                                                {
+                                                        // Display Peer information
+                                                        LCDErase();
+                                                        sprintf((char *)LCDText, (far rom char*)"SW1:<Addr:%02x%02x>",ConnectionTable[i].AltAddress.v[1], ConnectionTable[i].AltAddress.v[0]);				
+                                                        sprintf((char *)&(LCDText[16]), (far rom char*)"SW2: Additional");
+                                                        LCDUpdate();
+                                                        ConnectionsCount++;
+                                                        while(1)
+                                                        {
+                                                                switch_val = ButtonPressed();
+                                                                if(switch_val == SW1)
+                                                                {
+                                                                    ConnectionEntry = i;
+                                                                    result = TRUE;
+                                                                    break;
+                                                                }
+                                                                 else if(switch_val == SW2)
+                                                                {
+                                                                    if(ConnectionsCount == NumberOfConnections) 
+                                                                    {
+                                                                        i = -1;
+                                                                        ConnectionsCount = 0;
+                                                                    }
+                                                                    break;
+                                                                }
+                                                        }
+                                                }
+                                                if(result == TRUE) break;
+                                        }  
+                                }       
+                                MiApp_FlushTx();
+                                MiApp_WriteData(RANGE_DEMO);
+                                MiApp_UnicastConnection(ConnectionEntry, FALSE);
+
+                                // Run Range Test Demo
+                                RangeDemo();
+                                result = TRUE;
+                        }
+                        if((switch_val == SW2))
+                        {
+                                menu_choice++;
+                                if(menu_choice == 3) menu_choice = 0;
+                                if(menu_choice == 0)
+                                {
+                                    LCDDisplay((char *)"SW1: Range Demo SW2: Other Apps  ", 0, FALSE);
+                                }
+                                else if(menu_choice == 1)
+                                {
+                                    LCDDisplay((char *)"SW1: Temp Demo  SW2: Other Apps  ", 0, FALSE);
+                                }    
+                                else if(menu_choice == 2)
+                                {
+                                    LCDDisplay((char *)"SW1: Node Info  SW2: Other Apps  ", 0, FALSE);
+                                }
+
+                        }
+                        if((pktCMD == TEMP_DEMO) || ((switch_val == SW1) && (menu_choice == 1)))
+                        {
+                                MiApp_FlushTx();
+                                MiApp_WriteData(TEMP_DEMO);
+                                MiApp_BroadcastPacket(FALSE);
+
+                                    // Run Temp Sensor Demo
+                                TempDemo();
+                                result = TRUE;
+                        }
+                        if((pktCMD == IDENTIFY_MODE) || ((switch_val == SW1) && (menu_choice == 2)))
+                        {
+                                MIWI_TICK tick1 = MiWi_TickGet();
+                                LCDErase();
+                                sprintf((char *)&(LCDText), (far rom char*)"PANID:%02x%02x Ch:%02d",myPANID.v[1],myPANID.v[0],myChannel);
+                                #if defined(IEEE_802_15_4)
+                                    sprintf((char *)&(LCDText[16]), (far rom char*)"Address: %02x%02x", myShortAddress.v[1], myShortAddress.v[0]);
+                                #else
+                                    sprintf((char *)&(LCDText[16]), (far rom char*)"Addr:%02x%02x/%02x%02x", myShortAddress.v[1], myShortAddress.v[0], myLongAddress[1],myLongAddress[0]);
+                                #endif
+                                LCDUpdate();
+                                pktCMD = 0;
+                        }
+
+                        if(pktCMD == EXIT_IDENTIFY_MODE)
+                        {               
+                            result = TRUE;
+
+                        }
+                }
+        }
 }

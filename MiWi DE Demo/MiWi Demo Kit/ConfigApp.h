@@ -94,13 +94,13 @@
     // PROTOCOL_MIWI enables the application to use MiWi mesh networking
     // stack. This definition cannot be defined with PROTOCOL_P2P.
     /*********************************************************************/
-    #define PROTOCOL_MIWI
+//    #define PROTOCOL_MIWI
 
     /*********************************************************************/
     // PROTOCOL_MIWI_PRO enables the application to use MiWi PRO stack.
     // This definition cannot be defined with PROTOCOL_P2P or PROTOCOL_MIWI.
     /*********************************************************************/
-//    #define PROTOCOL_MIWI_PRO
+    #define PROTOCOL_MIWI_PRO
     
 
 
@@ -155,19 +155,27 @@
 // EUI_x defines the xth byte of permanent address for the wireless
 // node
 /*********************************************************************/
-#define EUI_7 0x11
-#define EUI_6 0x22
-#define EUI_5 0x33
-#define EUI_4 0x44
+#define EUI_7 0x55
+#define EUI_6 0xaa
+#define EUI_5 0x55
+#define EUI_4 0xaa
 #define EUI_3 0x55
-#define EUI_2 0x66
-#define EUI_1 0x77
-#ifdef NWK_ROLE_COORDINATOR
-    #define EUI_0 0x01
-#elif defined(NWK_ROLE_END_DEVICE)
+#define EUI_2 0x01
+#define EUI_1 0x02
+#define EUI_0 0x03
 
-    #define EUI_0 0x02
-#endif
+//#define EUI_7 0x11
+//#define EUI_6 0x22
+//#define EUI_5 0x33
+//#define EUI_4 0x44
+//#define EUI_3 0x55
+//#define EUI_2 0x66
+//#define EUI_1 0x77
+//#ifdef NWK_ROLE_COORDINATOR
+//    #define EUI_0 0x01
+//#elif defined(NWK_ROLE_END_DEVICE)
+//    #define EUI_0 0x02
+//#endif
 
 #define ENABLE_EEPROM
 
