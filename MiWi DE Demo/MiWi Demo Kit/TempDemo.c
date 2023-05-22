@@ -283,7 +283,7 @@ void TempDemo(void)
             }
             
  			/*******************************************************************/	
-           	// Check if Message from know Connection
+           	// Check if Message from known Connection
            	/*******************************************************************/            
 			for(i = 0; i < CONNECTION_SIZE; i++)
 			{
