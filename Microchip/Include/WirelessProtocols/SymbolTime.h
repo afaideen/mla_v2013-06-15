@@ -143,6 +143,7 @@
     #define TICKS_TO_SYMBOLS(a) (((DWORD)SYMBOL_TO_TICK_RATE/10000) * a / ((DWORD)CLOCK_FREQ/10000))
 #elif defined(__PIC32MX__)
     /* this section is based on the Timer 2/3 module of the PIC32MX family */
+    #define INSTR_FREQ  (CLOCK_FREQ/4)
 #if defined(WIRELESS_EVAL_BOARD)
     #define INSTR_FREQ  (CLOCK_FREQ/4)//64MHz--->16MHz
 #else
@@ -162,7 +163,6 @@
         #define CLOCK_DIVIDER_SETTING 0x0060
         #define SYMBOL_TO_TICK_RATE 8000000
     #elif(INSTR_FREQ <= 16000000)
-
         #define CLOCK_DIVIDER 256
         #define CLOCK_DIVIDER_SETTING 0x0070
         #define SYMBOL_TO_TICK_RATE INSTR_FREQ
