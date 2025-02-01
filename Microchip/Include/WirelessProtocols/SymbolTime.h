@@ -174,19 +174,18 @@
     #elif(INSTR_FREQ <= 16000000)
         #define CLOCK_DIVIDER 256
         #define CLOCK_DIVIDER_SETTING 0x0070
-        #define SYMBOL_TO_TICK_RATE INSTR_FREQ
+//        #define SYMBOL_TO_TICK_RATE INSTR_FREQ  //original
+//        #define SYMBOL_TO_TICK_RATE INSTR_FREQ/CLOCK_DIVIDER
     #else
         #if defined(__PIC32MZ__)
 	        #define CLOCK_DIVIDER           256       //check T2CON
 	        #define CLOCK_DIVIDER_SETTING   0x70  //T2CON=01110000 or T2CONbits.TCKPS = 0b111
-	        #define SYMBOL_TO_TICK_RATE     INSTR_FREQ/CLOCK_DIVIDER
-	        // Open Timer2 in 32-bit mode using PBCLK3
-	//        OpenTimer2((T2_ON | T2_32BIT_MODE_ON | CLOCK_DIVIDER_SETTING), 0xFFFFFFFF);
+//	        #define SYMBOL_TO_TICK_RATE     INSTR_FREQ/CLOCK_DIVIDER
 
         #else
 	        #define CLOCK_DIVIDER           256       //check T2CON
 	        #define CLOCK_DIVIDER_SETTING   0x70  //T2CON=01110000 or T2CONbits.TCKPS = 0b111
-	        #define SYMBOL_TO_TICK_RATE     INSTR_FREQ
+//	        #define SYMBOL_TO_TICK_RATE     INSTR_FREQ
 
         #endif
     #endif
@@ -202,20 +201,20 @@
         Final Timer Clock Frequency	200 MHz / 256 = 781.25 kHz
         One Timer Tick Duration	1 / 781.25 kHz = 1.28 �s
      */
-        #define ONE_SECOND  ((unsigned long long)INSTR_FREQ / CLOCK_DIVIDER)  // 781250 ticks for 1 second
+        #define ONE_SECOND              ((unsigned long long)INSTR_FREQ / CLOCK_DIVIDER)  // 781250 ticks for 1 second
+		#define SYMBOLS_TO_TICKS(a)     ((unsigned long long)(a) * (ONE_SECOND / 62500)) // For IEEE8.2.15.4 1 symbol = 16us or symbol rate=62500symbol/sec
+		#define TICKS_TO_SYMBOLS(a)     ((unsigned long long)(a) * (62500 / ONE_SECOND))
 
-        #define SYMBOLS_TO_TICKS(a) (((unsigned long long)SYMBOL_TO_TICK_RATE * a) / 100000)
-//        #define SYMBOLS_TO_TICKS(a) (((unsigned long long)INSTR_FREQ * a) / (CLOCK_DIVIDER * 100000))
-
-        #define TICKS_TO_SYMBOLS(a) (((unsigned long long) a * 100000) / SYMBOL_TO_TICK_RATE)
-//        #define TICKS_TO_SYMBOLS(a) (((unsigned long long) a * CLOCK_DIVIDER * 100000) / INSTR_FREQ)
-
-    #else
-        #define ONE_SECOND      (((DWORD)INSTR_FREQ/1000 * 62500) / (SYMBOL_TO_TICK_RATE / 1000))
-    //    #define ONE_SECOND      62500
+	#else
+		#define ONE_SECOND  ((unsigned long long)INSTR_FREQ / CLOCK_DIVIDER)
+//        #define ONE_SECOND      (((DWORD)INSTR_FREQ/1000 * 62500) / (SYMBOL_TO_TICK_RATE / 1000))//original
+    //    #define ONE_SECOND      62500 //if timer tick rate is 16M/256=62.5kHz
         /* SYMBOLS_TO_TICKS to only be used with input (a) as a constant, otherwise you will blow up the code */
-        #define SYMBOLS_TO_TICKS(a) (((DWORD)(INSTR_FREQ/100000) * a) / (SYMBOL_TO_TICK_RATE / 100000))
-        #define TICKS_TO_SYMBOLS(a) (((DWORD)SYMBOL_TO_TICK_RATE/100000) * a / ((DWORD)CLOCK_FREQ/100000))
+//        #define SYMBOLS_TO_TICKS(a)     (((DWORD)(INSTR_FREQ/100000) * a) / (SYMBOL_TO_TICK_RATE / 100000))//original
+		#define SYMBOLS_TO_TICKS(a)     ((unsigned long long)(a) * (ONE_SECOND / 62500))
+		#define TICKS_TO_SYMBOLS(a)     ((unsigned long long)(a) * (62500 / ONE_SECOND))
+//        #define TICKS_TO_SYMBOLS(a) (((DWORD)SYMBOL_TO_TICK_RATE/100000) * a / ((DWORD)CLOCK_FREQ/100000))//original
+
     #endif
 #else
     #error "Unsupported processor.  New timing definitions required for proper operation"

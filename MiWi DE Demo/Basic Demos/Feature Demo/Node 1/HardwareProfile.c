@@ -138,8 +138,8 @@
         //original
             //config for running at 64MHz
         #pragma config FPLLMUL = MUL_16, FPLLIDIV = DIV_2, FPLLODIV = DIV_1, FWDTEN = OFF
-//        #pragma config POSCMOD = XT, FNOSC = PRIPLL, FPBDIV = DIV_4, WDTPS = PS1024
-        #pragma config POSCMOD = XT, FNOSC = PRIPLL, FPBDIV = DIV_1, WDTPS = PS1024
+        #pragma config POSCMOD = XT, FNOSC = PRIPLL, FPBDIV = DIV_4, WDTPS = PS1024 //PBCLK1 = SYSCLK/4 = 64MHz/4 = 16MHz
+//        #pragma config POSCMOD = XT, FNOSC = PRIPLL, FPBDIV = DIV_1, WDTPS = PS1024   //PBCLK1=SYSCLK/1 = 64MHz/1 = 64MHz
          //config for running at 80MHz
 //        #pragma config FPLLMUL = MUL_20, FPLLIDIV = DIV_2, FPLLODIV = DIV_1, FWDTEN = OFF, WDTPS = PS1024//PS32768
 //        #pragma config POSCMOD = HS, FNOSC = PRIPLL, FPBDIV = DIV_1, CP = OFF
