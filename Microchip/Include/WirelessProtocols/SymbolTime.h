@@ -203,7 +203,7 @@
      */
         #define ONE_SECOND              ((unsigned long long)INSTR_FREQ / CLOCK_DIVIDER)  // 781250 ticks for 1 second
 		#define SYMBOLS_TO_TICKS(a)     ((unsigned long long)(a) * (ONE_SECOND / 62500)) // For IEEE8.2.15.4 1 symbol = 16us or symbol rate=62500symbol/sec
-		#define TICKS_TO_SYMBOLS(a)     ((unsigned long long)(a) * (62500 / ONE_SECOND))
+		#define TICKS_TO_SYMBOLS(a)     ((unsigned long long)(a) * (62500ULL / ONE_SECOND))
 
 	#else
 		#define ONE_SECOND  ((unsigned long long)INSTR_FREQ / CLOCK_DIVIDER)
@@ -212,7 +212,7 @@
         /* SYMBOLS_TO_TICKS to only be used with input (a) as a constant, otherwise you will blow up the code */
 //        #define SYMBOLS_TO_TICKS(a)     (((DWORD)(INSTR_FREQ/100000) * a) / (SYMBOL_TO_TICK_RATE / 100000))//original
 		#define SYMBOLS_TO_TICKS(a)     ((unsigned long long)(a) * (ONE_SECOND / 62500))
-		#define TICKS_TO_SYMBOLS(a)     ((unsigned long long)(a) * (62500 / ONE_SECOND))
+		#define TICKS_TO_SYMBOLS(a)     ((unsigned long long)(a) * (62500ULL / ONE_SECOND))
 //        #define TICKS_TO_SYMBOLS(a) (((DWORD)SYMBOL_TO_TICK_RATE/100000) * a / ((DWORD)CLOCK_FREQ/100000))//original
 
     #endif
