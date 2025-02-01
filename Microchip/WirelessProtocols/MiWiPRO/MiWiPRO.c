@@ -1681,7 +1681,7 @@ ASSIGN_COORDINATOR_SHORT_ADDRESS:
                                     {
                                         MiApp_WriteData(MACRxPacket.Payload[i]);
                                     }
-                                    LED1 ^= 1;
+                                    LED_1 ^= 1;
                                     if( (destShortAddress.v[1] == myShortAddress.v[1]) &&
                                         (TxBuffer[11] == MIWI_PRO_STACK_REPORT_TYPE) &&
                                         (TxBuffer[12] == ACK_REPORT_TYPE) )
@@ -1706,7 +1706,7 @@ ASSIGN_COORDINATOR_SHORT_ADDRESS:
                                     }
                                     else
                                     {
-                                        LED2 ^= 1;
+                                        LED_2 ^= 1;
                                         RouteMessage(destPANID, destShortAddress, MACRxPacket.flags.bits.secEn);
                                     }   
                                 }

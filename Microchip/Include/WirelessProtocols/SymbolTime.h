@@ -141,14 +141,23 @@
     /* SYMBOLS_TO_TICKS to only be used with input (a) as a constant, otherwise you will blow up the code */
     #define SYMBOLS_TO_TICKS(a) (((DWORD)CLOCK_FREQ/10000 * a ) / ((DWORD)SYMBOL_TO_TICK_RATE / 10000))
     #define TICKS_TO_SYMBOLS(a) (((DWORD)SYMBOL_TO_TICK_RATE/10000) * a / ((DWORD)CLOCK_FREQ/10000))
-#elif defined(__PIC32MX__)
-    /* this section is based on the Timer 2/3 module of the PIC32MX family */
-    #define INSTR_FREQ  (CLOCK_FREQ/4)
-#if defined(WIRELESS_EVAL_BOARD)
-    #define INSTR_FREQ  (CLOCK_FREQ/4)//64MHz--->16MHz
-#else
-    #define INSTR_FREQ  (CLOCK_FREQ/4)//64MHz--->16MHz
-#endif
+#elif defined(__PIC32MX__) || defined(__PIC32MZ__)
+	#if defined(__PIC32MX__)
+	    /* this section is based on the Timer 2/3 module of the PIC32MX family */
+
+		#if defined(WIRELESS_EVAL_BOARD)
+		    #define INSTR_FREQ  (CLOCK_FREQ/4)//64MHz--->16MHz
+		#else
+		    #define INSTR_FREQ  (CLOCK_FREQ/4)//64MHz--->16MHz
+
+		#endif
+	#elif defined(__PIC32MZ__)
+	//        #define INSTR_FREQ (CLOCK_FREQ / (1 << PB3DIVbits.PBDIV))  // PBCLK3 = 200MHz
+        // PB3DIVbits.PBDIV = 0; // PBCLK3 = SYSCLK / 1 // (PBCLK3 = 200 MHz). TMR3 based on PBCLK3
+        #define INSTR_FREQ  (CLOCK_FREQ/1) //CLOCK_FREQ is the same with INSTR_FREQ or PBCLK3=200MHz
+//        #define INSTR_FREQ  (CLOCK_FREQ/2) //CLOCK_FREQ/2 -> INSTR_FREQ or PBCLK3=100MHz
+    #endif
+
 
     #if(INSTR_FREQ <= 125000)
         #define CLOCK_DIVIDER 1
@@ -167,30 +176,75 @@
         #define CLOCK_DIVIDER_SETTING 0x0070
         #define SYMBOL_TO_TICK_RATE INSTR_FREQ
     #else
-        #define CLOCK_DIVIDER 256
-        #define CLOCK_DIVIDER_SETTING 0x70
-        #define SYMBOL_TO_TICK_RATE INSTR_FREQ
+        #if defined(__PIC32MZ__)
+	        #define CLOCK_DIVIDER           256       //check T2CON
+	        #define CLOCK_DIVIDER_SETTING   0x70  //T2CON=01110000 or T2CONbits.TCKPS = 0b111
+	        #define SYMBOL_TO_TICK_RATE     INSTR_FREQ/CLOCK_DIVIDER
+	        // Open Timer2 in 32-bit mode using PBCLK3
+	//        OpenTimer2((T2_ON | T2_32BIT_MODE_ON | CLOCK_DIVIDER_SETTING), 0xFFFFFFFF);
+
+        #else
+	        #define CLOCK_DIVIDER           256       //check T2CON
+	        #define CLOCK_DIVIDER_SETTING   0x70  //T2CON=01110000 or T2CONbits.TCKPS = 0b111
+	        #define SYMBOL_TO_TICK_RATE     INSTR_FREQ
+
+        #endif
     #endif
 
-    #define ONE_SECOND (((DWORD)INSTR_FREQ/1000 * 62500) / (SYMBOL_TO_TICK_RATE / 1000))
-    /* SYMBOLS_TO_TICKS to only be used with input (a) as a constant, otherwise you will blow up the code */
-    #define SYMBOLS_TO_TICKS(a) (((DWORD)(INSTR_FREQ/100000) * a) / (SYMBOL_TO_TICK_RATE / 100000))
-    #define TICKS_TO_SYMBOLS(a) (((DWORD)SYMBOL_TO_TICK_RATE/100000) * a / ((DWORD)CLOCK_FREQ/100000))
+    #if defined(__PIC32MZ__)
+        /*
+     ? Summary for PIC32MZ running at 200MHZ for both system clock and PBCLK3 clock
+        Configuration	Value
+        SYSCLK	200 MHz
+        PBCLK3	200 MHz
+        Timer2 Clock Source	PBCLK3 (200 MHz)
+        Prescaler	1:256
+        Final Timer Clock Frequency	200 MHz / 256 = 781.25 kHz
+        One Timer Tick Duration	1 / 781.25 kHz = 1.28 �s
+     */
+        #define ONE_SECOND  ((unsigned long long)INSTR_FREQ / CLOCK_DIVIDER)  // 781250 ticks for 1 second
+
+        #define SYMBOLS_TO_TICKS(a) (((unsigned long long)SYMBOL_TO_TICK_RATE * a) / 100000)
+//        #define SYMBOLS_TO_TICKS(a) (((unsigned long long)INSTR_FREQ * a) / (CLOCK_DIVIDER * 100000))
+
+        #define TICKS_TO_SYMBOLS(a) (((unsigned long long) a * 100000) / SYMBOL_TO_TICK_RATE)
+//        #define TICKS_TO_SYMBOLS(a) (((unsigned long long) a * CLOCK_DIVIDER * 100000) / INSTR_FREQ)
+
+    #else
+        #define ONE_SECOND      (((DWORD)INSTR_FREQ/1000 * 62500) / (SYMBOL_TO_TICK_RATE / 1000))
+    //    #define ONE_SECOND      62500
+        /* SYMBOLS_TO_TICKS to only be used with input (a) as a constant, otherwise you will blow up the code */
+        #define SYMBOLS_TO_TICKS(a) (((DWORD)(INSTR_FREQ/100000) * a) / (SYMBOL_TO_TICK_RATE / 100000))
+        #define TICKS_TO_SYMBOLS(a) (((DWORD)SYMBOL_TO_TICK_RATE/100000) * a / ((DWORD)CLOCK_FREQ/100000))
+    #endif
 #else
     #error "Unsupported processor.  New timing definitions required for proper operation"
 #endif
 
-#define ONE_MILI_SECOND     (ONE_SECOND/1000)
-#define HUNDRED_MILI_SECOND (ONE_SECOND/10)
-#define FORTY_MILI_SECOND   (ONE_SECOND/25)
-#define TWENTY_MILI_SECOND  (ONE_SECOND/50)
-#define TEN_MILI_SECOND     (ONE_SECOND/100)
-#define FIVE_MILI_SECOND    (ONE_SECOND/200)
-#define TWO_MILI_SECOND     (ONE_SECOND/500)
-#define ONE_MINUTE          (ONE_SECOND*60)
-#define ONE_HOUR            (ONE_MINUTE*60)
+#if defined(__PIC32MZ__)
+    #define ONE_MILI_SECOND     (ONE_SECOND/1000)    // 781
+    #define HUNDRED_MILI_SECOND (ONE_SECOND/10)      // 78,125
+    #define FORTY_MILI_SECOND   (ONE_SECOND/25)      // 31,250
+    #define TWENTY_MILI_SECOND  (ONE_SECOND/50)      // 15,625
+    #define TEN_MILI_SECOND     (ONE_SECOND/100)     // 7,812
+    #define FIVE_MILI_SECOND    (ONE_SECOND/200)     // 3,906
+    #define TWO_MILI_SECOND     (ONE_SECOND/500)     // 1,562
+    #define ONE_MINUTE          (ONE_SECOND*60ULL)
+    #define ONE_HOUR            (ONE_MINUTE*60ULL)
+	#define MiWi_TickGetDiff(a, b) ((a.Val >= b.Val) ? (a.Val - b.Val) : (0xFFFFFFFF - b.Val + a.Val + 1))
+#else
+	#define ONE_MILI_SECOND     (ONE_SECOND/1000)
+	#define HUNDRED_MILI_SECOND (ONE_SECOND/10)
+	#define FORTY_MILI_SECOND   (ONE_SECOND/25)
+	#define TWENTY_MILI_SECOND  (ONE_SECOND/50)
+	#define TEN_MILI_SECOND     (ONE_SECOND/100)
+	#define FIVE_MILI_SECOND    (ONE_SECOND/200)
+	#define TWO_MILI_SECOND     (ONE_SECOND/500)
+	#define ONE_MINUTE          (ONE_SECOND*60)
+	#define ONE_HOUR            (ONE_MINUTE*60)
+	#define MiWi_TickGetDiff(a,b) (a.Val - b.Val)
+#endif
 
-#define MiWi_TickGetDiff(a,b) (a.Val - b.Val)
 
 /************************ DATA TYPES *******************************/
 

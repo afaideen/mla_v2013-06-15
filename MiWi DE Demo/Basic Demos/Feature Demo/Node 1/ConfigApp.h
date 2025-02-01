@@ -63,14 +63,14 @@
     // PROTOCOL_MIWI enables the application to use MiWi mesh networking
     // stack. This definition cannot be defined with PROTOCOL_P2P.
     /*********************************************************************/
-    #define PROTOCOL_MIWI
+//    #define PROTOCOL_MIWI
 
 
     /*********************************************************************/
     // PROTOCOL_MIWI_PRO enables the application to use MiWi PRO stack. 
     // This definition cannot be defined with PROTOCOL_P2P or PROTOCOL_MIWI.
     /*********************************************************************/
-//    #define PROTOCOL_MIWI_PRO
+    #define PROTOCOL_MIWI_PRO
 
         /*********************************************************************/
         // NWK_ROLE_COORDINATOR is not valid if PROTOCOL_P2P is defined. It

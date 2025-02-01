@@ -63,12 +63,12 @@
     /*********************************************************************/
 //    #define PICDEMZ
 //    #define PIC18_EXPLORER
-    //#define EXPLORER16
+//    #define EXPLORER16
 //    #define EIGHT_BIT_WIRELESS_BOARD
 
     // there are three ways to use NVM to store data: External EPROM, Data EEPROM and 
     // programming space, with following definitions:
-    //  #define USE_EXTERNAL_EEPROM
+      #define USE_EXTERNAL_EEPROM
     //  #define USE_DATA_EEPROM
     //  #define USE_PROGRAMMING_SPACE  
     // Each demo board has defined the method of using NVM, as

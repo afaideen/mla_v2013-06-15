@@ -106,7 +106,29 @@ void InitSymbolTimer()
     WriteTimer2(0x00);
     WriteTimer3(0x00);
     WritePeriod3(0xFFFF);
-    OpenTimer2((T2_ON|T2_32BIT_MODE_ON|CLOCK_DIVIDER_SETTING),0xFFFFFFFF);     
+    OpenTimer2((T2_ON|T2_32BIT_MODE_ON|CLOCK_DIVIDER_SETTING),0xFFFFFFFF);
+#elif defined(__PIC32MZ__)
+
+    // 1. Disable Timer2 and Timer3 before configuring
+    T2CONCLR = _T2CON_ON_MASK;   // Stop Timer2
+    T3CONCLR = _T3CON_ON_MASK;   // Stop Timer3
+
+    // 2. Reset Timer2 and Timer3 count registers
+    TMR2 = 0x00000000;
+    TMR3 = 0x00000000;
+
+    // 3. Set Timer3 period to max (for full 32-bit mode operation)
+    PR3 = 0xFFFFFFFF;
+
+    // 4. Enable 32-bit mode (T2 & T3 combined)
+    T2CONSET = _T2CON_T32_MASK;
+
+    // 5. Apply Prescaler from `CLOCK_DIVIDER_SETTING`
+    T2CONCLR = _T2CON_TCKPS_MASK;        // Clear existing prescaler bits
+    T2CONSET = CLOCK_DIVIDER_SETTING;    // Set TCKPS value
+
+    // 6. Enable Timer2 (TMR2 + TMR3 in 32-bit mode)
+    T2CONSET = _T2CON_ON_MASK;
 #else
     #error "Symbol timer implementation required for stack usage."
 #endif
@@ -207,7 +229,8 @@ MIWI_TICK MiWi_TickGet(void)
     /* enable the timer*/
     TMR_IE = 1;
     
-#elif defined(__dsPIC30F__) || defined(__dsPIC33F__) || defined(__PIC24F__) || defined(__PIC24FK__) || defined(__PIC24H__) || defined(__PIC32MX__)
+#elif defined(__dsPIC30F__) || defined(__dsPIC33F__) || defined(__PIC24F__) || defined(__PIC24FK__) || defined(__PIC24H__) \
+    || defined(__PIC32MX__)
     currentTime.word.w1 = TMR3;
     currentTime.word.w0 = TMR2;
     if( currentTime.word.w1 != TMR3 )
@@ -215,8 +238,53 @@ MIWI_TICK MiWi_TickGet(void)
        currentTime.word.w1 = TMR3;
        currentTime.word.w0 = TMR2;
     }
+
+#elif defined(__PIC32MZ__)
+    do {
+        currentTime.word.w1 = TMR3;
+        currentTime.word.w0 = TMR2;
+    } while (currentTime.word.w1 != TMR3);  // Ensure atomic read
+
+
 #else
     #error "Symbol timer implementation required for stack usage."
 #endif
     return currentTime;
+}
+
+// Function to Convert Symbols to Timer Ticks
+unsigned long long Convert_Symbols_To_Ticks(unsigned long symbols)
+{
+    return ((unsigned long long) SYMBOL_TO_TICK_RATE * symbols) / 100000;
+}
+
+// Function to Test and Print Conversion
+void Test_Symbols_To_Ticks()
+{
+    unsigned long symbols[] = {1, 10, 50, 100, 1000};
+    int i;
+
+    printf("Symbol -> Timer Ticks Conversion:\n");
+    for (i = 0; i < sizeof(symbols) / sizeof(symbols[0]); i++)
+    {
+        printf("%lu symbols = %llu ticks\n", symbols[i], Convert_Symbols_To_Ticks(symbols[i]));
+    }
+}
+// Function to Convert Timer Ticks to Symbols
+unsigned long long Convert_Ticks_To_Symbols(unsigned long long ticks)
+{
+    return (ticks * 100000) / SYMBOL_TO_TICK_RATE;
+}
+
+// Function to Test and Print Conversion
+void Test_Ticks_To_Symbols()
+{
+    unsigned long long ticks[] = {7, 78, 390, 781, 7812};
+    int i;
+
+    printf("Timer Ticks -> Symbols Conversion:\n");
+    for (i = 0; i < sizeof(ticks) / sizeof(ticks[0]); i++)
+    {
+        printf("%llu ticks = %llu symbols\n", ticks[i], Convert_Ticks_To_Symbols(ticks[i]));
+    }
 }

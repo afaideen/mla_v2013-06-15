@@ -16,6 +16,7 @@
                 <sourceRootElem>../../../../../Microchip/WirelessProtocols</sourceRootElem>
                 <sourceRootElem>..</sourceRootElem>
                 <sourceRootElem>../../../../../Microchip/Include/TCPIP Stack</sourceRootElem>
+                <sourceRootElem>../../../../../../Microchip/mplabc32/v2.02/pic32mx/include/proc</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
