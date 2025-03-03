@@ -53,9 +53,28 @@
 #include "GenericTypeDefs.h"
 #include "WirelessProtocols/Console.h"
 
-#if defined(__dsPIC30F__) || defined(__dsPIC33F__) || defined(__PIC24F__) || defined(__PIC24FK__) || defined(__PIC24H__) || defined(__PIC32MX__)
+#if defined(__dsPIC30F__) || defined(__dsPIC33F__) || defined(__PIC24F__) || \
+defined(__PIC24FK__) || defined(__PIC24H__) || defined(__PIC32MX__) || defined(__PIC32MZ__)
 
 /************************ FUNCTIONS ********************************/
+#define DataRdySPI1() (SPI1STATbits.SPIRBF)
+#define ReadSPI1()  (SPI1BUF)
+#define putcSPI1(data_out)  do{while(!SPI1STATbits.SPITBE); SPI1BUF=(data_out); }while(0)
+unsigned int getcSPI1(void)
+{
+	while(!DataRdySPI1());		// wait receive data available
+	return ReadSPI1();
+}
+
+#define DataRdySPI2() (SPI2STATbits.SPIRBF)
+#define ReadSPI2()  (SPI2BUF)
+#define putcSPI2(data_out)  do{while(!SPI2STATbits.SPITBE); SPI2BUF=(data_out); }while(0)
+
+unsigned int getcSPI2(void)
+{
+	while(!DataRdySPI2());		// wait receive data available
+	return ReadSPI2();			// TODO: use return SPI2BUF; directly?
+}
 
 /*********************************************************************
 * Function:         void SPIPut(BYTE v)
@@ -90,7 +109,7 @@ void SPIPut(BYTE v)
         SPI_SDO = 0; 
     #else
     
-        #if defined(__PIC32MX__)
+        #if defined(__PIC32MX__)||defined(__PIC32MZ__)
             putcSPI1(v);
             i = (BYTE)getcSPI1();
         #else
@@ -184,7 +203,7 @@ BYTE SPIGet(void)
             SPI_SDO2 = 0; 
         #else
         
-            #if defined(__PIC32MX__)
+            #if defined(__PIC32MX__)||defined(__PIC32MZ__)
                 putcSPI2(v);
                 i = (BYTE)getcSPI2();
             #else
@@ -245,7 +264,7 @@ BYTE SPIGet(void)
 #endif    
     
 
-#elif defined(__18CXX)
+#elif defined(__18CXX) || defined(__XC8)
 
 /************************ FUNCTIONS ********************************/
  

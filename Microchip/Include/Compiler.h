@@ -217,7 +217,9 @@
                     #define FAR
 		#define Reset()				SoftReset()
                     #if defined(__PIC32MZ__)
-                        #define ClrWdt()			(WDTCONSET = _WDTCON_WDTCLRKEY_MASK)
+                        #define EnableWdt()			(WDTCONSET = (1 << 15))
+                        #define DisableWdt()	    (WDTCONCLR = (1 << 15))
+                        #define ClrWdt()			(WDTCONbits.WDTCLRKEY = 0x5743)
                     #elif defined(__PIC32MX__)
                         #define ClrWdt()			(WDTCONSET = _WDTCON_WDTCLR_MASK)
                     #endif

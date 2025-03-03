@@ -72,7 +72,7 @@
         // receive MiWi PRO acknowledgement will be used to notify application
         // layer if transmission is successful.
         /*********************************************************************/
-        #define ENABLE_MIWI_PRO_ACKNOWLEDGEMENT
+//        #define ENABLE_MIWI_PRO_ACKNOWLEDGEMENT
         
         /*********************************************************************/
         // NUM_COORDINATOR defines the maximum number of Coordinators that
@@ -226,7 +226,7 @@
         /*********************************************************************/
 #ifdef NWK_ROLE_COORDINATOR
 
-//        #define ENABLE_TIME_SYNC
+        #define ENABLE_TIME_SYNC
 #endif
         /*********************************************************************/
         // TIME_SYNC_SLOTS defines the total number of time slot available 

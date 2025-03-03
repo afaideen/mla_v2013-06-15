@@ -39,7 +39,7 @@
 #include "HardwareProfile.h"
 #include "MAC_EEProm.h"
 #include "LCD_ST7032.h"
-#include "TimeDelay.h"
+#include "TCPIP Stack/Delay.h" //#include "TimeDelay.h"
 #include "SystemProfile.h"
 #include "SST_SerialFlash.h"
 

@@ -62,7 +62,7 @@
         //#define USE_DATA_EEPROM
         //#define USE_PROGRAMMING_SPACE
         
-        #if defined(USE_EXTERNAL_EEPROM)
+        #if defined(USE_EXTERNAL_EEPROM) || defined(USE_EXTERNAL_SPIFLASH)
         
             #define SPI_WRT_STATUS  0x01
             #define SPI_WRITE       0x02
@@ -146,7 +146,7 @@
             #define TOTAL_NVM_BYTES     1024
         #endif
         
-        #if defined(USE_DATA_EEPROM) || defined(USE_EXTERNAL_EEPROM)
+        #if defined(USE_DATA_EEPROM) || defined(USE_EXTERNAL_EEPROM) || defined(USE_EXTERNAL_SPIFLASH)
         
             extern WORD        nvmMyPANID;
             extern WORD        nvmCurrentChannel;
@@ -183,7 +183,24 @@
             void NVMWrite(BYTE *source, WORD addr, WORD count);
             
             BOOL NVMInit(void);
+            #if defined(USE_EXTERNAL_SPIFLASH)
+                #define nvmGetMyPANID(x)                    SPIFlash_ReadArray((uint32_t)nvmMyPANID, (uint8_t *)x, 2)
+                #define nvmPutMyPANID(x)                    SPIFlash_WriteArrayAAIMode((uint32_t)nvmMyPANID, (uint8_t *)(x), 2)
 
+                #define nvmGetCurrentChannel( x )           SPIFlash_ReadArray((uint32_t)nvmCurrentChannel, (uint8_t *)x, 1)
+                #define nvmPutCurrentChannel( x )           SPIFlash_WriteByte((uint32_t)nvmCurrentChannel, *(uint8_t *)(x))
+
+                #define nvmGetConnMode( x )                 SPIFlash_ReadArray((uint32_t)nvmConnMode, (uint8_t *)x, 1)
+                #define nvmPutConnMode( x )                 SPIFlash_WriteByte((uint32_t)nvmConnMode, *(uint8_t *)(x))                
+
+                #define nvmGetConnectionTable( x )          SPIFlash_ReadArray((uint32_t)nvmConnectionTable, (uint8_t *)x, (WORD)CONNECTION_SIZE * sizeof(CONNECTION_ENTRY))
+                #define nvmPutConnectionTable( x )          SPIFlash_WriteArrayAAIMode((uint32_t)nvmConnectionTable, (uint8_t *)(x), (WORD)CONNECTION_SIZE * sizeof(CONNECTION_ENTRY))
+                #define nvmPutConnectionTableIndex(x, y)    SPIFlash_WriteArrayAAIMode((uint32_t)nvmConnectionTable+((WORD)y * sizeof(CONNECTION_ENTRY)), (uint8_t *)(x), sizeof(CONNECTION_ENTRY))
+
+                #define nvmGetOutFrameCounter( x )          SPIFlash_ReadArray((uint32_t)nvmOutFrameCounter, (uint8_t *)x, 4)
+                #define nvmPutOutFrameCounter( x )          SPIFlash_WriteArrayAAIMode((uint32_t)nvmOutFrameCounter, (uint8_t *)(x), 4)
+
+            #else
             #define nvmGetMyPANID( x )                  NVMRead( (BYTE *)x, nvmMyPANID, 2)
             #define nvmPutMyPANID( x )                  NVMWrite((BYTE *)x, nvmMyPANID, 2)
             
@@ -199,6 +216,10 @@
             
             #define nvmGetOutFrameCounter( x )          NVMRead( (BYTE *)x, nvmOutFrameCounter, 4)
             #define nvmPutOutFrameCounter( x )          NVMWrite((BYTE *)x, nvmOutFrameCounter, 4)
+            
+            #endif
+
+            
             
             #if defined(PROTOCOL_MIWI)
 
@@ -228,6 +249,17 @@
             
             #if defined(PROTOCOL_MIWI_PRO)
 
+                #if defined(USE_EXTERNAL_SPIFLASH)
+                    #define nvmGetMyShortAddress(x)        SPIFlash_ReadArray((uint32_t)nvmMyShortAddress, (uint8_t *)x, 2)
+                    #define nvmPutMyShortAddress(x)        SPIFlash_WriteArrayAAIMode((uint32_t)nvmMyShortAddress, (uint8_t *)(x), 2)
+
+                    #define nvmGetMyLongAddress(x)         SPIFlash_ReadArray((uint32_t)nvmMyLongAddress, (uint8_t *)x, MY_ADDRESS_LENGTH)
+                    #define nvmPutMyLongAddress(x)         SPIFlash_WriteArrayAAIMode((uint32_t)nvmMyLongAddress, (uint8_t *)(x), MY_ADDRESS_LENGTH)
+
+                    #define nvmGetMyParent(x)              SPIFlash_ReadArray((uint32_t)nvmMyParent, (uint8_t *)x, 1)
+                    #define nvmPutMyParent(x)              SPIFlash_WriteByte((uint32_t)nvmMyParent, *(uint8_t *)(x))
+
+                #else
                 #define nvmGetMyShortAddress( x )       NVMRead( (BYTE *)x, nvmMyShortAddress, 2)
                 #define nvmPutMyShortAddress( x )       NVMWrite((BYTE *)x, nvmMyShortAddress, 2)
                 
@@ -237,24 +269,42 @@
                 #define nvmGetMyParent( x )             NVMRead( (BYTE *)x, nvmMyParent, 1)
                 #define nvmPutMyParent( x )             NVMWrite((BYTE *)x, nvmMyParent, 1)
                 
-                #if defined(NWK_ROLE_COORDINATOR)
-                    
-                    #define nvmGetRoutingTable( x )         NVMRead( (BYTE *)x, nvmRoutingTable, NUM_COORDINATOR/8)
-                    #define nvmPutRoutingTable( x )         NVMWrite((BYTE *)x, nvmRoutingTable, NUM_COORDINATOR/8)
-                    
-                    #define nvmGetNeighborRoutingTable( x ) NVMRead( (BYTE *)x, nvmNeighborRoutingTable, ((WORD)NUM_COORDINATOR/8) * ((WORD)NUM_COORDINATOR))
-                    #define nvmPutNeighborRoutingTable( x ) NVMWrite((BYTE *)x, nvmNeighborRoutingTable, ((WORD)NUM_COORDINATOR/8) * ((WORD)NUM_COORDINATOR))
-
-                    #define nvmGetFamilyTree( x )           NVMRead( (BYTE *)x, nvmFamilyTree, NUM_COORDINATOR)
-                    #define nvmPutFamilyTree( x )           NVMWrite((BYTE *)x, nvmFamilyTree, NUM_COORDINATOR)
-                    
-                    #define nvmGetRole( x )                 NVMRead( (BYTE *)x, nvmRole, 1)
-                    #define nvmPutRole( x )                 NVMWrite((BYTE *)x, nvmRole, 1)
-                
                 #endif
+
                 
-            #endif    
+                #if defined(NWK_ROLE_COORDINATOR)
+                    #if defined(USE_EXTERNAL_SPIFLASH)
+                        #define nvmGetRoutingTable(x)          SPIFlash_ReadArray((uint32_t)nvmRoutingTable, (uint8_t *)x, NUM_COORDINATOR/8)
+                        #define nvmPutRoutingTable(x)          SPIFlash_WriteArrayAAIMode((uint32_t)nvmRoutingTable, (uint8_t *)(x), NUM_COORDINATOR/8)
+                    
+                        #define nvmGetNeighborRoutingTable(x)  SPIFlash_ReadArray((uint32_t)nvmNeighborRoutingTable, (uint8_t *)x, ((WORD)NUM_COORDINATOR/8) * ((WORD)NUM_COORDINATOR))
+                        #define nvmPutNeighborRoutingTable(x)  SPIFlash_WriteArrayAAIMode((uint32_t)nvmNeighborRoutingTable, (uint8_t *)(x), ((WORD)NUM_COORDINATOR/8) * ((WORD)NUM_COORDINATOR))
+
+                        #define nvmGetFamilyTree(x)            SPIFlash_ReadArray((uint32_t)nvmFamilyTree, (uint8_t *)x, NUM_COORDINATOR)
+                        #define nvmPutFamilyTree(x)            SPIFlash_WriteArrayAAIMode((uint32_t)nvmFamilyTree, (uint8_t *)(x), NUM_COORDINATOR)
+
+                        #define nvmGetRole(x)                  SPIFlash_ReadArray((uint32_t)nvmRole, (uint8_t *)x, 1)
+                        #define nvmPutRole(x)                  SPIFlash_WriteByte((uint32_t)nvmRole, *(uint8_t *)(x))
+
+                    #else
+                        #define nvmGetRoutingTable( x )         NVMRead( (BYTE *)x, nvmRoutingTable, NUM_COORDINATOR/8)
+                        #define nvmPutRoutingTable( x )         NVMWrite((BYTE *)x, nvmRoutingTable, NUM_COORDINATOR/8)
+
+                        #define nvmGetNeighborRoutingTable( x ) NVMRead( (BYTE *)x, nvmNeighborRoutingTable, ((WORD)NUM_COORDINATOR/8) * ((WORD)NUM_COORDINATOR))
+                        #define nvmPutNeighborRoutingTable( x ) NVMWrite((BYTE *)x, nvmNeighborRoutingTable, ((WORD)NUM_COORDINATOR/8) * ((WORD)NUM_COORDINATOR))
+
+                        #define nvmGetFamilyTree( x )           NVMRead( (BYTE *)x, nvmFamilyTree, NUM_COORDINATOR)
+                        #define nvmPutFamilyTree( x )           NVMWrite((BYTE *)x, nvmFamilyTree, NUM_COORDINATOR)
+
+                        #define nvmGetRole( x )                 NVMRead( (BYTE *)x, nvmRole, 1)
+                        #define nvmPutRole( x )                 NVMWrite((BYTE *)x, nvmRole, 1)
+
+                    #endif
+                
+                #endif    
             
+            #endif    
+      
       
         #else   
         

@@ -60,7 +60,7 @@
 	#define ENABLE_MANUALBACKLIGHT
 #endif
 
-#define USE_IRQ0_AS_INTERRUPT
+//#define USE_IRQ0_AS_INTERRUPT
 
 /*********************************************************************/
 // ENABLE_NETWORK_FREEZER enables the network freezer feature, which
@@ -101,18 +101,15 @@
     // This definition cannot be defined with PROTOCOL_P2P or PROTOCOL_MIWI.
     /*********************************************************************/
     #define PROTOCOL_MIWI_PRO
-    
 
-
-
-        /*********************************************************************/
-        // NWK_ROLE_COORDINATOR is not valid if PROTOCOL_P2P is defined. It
-        // specified that the node has the capability to be coordinator or PAN 
-        // coordinator. This definition cannot be defined with 
-        // NWK_ROLE_END_DEVICE.
-        /*********************************************************************/
+    /*********************************************************************/
+    // NWK_ROLE_COORDINATOR is not valid if PROTOCOL_P2P is defined. It
+    // specified that the node has the capability to be coordinator or PAN 
+    // coordinator. This definition cannot be defined with 
+    // NWK_ROLE_END_DEVICE.
+    /*********************************************************************/
 //        #define NWK_ROLE_END_DEVICE
-        #define NWK_ROLE_COORDINATOR
+    #define NWK_ROLE_COORDINATOR
 
 //#if defined PROTOCOL_MIWI_PRO
     #define ENABLE_NETWORK_FREEZER
@@ -155,29 +152,29 @@
 // EUI_x defines the xth byte of permanent address for the wireless
 // node
 /*********************************************************************/
-#define EUI_7 0x55
-#define EUI_6 0xaa
-#define EUI_5 0x55
-#define EUI_4 0xaa
-#define EUI_3 0x55
-#define EUI_2 0x01
-#define EUI_1 0x02
-#define EUI_0 0x03
-
-//#define EUI_7 0x11
-//#define EUI_6 0x22
-//#define EUI_5 0x33
-//#define EUI_4 0x44
+//#define EUI_7 0x55
+//#define EUI_6 0xaa
+//#define EUI_5 0x55
+//#define EUI_4 0xaa
 //#define EUI_3 0x55
-//#define EUI_2 0x66
-//#define EUI_1 0x77
-//#ifdef NWK_ROLE_COORDINATOR
-//    #define EUI_0 0x01
-//#elif defined(NWK_ROLE_END_DEVICE)
-//    #define EUI_0 0x02
-//#endif
+//#define EUI_2 0x01
+//#define EUI_1 0x02
+//#define EUI_0 0x03
 
-#define ENABLE_EEPROM
+#define EUI_7 0x11
+#define EUI_6 0x22
+#define EUI_5 0x33
+#define EUI_4 0x44
+#define EUI_3 0x55
+#define EUI_2 0x66
+#define EUI_1 0x77
+#ifdef NWK_ROLE_COORDINATOR
+    #define EUI_0 0x01
+#elif defined(NWK_ROLE_END_DEVICE)
+    #define EUI_0 0x02
+#endif
+
+//#define ENABLE_EEPROM
 
 /*********************************************************************/
 // TX_BUFFER_SIZE defines the maximum size of application payload
@@ -199,7 +196,8 @@
 /*********************************************************************/
 #ifdef NWK_ROLE_COORDINATOR
 //    #define MY_PAN_ID                       0xFFFF    //original
-    #define MY_PAN_ID                       0x1234
+//    #define MY_PAN_ID                       0x1234
+    #define MY_PAN_ID                       0xabcd
 #elif defined NWK_ROLE_END_DEVICE
 //    #define MY_PAN_ID                       0x1234
     #define MY_PAN_ID                       0xFFFF// PAN ID used by end device must be the same with coordinator
@@ -243,7 +241,7 @@
 // transceivers can only broadcast, or hardcoded the destination address
 // to perform unicast.
 /*********************************************************************/
-#define ENABLE_HAND_SHAKE
+//#define ENABLE_HAND_SHAKE
 
 
 /*********************************************************************/
@@ -265,7 +263,8 @@
         #define ENABLE_ED_SCAN
     #endif
 #endif
-
+#define ENABLE_FREQUENCY_AGILITY
+#define ENABLE_ED_SCAN
 /*********************************************************************/
 // ENABLE_ACTIVE_SCAN will enable the device to do an active scan to 
 // to detect current existing connection. 
@@ -351,7 +350,9 @@
 
 #if defined(ENABLE_NETWORK_FREEZER)
     #define ENABLE_NVM
-	//#define ENABLE_NVM_MAC
+    #define USE_EXTERNAL_EEPROM
+//    #define USE_EXTERNAL_SPIFLASH
+	#define ENABLE_NVM_MAC
 #endif
 
 #if defined(ENABLE_ACTIVE_SCAN) && defined(TARGET_SMALL)
@@ -378,7 +379,7 @@
     #error TX BUFFER SIZE too small. Must be >= 10.
 #endif
 
-#if (NETWORK_TABLE_SIZE > 0xFE)
+#if (CONNECTION_SIZE > 0xFE)
     #error NETWORK TABLE SIZE too large.  Must be < 0xFF.
 #endif
 

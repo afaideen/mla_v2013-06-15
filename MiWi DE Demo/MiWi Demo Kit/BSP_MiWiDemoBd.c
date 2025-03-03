@@ -50,6 +50,11 @@
 #include "WirelessProtocols/SymbolTime.h"
 #include "LCD_ST7032.h"
 #include "HardwareProfile.h"
+#include "TCPIP Stack/Delay.h" //#include "TimeDelay.h"
+
+   void ADC_Init(void);  
+   unsigned int ADC_Read(unsigned char channel);
+   float ReadTemperature(void);
 
 // Config Bit Settings to get 16 MHz: Internal 8 MHz / 2 = 4 * 12 = 48 / 3 = 16
 #pragma config OSC = INTOSCPLL, WDTEN = OFF, XINST = ON, WDTPS = 2048, PLLDIV = 2, CPUDIV = OSC3_PLL3
@@ -83,7 +88,7 @@ MIWI_TICK switch1PressTime;
  *                  to initialize stack or any other function that
  *                  operates on the stack
  ********************************************************************/
- void BoardInit(void)
+     void BoardInit(void)
 {
     /*******************************************************************/
     // Primary Internal Oscillator
@@ -247,11 +252,92 @@ MIWI_TICK switch1PressTime;
     
     PIR3bits.SSP2IF = 0; 
 
+    ADC_Init();  // Initialize ADC
     /*******************************************************************/
-    // Enable System Interupts
+    // Enable System Interupts. DISABLE THIS IF NOT USED ELSE IT MAY CREATE INSTABILITY.
     /*******************************************************************/
-    INTCONbits.GIEH = 1;
+    RCONbits.IPEN = 1;          // Enable interrupt priorities
+//    INTCONbits.GIEL = 1;        // Enable Low-Priority Interrupts
+    INTCONbits.GIEH = 1;        // Enable High-Priority Interrupts
+    
+    
 
+}
+
+     // ================================
+// ** Initialize ADC **
+// ================================
+void ADC_Init(void) {
+    // Set RA0 (AN0) & RA1 (AN1) as Analog Inputs
+    ANCON0 = 0b11111100;  // AN0 & AN1 = Analog, others Digital
+    TRISA |= 0b00000011;  // RA0 & RA1 as Input
+    
+    ANCON1bits.PCFG8 = 1;
+    ANCON1bits.PCFG9 = 1;
+    ANCON1bits.PCFG10 = 1;
+    ANCON1bits.PCFG11 = 1;
+    ANCON1bits.PCFG12 = 1;
+    // Disable 1.2V Bandgap Reference (Not needed)
+    ANCON1bits.VBGEN = 0;
+
+    // Configure ADC
+//    ADCON1 = 0x0E;  // VDD as Vref
+    ADCON1bits.ADCAL = 0;  // Normal ADC operation (no calibration)
+    ADCON1bits.ACQT = 0b101;  // Set 12 TAD acquisition time
+    ADCON1bits.ADCS = 0b110;  // Select Fosc/64 (Good for 16MHz)
+    // Set ADC Result Format to Right-Justified
+    ADCON1bits.ADFM = 1;
+    
+    ADCON0 = 0x00;  // Turn off ADC initially
+    // Configure External VREF+
+    ADCON0bits.VCFG = 0b00;  // VREF+ = VDD, VREF- = VSS (Default)
+    ADCON0bits.ADON = 1;  // Enable ADC
+}
+// ================================
+// ** Read ADC Value from ANx **
+// ================================
+unsigned int ADC_Read(unsigned char channel) {
+    unsigned int result;
+    ADCON0bits.CHS = channel;  // Select ADC channel
+    ADCON0bits.ADON = 1;  // Turn ON ADC
+
+    Delay10us(1);  // Acquisition time (Wait before conversion)
+    ADCON0bits.GO = 1;  // Start conversion
+
+    while (ADCON0bits.DONE);  // Wait for conversion to complete
+
+//    result = (ADRESH << 8) | ADRESL;  // Get 10-bit ADC value
+    result = ADRES;  // Get 10-bit ADC value
+    ADCON0bits.ADON = 0;  // Turn OFF ADC
+
+    return result;
+}
+
+// ================================
+// ** Convert ADC Value to Temperature **
+// ================================
+#define NUM_SAMPLES 10  // Number of ADC samples for averaging
+
+float ReadTemperature(void) {
+    unsigned int adcValue = 0;
+    float voltage, temperature;
+    unsigned char i;
+
+    // Take multiple ADC readings and average them
+    for (i = 0; i < NUM_SAMPLES; i++) {
+        adcValue += ADC_Read(1);  // Read from AN1 (RA1)
+        Delay10us(10);  // Small delay between samples to allow stability
+    }
+
+    adcValue /= NUM_SAMPLES;  // Compute average
+
+    // Convert ADC value to voltage
+    voltage = adcValue * (3.3 / 1023.0);
+
+    // Convert voltage to temperature (MCP9700AT formula)
+    temperature = (voltage - 0.5) * 100.0;
+
+    return temperature;  // Return final averaged temperature
 }
 
 

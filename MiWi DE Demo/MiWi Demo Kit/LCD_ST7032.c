@@ -44,7 +44,7 @@
 #include "GenericTypeDefs.h"
 #include "Compiler.h"
 #include "HardwareProfile.h"
-#include "TimeDelay.h"
+#include "TCPIP Stack/Delay.h" //#include "TimeDelay.h"
 //#include <plib.h>
 #include "WirelessProtocols/MSPI.h"
 #include "LCD_ST7032.h"

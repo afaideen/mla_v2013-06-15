@@ -46,7 +46,7 @@
 #include "HardwareProfile.h"
 #include "WirelessProtocols/MCHP_API.h"
 #include "LCD_ST7032.h"
-#include "TimeDelay.h"
+#include "TCPIP Stack/Delay.h" //#include "TimeDelay.h"
 
 
 void RangeDemo(void);

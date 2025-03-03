@@ -121,7 +121,7 @@ void Read_MAC_Address(void)
 {
     BYTE i;
     
-	if( MY_ADDRESS_LENGTH > 6 )
+	#if( MY_ADDRESS_LENGTH > 6 )
 	{
 	    for(i = 0; i < 3; i++)
 	    {
@@ -140,13 +140,14 @@ void Read_MAC_Address(void)
 	        EEPROMRead(&(myLongAddress[2-i]), EEPROM_MAC_ADDR+3+i, 1);
 	    }
 	}
-	else
+	#else
 	{
 	    for(i = 0; i < MY_ADDRESS_LENGTH; i++)
 	    {
 	        EEPROMRead(&(myLongAddress[i]), EEPROM_MAC_ADDR+5-i, 1);
 	    }   
 	}
+    #endif
 }
 
 

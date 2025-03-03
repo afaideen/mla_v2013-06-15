@@ -275,6 +275,7 @@ MIWI_TICK MiWi_TickGet(void)
     return currentTime;
 }
 
+#if defined(__PIC32MZ__)
 // Function to Convert Symbols to Timer Ticks
 unsigned long long Convert_Symbols_To_Ticks(unsigned long symbols)
 {
@@ -312,6 +313,8 @@ void Test_Ticks_To_Symbols()
         printf("%llu ticks = %llu symbols\n", ticks[i], Convert_Ticks_To_Symbols(ticks[i]));
     }
 }
+
+#endif
 
 
 

@@ -7,7 +7,7 @@
 *
 * Copyright and Disclaimer Notice for P2P Software:
 *
-* Copyright © 2007-2010 Microchip Technology Inc.  All rights reserved.
+* Copyright ï¿½ 2007-2010 Microchip Technology Inc.  All rights reserved.
 *
 * Microchip licenses to you the right to use, modify, copy and distribute 
 * Software only when embedded on a Microchip microcontroller or digital 
@@ -99,7 +99,7 @@ extern BYTE myLongAddress[];
 // In this demo, this variable array is set to be empty.
 /*************************************************************************/
 #if ADDITIONAL_NODE_ID_SIZE > 0
-    BYTE AdditionalNodeID[ADDITIONAL_NODE_ID_SIZE] = {0x00};
+    extern BYTE AdditionalNodeID[ADDITIONAL_NODE_ID_SIZE] = {0x00};
 #endif
 
                                                                                                
@@ -134,17 +134,22 @@ extern BYTE myLongAddress[];
 **********************************************************************/
 void main(void)
 {   
-        BYTE i, j;
-        BOOL result = TRUE;
-        BYTE switch_val;
-        WORD VBG_Result;
+    BYTE i, j;
+    BOOL result = TRUE;
+    BYTE switch_val;
+    WORD VBG_Result;
+    MIWI_TICK t_1 = { 0 };
+    MIWI_TICK t_2 = { 0 };
+    MIWI_TICK t_3 = { 0 };
+    MIWI_TICK currentTime = { 0 };
 
-        NetFreezerEnable = FALSE;
+    NetFreezerEnable = FALSE;
 
     /*******************************************************************/
     // Initialize Hardware
     /*******************************************************************/
 	BoardInit();
+
 //#ifdef ENABLE_CONSOLE
 //    ConsoleInit(); 
 //#endif
@@ -162,7 +167,10 @@ void main(void)
     /*******************************************************************/
     LCDInit();
  	
- 	LED0 = LED1 = LED2 = 1;
+// 	LED0 = LED1 = LED2 = 1;
+    LED0 = 0;
+    LED1 = 0;
+    LED2 = 0;
  	
  	Read_MAC_Address();
     
@@ -357,11 +365,11 @@ CreateorJoin:
                         if(myChannel < 8)
                             scanresult = MiApp_SearchConnection(10, (0x00000001 << myChannel));
                         else if(myChannel < 16)
-                                scanresult = MiApp_SearchConnection(10, (0x00000100 << (myChannel-8)));
+                            scanresult = MiApp_SearchConnection(10, (0x00000100 << (myChannel-8)));
                         else if(myChannel < 24)
-                                scanresult = MiApp_SearchConnection(10, (0x00010000 << (myChannel-16)));
+                            scanresult = MiApp_SearchConnection(10, (0x00010000 << (myChannel-16)));
                         else 
-                                scanresult = MiApp_SearchConnection(10, (0x01000000 << (myChannel-24)));
+                            scanresult = MiApp_SearchConnection(10, (0x01000000 << (myChannel-24)));
 //                                scanresult = MiApp_SearchConnection(10, 1<<myChannel);
 
                         /*******************************************************************/
@@ -436,41 +444,41 @@ CreateorJoin:
                                                                 MiApp_BroadcastPacket(FALSE);
                                                                 for(k = 0 ; k < scanresult ; k++)
                                                                 {
-                                                                        if( (ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]) &
-                                                                        (ActiveScanResults[j].PANID.v[0] == ActiveScanResults[k].PANID.v[0]) )
+                                                                    if( (ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]) &
+                                                                    (ActiveScanResults[j].PANID.v[0] == ActiveScanResults[k].PANID.v[0]) )
+                                                                    {
+                                                                        count++;
+                                                                        LCDErase();
+
+                                                                        // Display Network information
+                                                                        sprintf((char *)LCDText, (far rom char*)"SW1:<Addr:%02x%02x>",ActiveScanResults[k].Address[1], ActiveScanResults[k].Address[0]);
+                                                                        sprintf((char *)&(LCDText[16]), (far rom char*)"SW2: Additional");
+
+                                                                        LCDUpdate();
+                                                                        nodeIndex = k;
+
+                                                                        while(1)
                                                                         {
-                                                                                count++;
-                                                                                LCDErase();
-
-                                                                                // Display Network information
-                                                                                sprintf((char *)LCDText, (far rom char*)"SW1:<Addr:%02x%02x>",ActiveScanResults[k].Address[1], ActiveScanResults[k].Address[0]);
-                                                                                sprintf((char *)&(LCDText[16]), (far rom char*)"SW2: Additional");
-
-                                                                                LCDUpdate();
-                                                                                nodeIndex = k;
-
-                                                                                while(1)
+                                                                                switch_val = ButtonPressed();
+                                                                                if(switch_val == SW1)
                                                                                 {
-                                                                                        switch_val = ButtonPressed();
-                                                                                        if(switch_val == SW1)
-                                                                                        {
-                                                                                           //Establish connection with the node
-                                                                                           j = nodeIndex;
-                                                                                           k = scanresult-1;
-                                                                                           break;
-                                                                                        }
-                                                                                        else if(switch_val == SW2)
-                                                                                        {
-                                                                                            //Display Additional node information
-                                                                                            if((k == (scanresult - 1)) || (count == CoordCount))
-                                                                                              {
-                                                                                                 k = -1;
-                                                                                                 count = 0;
-                                                                                              }  
-                                                                                           break;
-                                                                                        }
-                                                                                } //End of while(1) loop
-                                                                        }
+                                                                                   //Establish connection with the node
+                                                                                   j = nodeIndex;
+                                                                                   k = scanresult-1;
+                                                                                   break;
+                                                                                }
+                                                                                else if(switch_val == SW2)
+                                                                                {
+                                                                                    //Display Additional node information
+                                                                                    if((k == (scanresult - 1)) || (count == CoordCount))
+                                                                                      {
+                                                                                         k = -1;
+                                                                                         count = 0;
+                                                                                      }  
+                                                                                   break;
+                                                                                }
+                                                                        } //End of while(1) loop
+                                                                    }
                                           
                                                                 } //End of for(k = 0; ....)
                                                         } //End of if (CoordCount > ...)							

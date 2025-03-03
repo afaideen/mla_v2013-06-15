@@ -50,7 +50,8 @@
  ********************************************************************/
 #define __DELAY_C
 
-#include "TCPIP Stack/TCPIP.h"
+//#include "TCPIP Stack/TCPIP.h"
+#include "TCPIP Stack/Delay.h"
 
 
 #if !defined(__18CXX) || defined(HI_TECH_C)

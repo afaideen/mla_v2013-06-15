@@ -51,11 +51,11 @@
     #include "WirelessProtocols/MSPI.h"
     #include "WirelessProtocols/Console.h"
     #include "ConfigApp.h"
-#include "TimeDelay.h"
+#include "TCPIP Stack/Delay.h" //#include "TimeDelay.h"
     
     extern void MacroNop(void);
       
-    #if defined(USE_EXTERNAL_EEPROM) || defined(USE_DATA_EEPROM)
+    #if defined(USE_EXTERNAL_EEPROM) || defined(USE_DATA_EEPROM) || defined(USE_EXTERNAL_SPIFLASH)
 
         WORD        nvmMyPANID;
         WORD        nvmCurrentChannel;
@@ -180,7 +180,7 @@
             #endif
             Delay10us(10);
             DelayMs(10);
-            EE_nCS = 0;
+            MAC_nCS = 0;
             
             #if MCHP_EEPROM < MCHP_4KBIT
                 EESPIPut(SPI_READ);
@@ -208,7 +208,7 @@
             }
             Delay10us(10);
             DelayMs(1);
-            EE_nCS = 1;
+            MAC_nCS = 1;
             
             #if defined(__18CXX)
                 INTCONbits.GIEH = oldGIEH;
@@ -235,18 +235,18 @@
 EEPROM_NEXT_PAGE:
             do
             {
-                EE_nCS = 0;
+                MAC_nCS = 0;
                 EESPIPut(SPI_RD_STATUS);
                 PageCounter = EESPIGet();
-                EE_nCS = 1;
+                MAC_nCS = 1;
                 MacroNop();
             } while(PageCounter & 0x01 );
     
-            EE_nCS = 0;
+            MAC_nCS = 0;
             EESPIPut(SPI_EN_WRT);
-            EE_nCS = 1;
+            MAC_nCS = 1;
             MacroNop();
-            EE_nCS = 0;
+            MAC_nCS = 0;
             #if MCHP_EEPROM < MCHP_4KBIT
                 EESPIPut(SPI_WRITE);
                 EESPIPut(addr);
@@ -273,14 +273,14 @@ EEPROM_NEXT_PAGE:
                 PageCounter++;
                 if( ((addr + PageCounter) & (NVM_PAGE_SIZE-1)) == 0 )
                 {
-                    EE_nCS = 1;
+                    MAC_nCS = 1;
                     addr += PageCounter;
                     goto EEPROM_NEXT_PAGE;
                 }
             }
             Delay10us(10);
             DelayMs(5);
-            EE_nCS = 1;
+            MAC_nCS = 1;
             
             #if defined(__18CXX)
                 INTCONbits.GIEH = oldGIEH;
@@ -455,8 +455,63 @@ EEPROM_NEXT_PAGE:
     #endif
  
     
-    #if defined(USE_DATA_EEPROM) || defined(USE_EXTERNAL_EEPROM)
+    #if defined(USE_DATA_EEPROM) || defined(USE_EXTERNAL_EEPROM) || defined(USE_EXTERNAL_SPIFLASH)
+        #if defined(USE_EXTERNAL_SPIFLASH)
         
+            uint32_t nextFlashPosition = 0;  // Track next available SPI Flash position
+
+            BOOL NVMalloc(WORD size, uint16_t *location) 
+            {
+                if ((nextFlashPosition + size) > TOTAL_NVM_BYTES) {
+                    return FALSE;  // No space left in flash
+                }
+                *location = nextFlashPosition;  // Assign address in flash
+                nextFlashPosition += size;  // Move pointer forward
+                return TRUE;
+            }
+            BOOL NVMInit(void) {
+                BOOL result = TRUE;
+
+                nextFlashPosition = 0;  // Start from SPI flash base
+
+                result &= NVMalloc(2, &nvmMyPANID);
+                result &= NVMalloc(1, &nvmCurrentChannel);
+                result &= NVMalloc(1, &nvmConnMode);
+                result &= NVMalloc(sizeof(CONNECTION_ENTRY) * CONNECTION_SIZE, &nvmConnectionTable);
+                result &= NVMalloc(4, &nvmOutFrameCounter);
+
+                #if defined(PROTOCOL_MIWI)
+
+                    result &= NVMalloc(2, &nvmMyShortAddress);
+                    result &= NVMalloc(MY_ADDRESS_LENGTH, &nvmMyLongAddress);
+                    result &= NVMalloc(1, &nvmMyParent);
+
+                    #if defined(NWK_ROLE_COORDINATOR)
+                        result &= NVMalloc(8, &nvmRoutingTable);
+                        result &= NVMalloc(1, &nvmKnownCoordinators);
+                        result &= NVMalloc(1, &nvmRole);
+                    #endif
+                #endif
+
+                #if defined(PROTOCOL_MIWI_PRO)
+
+                    result &= NVMalloc(2, &nvmMyShortAddress);
+                    result &= NVMalloc(MY_ADDRESS_LENGTH, &nvmMyLongAddress);
+                    result &= NVMalloc(1, &nvmMyParent);
+
+                    #if defined(NWK_ROLE_COORDINATOR)
+                        result &= NVMalloc((NUM_COORDINATOR/8), &nvmRoutingTable);
+                        result &= NVMalloc(((WORD)NUM_COORDINATOR/8*(WORD)NUM_COORDINATOR), &nvmNeighborRoutingTable);
+                        result &= NVMalloc(NUM_COORDINATOR, &nvmFamilyTree);
+                        result &= NVMalloc(1, &nvmRole);
+                    #endif
+                #endif
+
+                return result;
+            }
+
+        
+        #else
     	WORD nextEEPosition;
         BOOL NVMalloc(WORD size, WORD *location)
         {
@@ -517,6 +572,7 @@ EEPROM_NEXT_PAGE:
         
     #endif 
  
+    #endif 
  
  
  

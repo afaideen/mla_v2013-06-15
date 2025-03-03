@@ -67,12 +67,13 @@
     /************************ VARIABLES ********************************/
     MACINIT_PARAM   MACInitParams;
     
-    #if defined(__18CXX)
+    #if defined(__18CXX) || defined(__XC8)
         #define MIPS    (CLOCK_FREQ/4000000)
     #elif defined(__PIC24F__) || defined(__PIC24FK__) || defined(__PIC24H__) || defined(__dsPIC33F__)
         #define MIPS    (CLOCK_FREQ/2000000)
-    #elif defined(__PIC32MX__)
+    #elif defined(__PIC32MX__) || defined(__PIC32MZ__)
         #define MIPS    (CLOCK_FREQ/1000000)   // PIC32 has various execution timing. Here assumes the best situation
+//        #define MIPS (CLOCK_FREQ / PBCLK1_DIV / 1000000) //for PIC32MZ, use PBCLK1_DIV = 1
     #else
         #error "Unsupported MCU family. Please contact Microchip Technology for more support information"
     #endif
@@ -125,10 +126,13 @@
     WORD_VAL myNetworkAddress;
 
     volatile MRF24J40_STATUS MRF24J40Status;
-    
+#if defined(PIC32MZ_CURIOSITY_V2)
+    void SPIPut2(BYTE v);
+    BYTE SPIGet2(void);
+#else
     void SPIPut(BYTE v);
     BYTE SPIGet(void);
-    
+#endif
     /*********************************************************************
      * void PHYSetLongRAMAddr(INPUT WORD address, INPUT BYTE value)
      *
@@ -154,9 +158,17 @@
         
         RFIE = 0;
         PHY_CS = 0;
+        #if defined(PIC32MZ_CURIOSITY_V2)
+        SPIPut2((((BYTE)(address>>3))&0x7F)|0x80);
+        SPIPut2((((BYTE)(address<<5))&0xE0)|0x10);
+        SPIPut2(value);
+   
+        #else
         SPIPut((((BYTE)(address>>3))&0x7F)|0x80);
         SPIPut((((BYTE)(address<<5))&0xE0)|0x10);
         SPIPut(value);
+
+        #endif
         PHY_CS = 1;
         RFIE = tmpRFIE;
     }
@@ -188,8 +200,15 @@
         
         RFIE = 0;
         PHY_CS = 0;     
+#if defined(PIC32MZ_CURIOSITY_V2)
+        SPIPut2(address);
+        SPIPut2(value);
+   
+#else
         SPIPut(address);
         SPIPut(value);
+   
+#endif
         PHY_CS = 1;
         RFIE = tmpRFIE;
     }
@@ -219,8 +238,15 @@
         
         RFIE = 0;
         PHY_CS = 0;
+#if defined(PIC32MZ_CURIOSITY_V2)
+        SPIPut2(address);
+        toReturn = SPIGet2();
+   
+#else
         SPIPut(address);
         toReturn = SPIGet();
+   
+#endif
         PHY_CS = 1;
         RFIE = tmpRFIE;
         
@@ -250,16 +276,22 @@
         
         RFIE = 0;
         PHY_CS = 0;
+#if defined(PIC32MZ_CURIOSITY_V2)
+        SPIPut2(((address>>3)&0x7F)|0x80);
+        SPIPut2(((address<<5)&0xE0));
+        toReturn = SPIGet2();   
+#else   
         SPIPut(((address>>3)&0x7F)|0x80);
         SPIPut(((address<<5)&0xE0));
         toReturn = SPIGet();
+#endif
         PHY_CS = 1;
         RFIE = tmpRFIE;
         
         return toReturn;
     }
 
-    void InitMRF24J40(void)
+    BOOL InitMRF24J40(void)
     {
         BYTE i;
         WORD j;
@@ -353,12 +385,19 @@
         PHYSetShortRAMAddr(WRITE_TXPEMISP, 0x95);
     
         // wait until the MRF24J40 in receive mode
+        // ?? Wait for MRF24J40 to enter Receive Mode (Add timeout)
+        j = 1000;
         do
         {
             i = PHYGetLongRAMAddr(RFSTATE);
+            if (--j == 0) 
+            {
+//                printf("? ERROR: MRF24J40 did not enter Receive Mode!\n");
+                return FALSE;
+            }
         }
         while((i&0xA0) != 0xA0);
-        
+        // ?? Enable Interrupts
         PHYSetShortRAMAddr(WRITE_INTMSK,0xE6);
 
         #ifdef ENABLE_INDIRECT_MESSAGE
@@ -369,7 +408,11 @@
         PHYSetLongRAMAddr(RFCTRL0, 0x03);
         PHYSetLongRAMAddr(RFCTRL1, 0x02);
         
-        MiMAC_SetChannel(MACCurrentChannel, 0);
+        // 1??1?? Set Channel
+        if (!MiMAC_SetChannel(MACCurrentChannel, 0)) {
+            //printf("? ERROR: Failed to set channel %d\n", MACCurrentChannel);
+            return FALSE;
+        }
                     
         // Define TURBO_MODE if more bandwidth is required
         // to enable radio to operate to TX/RX maximum 
@@ -385,6 +428,12 @@
     
         #endif          
         
+        // 1??2?? Verify MRF24J40 is operational
+        if (PHYGetShortRAMAddr(READ_SOFTRST) & 0x07) {
+                //printf("? ERROR: MRF24J40 did not reset correctly!\n");
+                return FALSE;
+        }
+        return TRUE;  // ? SUCCESS
     }
         
     
@@ -952,19 +1001,30 @@
                 }
                 else
                 {
-                    for(i = 0; i < 8; i++)
-                    {
-                        //bug here
+                    if (transParam.DestAddress == NULL) {
+                        //printf("WARNING: Invalid destination address. Using default address 0x0000FFFF.\n");
+                        for (i = 0; i < 8; i++) {
+                            PHYSetLongRAMAddr(loc++, (i < 6) ? 0x00 : 0xFF);
+                        }
+                    } else {
+                        for (i = 0; i < 8; i++) {
+                            PHYSetLongRAMAddr(loc++, transParam.DestAddress[i]);
+                        }
+                    }
+                    
+//                    for(i = 0; i < 8; i++)
+//                    {
+//                        //bug here
 //                        if(transParam.DestAddress != 0)//pointer DestAddress can never be zero!
 //                        {
-                            PHYSetLongRAMAddr(loc++, transParam.DestAddress[i]);//pointer DestAddress can never be zero!
+//                            PHYSetLongRAMAddr(loc++, transParam.DestAddress[i]);//pointer DestAddress can never be zero!
 //                        }
 //                        else{
 //                            PHYSetLongRAMAddr(loc++, 0);
 //                            PHYSetLongRAMAddr(loc++, 0xff);
 //                            
 //                        }
-                    }
+//                    }
                 }
             }
         }
@@ -1073,7 +1133,8 @@
                     break;   
                 }
                 t2 = MiWi_TickGet();
-                if( MiWi_TickGetDiff(t2, t1) > FORTY_MILI_SECOND )
+//                if( MiWi_TickGetDiff(t2, t1) > FORTY_MILI_SECOND )
+                if( MiWi_TickGetDiff(t2, t1) > HUNDRED_MILI_SECOND )
                 {
                     InitMRF24J40();
                     MiMAC_SetAltAddress(myNetworkAddress.v, MAC_PANID.v);
@@ -1547,7 +1608,12 @@
         
         MACCurrentChannel = 11;
            
-        InitMRF24J40();
+        // ?? Initialize MRF24J40 Transceiver & Check for Failure
+        if (!InitMRF24J40()) 
+        {
+            //printf("? ERROR: Failed to initialize MRF24J40 Transceiver!\n");
+            return FALSE;
+        }
         
         MRF24J40Status.Val = 0;
         
@@ -1595,6 +1661,8 @@
     #if defined(__18CXX)
         #pragma interruptlow HighISR
         void HighISR(void)
+    #elif defined(__XC8)
+        void __interrupt(high_priority) HighISR(void)
     #elif defined(__dsPIC30F__) || defined(__dsPIC33F__) || defined(__PIC24F__) || defined(__PIC24FK__) || defined(__PIC24H__)
         void _ISRFAST __attribute__((interrupt, auto_psv)) _INT1Interrupt(void)
     #elif defined(__PIC32MX__)
@@ -1603,6 +1671,10 @@
         #else
             void __ISR(_EXTERNAL_1_VECTOR, ipl4) _INT1Interrupt(void)
         #endif
+    #elif defined(__PIC32MZ__)
+//        void __ISR(_EXTERNAL_2_VECTOR, ipl4srs) _INT2Interrupt(void)
+//        void __ISR(_EXTERNAL_3_VECTOR, ipl4srs) _INT3Interrupt(void) //For CURIOSITY V2
+        void __ISR(_EXTERNAL_3_VECTOR, ipl4) _INT3Interrupt(void) //For CURIOSITY V2
     #else
         void _ISRFAST _INT1Interrupt(void)
     #endif
@@ -1615,6 +1687,7 @@
             //clear the interrupt flag as soon as possible such that another interrupt can
             //occur quickly.
             RFIF = 0;
+            LED2 ^= 1;
 
             //create a new scope for the MRF24J40 interrupts so that we can clear the interrupt
             //flag quickly and then handle the interrupt that we have already received
@@ -1873,7 +1946,7 @@ START_OF_SEC_INT:
         } //end of if(RFIE && RFIF)
 
 END_OF_RF_INT:        
-        #if defined(__18CXX)
+        #if defined(__18CXX) || defined(__XC8)
             //check to see if the symbol timer overflowed
             if(TMR_IF)
             {

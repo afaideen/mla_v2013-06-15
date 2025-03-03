@@ -50,11 +50,11 @@
     // Choose one of the demo board that support the demo out of the box
     /*********************************************************************/
 //    #define EIGHT_BIT_WIRELESS_BOARD
-#if defined(SIMPLE_EXAMPLE)
+//#if defined(SIMPLE_EXAMPLE)
     #define MIWI_CARD_DEMO_BOARD
-#else
-    #define WIRELESS_EVAL_BOARD
-#endif
+//#else
+//    #define WIRELESS_EVAL_BOARD
+//#endif
  
     #include "GenericTypeDefs.h"
     #include "ConfigApp.h"

@@ -11,9 +11,11 @@
             <header-extensions>h</header-extensions>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <asminc-extensions/>
+            <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>../</sourceRootElem>
                 <sourceRootElem>../../../Microchip/WirelessProtocols</sourceRootElem>
+                <sourceRootElem>../../../Microchip/TCPIP Stack</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
@@ -28,11 +30,14 @@
                     <name>PIC32MX_WIRELESS_EVAL_BOARD</name>
                     <type>2</type>
                 </confElem>
+                <confElem>
+                    <name>NO_SIMPLE_EXAMPLE</name>
+                    <type>2</type>
+                </confElem>
             </confList>
             <formatting>
                 <project-formatting-style>false</project-formatting-style>
             </formatting>
-            <make-dep-projects/>
         </data>
     </configuration>
 </project>

@@ -56,17 +56,55 @@
     #include "Compiler.h"
     #include "GenericTypeDefs.h"
     #include "WirelessProtocols/Console.h"
-    #include "TimeDelay.h"
+    #include "TCPIP Stack/Delay.h" //#include "TimeDelay.h"
     #include "WirelessProtocols/NVM.h"
     #include "Transceivers/MCHP_MAC.h"
     #include "Transceivers/Transceivers.h"
     #include "WirelessProtocols/MCHP_API.h"
     #include "WirelessProtocols/EEPROM.h"
+    
 
     /************************ VARIABLES ********************************/
-
+    /*
+     At PBCLK3=100Mhz
+     * ScanDuration	Symbols     Time (s)	Ticks (PBCLK3 = 100MHz)
+            0           120     0.00192             192000
+            1           180     0.00288             288000
+            2           300     0.00480             480000
+            3           540     0.00864             864000
+            4           1020	0.01632             1632000
+            5           1980	0.03168             3168000
+            6           3900	0.06240             6240000
+            7           7740	0.12384             12384000
+            8           15420	0.24672             24672000
+            9           30780	0.49248             49248000
+            10          61500	0.98400             98400000
+            11          122940	1.96704             196704000
+            12          245820	3.93312             393312000
+            13          491580	7.86528             786528000
+            14          983100	15.72960            1572960000
+     * 
+     * PBCLK3=16MHz
+     * ScanDuration	Symbols	Time (s)	Ticks (PBCLK3 = 16MHz)
+            0       120     0.00192         30720
+            1       180     0.00288         46080
+            2       300     0.00480         76800
+            3       540     0.00864         138240
+            4       1020	0.01632         261120
+            5       1980	0.03168         507840
+            6       3900	0.06240         1008000
+            7       7740	0.12384         2000640
+            8       15420	0.24672         3987840
+            9       30780	0.49248         7956480
+            10      61500	0.98400         15936000
+            11      122940	1.96704         31856640
+            12      245820	3.93312         63729920
+            13      491580	7.86528         127011840
+            14      983100	15.72960        254502400
+     */
     // Scan Duration formula 
     //  60 * (2 ^ n + 1) symbols, where one symbol equals 16us
+//    #define SCAN_DURATION(n) SYMBOLS_TO_TICKS(60 * ((1 << (n)) + 1))
     #define SCAN_DURATION_0 SYMBOLS_TO_TICKS(120)
     #define SCAN_DURATION_1 SYMBOLS_TO_TICKS(180)
     #define SCAN_DURATION_2 SYMBOLS_TO_TICKS(300)
@@ -82,10 +120,23 @@
     #define SCAN_DURATION_12 SYMBOLS_TO_TICKS(245820)
     #define SCAN_DURATION_13 SYMBOLS_TO_TICKS(491580)
     #define SCAN_DURATION_14 SYMBOLS_TO_TICKS(983100)
+#if defined(__XC8)
+    const DWORD ScanTime[15] = {SCAN_DURATION_0,SCAN_DURATION_1,SCAN_DURATION_2,SCAN_DURATION_3,
+        SCAN_DURATION_4,SCAN_DURATION_5,SCAN_DURATION_6,SCAN_DURATION_7,SCAN_DURATION_8,SCAN_DURATION_9,
+        SCAN_DURATION_10, SCAN_DURATION_11, SCAN_DURATION_12, SCAN_DURATION_13,SCAN_DURATION_14
+    };
+#else
     const ROM DWORD ScanTime[15] = {SCAN_DURATION_0,SCAN_DURATION_1,SCAN_DURATION_2,SCAN_DURATION_3,
         SCAN_DURATION_4,SCAN_DURATION_5,SCAN_DURATION_6,SCAN_DURATION_7,SCAN_DURATION_8,SCAN_DURATION_9,
         SCAN_DURATION_10, SCAN_DURATION_11, SCAN_DURATION_12, SCAN_DURATION_13,SCAN_DURATION_14
     };
+#endif
+//    const DWORD ScanTime[15] = {
+//        SCAN_DURATION(0),  SCAN_DURATION(1),  SCAN_DURATION(2),  SCAN_DURATION(3),
+//        SCAN_DURATION(4),  SCAN_DURATION(5),  SCAN_DURATION(6),  SCAN_DURATION(7),
+//        SCAN_DURATION(8),  SCAN_DURATION(9),  SCAN_DURATION(10), SCAN_DURATION(11),
+//        SCAN_DURATION(12), SCAN_DURATION(13), SCAN_DURATION(14)
+//    };
     
     // permanent address definition
     #if MY_ADDRESS_LENGTH == 8
@@ -104,8 +155,8 @@
         BYTE myLongAddress[MY_ADDRESS_LENGTH] = {EUI_0,EUI_1};    
     #endif
 
-//    BYTE            currentChannel = 11;             // current operating channel for the device
-    BYTE            currentChannel = 25;             // current operating channel for the device
+    BYTE            currentChannel = 11;             // current operating channel for the device
+//    BYTE            currentChannel = 25;             // current operating channel for the device
     BYTE            ConnMode = 0;
     typedef union
     {
@@ -297,7 +348,8 @@
         #endif
     #endif
     
-    extern BYTE     AdditionalNodeID[];             // the additional information regarding the device
+    BYTE     AdditionalNodeID[ADDITIONAL_NODE_ID_SIZE];             // the additional information regarding the device
+//    extern BYTE     AdditionalNodeID[];             // the additional information regarding the device
                                                     // that would like to share with the peer on the 
                                                     // other side of P2P connection. This information 
                                                     // is applicaiton specific. 
@@ -1681,7 +1733,7 @@ ASSIGN_COORDINATOR_SHORT_ADDRESS:
                                     {
                                         MiApp_WriteData(MACRxPacket.Payload[i]);
                                     }
-                                    LED_1 ^= 1;
+//                                    LED_1 ^= 1;
                                     if( (destShortAddress.v[1] == myShortAddress.v[1]) &&
                                         (TxBuffer[11] == MIWI_PRO_STACK_REPORT_TYPE) &&
                                         (TxBuffer[12] == ACK_REPORT_TYPE) )
@@ -1706,7 +1758,7 @@ ASSIGN_COORDINATOR_SHORT_ADDRESS:
                                     }
                                     else
                                     {
-                                        LED_2 ^= 1;
+//                                        LED_2 ^= 1;
                                         RouteMessage(destPANID, destShortAddress, MACRxPacket.flags.bits.secEn);
                                     }   
                                 }
@@ -4516,7 +4568,9 @@ EndOfSearchLoop:
         BYTE i;
 
         #if defined(ENABLE_NVM_MAC)
-            if( MY_ADDRESS_LENGTH > 6 )
+            #include "MAC_EEProm.h"
+//            if( MY_ADDRESS_LENGTH > 6 )
+            #if MY_ADDRESS_LENGTH > 6
             {
                 for(i = 0; i < 3; i++)
                 {
@@ -4532,13 +4586,14 @@ EndOfSearchLoop:
                     EEPROMRead(&(myLongAddress[2-i]), EEPROM_MAC_ADDR+3+i, 1);
                 }
             }
-            else
+            #else
             {
                 for(i = 0; i < MY_ADDRESS_LENGTH; i++)
                 {
                     EEPROMRead(&(myLongAddress[MY_ADDRESS_LENGTH-1-i]), EEPROM_MAC_ADDR+i, 1);
                 }   
             }
+            #endif
         
         #endif
         
@@ -4834,6 +4889,10 @@ EndOfSearchLoop:
     #endif
     
     
+BYTE MiApp_GetChannel(void)
+{
+    return currentChannel;  // Returns the last set channel
+}    
 BOOL MiApp_SetChannel(BYTE channel)
 {
     if( MiMAC_SetChannel(channel, 0) )
@@ -4953,6 +5012,11 @@ BYTE MiApp_SearchConnection(INPUT BYTE ScanDuration, INPUT DWORD ChannelMap)
     BYTE backupChannel = currentChannel;
     MIWI_TICK t1, t2;
         
+    if (ScanDuration < 1 || ScanDuration > 14) {
+        //printf("ERROR: Invalid ScanDuration (%d). Must be between 1-14.\n", ScanDuration);
+        return 0;  // Return immediately to avoid crashes
+    }
+        
     for(i = 0; i < ACTIVE_SCAN_RESULT_SIZE; i++)
     {
         ActiveScanResults[i].Channel = 0xFF;
@@ -4981,20 +5045,30 @@ BYTE MiApp_SearchConnection(INPUT BYTE ScanDuration, INPUT DWORD ChannelMap)
             #endif
             
             t1 = MiWi_TickGet();
-            while(1)
+            /////////////////////////////////////////
+            // ? Use Non-blocking Delay Instead of Busy Waiting
+            while (MiWi_TickGetDiff(MiWi_TickGet(), t1) < ScanTime[ScanDuration])
             {
-                if( MiApp_MessageAvailable())
-                {
-                    MiApp_DiscardMessage();
-                }                
-                //MiWiPROTasks();
-                t2 = MiWi_TickGet();
-                if( MiWi_TickGetDiff(t2, t1) > ((DWORD)(ScanTime[ScanDuration])) )
-                {
-                    // if scan time exceed scan duration, prepare to scan the next channel
-                    break;
+                if (MiApp_MessageAvailable()) {
+                    MiWiPROTasks();
+                    MiApp_DiscardMessage();  // ? Process messages if available
                 }
-            } 
+            }
+            //ORIGINAL
+//            while(1)
+//            {
+//                if( MiApp_MessageAvailable())
+//                {
+//                    MiApp_DiscardMessage();
+//                }                
+//                MiWiPROTasks();
+//                t2 = MiWi_TickGet();
+//                if( MiWi_TickGetDiff(t2, t1) > ((DWORD)(ScanTime[ScanDuration])) )
+//                {
+//                    // if scan time exceed scan duration, prepare to scan the next channel
+//                    break;
+//                }
+//            } 
         
         }  
         i++;
@@ -5081,7 +5155,7 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
             {
                 MiApp_DiscardMessage();
             }            
-            //MiWiPROTasks();
+            MiWiPROTasks();
             #if defined(ENABLE_SLEEP) && defined(NWK_ROLE_END_DEVICE)
                 t2 = MiWi_TickGet();
                 if( MiWi_TickGetDiff(t2, t1) > OPEN_SOCKET_POLL_INTERVAL )
@@ -5133,7 +5207,7 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
                 return 0xFF;
             }
         }        
-        
+
         ConnectionTable[myParent].status.Val = 0;
         ConnectionTable[myParent].PANID.Val = ActiveScanResults[ActiveScanIndex].PANID.Val;
         #if defined(IEEE_802_15_4)
@@ -5189,7 +5263,7 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
             {
                 MiApp_DiscardMessage();
             }            
-            //MiWiPROTasks();
+            MiWiPROTasks();
             t2 = MiWi_TickGet();
             if( MiWi_TickGetDiff(t2, t1) > ONE_SECOND )
             {
@@ -6099,6 +6173,7 @@ BOOL MiApp_StartConnection(BYTE Mode, BYTE ScanDuration, DWORD ChannelMap)
                     t2 = MiWi_TickGet();
                     
                     if( MiWi_TickGetDiff(t2, t1) > SCAN_DURATION_9 )
+//                    if( MiWi_TickGetDiff(t2, t1) > SCAN_DURATION(9) )
                     {
                         t1.Val = t2.Val;
                         
