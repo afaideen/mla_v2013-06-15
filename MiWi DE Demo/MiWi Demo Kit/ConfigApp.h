@@ -195,9 +195,9 @@
 // with any PAN ID.
 /*********************************************************************/
 #ifdef NWK_ROLE_COORDINATOR
-//    #define MY_PAN_ID                       0xFFFF    //original
+    #define MY_PAN_ID                       0xFFFF    //original
 //    #define MY_PAN_ID                       0x1234
-    #define MY_PAN_ID                       0xabcd
+//    #define MY_PAN_ID                       0xabcd
 #elif defined NWK_ROLE_END_DEVICE
 //    #define MY_PAN_ID                       0x1234
     #define MY_PAN_ID                       0xFFFF// PAN ID used by end device must be the same with coordinator

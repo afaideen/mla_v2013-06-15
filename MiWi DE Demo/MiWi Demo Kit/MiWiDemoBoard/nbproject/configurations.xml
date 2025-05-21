@@ -199,6 +199,10 @@
           <property key="stack-analysis-mplink" value="false"/>
         </C18LanguageToolchain>
       </item>
+      <item path="../../../Microchip/Transceivers/MRF89XA/MRF89XA.c"
+            ex="true"
+            overriding="false">
+      </item>
       <item path="../Demo - Copy.c" ex="true" overriding="false">
         <C18>
         </C18>

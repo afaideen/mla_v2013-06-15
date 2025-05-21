@@ -1,5 +1,5 @@
 MPLINK 4.48, Linker
-Linker Map File - Created Mon Mar 03 18:08:58 2025
+Linker Map File - Created Mon May 19 17:31:05 2025
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -25,21 +25,20 @@ Linker Map File - Created Mon Mar 03 18:08:58 2025
         .code_RangeDemo.o       code   0x00c49a    program   0x0005cc
    .code_BSP_MiWiDemoBd.o       code   0x00ca66    program   0x0004d0
              .stringtable    romdata   0x00cf36    program   0x0003d9
+         .idata_Delay.o_i    romdata   0x00d30f    program   0x000000
          .romdata_Delay.o    romdata   0x00d30f    program   0x000000
           .idata_MiWi.o_i    romdata   0x00d30f    program   0x000000
           .romdata_MiWi.o    romdata   0x00d30f    program   0x000000
            .idata_P2P.o_i    romdata   0x00d30f    program   0x000000
-       .idata_Console.o_i    romdata   0x00d30f    program   0x000000
-           .romdata_NVM.o    romdata   0x00d30f    program   0x000000
            .romdata_P2P.o    romdata   0x00d30f    program   0x000000
+           .idata_NVM.o_i    romdata   0x00d30f    program   0x000000
     .romdata_SymbolTime.o    romdata   0x00d30f    program   0x000000
     .idata_SymbolTime.o_i    romdata   0x00d30f    program   0x000000
-           .idata_NVM.o_i    romdata   0x00d30f    program   0x000000
+           .romdata_NVM.o    romdata   0x00d30f    program   0x000000
+       .idata_Console.o_i    romdata   0x00d30f    program   0x000000
        .romdata_Console.o    romdata   0x00d30f    program   0x000000
       .idata_security.o_i    romdata   0x00d30f    program   0x000000
       .romdata_security.o    romdata   0x00d30f    program   0x000000
-       .idata_MRF89XA.o_i    romdata   0x00d30f    program   0x000000
-       .romdata_MRF89XA.o    romdata   0x00d30f    program   0x000000
         .idata___init.o_i    romdata   0x00d30f    program   0x000000
         .romdata___init.o    romdata   0x00d30f    program   0x000000
        .idata_sprintf.o_i    romdata   0x00d30f    program   0x000000
@@ -49,36 +48,34 @@ Linker Map File - Created Mon Mar 03 18:08:58 2025
           .romdata_putc.o    romdata   0x00d30f    program   0x000000
     .idata__user_putc.o_i    romdata   0x00d30f    program   0x000000
     .romdata__user_putc.o    romdata   0x00d30f    program   0x000000
-       .idata_c018i_e.o_i    romdata   0x00d30f    program   0x000000
-       .romdata_c018i_e.o    romdata   0x00d30f    program   0x000000
-.idata_BSP_PC32MX_WirelessEvalBoard.o_i    romdata   0x00d30f    program   0x000000
-.romdata_BSP_PC32MX_WirelessEvalBoard.o    romdata   0x00d30f    program   0x000000
           .romdata_Demo.o    romdata   0x00d30f    program   0x000000
       .romdata_TempDemo.o    romdata   0x00d30f    program   0x000000
      .idata_RangeDemo.o_i    romdata   0x00d30f    program   0x000000
 .idata_BSP_MiWiDemoBd.o_i    romdata   0x00d30f    program   0x000000
+.romdata_BSP_PC32MX_WirelessEvalBoard.o    romdata   0x00d30f    program   0x000000
 .romdata_BSP_MiWiDemoBd.o    romdata   0x00d30f    program   0x000000
+.idata_BSP_PC32MX_WirelessEvalBoard.o_i    romdata   0x00d30f    program   0x000000
     .idata_LCD_ST7032.o_i    romdata   0x00d30f    program   0x000000
     .romdata_LCD_ST7032.o    romdata   0x00d30f    program   0x000000
     .idata_MAC_EEProm.o_i    romdata   0x00d30f    program   0x000000
     .romdata_MAC_EEProm.o    romdata   0x00d30f    program   0x000000
+       .romdata_c018i_e.o    romdata   0x00d30f    program   0x000000
   .romdata_SelfTestMode.o    romdata   0x00d30f    program   0x000000
-         .idata_Delay.o_i    romdata   0x00d30f    program   0x000000
+       .idata_c018i_e.o_i    romdata   0x00d30f    program   0x000000
           .romdata_MSPI.o    romdata   0x00d30f    program   0x000000
-          .idata_MSPI.o_i    romdata   0x00d30f    program   0x000000
-     .romdata_TimeDelay.o    romdata   0x00d30f    program   0x000000
-     .idata_TimeDelay.o_i    romdata   0x00d30f    program   0x000000
-.romdata_SST_SerialFlash.o    romdata   0x00d30f    program   0x000000
 .idata_SST_SerialFlash.o_i    romdata   0x00d30f    program   0x000000
-            .code_Delay.o       code   0x00d310    program   0x000000
-          .code_c018i_e.o       code   0x00d310    program   0x000000
-.code_BSP_PC32MX_WirelessEvalBoard.o       code   0x00d310    program   0x000000
-             .code_MiWi.o       code   0x00d310    program   0x000000
-              .code_P2P.o       code   0x00d310    program   0x000000
-          .code_MRF89XA.o       code   0x00d310    program   0x000000
-         .code_security.o       code   0x00d310    program   0x000000
-          .code_Console.o       code   0x00d310    program   0x000000
+.romdata_SST_SerialFlash.o    romdata   0x00d30f    program   0x000000
+          .idata_MSPI.o_i    romdata   0x00d30f    program   0x000000
+     .idata_TimeDelay.o_i    romdata   0x00d30f    program   0x000000
+     .romdata_TimeDelay.o    romdata   0x00d30f    program   0x000000
               .code_NVM.o       code   0x00d310    program   0x00038e
+            .code_Delay.o       code   0x00d310    program   0x000000
+          .code_Console.o       code   0x00d310    program   0x000000
+.code_BSP_PC32MX_WirelessEvalBoard.o       code   0x00d310    program   0x000000
+              .code_P2P.o       code   0x00d310    program   0x000000
+          .code_c018i_e.o       code   0x00d310    program   0x000000
+         .code_security.o       code   0x00d310    program   0x000000
+             .code_MiWi.o       code   0x00d310    program   0x000000
      .code_SelfTestMode.o       code   0x00d69e    program   0x0002de
        .code_LCD_ST7032.o       code   0x00d97c    program   0x0002c6
         .code_TimeDelay.o       code   0x00dc42    program   0x00017c
@@ -128,40 +125,38 @@ Linker Map File - Created Mon Mar 03 18:08:58 2025
          .udata_Console.o      udata   0x000320       data   0x000000
          .idata_Console.o      idata   0x000320       data   0x000000
          .idata_c018i_e.o      idata   0x000320       data   0x000000
+      .idata__user_putc.o      idata   0x000320       data   0x000000
+      .idata_MAC_EEProm.o      idata   0x000320       data   0x000000
         .udata_security.o      udata   0x000320       data   0x000000
         .idata_security.o      idata   0x000320       data   0x000000
-         .udata_MRF89XA.o      udata   0x000320       data   0x000000
-         .idata_MRF89XA.o      idata   0x000320       data   0x000000
-          .udata___init.o      udata   0x000320       data   0x000000
-          .idata___init.o      idata   0x000320       data   0x000000
-         .udata_sprintf.o      udata   0x000320       data   0x000000
-         .idata_sprintf.o      idata   0x000320       data   0x000000
-        .udata_vfprintf.o      udata   0x000320       data   0x000000
-        .idata_vfprintf.o      idata   0x000320       data   0x000000
-            .udata_putc.o      udata   0x000320       data   0x000000
-            .idata_putc.o      idata   0x000320       data   0x000000
       .udata__user_putc.o      udata   0x000320       data   0x000000
-      .idata__user_putc.o      idata   0x000320       data   0x000000
-           .idata_Delay.o      idata   0x000320       data   0x000000
-           .udata_Delay.o      udata   0x000320       data   0x000000
-            .idata_MSPI.o      idata   0x000320       data   0x000000
-            .udata_MSPI.o      udata   0x000320       data   0x000000
-       .idata_TimeDelay.o      idata   0x000320       data   0x000000
-       .udata_TimeDelay.o      udata   0x000320       data   0x000000
- .idata_SST_SerialFlash.o      idata   0x000320       data   0x000000
+            .idata_putc.o      idata   0x000320       data   0x000000
+            .udata_putc.o      udata   0x000320       data   0x000000
+        .idata_vfprintf.o      idata   0x000320       data   0x000000
+        .udata_vfprintf.o      udata   0x000320       data   0x000000
+         .idata_sprintf.o      idata   0x000320       data   0x000000
+         .udata_sprintf.o      udata   0x000320       data   0x000000
+          .idata___init.o      idata   0x000320       data   0x000000
+          .udata___init.o      udata   0x000320       data   0x000000
+      .udata_MAC_EEProm.o      udata   0x000320       data   0x000000
  .udata_SST_SerialFlash.o      udata   0x000320       data   0x000000
-      .idata_LCD_ST7032.o      idata   0x000320       data   0x000000
-      .idata_MAC_EEProm.o      idata   0x000320       data   0x000000
+ .idata_SST_SerialFlash.o      idata   0x000320       data   0x000000
+       .udata_TimeDelay.o      udata   0x000320       data   0x000000
+       .idata_TimeDelay.o      idata   0x000320       data   0x000000
+            .udata_MSPI.o      udata   0x000320       data   0x000000
+            .idata_MSPI.o      idata   0x000320       data   0x000000
+           .udata_Delay.o      udata   0x000320       data   0x000000
+           .idata_Delay.o      idata   0x000320       data   0x000000
             .udata_MiWi.o      udata   0x000320       data   0x000000
             .idata_MiWi.o      idata   0x000320       data   0x000000
              .udata_P2P.o      udata   0x000320       data   0x000000
              .idata_P2P.o      idata   0x000320       data   0x000000
   .idata_BSP_MiWiDemoBd.o      idata   0x000320       data   0x000000
-      .udata_MAC_EEProm.o      udata   0x000320       data   0x000000
              .idata_NVM.o      idata   0x000320       data   0x000000
        .idata_RangeDemo.o      idata   0x000320       data   0x000000
       .idata_SymbolTime.o      idata   0x000320       data   0x000000
        .udata_RangeDemo.o      udata   0x000320       data   0x000000
+      .idata_LCD_ST7032.o      idata   0x000320       data   0x000000
             .udata_Demo.o      udata   0x000320       data   0x000000
                    .stack      udata   0x000d00       data   0x000100
               MAC_RX_BUFF      udata   0x000e00       data   0x0000b2
@@ -234,22 +229,22 @@ Linker Map File - Created Mon Mar 03 18:08:58 2025
             LCD_WriteData   0x00d9a0    program     extern C:\mla_v2013-06-15\MiWi DE Demo\MiWi Demo Kit\LCD_ST7032.c
                 LowVector   0x000018    program     extern C:\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
                  MacroNop   0x00007c    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-    MiApp_BroadcastPacket   0x005bcc    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-     MiApp_ConnectionMode   0x0052e2    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-     MiApp_DiscardMessage   0x005bc2    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-MiApp_EstablishConnection   0x00560e    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-         MiApp_GetChannel   0x005290    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+    MiApp_BroadcastPacket   0x005bc8    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+     MiApp_ConnectionMode   0x0052de    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+     MiApp_DiscardMessage   0x005bbe    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+MiApp_EstablishConnection   0x00560a    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+         MiApp_GetChannel   0x00528c    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
  MiApp_InitChannelHopping   0x006f66    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-   MiApp_MessageAvailable   0x005bb0    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+   MiApp_MessageAvailable   0x005bac    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
      MiApp_NoiseDetection   0x00686c    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
        MiApp_ProtocolInit   0x004dd2    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
    MiApp_RemoveConnection   0x00756a    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
    MiApp_ResyncConnection   0x006af4    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-   MiApp_SearchConnection   0x005336    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-         MiApp_SetChannel   0x005298    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-    MiApp_StartConnection   0x00660a    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-     MiApp_UnicastAddress   0x005fb4    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-  MiApp_UnicastConnection   0x005ca8    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+   MiApp_SearchConnection   0x005332    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+         MiApp_SetChannel   0x005294    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+    MiApp_StartConnection   0x006606    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+     MiApp_UnicastAddress   0x005fb0    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+  MiApp_UnicastConnection   0x005ca4    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
   MiMAC_ChannelAssessment   0x008f98    program     extern C:\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
       MiMAC_DiscardPacket   0x008914    program     extern C:\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
                MiMAC_Init   0x009172    program     extern C:\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
@@ -260,7 +255,7 @@ MiApp_EstablishConnection   0x00560e    program     extern C:\mla_v2013-06-15\Mi
            MiMAC_SetPower   0x00905a    program     extern C:\mla_v2013-06-15\Microchip\Transceivers\MRF24J40\MRF24J40.c
              MiWiPROTasks   0x0001f0    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
              MiWi_TickGet   0x00e252    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\SymbolTime.c
-                MultiCast   0x005bec    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+                MultiCast   0x005be8    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
                   NVMInit   0x00d58c    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\NVM.c
                   NVMRead   0x00d310    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\NVM.c
                  NVMWrite   0x00d3f0    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\NVM.c
@@ -1336,18 +1331,18 @@ MiApp_EstablishConnection   0x00560e    program     extern C:\mla_v2013-06-15\Mi
     AddNodeToNetworkTable   0x004c68    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
             isSameAddress   0x004d86    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
        MiApp_ProtocolInit   0x004dd2    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-         MiApp_GetChannel   0x005290    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-         MiApp_SetChannel   0x005298    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-     MiApp_ConnectionMode   0x0052e2    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-   MiApp_SearchConnection   0x005336    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-MiApp_EstablishConnection   0x00560e    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-   MiApp_MessageAvailable   0x005bb0    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-     MiApp_DiscardMessage   0x005bc2    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-    MiApp_BroadcastPacket   0x005bcc    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-                MultiCast   0x005bec    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-  MiApp_UnicastConnection   0x005ca8    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-     MiApp_UnicastAddress   0x005fb4    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
-    MiApp_StartConnection   0x00660a    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+         MiApp_GetChannel   0x00528c    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+         MiApp_SetChannel   0x005294    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+     MiApp_ConnectionMode   0x0052de    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+   MiApp_SearchConnection   0x005332    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+MiApp_EstablishConnection   0x00560a    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+   MiApp_MessageAvailable   0x005bac    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+     MiApp_DiscardMessage   0x005bbe    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+    MiApp_BroadcastPacket   0x005bc8    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+                MultiCast   0x005be8    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+  MiApp_UnicastConnection   0x005ca4    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+     MiApp_UnicastAddress   0x005fb0    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
+    MiApp_StartConnection   0x006606    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
      MiApp_NoiseDetection   0x00686c    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
    MiApp_ResyncConnection   0x006af4    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
       StartChannelHopping   0x006d8c    program     extern C:\mla_v2013-06-15\Microchip\WirelessProtocols\MiWiPRO\MiWiPRO.c
