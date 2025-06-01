@@ -21,7 +21,7 @@
 * You should refer to the license agreement accompanying this Software for 
 * additional information regarding your rights and obligations.
 *
-* SOFTWARE AND DOCUMENTATION ARE PROVIDED â€œAS ISâ€ WITHOUT WARRANTY OF ANY 
+* SOFTWARE AND DOCUMENTATION ARE PROVIDED â??AS ISâ?? WITHOUT WARRANTY OF ANY 
 * KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY 
 * WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A 
 * PARTICULAR PURPOSE. IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE 
@@ -2064,7 +2064,7 @@ HANDLE_COMMAND_PACKET:
                                         #endif
                                         
                                         #if defined(ENABLE_NETWORK_FREEZER)
-                                            nvmPutConnectionTableIndex(&(ConnectionTable[handle]), handle);  
+                                            nvmPutConnectionTableIndex(&(ConnectionTable[handle]), handle);  //device join the network
                                         #endif
                                     }     
                                 }    
@@ -2114,13 +2114,13 @@ START_ASSOCIATION_RESPONSE:
                                     #ifdef NWK_ROLE_COORDINATOR
                                         if(myShortAddress.v[0] == 0x00)
                                         {
-                                            ConsolePutROMString((ROM char*)"I am a coordinator\r\n");
+                                            ConsolePutROMString((ROM char*)"\r\nI am a coordinator\r\n");
                                             role = ROLE_COORDINATOR;
                                             MiWiPROCapacityInfo.bits.Role = role;
                                         }
                                         else
                                         {
-                                            ConsolePutROMString((ROM char*)"I am an end device\r\n");
+                                            ConsolePutROMString((ROM char*)"\r\nI am an end device\r\n");
                                             role = ROLE_FFD_END_DEVICE;
                                             MiWiPROCapacityInfo.bits.Role = role;
                                         }
@@ -4672,7 +4672,7 @@ EndOfSearchLoop:
                 nvmGetConnMode(&ConnMode);
                 MiWiPROCapacityInfo.bits.ConnMode = ConnMode;
                 nvmGetConnectionTable(ConnectionTable);
-                nvmGetMyShortAddress(myShortAddress.v);
+//                nvmGetMyShortAddress(myShortAddress.v);
                 nvmGetMyParent(&myParent);
                 #if defined(NWK_ROLE_COORDINATOR)
                     nvmGetRoutingTable(RoutingTable);
@@ -4690,8 +4690,8 @@ EndOfSearchLoop:
                 PrintChar(myShortAddress.v[1]);
                 PrintChar(myShortAddress.v[0]);
             
-                MiApp_SetChannel(currentChannel);
-                MiMAC_SetAltAddress(myShortAddress.v, myPANID.v);
+//                MiApp_SetChannel(currentChannel);
+//                MiMAC_SetAltAddress(myShortAddress.v, myPANID.v);
                 MiWiPROStateMachine.bits.memberOfNetwork = 1;
             }
             else
@@ -4727,7 +4727,10 @@ EndOfSearchLoop:
         MIP.actionFlags.bits.CCAEnable = 1;
         MIP.actionFlags.bits.NetworkFreezer = bNetworkFreezer;
         MIP.PAddress = myLongAddress;
-        MiMAC_Init(MIP);
+        if (!MiMAC_Init(MIP)) {
+//            Printf("ERROR: MiMAC Initialization Failed!\n");
+            return FALSE;
+        }
 
         MiMAC_SetAltAddress(myShortAddress.v, myPANID.v);
         MiApp_SetChannel(currentChannel);
@@ -5137,16 +5140,214 @@ BYTE MiApp_SearchConnection(INPUT BYTE ScanDuration, INPUT DWORD ChannelMap)
  *      return value points to the index of one of the peer devices.
  *
  *****************************************************************************************/  
+#define MAX_ASSOCIATION_RETRIES 3
+volatile BOOL JoiningNetwork = FALSE;  // ? Track if device is trying to join
+//BYTE MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode) {
+//    BYTE retry = CONNECTION_RETRY_TIMES;
+//    BYTE i, j;
+//    BYTE attempt;
+//    MIWI_TICK t1, t2;
+////    uint32_t selected_channels;
+//
+//    JoiningNetwork = TRUE;
+//    if (Mode == CONN_MODE_INDIRECT) {
+//        #if defined(ENABLE_SLEEP)
+//            t1 = MiWi_TickGet();
+//        #endif
+//        OpenSocket();
+//        while (openSocketInfo.status.bits.requestIsOpen) {
+//            if (MiApp_MessageAvailable()) {
+//                MiApp_DiscardMessage();
+//            }
+//            MiWiPROTasks(); // Ensure network tasks continue
+//
+//            #if defined(ENABLE_SLEEP) && defined(NWK_ROLE_END_DEVICE)
+//                t2 = MiWi_TickGet();
+//                if (MiWi_TickGetDiff(t2, t1) > OPEN_SOCKET_POLL_INTERVAL) {
+//                    CheckForData();
+//                    t1.Val = t2.Val;
+//                }
+//            #endif
+//        }
+//        if (openSocketInfo.status.bits.matchFound)
+//		{
+//            JoiningNetwork = FALSE;
+//            return openSocketInfo.socketHandle;
+//        }
+//        JoiningNetwork = FALSE;
+//        return 0xFF;
+//    }
+//
+//    else if (Mode == CONN_MODE_DIRECT) {
+//        if (ActiveScanIndex == 0xFF) {
+//            BYTE bestNetworkIndex = 0xFF;
+//            int8_t bestRSSI = -127;
+//            // Ensure bit shifting works correctly else shifting operation is abnormal with C18
+////            if(currentChannel < 8)
+////                selected_channels = 0x0001 << currentChannel;
+////            else if(currentChannel < 16)
+////                selected_channels = 0x0100 << currentChannel-8;
+////            else if(currentChannel < 24)
+////                selected_channels = 0x010000 << currentChannel-16;
+////            else if(currentChannel < 32)
+////                selected_channels = 0x01000000 << currentChannel-24;
+//            // Perform Active Scan
+////            while ((i = MiApp_SearchConnection(11, ((DWORD)0x00000001) << currentChannel)) == 0) {
+//            while ((i = MiApp_SearchConnection(10, ((DWORD)0x00000001) << currentChannel)) == 0) {
+////            while ((i = MiApp_SearchConnection(10, selected_channels)) == 0) {
+//                if (--retry == 0) {
+//                    printf("ERROR: No PAN found after %d attempts.\n", CONNECTION_RETRY_TIMES);
+//                    JoiningNetwork = FALSE;
+//                    return 0xFF;
+//                }
+//                printf("Retrying PAN search... %d attempts left\n", retry);
+//            }
+//            if( i > 0 )
+//                bestNetworkIndex = 0;
+//            // Select PAN with the best RSSI
+//            for (j = 0; j < i; j++) {
+//                if (ActiveScanResults[j].RSSIValue > bestRSSI) {  // Ensure correct RSSI field is used
+//                    bestRSSI = ActiveScanResults[j].RSSIValue;
+//                    bestNetworkIndex = j;
+//                }
+//            }
+//
+//            if (bestNetworkIndex != 0xFF) {
+//                ActiveScanIndex = bestNetworkIndex;
+//                printf("Selected PAN with best RSSI: %d dBm\n", bestRSSI);
+//            } else {
+//                printf("ERROR: No valid PANs found!\n");
+//                JoiningNetwork = FALSE;
+//                return 0xFF;
+//            }
+//        }
+//
+//        #if defined(IEEE_802_15_4)
+//            tempPANID.Val = ActiveScanResults[ActiveScanIndex].PANID.Val;
+//            tempShortAddress.v[0] = ActiveScanResults[ActiveScanIndex].Address[0];
+//            tempShortAddress.v[1] = ActiveScanResults[ActiveScanIndex].Address[1];
+//            myParent = SearchForShortAddress();
+//        #else
+//            tempPANID.Val = ActiveScanResults[ActiveScanIndex].PANID.Val;
+//            for (i = 0; i < MY_ADDRESS_LENGTH; i++) {
+//                tempLongAddress[i] = ActiveScanResults[ActiveScanIndex].Address[i];
+//            }
+//            myParent = SearchForLongAddress();
+//        #endif
+//
+//        if (myParent == 0xFF) {
+//            if ((myParent = findNextNetworkEntry()) == 0xFF) {
+//                JoiningNetwork = FALSE;
+//                return 0xFF;
+//            }
+//        }
+//
+//        // Update Connection Table
+//        ConnectionTable[myParent].status.Val = 0;
+//        ConnectionTable[myParent].PANID.Val = ActiveScanResults[ActiveScanIndex].PANID.Val;
+//        #if defined(IEEE_802_15_4)
+//            ConnectionTable[myParent].AltAddress.v[0] = ActiveScanResults[ActiveScanIndex].Address[0];
+//            ConnectionTable[myParent].AltAddress.v[1] = ActiveScanResults[ActiveScanIndex].Address[1];
+//            ConnectionTable[myParent].status.bits.shortAddressValid = 1;
+//        #else
+//            for (i = 0; i < MY_ADDRESS_LENGTH; i++)
+//			{
+//                ConnectionTable[myParent].Address[i] = ActiveScanResults[ActiveScanIndex].Address[i];
+//            }
+//            ConnectionTable[myParent].status.bits.longAddressValid = 1;
+//        #endif
+//        #if ADDITIONAL_NODE_ID_SIZE > 0
+//            for(i = 0; i < ADDITIONAL_NODE_ID_SIZE; i++)
+//            {
+//                ConnectionTable[myParent].PeerInfo[i] = ActiveScanResults[ActiveScanIndex].PeerInfo[i];
+//            }
+//        #endif
+//
+//        ConnectionTable[myParent].status.bits.directConnection = 1;
+//        ConnectionTable[myParent].status.bits.isFamily = 1;
+//        ConnectionTable[myParent].status.bits.RXOnWhenIdle = 1;
+//
+//        MiApp_SetChannel(ActiveScanResults[ActiveScanIndex].Channel);
+//
+//        /* Program the PANID to the attempted network */
+//        myPANID.Val = ConnectionTable[myParent].PANID.Val;
+//        tempShortAddress.Val = 0xFFFF;
+//        MiMAC_SetAltAddress(tempShortAddress.v, myPANID.v);
+//
+//        // Attempt PAN Association
+//        attempt = 0;
+//        while (attempt < MAX_ASSOCIATION_RETRIES) {
+//            printf("Attempting PAN association... (Attempt %d)\n", attempt + 1);
+//
+//            /* Prepare and send MAC Association Request */
+//            MAC_FlushTx();
+//            MiApp_WriteData(MAC_COMMAND_ASSOCIATION_REQUEST);
+//            MiApp_WriteData(MiWiPROCapacityInfo.Val);
+//
+//            #if ADDITIONAL_NODE_ID_SIZE > 0
+//                for (i = 0; i < ADDITIONAL_NODE_ID_SIZE; i++) {
+//                    MiApp_WriteData(AdditionalNodeID[i]);
+//                }
+//            #endif
+//
+//            #if defined(IEEE_802_15_4)
+//                SendMACPacket(ConnectionTable[myParent].PANID.v, ConnectionTable[myParent].AltAddress.v, PACKET_TYPE_COMMAND, MSK_ALT_DST_ADDR);
+//            #else
+//                SendMACPacket(ConnectionTable[myParent].Address, PACKET_TYPE_COMMAND);
+//            #endif
+//
+//            t1 = MiWi_TickGet();
+//            while (ConnectionTable[myParent].status.bits.FinishJoin == 0) {
+//                if (MiApp_MessageAvailable()) {
+//                    printf("Processing join response...\n");
+//                    MiApp_DiscardMessage();
+//                }
+//
+//                MiWiPROTasks();  // Process background tasks
+//
+//                t2 = MiWi_TickGet();
+//                if (MiWi_TickGetDiff(t2, t1) > ONE_SECOND) {
+//                    printf("ERROR: Join timeout, retrying...\n");
+//                    attempt++;
+//                    break;
+//                }
+//            }
+//
+//            if (ConnectionTable[myParent].status.bits.FinishJoin) {
+//                printf("Successfully joined PAN!\n");
+//                break;
+//            }
+//        }
+//
+//        if (attempt == MAX_ASSOCIATION_RETRIES) {
+//            printf("ERROR: Failed to join PAN after %d attempts.\n", MAX_ASSOCIATION_RETRIES);
+//            JoiningNetwork = FALSE;
+//            return 0xFF;
+//        }
+//
+//        #if defined(ENABLE_TIME_SYNC) && !defined(ENABLE_SLEEP) && defined(ENABLE_INDIRECT_MESSAGE)
+//            TimeSyncTick = MiWi_TickGet();
+//            printf("Time synchronization updated successfully!\n");
+//        #endif
+//        JoiningNetwork = FALSE;
+//        return myParent;
+//    }
+//    JoiningNetwork = FALSE;
+//    return 0xFF;
+//}
+
 BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
 {
     BYTE retry = CONNECTION_RETRY_TIMES;
-    BYTE i;
+    BYTE i, j;
     MIWI_TICK t1, t2;
+	BYTE bestNetworkIndex = 0xFF;
+	BYTE bestRSSI = -127;
     
     if( Mode == CONN_MODE_INDIRECT )
     {
         #if defined(ENABLE_SLEEP)
-            t1 = MiWi_TickGet();;
+            t1 = MiWi_TickGet();
         #endif
         OpenSocket();
         while(openSocketInfo.status.bits.requestIsOpen)
@@ -5155,7 +5356,7 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
             {
                 MiApp_DiscardMessage();
             }            
-            MiWiPROTasks();
+            //MiWiPROTasks();
             #if defined(ENABLE_SLEEP) && defined(NWK_ROLE_END_DEVICE)
                 t2 = MiWi_TickGet();
                 if( MiWi_TickGetDiff(t2, t1) > OPEN_SOCKET_POLL_INTERVAL )
@@ -5180,12 +5381,31 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
             {
                 if( --retry == 0 )
                 {
+//                    printf("ERROR: No PAN found after %d attempts.\n", CONNECTION_RETRY_TIMES);
                     return 0xFF;
                 }
+//                printf("Retrying PAN search... %d attempts left\n", retry);
             }
             ActiveScanIndex = 0;
+                
+            // Select PAN with best RSSI
+            for ( j = 0; j < i; j++) {
+                if (ActiveScanResults[j].RSSIValue > bestRSSI) {
+                    bestRSSI = ActiveScanResults[j].RSSIValue;
+                    bestNetworkIndex = j;
         }
+            }
         
+            if (bestNetworkIndex != 0xFF) {
+                ActiveScanIndex = bestNetworkIndex;
+//                printf("Selected PAN with best RSSI: %d dBm\n", bestRSSI);
+            } else {
+//                printf("ERROR: No valid PANs found!\n");
+                return 0xFF;
+            }
+
+        }
+
         #if defined(IEEE_802_15_4)
             tempPANID.Val = ActiveScanResults[ActiveScanIndex].PANID.Val;
             tempShortAddress.v[0] = ActiveScanResults[ActiveScanIndex].Address[0];
@@ -5263,7 +5483,7 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
             {
                 MiApp_DiscardMessage();
             }            
-            MiWiPROTasks();
+            //MiWiPROTasks();
             t2 = MiWi_TickGet();
             if( MiWi_TickGetDiff(t2, t1) > ONE_SECOND )
             {
@@ -5379,6 +5599,7 @@ BOOL MultiCast( INPUT BYTE MultiCastMode, INPUT BOOL SecEn )
             {
                 #if defined(IEEE_802_15_4)
                     SaveIndirectMessage(TRUE, myPANID, NULL, FALSE, SecEn);
+//                    SaveIndirectMessage(TRUE, myPANID, &ConnectionTable[i].Address, FALSE, SecEn);
                 #else
                     SaveIndirectMessage(TRUE, NULL, FALSE, SecEn);
                 #endif
@@ -6060,9 +6281,7 @@ BOOL MiApp_StartConnection(BYTE Mode, BYTE ScanDuration, DWORD ChannelMap)
     
                     /* choose appropriate channel */
                     MiApp_SetChannel(i);
-                    
                     t2 = MiWi_TickGet();
-                    
                     while(1)
                     {
                         RSSIcheck = MiMAC_ChannelAssessment(CHANNEL_ASSESSMENT_ENERGY_DETECT);
