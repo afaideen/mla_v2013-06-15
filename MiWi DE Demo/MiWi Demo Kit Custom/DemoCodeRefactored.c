@@ -83,6 +83,7 @@ void main(void)
 	BoardInit();
 	LCDInit();
 	LED0 = 0; LED1 = 0; LED2 = 0;
+    Read_MAC_Address();
 	MiApp_ProtocolInit(FALSE);
 
 	VBGResult = Read_VBGVoltage();
