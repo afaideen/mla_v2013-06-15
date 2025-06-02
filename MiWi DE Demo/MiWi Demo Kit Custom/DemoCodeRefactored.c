@@ -30,8 +30,8 @@
 #define DBG(x)      printf(x)
     #define DBG2(x, y)  printf(x, y)
 #else
-    #define DBG(x)
-    #define DBG2(x, y)
+#define DBG(x)
+#define DBG2(x, y)
 #endif
 
 static void App_StateMachine(BYTE evt);
@@ -45,17 +45,14 @@ extern RECEIVED_MESSAGE rxMessage;
 extern BYTE ButtonPressed(void);
 extern BYTE ReadTempSensor(WORD VBGResult);
 
-// Helper for decimal precision simulation
 static float ConvertToCelsius(BYTE raw) {
-	return (float)raw + 0.6f; // simulate decimal
+	return (float)raw + 0.6f;
 }
 
 static WORD ConvertToFixedPoint(BYTE raw) {
 	float t = ConvertToCelsius(raw);
-	return (WORD)(t * 10.0f); // scale to 0.1°C resolution
+	return (WORD)(t * 10.0f);
 }
-
-
 
 #define APP_VERSION_STRING "    Microchip   "
 #define APP_NAME_STRING    " MiWi Demo Board"
@@ -85,21 +82,20 @@ void main(void)
 	WORD VBGResult;
 	char buf[32];
 
-    NetFreezerEnable = FALSE;
+	NetFreezerEnable = FALSE;
 	BoardInit();
 	LCDInit();
 	LED0 = 0; LED1 = 0; LED2 = 0;
-    Read_MAC_Address();
-    if( !NetFreezerEnable )
-    {
-        LCDBacklightON();
-        LCDErase();
-        sprintf((char *)LCDText, (far rom char*)"    Microchip   ");
-        sprintf((char *)&LCDText[16], (far rom char*)" MiWi Demo Board");
-        LCDUpdate();
-    }
-
-
+	Read_MAC_Address();
+	if( !NetFreezerEnable )
+	{
+		LCDBacklightON();
+		LCDErase();
+		sprintf((char *)LCDText, APP_VERSION_STRING);
+		sprintf((char *)&LCDText[16], APP_NAME_STRING);
+		LCDUpdate();
+	}
+    DelayMs(4000);
 	MiApp_ProtocolInit(FALSE);
 
 	g_lastTick = g_tempTick = g_lcdTick = MiWi_TickGet();
@@ -132,6 +128,8 @@ static void App_StateMachine(BYTE evt)
 {
 	char buf[32];
 	MIWI_TICK now = MiWi_TickGet();
+	static char info[32];
+	static char tbuf[32];
 
 	switch (g_appState)
 	{
@@ -147,10 +145,14 @@ static void App_StateMachine(BYTE evt)
 			if (evt == 2) {
 				g_channel = (g_channel == 26) ? 11 : g_channel + 1;
 				sprintf(buf, "Select CH: %u", g_channel);
-				LCDDisplay(buf, 0, FALSE);
+				LCDErase();
+				sprintf((char *)LCDText, buf);
+				LCDUpdate();
 			} else if (evt == 3) {
 				LCDErase();
-				LCDDisplay("SW1=Create\nSW2=Join", 0, FALSE);
+				sprintf((char *)LCDText, "SW1=Create");
+				sprintf((char *)&LCDText[16], "SW2=Join");
+				LCDUpdate();
 				g_appState = APP_STATE_ROLE_SELECT;
 			}
 			break;
@@ -158,18 +160,23 @@ static void App_StateMachine(BYTE evt)
 		case APP_STATE_ROLE_SELECT:
 			if (evt == 2) {
 				MiApp_StartConnection(START_CONN_DIRECT, 0, 0);
-				sprintf(buf, "PAN Created\nCH%u", g_channel);
-				LCDErase(); LCDDisplay(buf, 0, FALSE);
+				sprintf(buf, "PAN Created  CH%u", g_channel);
+				LCDErase(); sprintf((char *)LCDText, buf);
+				LCDUpdate();
 				g_appState = APP_STATE_RUN;
 			} else if (evt == 3) {
 				BYTE scanResult = MiApp_SearchConnection(10, (0x00000001UL << g_channel));
 				if (scanResult != 0xFF) {
 					g_connIndex = MiApp_EstablishConnection(0, CONN_MODE_DIRECT);
-					sprintf(buf, "Joined\nCH%u", g_channel);
-					LCDErase(); LCDDisplay(buf, 0, FALSE);
+					sprintf(buf, "Joined  CH%u", g_channel);
+					LCDErase(); sprintf((char *)LCDText, buf);
+					LCDUpdate();
 					g_appState = APP_STATE_RUN;
 				} else {
-					LCDErase(); LCDDisplay("No networks\nfound.", 0, FALSE);
+					LCDErase();
+					sprintf((char *)LCDText, "No networks");
+					sprintf((char *)&LCDText[16], "found.");
+					LCDUpdate();
 					DelayMs(1000);
 					g_appState = APP_STATE_CH_SELECT;
 				}
@@ -185,28 +192,38 @@ static void App_StateMachine(BYTE evt)
 					SelectPeerNode();
 					g_appState = APP_STATE_RANGE_DEMO;
 					LCDErase();
-					LCDDisplay("Range demo\nTx->Peer", 0, FALSE);
+					sprintf((char *)LCDText, "Range demo");
+					sprintf((char *)&LCDText[16], "Tx->Peer");
+					LCDUpdate();
 				} else if (menu_choice == 1) {
 					WORD vbg = Read_VBGVoltage();
 					BYTE rawTemp = ReadTempSensor(vbg);
 					float realTemp = ConvertToCelsius(rawTemp);
-					char tbuf[32];
 					sprintf(tbuf, "Temp: %.1f C", realTemp);
-					LCDDisplay(tbuf, 0, FALSE);
+					LCDErase();
+					sprintf((char *)LCDText, tbuf);
+					LCDUpdate();
 					RunTempTx();
 				} else if (menu_choice == 2) {
-					static char info[32];
 					sprintf(info, "PANID:%02X%02X Addr:%02X%02X", myPANID.v[1], myPANID.v[0], myShortAddress.v[1], myShortAddress.v[0]);
-					LCDDisplay(info, 0, FALSE);
+					LCDErase();
+					sprintf((char *)LCDText, info);
+					LCDUpdate();
 				}
 			} else if (evt == 3) {
 				menu_choice = (menu_choice + 1) % 3;
-				if (menu_choice == 0)
-					LCDDisplay("SW1: Range Demo\nSW2: Menu >>", 0, FALSE);
-				else if (menu_choice == 1)
-					LCDDisplay("SW1: Temp Demo\nSW2: Menu >>", 0, FALSE);
-				else if (menu_choice == 2)
-					LCDDisplay("SW1: Node Info\nSW2: Menu >>", 0, FALSE);
+				LCDErase();
+				if (menu_choice == 0) {
+					sprintf((char *)LCDText, "SW1: Range Demo");
+					sprintf((char *)&LCDText[16], "SW2: Menu >>");
+				} else if (menu_choice == 1) {
+					sprintf((char *)LCDText, "SW1: Temp Demo");
+					sprintf((char *)&LCDText[16], "SW2: Menu >>");
+				} else {
+					sprintf((char *)LCDText, "SW1: Node Info");
+					sprintf((char *)&LCDText[16], "SW2: Menu >>");
+				}
+				LCDUpdate();
 			} else if (evt == 4) {
 				ProcessMiWiMessage();
 			}
@@ -219,7 +236,7 @@ static void App_StateMachine(BYTE evt)
 
 		case APP_STATE_RANGE_DEMO:
 			if (evt == 1) RunRangeTx();
-			else if (evt == 3) { g_appState = APP_STATE_RUN; LCDErase(); }
+			else if (evt == 3) { g_appState = APP_STATE_RUN; LCDErase(); LCDUpdate(); }
 			else if (evt == 4) ProcessMiWiMessage();
 			break;
 
