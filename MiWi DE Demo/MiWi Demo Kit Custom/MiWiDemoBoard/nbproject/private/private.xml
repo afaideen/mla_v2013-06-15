@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>file:/D:/github/microchip/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit/Demo.c</url>
+            <bookmark id="2">
+                <name/>
+                <line>332</line>
+                <key/>
+            </bookmark>
+            <bookmark id="1">
+                <name/>
+                <line>480</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/BSP_MiWiDemoBd.h</file>
+            <file>file:/C:/mla_v2013-06-15/Microchip/Transceivers/MRF24J40/MRF24J40.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/TempDemo.c</file>
+            <file>file:/C:/mla_v2013-06-15/Microchip/Include/WirelessProtocols/MiWi/MiWi.h</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/Demo.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/DemoCodeRefactored.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/HardwareProfile.h</file>
+            <file>file:/C:/mla_v2013-06-15/Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/LCD_ST7032.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/BSP_MiWiDemoBd.c</file>
+        </group>
+    </open-files>
+</project-private>
