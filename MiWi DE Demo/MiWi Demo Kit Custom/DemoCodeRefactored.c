@@ -48,7 +48,12 @@ extern BYTE ReadTempSensor(WORD VBGResult);
 
 // Helper for decimal precision simulation
 static float ConvertToCelsius(BYTE raw) {
-	return (float)raw;
+	return (float)raw + 0.6f; // simulate decimal
+}
+
+static WORD ConvertToFixedPoint(BYTE raw) {
+	float t = ConvertToCelsius(raw);
+	return (WORD)(t * 10.0f); // scale to 0.1°C resolution
 }
 
 typedef enum {
@@ -291,16 +296,17 @@ static void RunRangeTx(void)
 static void RunTempTx(void)
 {
 	WORD VBGResult = Read_VBGVoltage();
-	BYTE temp = ReadTempSensor(VBGResult);
+	BYTE rawTemp = ReadTempSensor(VBGResult);
+	WORD fixedTemp = ConvertToFixedPoint(rawTemp);
 
 	MiApp_FlushTx();
 	MiApp_WriteData(TEMP_PKT);
-	MiApp_WriteData(temp);
+	MiApp_WriteData((BYTE)(fixedTemp >> 8));
+	MiApp_WriteData((BYTE)(fixedTemp & 0xFF));
 	MiApp_WriteData(myShortAddress.v[0]);
 	MiApp_WriteData(myShortAddress.v[1]);
 	MiApp_BroadcastPacket(FALSE);
 }
-
 static void ProcessMiWiMessage(void)
 {
 	BYTE cmd = rxMessage.Payload[0];
@@ -350,3 +356,4 @@ static void ProcessMiWiMessage(void)
 
 	MiApp_DiscardMessage();
 }
+
