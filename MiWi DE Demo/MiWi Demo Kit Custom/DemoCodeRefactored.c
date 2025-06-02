@@ -200,9 +200,38 @@ static void SendIdentifyCmd(BYTE cmd)
 
 static void RunRangeTx(void)
 {
-	MiApp_FlushTx();
-	MiApp_WriteData(RANGE_DEMO);
-	MiApp_UnicastConnection(g_connIndex, TRUE);
+	static BYTE Tx_Packet = TRUE;
+	static BYTE Pkt_Loss_Cnt = 0;
+
+	if (Tx_Packet)
+	{
+		LCDDisplay("Checking Signal Strength...", 0, FALSE);
+
+		MiApp_FlushTx();
+		MiApp_WriteData(RANGE_DEMO);
+		MiApp_WriteData('M');
+		MiApp_WriteData('i');
+		MiApp_WriteData('W');
+		MiApp_WriteData('i');
+		MiApp_WriteData(' ');
+		MiApp_WriteData('R');
+		MiApp_WriteData('o');
+		MiApp_WriteData('c');
+		MiApp_WriteData('k');
+		MiApp_WriteData('s');
+		MiApp_WriteData('!');
+
+		if (MiApp_UnicastConnection(g_connIndex, FALSE) == FALSE)
+			Pkt_Loss_Cnt++;
+		else
+			Pkt_Loss_Cnt = 0;
+
+		Tx_Packet = FALSE;
+	}
+	else
+	{
+		Tx_Packet = TRUE;
+	}
 }
 
 static void RunTempTx(void)
