@@ -46,6 +46,11 @@ extern RECEIVED_MESSAGE rxMessage;
 extern BYTE ButtonPressed(void);
 extern BYTE ReadTempSensor(WORD VBGResult);
 
+// Helper for decimal precision simulation
+static float ConvertToCelsius(BYTE raw) {
+	return (float)raw;
+}
+
 typedef enum {
 	APP_STATE_BOOT = 0,
 	APP_STATE_CH_SELECT,
@@ -165,9 +170,10 @@ static void App_StateMachine(BYTE evt)
 					LCDDisplay("Range demo\nTx->Peer", 0, FALSE);
 				} else if (menu_choice == 1) {
 					WORD vbg = Read_VBGVoltage();
-					BYTE temp = ReadTempSensor(vbg);
+					BYTE rawTemp = ReadTempSensor(vbg);
+					float realTemp = ConvertToCelsius(rawTemp);
 					char tbuf[32];
-					sprintf(tbuf, "Temp: %d C", temp);
+					sprintf(tbuf, "Temp: %.1f C", realTemp);
 					LCDDisplay(tbuf, 0, FALSE);
 					RunTempTx();
 				} else if (menu_choice == 2) {
