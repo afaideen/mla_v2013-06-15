@@ -164,11 +164,15 @@ static void App_StateMachine(BYTE evt)
 					LCDErase();
 					LCDDisplay("Range demo\nTx->Peer", 0, FALSE);
 				} else if (menu_choice == 1) {
+					WORD vbg = Read_VBGVoltage();
+					BYTE temp = ReadTempSensor(vbg);
+					char tbuf[32];
+					sprintf(tbuf, "Temp: %d C", temp);
+					LCDDisplay(tbuf, 0, FALSE);
 					RunTempTx();
-					LCDDisplay("Temp demo\nData sent", 0, FALSE);
 				} else if (menu_choice == 2) {
-					char info[32];
-					sprintf(info, "PANID: %02X%02X", myPANID.v[1], myPANID.v[0]);
+					static char info[32];
+					sprintf(info, "PANID:%02X%02X Addr:%02X%02X", myPANID.v[1], myPANID.v[0], myShortAddress.v[1], myShortAddress.v[0]);
 					LCDDisplay(info, 0, FALSE);
 				}
 			} else if (evt == 3) {
