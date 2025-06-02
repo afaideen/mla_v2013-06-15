@@ -30,8 +30,8 @@
 #define DBG(x)      printf(x)
     #define DBG2(x, y)  printf(x, y)
 #else
-#define DBG(x)
-#define DBG2(x, y)
+    #define DBG(x)
+    #define DBG2(x, y)
 #endif
 
 static void App_StateMachine(BYTE evt);
@@ -55,7 +55,7 @@ static WORD ConvertToFixedPoint(BYTE raw) {
 	return (WORD)(t * 10.0f); // scale to 0.1°C resolution
 }
 
-#define NetFreezerEnable 0
+
 
 #define APP_VERSION_STRING "    Microchip   "
 #define APP_NAME_STRING    " MiWi Demo Board"
@@ -76,6 +76,7 @@ static BYTE g_channel = 11;
 static BYTE g_connIndex = 0xFF;
 static BYTE menu_choice = 0;
 BYTE ConnectionEntry = 0;
+BOOL NetFreezerEnable = FALSE;
 
 void main(void)
 {
@@ -84,18 +85,20 @@ void main(void)
 	WORD VBGResult;
 	char buf[32];
 
+    NetFreezerEnable = FALSE;
 	BoardInit();
 	LCDInit();
 	LED0 = 0; LED1 = 0; LED2 = 0;
+    Read_MAC_Address();
+    if( !NetFreezerEnable )
+    {
+        LCDBacklightON();
+        LCDErase();
+        sprintf((char *)LCDText, (far rom char*)"    Microchip   ");
+        sprintf((char *)&LCDText[16], (far rom char*)" MiWi Demo Board");
+        LCDUpdate();
+    }
 
-#if !NetFreezerEnable
-	LCDBacklightON();
-	LCDErase();
-	memset(LCDText, ' ', 32);
-	strncpy((char *)LCDText, APP_VERSION_STRING, 16);
-	strncpy((char *)&LCDText[16], APP_NAME_STRING, 16);
-	LCDUpdate();
-#endif
 
 	MiApp_ProtocolInit(FALSE);
 

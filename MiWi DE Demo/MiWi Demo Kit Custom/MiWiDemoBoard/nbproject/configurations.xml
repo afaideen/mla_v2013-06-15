@@ -232,6 +232,10 @@
         <C18LanguageToolchain>
         </C18LanguageToolchain>
       </item>
+      <item path="../bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.c"
+            ex="true"
+            overriding="false">
+      </item>
       <item path="../bsp_wireless_eval_board/SPIEEPROM.c"
             ex="true"
             overriding="false">
@@ -351,7 +355,8 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
-        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="debugoptions.useswbreakpoints" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
         <property key="hwtoolclock.units" value="mips"/>
