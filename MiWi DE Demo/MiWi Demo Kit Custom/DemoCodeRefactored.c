@@ -9,7 +9,6 @@
 #include "MAC_EEProm.h"
 #include "SelfTestMode.h"
 
-#define APP_VERSION      "v1.0-refactor"
 #define APP_BUILD_DEBUG  0
 
 #define TEMP_SECOND_INTERVAL        5
@@ -56,6 +55,11 @@ static WORD ConvertToFixedPoint(BYTE raw) {
 	return (WORD)(t * 10.0f); // scale to 0.1°C resolution
 }
 
+#define NetFreezerEnable 0
+
+#define APP_VERSION_STRING "    Microchip   "
+#define APP_NAME_STRING    " MiWi Demo Board"
+
 typedef enum {
 	APP_STATE_BOOT = 0,
 	APP_STATE_CH_SELECT,
@@ -83,13 +87,16 @@ void main(void)
 	BoardInit();
 	LCDInit();
 	LED0 = 0; LED1 = 0; LED2 = 0;
-    Read_MAC_Address();
-	MiApp_ProtocolInit(FALSE);
 
-	VBGResult = Read_VBGVoltage();
-	sprintf(buf, "MiWi Demo %s", APP_VERSION);
-	LCDDisplay(buf, 0, FALSE);
-	DelayMs(1500);
+#if !NetFreezerEnable
+	LCDBacklightON();
+	LCDErase();
+	sprintf((char *)LCDText, APP_VERSION_STRING);
+	sprintf((char *)&(LCDText[16]), APP_NAME_STRING);
+	LCDUpdate();
+#endif
+
+	MiApp_ProtocolInit(FALSE);
 
 	g_lastTick = g_tempTick = g_lcdTick = MiWi_TickGet();
 
