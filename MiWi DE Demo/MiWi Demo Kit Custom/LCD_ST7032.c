@@ -92,9 +92,9 @@ void LCDInit(void)
 {    
     LCD_CS = 1;
     LCD_RESET = 0;    
-    DelayMs(2);
+    DelayMs(10);
     LCD_RESET = 1;
-    DelayMs(20);
+    DelayMs(50);
     LCD_WriteCmd(LCD_WAKEUP);
     DelayMs(2);
     LCD_WriteCmd(LCD_WAKEUP);

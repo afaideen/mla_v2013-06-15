@@ -91,8 +91,9 @@ void main(void)
 #if !NetFreezerEnable
 	LCDBacklightON();
 	LCDErase();
-	sprintf((char *)LCDText, APP_VERSION_STRING);
-	sprintf((char *)&(LCDText[16]), APP_NAME_STRING);
+	memset(LCDText, ' ', 32);
+	strncpy((char *)LCDText, APP_VERSION_STRING, 16);
+	strncpy((char *)&LCDText[16], APP_NAME_STRING, 16);
 	LCDUpdate();
 #endif
 
