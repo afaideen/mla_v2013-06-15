@@ -40,6 +40,7 @@ static void ProcessMiWiMessage(void);
 static void SendIdentifyCmd(BYTE cmd);
 static void RunRangeTx(void);
 static void RunTempTx(void);
+static void SelectPeerNode(void);
 
 extern RECEIVED_MESSAGE rxMessage;
 extern BYTE ButtonPressed(void);
@@ -156,6 +157,7 @@ static void App_StateMachine(BYTE evt)
 				PrintTempLCD();
 				g_lcdTick = now;
 			} else if (evt == 2) {
+				SelectPeerNode();
 				g_appState = APP_STATE_RANGE_DEMO;
 				LCDErase();
 				LCDDisplay("Range demo\nTx->Peer", 0, FALSE);
@@ -188,6 +190,35 @@ static void App_StateMachine(BYTE evt)
 				g_appState = APP_STATE_RUN;
 			} else if (evt == 4) ProcessMiWiMessage();
 			break;
+	}
+}
+
+static void SelectPeerNode(void)
+{
+	BYTE i, totalPeers = 0, selected = 0;
+	BYTE switch_val;
+	for (i = 0; i < CONNECTION_SIZE; i++) {
+		if (ConnectionTable[i].status.bits.isValid) totalPeers++;
+	}
+	if (totalPeers == 0) return;
+
+	for (i = 0; i < CONNECTION_SIZE; i++) {
+		if (!ConnectionTable[i].status.bits.isValid) continue;
+
+		LCDErase();
+		sprintf((char *)LCDText, "SW1:<Addr:%02X%02X>", ConnectionTable[i].AltAddress.v[1], ConnectionTable[i].AltAddress.v[0]);
+		sprintf((char *)&LCDText[16], "SW2: Next Peer");
+		LCDUpdate();
+
+		while (1) {
+			switch_val = ButtonPressed();
+			if (switch_val == SW1) {
+				g_connIndex = i;
+				return;
+			} else if (switch_val == SW2) {
+				break; // show next peer
+			}
+		}
 	}
 }
 
