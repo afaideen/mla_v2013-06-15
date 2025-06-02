@@ -157,8 +157,8 @@ static void App_StateMachine(BYTE evt)
 				g_lcdTick = now;
 			} else if (evt == 2) {
 				g_appState = APP_STATE_RANGE_DEMO;
-				LCDErase(); 
-                LCDDisplay("Range demo\nTx->Peer", 0, FALSE);
+				LCDErase();
+				LCDDisplay("Range demo\nTx->Peer", 0, FALSE);
 			} else if (evt == 3) {
 				MiApp_FlushTx();
 				MiApp_WriteData(EXIT_DEMO);
@@ -248,6 +248,21 @@ static void ProcessMiWiMessage(void)
 	} else if (cmd == EXIT_IDENTIFY_MODE) {
 		g_appState = APP_STATE_RUN;
 		LED0 = 0; LED1 = 0; LED2 = 0;
+	} else if (cmd == RANGE_DEMO) {
+		BYTE rssi = rxMessage.PacketRSSI;
+#if defined(MRF89XA)
+		rssi <<= 1;
+#endif
+		if (rssi > 120) {
+			LCDDisplay("Strength: High", 0, FALSE);
+			LED0 = 1; LED1 = 0; LED2 = 0;
+		} else if (rssi > 60) {
+			LCDDisplay("Strength: Medium", 0, FALSE);
+			LED0 = 1; LED1 = 1; LED2 = 0;
+		} else {
+			LCDDisplay("Strength: Low", 0, FALSE);
+			LED0 = 0; LED1 = 1; LED2 = 0;
+		}
 	}
 
 	MiApp_DiscardMessage();
