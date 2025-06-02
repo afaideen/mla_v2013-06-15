@@ -157,7 +157,8 @@ static void App_StateMachine(BYTE evt)
 				g_lcdTick = now;
 			} else if (evt == 2) {
 				g_appState = APP_STATE_RANGE_DEMO;
-				LCDErase(); LCDDisplay("Range demo\nTx->Peer", 0, FALSE);
+				LCDErase(); 
+                LCDDisplay("Range demo\nTx->Peer", 0, FALSE);
 			} else if (evt == 3) {
 				MiApp_FlushTx();
 				MiApp_WriteData(EXIT_DEMO);
