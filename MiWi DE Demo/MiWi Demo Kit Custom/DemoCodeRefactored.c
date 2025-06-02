@@ -60,6 +60,7 @@ static APP_STATE g_appState = APP_STATE_BOOT;
 static MIWI_TICK g_lastTick, g_tempTick, g_lcdTick;
 static BYTE g_channel = 11;
 static BYTE g_connIndex = 0xFF;
+static BYTE menu_choice = 0;
 BYTE ConnectionEntry = 0;
 
 void main(void)
@@ -157,15 +158,27 @@ static void App_StateMachine(BYTE evt)
 				PrintTempLCD();
 				g_lcdTick = now;
 			} else if (evt == 2) {
-				SelectPeerNode();
-				g_appState = APP_STATE_RANGE_DEMO;
-				LCDErase();
-				LCDDisplay("Range demo\nTx->Peer", 0, FALSE);
+				if (menu_choice == 0) {
+					SelectPeerNode();
+					g_appState = APP_STATE_RANGE_DEMO;
+					LCDErase();
+					LCDDisplay("Range demo\nTx->Peer", 0, FALSE);
+				} else if (menu_choice == 1) {
+					RunTempTx();
+					LCDDisplay("Temp demo\nData sent", 0, FALSE);
+				} else if (menu_choice == 2) {
+					char info[32];
+					sprintf(info, "PANID: %02X%02X", myPANID.v[1], myPANID.v[0]);
+					LCDDisplay(info, 0, FALSE);
+				}
 			} else if (evt == 3) {
-				MiApp_FlushTx();
-				MiApp_WriteData(EXIT_DEMO);
-				MiApp_BroadcastPacket(FALSE);
-				g_appState = APP_STATE_RUN;
+				menu_choice = (menu_choice + 1) % 3;
+				if (menu_choice == 0)
+					LCDDisplay("SW1: Range Demo\nSW2: Menu >>", 0, FALSE);
+				else if (menu_choice == 1)
+					LCDDisplay("SW1: Temp Demo\nSW2: Menu >>", 0, FALSE);
+				else if (menu_choice == 2)
+					LCDDisplay("SW1: Node Info\nSW2: Menu >>", 0, FALSE);
 			} else if (evt == 4) {
 				ProcessMiWiMessage();
 			}
