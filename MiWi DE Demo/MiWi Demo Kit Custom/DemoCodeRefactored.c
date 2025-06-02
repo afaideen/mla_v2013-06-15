@@ -137,8 +137,9 @@ static void App_StateMachine(BYTE evt)
 	{
 		case APP_STATE_BOOT:
 			LCDErase();
-			sprintf(buf, "Select CH: %u", g_channel);
-			LCDDisplay(buf, 0, FALSE);
+			sprintf((char *)LCDText, "Select CH: %u", g_channel);
+			memset(&LCDText[16], ' ', 16);
+			LCDUpdate();
 			g_appState = APP_STATE_CH_SELECT;
 			break;
 
