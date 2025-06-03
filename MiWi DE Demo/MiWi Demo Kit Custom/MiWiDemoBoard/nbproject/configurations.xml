@@ -271,7 +271,7 @@
       <C18>
         <property key="code-model" value="ms"/>
         <property key="data-model" value="oa-"/>
-        <property key="default-char-unsigned" value="false"/>
+        <property key="default-char-unsigned" value="true"/>
         <property key="enable-all-optimizations" value="false"/>
         <property key="enable-int-promotion" value="false"/>
         <property key="enable-multi-bank-stack-model" value="false"/>
@@ -364,7 +364,6 @@
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="true"/>
-        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
         <property key="hwtoolclock.units" value="mips"/>

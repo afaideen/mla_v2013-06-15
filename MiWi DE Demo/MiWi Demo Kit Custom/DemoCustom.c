@@ -60,7 +60,7 @@ extern BYTE myLongAddress[];     // Provided by stack/board
 extern BOOL SelfTestModeEnabled; // Used for startup test
 
 // Demo menu item names - as fixed size char arrays to avoid const warnings
-static char menuText[MENU_COUNT][33] = {
+static char menuText[MENU_COUNT][34] = {
     "SW1: Range Demo SW2: Other Apps  ",
     "SW1: Temp Demo  SW2: Other Apps  ",
     "SW1: Node Info  SW2: Other Apps  "
@@ -192,6 +192,7 @@ static void App_ChannelSelect(void)
         if (sw == SW1) {
             myChannel = channel;
             selected = TRUE;
+            App_SetChannel(myChannel);
         }
         else if (sw == SW2) {
             channel++;
