@@ -71,7 +71,7 @@
         <itemPath>../SelfTestMode.c</itemPath>
         <itemPath>../SST_SerialFlash.c</itemPath>
         <itemPath>../Demo - Copy.c</itemPath>
-        <itemPath>../DemoCodeRefactored.c</itemPath>
+        <itemPath>../DemoCustom.c</itemPath>
       </logicalFolder>
       <logicalFolder name="Common" displayName="Common" projectFiles="true">
         <itemPath>../../../Microchip/Common/TimeDelay.c</itemPath>
@@ -235,6 +235,14 @@
       <item path="../bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.c"
             ex="true"
             overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
       <item path="../bsp_wireless_eval_board/SPIEEPROM.c"
             ex="true"
