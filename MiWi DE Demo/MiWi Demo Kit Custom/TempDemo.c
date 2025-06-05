@@ -43,6 +43,7 @@
 
 #include "TempDemo.h"
 #include "Compiler.h"
+#include "GenericTypeDefs.h"
 
 #define TEMP_SECOND_INTERVAL        5
 #define DISPLAY_CYCLE_INTERVAL      4
@@ -65,7 +66,7 @@ extern BYTE role;
 struct TempPacket
 {
 	BYTE NodeAddress[2];
-	BYTE TempValue;
+	float TempValue;
 }; 
 struct TempPacket NodeTemp[10];
 
@@ -91,9 +92,11 @@ void TempDemo(void)
 {
     BOOL Run_Demo = TRUE;
     WORD VBGResult;
-    double temp;
+    float temp;
+    int tempToSend;
     MIWI_TICK tick1, tick2, tick3;
-    BYTE switch_val;
+    BYTE switch_val, i;
+    short tempRaw;
     
     
 	/*******************************************************************/
@@ -117,6 +120,9 @@ void TempDemo(void)
     /*******************************************************************/
 	NodeTemp[0].NodeAddress[0] = myShortAddress.v[0];
 	NodeTemp[0].NodeAddress[1] = myShortAddress.v[1];
+    for(i = 0; i < 10; i++)
+        NodeTemp[i].TempValue = -100.0f; // -100 is 'no data'
+
     
 	/*******************************************************************/
     // Read Start tickcount
@@ -222,6 +228,7 @@ void TempDemo(void)
             /*******************************************************************/			
 			tempAverage = 0;
 			tempAverage = temp;
+            tempToSend = (int)(temp * 10);  // e.g., 24.6°C -> 246
 			
             /*******************************************************************/
             // Reset TX Buffer Pointer
@@ -232,13 +239,16 @@ void TempDemo(void)
             // Write this Nodes temperature value and Address to the TX Buffer
             /*******************************************************************/
             MiApp_WriteData(TEMP_PKT);
-           	MiApp_WriteData((BYTE) tempAverage);
+//           	MiApp_WriteData((BYTE) tempAverage);
+            MiApp_WriteData((BYTE)((tempToSend >> 8) & 0xFF));
+            MiApp_WriteData((BYTE)(tempToSend & 0xFF));
 		   	MiApp_WriteData(myShortAddress.v[0]);
-			MiApp_WriteData(myShortAddress.v[1]);	
+			MiApp_WriteData(myShortAddress.v[1]);
 
             
          	// Update NodeTemp Structure
-			NodeTemp[0].TempValue = (BYTE)tempAverage;
+//			NodeTemp[0].TempValue = (BYTE)tempAverage;
+            NodeTemp[0].TempValue = temp;
 					
            /*******************************************************************/
            // Broadcast Node Tempature across Network.
@@ -292,9 +302,14 @@ void TempDemo(void)
 					if(rxMessage.Payload[0] == TEMP_PKT)
 					{
 						// Update the Remote Nodes Temp value
-						NodeTemp[i+1].TempValue = rxMessage.Payload[1];
-    					NodeTemp[i+1].NodeAddress[0] = rxMessage.Payload[2];
-    					NodeTemp[i+1].NodeAddress[1] = rxMessage.Payload[3];
+//						NodeTemp[i+1].TempValue = rxMessage.Payload[1];
+//    					NodeTemp[i+1].NodeAddress[0] = rxMessage.Payload[2];
+//    					NodeTemp[i+1].NodeAddress[1] = rxMessage.Payload[3];
+                        
+                        tempRaw = ((rxMessage.Payload[1] << 8) | rxMessage.Payload[2]);
+                        NodeTemp[i+1].TempValue = tempRaw / 10.0;
+                        NodeTemp[i+1].NodeAddress[0] = rxMessage.Payload[3];
+                        NodeTemp[i+1].NodeAddress[1] = rxMessage.Payload[4];
 					}	
 				}
 			}
@@ -337,83 +352,39 @@ BYTE ReadTempSensor_WirelessEvalBoard(void)
 *
 * Note:			    
 **********************************************************************/
-BYTE ReadTempSensor(WORD VBGResult)
+float ReadTempSensor(WORD VBGResult)
 {
-	WORD tempValue;
-	double temp;
-	BYTE tempHere;
-	BYTE i = 0;
+    WORD tempValue;
+    float temp;
     float tempAverage = 0;
-    BYTE tempArray[NUM_TEMP_SAMPLES];
-    
-     
-    // Configure the ADC register settings
+    BYTE i = 0;
 
     ADCON0 = 0x04;
     ADCON1 = 0xBD;
-    
     PIR1bits.ADIF = 0;
     PIE1bits.ADIE = 0;
 
-/*
-	ADCON0bits.ADON = 1;
-	Delay10us(10);					// Wait Acquisition time
-	
-	ADCON0bits.GO = 1;	
-	while(ADCON0bits.DONE);
- 
- 	tempValue = ADRES;
-	ADCON0bits.ADON = 0;
-	 	   
-	temp = (1200.0/VBGResult);
-	temp = (temp * tempValue);				
-	temp = (temp - 500.0)/10.0;
-
-    return (BYTE) temp;
-*/	
-   
-    do
-    {
-
-       
-    	ADCON0bits.ADON = 1;
-    	Delay10us(10);					// Wait Acquisition time
-    	ADCON0bits.GO = 1;	    	
-    	while(ADCON0bits.DONE);
-        
-
-        
-    	temp = (1200.0/VBGResult);
-
-    	tempValue = ADRES;
-
-    	temp = (temp * tempValue);				
-    	temp = (temp - 500.0)/10.0;
-    	
-    	tempArray[i] = (BYTE) temp;
-
-	    ADCON0bits.ADON = 0;
-
-	    Delay10us(1);
-	    i++;
-	} while(i < NUM_TEMP_SAMPLES);
-	
-
     for(i = 0; i < NUM_TEMP_SAMPLES; i++)
     {
-        tempAverage = ( tempAverage + tempArray[i] );
+        ADCON0bits.ADON = 1;
+        Delay10us(10);
+        ADCON0bits.GO = 1;	    	
+        while(ADCON0bits.DONE);
+
+        tempValue = ADRES;
+        temp = (1200.0/VBGResult);
+        temp = (temp * tempValue);				
+        temp = (temp - 500.0)/10.0;
+
+        tempAverage += temp;
+        ADCON0bits.ADON = 0;
+        Delay10us(1);
     }
-    tempAverage = ( tempAverage / NUM_TEMP_SAMPLES );
-    tempHere = (BYTE) tempAverage;
-    tempAverage = (tempAverage - tempHere) * 10;
-    
-    if(tempAverage >= 5)
-        tempHere = tempHere + 1;
-        
-    return (BYTE)tempHere;    
-
-
+    tempAverage = tempAverage / NUM_TEMP_SAMPLES;
+    return tempAverage;
 }
+
+
 
     				
 /*********************************************************************
@@ -471,8 +442,11 @@ WORD Read_VBGVoltage(void)
 **********************************************************************/
 void PrintTempLCD(void)
 {
-	int temp;
+    int clearIdx;
+	int temp, len;
 	BYTE tempF;
+    int intpart,decpart;
+    char tempStr[6];
 	
     LCDErase();
     
@@ -487,22 +461,39 @@ void PrintTempLCD(void)
 	
     sprintf((char *)&LCDText[16], (far rom char*)"%02x%02x:",NodeTemp[CurrentNodeIndex].NodeAddress[1],NodeTemp[CurrentNodeIndex].NodeAddress[0]);
     
-    if(NodeTemp[CurrentNodeIndex].TempValue == 255)
+    if(NodeTemp[CurrentNodeIndex].TempValue < -90.0f)
 	{
-		sprintf((char*)&LCDText[23], (far rom char*) " - ");
+		sprintf((char *)&LCDText[21], " -          "); // pad with spaces to erase old data
 	}
     else
 	{
-    	sprintf((char *)&LCDText[21], (far rom char*)" %d", NodeTemp[CurrentNodeIndex].TempValue);
-    	sprintf((char *)&LCDText[24], (far rom char*)"C"); 	
+        
+//        sprintf((char *)&LCDText[21], "%2.1f", NodeTemp[CurrentNodeIndex].TempValue);
+        intpart = (int)NodeTemp[CurrentNodeIndex].TempValue;
+        decpart = (int)((NodeTemp[CurrentNodeIndex].TempValue - intpart) * 10.0 + 0.5);
+        if(decpart < 0) 
+            decpart = -decpart; // handle negative temps safely
+        // Compose to a local string first for debug/clarity
+        
+        sprintf(tempStr, "%2d.%1d", intpart, decpart);
+        len = strlen(tempStr);
+        sprintf((char *)&LCDText[21], "%sC", tempStr);	
 
 		temp = NodeTemp[CurrentNodeIndex].TempValue;
 		temp = temp * 9;
 		temp = temp / 5;
 		temp = temp + 32;
 		tempF = (BYTE) temp;
-    	sprintf((char *)&LCDText[25], (far rom char*)"/ %d", tempF);
-    	sprintf((char *)&LCDText[29], (far rom char*)"F"); 				
+//    	sprintf((char *)&LCDText[25], (far rom char*)"/ %d", tempF);
+//    	sprintf((char *)&LCDText[29], (far rom char*)"F"); 	
+        
+        // Write Fahrenheit immediately after 'C'
+        
+        sprintf((char *)&LCDText[21 + len + 1], "/%dF", tempF);
+        // Optionally pad with spaces to clear the rest of the line if previous content was longer
+        clearIdx = 21 + len + 1 + strlen((char *)&LCDText[21 + len + 1]);
+        for(; clearIdx < 32; clearIdx++)
+            LCDText[clearIdx] = ' ';
  	}
     
     LCDUpdate();

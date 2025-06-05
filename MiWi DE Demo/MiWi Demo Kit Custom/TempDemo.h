@@ -54,9 +54,9 @@
 void TempDemo(void);
 WORD Read_VBGVoltage(void);
 #if defined(__18CXX) && !defined(HI_TECH_C)	
-BYTE ReadTempSensor(WORD VBGResult);
+float ReadTempSensor(WORD VBGResult);
 #else
-BYTE ReadTempSensor_WirelessEvalBoard(void);
+float ReadTempSensor_WirelessEvalBoard(void);
 #endif
 void PrintTempLCD(void);
 	
