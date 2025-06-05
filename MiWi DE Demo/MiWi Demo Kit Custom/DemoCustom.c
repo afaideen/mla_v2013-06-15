@@ -276,10 +276,12 @@ static BOOL App_SetChannel(BYTE channel)
 
 // 3. Network setup: create or join
 static BOOL App_NetworkSetup(void)
-{
-    BYTE sw;
+{              
+    BYTE sw, selBtn;
     BOOL networkJoined = FALSE;
-    
+    DWORD scanChannelBitmap;
+
+create_or_join: 
     LCDErase();
     sprintf((char *)LCDText, "SW1: Create Ntwk");
     sprintf((char *)&(LCDText[16]), "SW2: Join Ntwk  ");
@@ -319,29 +321,161 @@ static BOOL App_NetworkSetup(void)
         }
         else if (sw == SW2) // Join network
         {
-            LCDErase();
-            sprintf((char *)LCDText, "  Scanning for   ");
-            sprintf((char *)&(LCDText[16]), "   Networks....  ");
-            LCDUpdate();
-            DelayMs(1000);
-            LCDErase();
-            sprintf((char *)LCDText, "Please Select    ");
-            sprintf((char *)&(LCDText[16]), "Network to Join  ");
-            LCDUpdate();
-            DelayMs(1000);
-            MiApp_ProtocolInit(FALSE);
+	        BYTE scanresult = 0, j, k;
+	        BOOL joined = FALSE;
 
-            // Scan and join logic here (reuse Demo.c logic)
-            // ... For brevity, use similar display logic for selection
-            // Assume scanresult and joining is handled, update networkJoined on success
+	        LCDDisplay((char *)"  Scanning for    Networks....", 0, TRUE);
+	        LCDDisplay((char *)"Please Select   Network to Join ", 0, TRUE);
 
-            // If failed, show:
-            // LCDErase();
-            // sprintf((char *)LCDText, "No Network Found");
-            // sprintf((char *)&(LCDText[16]), "SW2: Re-Scan    ");
-            // LCDUpdate();
-            // DelayMs(1000);
+	        MiApp_ProtocolInit(FALSE);
+
+	        // Calculate channel bitmap for current myChannel (matches Demo.c)
+	        scanChannelBitmap = 0;
+	        if(myChannel < 8)
+		        scanChannelBitmap = (0x00000001 << myChannel);
+	        else if(myChannel < 16)
+		        scanChannelBitmap = (0x00000100 << (myChannel-8));
+	        else if(myChannel < 24)
+		        scanChannelBitmap = (0x00010000 << (myChannel-16));
+	        else
+		        scanChannelBitmap = (0x01000000 << (myChannel-24));
+
+	        scanresult = MiApp_SearchConnection(10, scanChannelBitmap);
+
+	        if(scanresult > 0)
+	        {
+		        for(j = 0; j < scanresult; j++)
+		        {
+			        // Skip duplicate PANIDs (Demo.c logic)
+			        BOOL skip_print = FALSE;
+			        if(j > 0)
+			        {
+				        skip_print = FALSE;
+				        for(k = 0; k < j; k++)
+				        {
+					        if((ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]) &&
+					           (ActiveScanResults[j].PANID.v[0] == ActiveScanResults[k].PANID.v[0]))
+					        {
+						        skip_print = TRUE;
+						        break;
+					        }
+				        }
+				        if(skip_print == TRUE)
+				        {
+					        if(j == (scanresult-1))
+						        j = -1;
+					        continue;
+				        }
+			        }
+
+			        // Show PANID and give user options (SW1: Join, SW2: Next)
+			        LCDErase();
+			        sprintf((char *)LCDText, "SW1:<PANID:%02x%02x>",
+			                ActiveScanResults[j].PANID.v[1],
+			                ActiveScanResults[j].PANID.v[0]);
+			        sprintf((char *)&(LCDText[16]), "SW2: Additional");
+			        LCDUpdate();
+
+			        while(1)
+			        {
+				        BYTE switch_val = ButtonPressed();
+
+				        if(switch_val == SW1)
+				        {
+					        // Check if PANID has multiple coordinators
+					        BYTE CoordCount = 0, nodeIndex = 0, count = 0, Status;
+					        for(k = 0; k < scanresult; k++)
+					        {
+						        if((ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]) &&
+						           (ActiveScanResults[j].PANID.v[0] == ActiveScanResults[k].PANID.v[0]))
+						        {
+							        CoordCount++;
+						        }
+					        }
+
+					        if(CoordCount > 1)
+					        {
+						        // Submenu for address selection
+						        for(k = 0; k < scanresult; k++)
+						        {
+							        if((ActiveScanResults[j].PANID.v[1] == ActiveScanResults[k].PANID.v[1]) &&
+							           (ActiveScanResults[j].PANID.v[0] == ActiveScanResults[k].PANID.v[0]))
+							        {
+								        count++;
+								        LCDErase();
+								        sprintf((char *)LCDText, "SW1:<Addr:%02x%02x>",
+								                ActiveScanResults[k].Address[1], ActiveScanResults[k].Address[0]);
+								        sprintf((char *)&(LCDText[16]), "SW2: Additional");
+								        LCDUpdate();
+								        nodeIndex = k;
+
+								        while(1)
+								        {
+									        BYTE addrBtn = ButtonPressed();
+									        if(addrBtn == SW1)
+									        {
+										        //Establish connection with nodeIndex
+										        j = nodeIndex;
+										        k = scanresult-1;
+										        break;
+									        }
+									        else if(addrBtn == SW2)
+									        {
+										        if((k == (scanresult - 1)) || (count == CoordCount))
+										        {
+											        k = -1;
+											        count = 0;
+										        }
+										        break;
+									        }
+								        }
+							        }
+						        }
+					        }
+
+					        // Attempt to join
+					        Status = MiApp_EstablishConnection(j, CONN_MODE_DIRECT);
+					        if(Status == 0xFF)
+					        {
+						        LCDDisplay((char *)"Join Failed!!!", 0, TRUE);
+						        goto create_or_join; // Return to main menu
+					        }
+					        else
+					        {
+						        LCDDisplay((char *)"Joined  Network Successfully..", 0, TRUE);
+						        joined = TRUE;
+					        }
+					        // After join, broadcast EXIT_IDENTIFY_MODE
+					        MiApp_FlushTx();
+					        MiApp_WriteData(EXIT_IDENTIFY_MODE);
+					        MiApp_WriteData(myPANID.v[1]);
+					        MiApp_WriteData(myPANID.v[0]);
+					        MiApp_BroadcastPacket(FALSE);
+					        break;
+				        }
+				        else if(switch_val == SW2)
+				        {
+					        if((scanresult-j-1) == 0)
+						        j = -1;
+					        break;
+				        }
+			        }
+			        if(joined == TRUE)
+				        break;
+		        }
+		        if(joined)
+			        return TRUE;
+	        }
+	        else
+	        {
+		        LCDDisplay((char *)"No Network FoundSW2: Re-Scan", 0, FALSE);
+		        // Wait for user to press SW2 to rescan
+		        while (ButtonPressed() != SW2);
+		        goto create_or_join; // Jump back to top
+	        }
         }
+
+
     }
 
     return networkJoined;
