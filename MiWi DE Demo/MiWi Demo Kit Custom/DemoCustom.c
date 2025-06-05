@@ -179,15 +179,17 @@ static void App_ChannelSelect(void)
 	BYTE sw;
 	BYTE select_channel;
 	BOOL update_channel = FALSE;
+    
+    LCDErase();
+    sprintf((char *)LCDText, "SW1:<Sel Ch:%02d>", myChannel);
+    sprintf((char *)&(LCDText[16]), "SW2: Chnge Chnl");
+    LCDUpdate();
+    DelayMs(1000);
 
 	// Show initial prompt with current channel
 	while (1)
 	{
-		LCDErase();
-		sprintf((char *)LCDText, "SW1:<Sel Ch:%02d>", myChannel);
-		sprintf((char *)&(LCDText[16]), "SW2: Chnge Chnl");
-		LCDUpdate();
-		DelayMs(1000);
+		
 
 		sw = ButtonPressed();
 		if (sw == SW1)
@@ -266,14 +268,16 @@ static BOOL App_NetworkSetup(void)
 {
     BYTE sw;
     BOOL networkJoined = FALSE;
+    
+    LCDErase();
+    sprintf((char *)LCDText, "SW1: Create Ntwk");
+    sprintf((char *)&(LCDText[16]), "SW2: Join Ntwk  ");
+    LCDUpdate();
+    DelayMs(1000);
 
     while (!networkJoined)
     {
-        LCDErase();
-        sprintf((char *)LCDText, "SW1: Create Ntwk");
-        sprintf((char *)&(LCDText[16]), "SW2: Join Ntwk  ");
-        LCDUpdate();
-        DelayMs(1000);
+        
 
         sw = ButtonPressed();
 
