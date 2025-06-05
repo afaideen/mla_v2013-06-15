@@ -86,6 +86,7 @@ void main(void)
     // Board and LCD initialization
     BoardInit();
     LCDInit();
+    InitSymbolTimer();
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
@@ -96,6 +97,11 @@ void main(void)
         {
             case APP_STATE_INIT:
                 App_ShowSplash();
+                /*******************************************************************/
+                // Initialize the MiWi Protocol Stack. The only input parameter indicates
+                // if previous network configuration should be restored.
+                /*******************************************************************/		
+                MiApp_ProtocolInit(FALSE);
                 state = APP_STATE_CHANNEL_SELECT;
                 break;
 
