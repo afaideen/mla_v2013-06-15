@@ -33,23 +33,23 @@
 
 /*** State Definitions ***/
 typedef enum {
-    APP_STATE_INIT,
-    APP_STATE_CHANNEL_SELECT,
-    APP_STATE_NETWORK_SETUP,
-    APP_STATE_WAIT_FOR_CONNECTION,
-    APP_STATE_MENU,
-    APP_STATE_RANGE_DEMO,
-    APP_STATE_TEMP_DEMO,
-    APP_STATE_NODE_INFO,
-    APP_STATE_EXIT
+	APP_STATE_INIT,
+	APP_STATE_CHANNEL_SELECT,
+	APP_STATE_NETWORK_SETUP,
+	APP_STATE_WAIT_FOR_CONNECTION,
+	APP_STATE_MENU,
+	APP_STATE_RANGE_DEMO,
+	APP_STATE_TEMP_DEMO,
+	APP_STATE_NODE_INFO,
+	APP_STATE_EXIT
 } APP_STATE;
 
 /*** Menu Definitions ***/
 typedef enum {
-    MENU_RANGE_DEMO,
-    MENU_TEMP_DEMO,
-    MENU_NODE_INFO,
-    MENU_COUNT
+	MENU_RANGE_DEMO,
+	MENU_TEMP_DEMO,
+	MENU_NODE_INFO,
+	MENU_COUNT
 } MENU_OPTION;
 
 /*** Global Variables (reuse existing as much as possible) ***/
@@ -61,9 +61,9 @@ extern BOOL SelfTestModeEnabled; // Used for startup test
 
 // Demo menu item names - as fixed size char arrays to avoid const warnings
 static char menuText[MENU_COUNT][34] = {
-    "SW1: Range Demo SW2: Other Apps  ",
-    "SW1: Temp Demo  SW2: Other Apps  ",
-    "SW1: Node Info  SW2: Other Apps  "
+		"SW1: Range Demo SW2: Other Apps  ",
+		"SW1: Temp Demo  SW2: Other Apps  ",
+		"SW1: Node Info  SW2: Other Apps  "
 };
 
 /*** Function Prototypes ***/
@@ -80,79 +80,87 @@ BYTE ConnectionEntry = 0;
 /*** Main Application Entry ***/
 void main(void)
 {
-    APP_STATE state = APP_STATE_INIT;
-    MENU_OPTION selectedMenu = MENU_RANGE_DEMO;
+	APP_STATE state = APP_STATE_INIT;
+	MENU_OPTION selectedMenu = MENU_RANGE_DEMO;
 
-    // Board and LCD initialization
-    BoardInit();
-    LCDInit();
-    InitSymbolTimer();
-    LED0 = 0;
-    LED1 = 0;
-    LED2 = 0;
+	// Board and LCD initialization
+	BoardInit();
+	LCDInit();
+	InitSymbolTimer();
+	LED0 = 0;
+	LED1 = 0;
+	LED2 = 0;
 
-    while (state != APP_STATE_EXIT)
-    {
-        switch (state)
-        {
-            case APP_STATE_INIT:
-                App_ShowSplash();
-                /*******************************************************************/
-                // Initialize the MiWi Protocol Stack. The only input parameter indicates
-                // if previous network configuration should be restored.
-                /*******************************************************************/		
-                MiApp_ProtocolInit(FALSE);
-                state = APP_STATE_CHANNEL_SELECT;
-                break;
+	while (state != APP_STATE_EXIT)
+	{
+		switch (state)
+		{
+			case APP_STATE_INIT:
+				App_ShowSplash();
+				MiApp_ProtocolInit(FALSE);
+				state = APP_STATE_CHANNEL_SELECT;
+				break;
 
-            case APP_STATE_CHANNEL_SELECT:
-                App_ChannelSelect();
-                state = APP_STATE_NETWORK_SETUP;
-                break;
+			case APP_STATE_CHANNEL_SELECT:
+				App_ChannelSelect();
+				state = APP_STATE_NETWORK_SETUP;
+				break;
 
-            case APP_STATE_NETWORK_SETUP:
-                if (App_NetworkSetup())
-                    state = APP_STATE_WAIT_FOR_CONNECTION;
-                else
-                    state = APP_STATE_CHANNEL_SELECT; // Retry on fail
-                break;
+			case APP_STATE_NETWORK_SETUP:
+				if (App_NetworkSetup())
+					state = APP_STATE_WAIT_FOR_CONNECTION;
+				else
+					state = APP_STATE_CHANNEL_SELECT;
+				break;
 
-            case APP_STATE_WAIT_FOR_CONNECTION:
-                App_WaitForConnection();
-                state = APP_STATE_MENU;
-                break;
+			case APP_STATE_WAIT_FOR_CONNECTION:
+				App_WaitForConnection();
+				state = APP_STATE_MENU;
+				break;
 
-            case APP_STATE_MENU:
-                selectedMenu = App_ShowMenu();
-                switch (selectedMenu)
-                {
-                    case MENU_RANGE_DEMO: state = APP_STATE_RANGE_DEMO; break;
-                    case MENU_TEMP_DEMO:  state = APP_STATE_TEMP_DEMO; break;
-                    case MENU_NODE_INFO:  state = APP_STATE_NODE_INFO; break;
-                    default:              state = APP_STATE_EXIT; break;
-                }
-                break;
+			case APP_STATE_MENU:
+				selectedMenu = App_ShowMenu();
+				switch (selectedMenu)
+				{
+					case MENU_RANGE_DEMO: state = APP_STATE_RANGE_DEMO; break;
+					case MENU_TEMP_DEMO:  state = APP_STATE_TEMP_DEMO; break;
+					case MENU_NODE_INFO:  state = APP_STATE_NODE_INFO; break;
+					default:              state = APP_STATE_EXIT; break;
+				}
+				break;
 
-            case APP_STATE_RANGE_DEMO:
-                RangeDemo();
-                state = APP_STATE_MENU;
-                break;
+			case APP_STATE_RANGE_DEMO:
+			{
+				BYTE i, validCount = 0;
+				for (i = 0; i < CONNECTION_SIZE; i++) {
+					if (ConnectionTable[i].status.bits.isValid) {
+						validCount++;
+					}
+				}
+				if (validCount > 1) {
+					LCDDisplay("Select Peer Node for Range Test", 0, FALSE);
+					DelayMs(1000);
+				}
+				RangeDemo();
+				state = APP_STATE_MENU;
+				break;
+			}
 
-            case APP_STATE_TEMP_DEMO:
-                TempDemo();
-                state = APP_STATE_MENU;
-                break;
+			case APP_STATE_TEMP_DEMO:
+				TempDemo();
+				state = APP_STATE_MENU;
+				break;
 
-            case APP_STATE_NODE_INFO:
-                App_ShowNodeInfo();
-                state = APP_STATE_MENU;
-                break;
+			case APP_STATE_NODE_INFO:
+				App_ShowNodeInfo();
+				state = APP_STATE_MENU;
+				break;
 
-            default:
-                state = APP_STATE_EXIT;
-                break;
-        }
-    }
+			default:
+				state = APP_STATE_EXIT;
+				break;
+		}
+	}
 }
 
 /***************************************************************************
