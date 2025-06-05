@@ -445,8 +445,9 @@ void PrintTempLCD(void)
     int clearIdx;
 	int temp, len;
 	BYTE tempF;
-    int intpart,decpart;
+    int intpart,decpart, intpartF, decpartF;
     char tempStr[6];
+    float tempF_f;
 	
     LCDErase();
     
@@ -479,18 +480,14 @@ void PrintTempLCD(void)
         len = strlen(tempStr);
         sprintf((char *)&LCDText[21], "%sC", tempStr);	
 
-		temp = NodeTemp[CurrentNodeIndex].TempValue;
-		temp = temp * 9;
-		temp = temp / 5;
-		temp = temp + 32;
-		tempF = (BYTE) temp;
-//    	sprintf((char *)&LCDText[25], (far rom char*)"/ %d", tempF);
-//    	sprintf((char *)&LCDText[29], (far rom char*)"F"); 	
-        
-        // Write Fahrenheit immediately after 'C'
-        
-        sprintf((char *)&LCDText[21 + len + 1], "/%dF", tempF);
-        // Optionally pad with spaces to clear the rest of the line if previous content was longer
+		tempF_f = NodeTemp[CurrentNodeIndex].TempValue * 9.0 / 5.0 + 32.0;
+        intpartF = (int)tempF_f;
+        decpartF = (int)((tempF_f - intpartF) * 10.0 + 0.5);
+        if(decpartF < 0) decpartF = -decpartF;
+
+        // Now format with one decimal point
+        sprintf((char *)&LCDText[21 + len + 1], "/%d.%1dF", intpartF, decpartF);
+        // Pad the rest of the line with spaces
         clearIdx = 21 + len + 1 + strlen((char *)&LCDText[21 + len + 1]);
         for(; clearIdx < 32; clearIdx++)
             LCDText[clearIdx] = ' ';
