@@ -176,75 +176,80 @@ static void App_ShowSplash(void)
 // 2. User selects channel (SW1 to select, SW2 to cycle)
 static void App_ChannelSelect(void)
 {
-	BYTE sw;
-	BYTE select_channel;
-	BOOL update_channel = FALSE;
-    
+    BYTE sw;
+    BYTE select_channel;
+    BOOL update_channel = FALSE;
+
     LCDErase();
     sprintf((char *)LCDText, "SW1:<Sel Ch:%02d>", myChannel);
     sprintf((char *)&(LCDText[16]), "SW2: Chnge Chnl");
     LCDUpdate();
     DelayMs(1000);
 
-	// Show initial prompt with current channel
-	while (1)
-	{
-		
+    // Wait until user presses SW1 to accept or SW2 to modify
+    while (1)
+    {
+        sw = ButtonPressed();
 
-		sw = ButtonPressed();
-		if (sw == SW1)
-		{
-			// User accepted default channel, break and set it
-			break;
-		}
-		else if (sw == SW2)
-		{
-			// Start cycling through channels
+        if (sw == SW1)
+        {
+            // Use the default channel
+            break;
+        }
+        else if (sw == SW2)
+        {
+            // Start cycling through channels
 #if defined (MRF24J40)
-			select_channel = 11;
+            select_channel = 11;
 #else
-			select_channel = 27;
+            select_channel = 27;
 #endif
-			update_channel = TRUE;
+            update_channel = TRUE;
 
-			while(update_channel)
-			{
-				LCDErase();
-				sprintf((char *)LCDText, "SW1:<Sel Ch:%02d>", select_channel);
-				sprintf((char *)&(LCDText[16]), "SW2: Chnge Chnl");
-				LCDUpdate();
+            while (update_channel)
+            {
+                // Display currently selected channel
+                LCDErase();
+                sprintf((char *)LCDText, "SW1:<Sel Ch:%02d>", select_channel);
+                sprintf((char *)&(LCDText[16]), "SW2: Chnge Chnl");
+                LCDUpdate();
 
-				sw = ButtonPressed();
-				if (sw == SW1)
-				{
-					myChannel = select_channel;
-					update_channel = FALSE;
-				}
-				else if (sw == SW2)
-				{
-					select_channel++;
+                // Block until SW1 or SW2 is pressed
+                while (1)
+                {
+                    sw = ButtonPressed();
+                    if (sw == SW1)
+                    {
+                        myChannel = select_channel;
+                        update_channel = FALSE;
+                        break;
+                    }
+                    else if (sw == SW2)
+                    {
+                        select_channel++;
 #if defined(MRF24J40)
-					if(select_channel == 27)
-						select_channel = 11;
+                        if (select_channel == 27)
+                            select_channel = 11;
 #elif defined(MRF89XA)
-					if(select_channel == 32)
+                        if (select_channel == 32)
                             select_channel = 0;
-                    #else
+#else
                         #error "MiWi Demo is not supported for this transceiver"
 #endif
-				}
-			}
-			break;
-		}
-	}
+                        break;  // redraw screen with new channel value
+                    }
+                }
+            }
+            break;
+        }
+    }
 
-	// Now set the channel and check result
-	if( !App_SetChannel(myChannel) )
-	{
-		// Error already displayed inside App_SetChannel
-		// Could loop back, or halt as Demo.c does
-		return;
-	}
+    // Now set the channel and check result
+    if (!App_SetChannel(myChannel))
+    {
+        // Error already displayed inside App_SetChannel
+        return;
+    }
 }
 
 
