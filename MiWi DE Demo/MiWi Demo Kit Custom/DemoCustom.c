@@ -158,6 +158,7 @@ void main(void)
 
 			default:
 				state = APP_STATE_EXIT;
+                MiApp_RemoveConnection(0);
 				break;
 		}
 	}
