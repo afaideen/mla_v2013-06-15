@@ -465,7 +465,27 @@ void HandleSecurity(void);
         {
             flags_bits_RF_SECIF = FALSE;            
             HandleMRF24J40SecurityInterrupt();  // Now safely executed
-        }
+
+		}
+
+#if defined(__18CXX)
+	    //check to see if the symbol timer overflowed
+            if(TMR_IF)
+            {
+                if(TMR_IE)
+                {
+                    /* there was a timer overflow */
+                    TMR_IF = 0;
+                    timerExtension1++;
+                    if(timerExtension1 == 0)
+                    {
+                        timerExtension2++;
+                    }
+                }
+            }
+
+            UserInterruptHandler();
+#endif
     }
 
     /************************************************************************************
@@ -513,7 +533,7 @@ void HandleSecurity(void);
         //set the interrupt flag just in case the interrupt was missed
         if(RF_INT_PIN == 0)
         {
-//            RFIF = 1; //original
+            RFIF = 1; //original
         }
         
         //If the stack TX has been busy for a long time then
@@ -1685,14 +1705,14 @@ void HandleSecurity(void);
 
 static void HandleMRF24J40SecurityInterrupt()
 {
-	MIWI_TICK fnStart = MiWi_TickGet();
+//	MIWI_TICK fnStart = MiWi_TickGet();
 	BYTE i, j;
 //    printf("Handling security interrupt\r\n");
 #ifdef ENABLE_SECURITY
 	BYTE FrameControl;
     // If no security-related flags, exit early
-    if (!MRF24J40Status.bits.RX_SECURITY && !MRF24J40Status.bits.RX_IGNORE_SECURITY)
-        return;
+//    if (!MRF24J40Status.bits.RX_SECURITY && !MRF24J40Status.bits.RX_IGNORE_SECURITY)
+//        return;
 	if( MRF24J40Status.bits.TX_BUSY )
 	{
 		MRF24J40Status.bits.RX_IGNORE_SECURITY = 1;
@@ -1765,7 +1785,7 @@ static void HandleMRF24J40SecurityInterrupt()
 }
 static void HandleMRF24J40RXInterrupt(void)
 {
-	MIWI_TICK fnStart = MiWi_TickGet();
+//	MIWI_TICK fnStart = MiWi_TickGet();
 	BYTE i, j;
 	BYTE RxBank = 0xFF;
 //    printf("Handling rx interrupt\r\n");
@@ -1916,7 +1936,7 @@ static void HandleMRF24J40RXInterrupt(void)
 }
 static void HandleMRF24J40TXInterrupt(void)
 {
-	MIWI_TICK fnStart = MiWi_TickGet();
+//	MIWI_TICK fnStart = MiWi_TickGet();
 	//if the TX interrupt was triggered
 	//clear the busy flag indicating the transmission was complete
 	MRF24J40Status.bits.TX_BUSY = 0;
@@ -2062,25 +2082,26 @@ MIWI_TICK isrStart, isrEnd;
             } //end of scope of RF interrupt handler
         } //end of if(RFIE && RFIF)
 
-    END_OF_RF_INT:
-    #if defined(__18CXX)
-        //check to see if the symbol timer overflowed
-        if(TMR_IF)
-        {
-            if(TMR_IE)
-            {
-                /* there was a timer overflow */
-                TMR_IF = 0;
-                timerExtension1++;
-                if(timerExtension1 == 0)
-                {
-                    timerExtension2++;
-                }
-            }
-        }
+//    END_OF_RF_INT:
+//    #if defined(__18CXX)
+//        //check to see if the symbol timer overflowed
+//        if(TMR_IF)
+//        {
+//            if(TMR_IE)
+//            {
+//                /* there was a timer overflow */
+//                TMR_IF = 0;
+//                timerExtension1++;
+//                if(timerExtension1 == 0)
+//                {
+//                    timerExtension2++;
+//                }
+//            }
+//        }
+//
+//        UserInterruptHandler();
+//    #endif
 
-        UserInterruptHandler();
-    #endif
 //        isrEnd = MiWi_TickGet();
 //        uint32_t elapsed = MiWi_TickGetDiff(isrEnd, isrStart);
 //        unsigned long elapsed_ms = TICK_TO_MS(elapsed);

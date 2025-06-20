@@ -17,6 +17,16 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/DemoCustom.c</file>
+            <file>file:/C:/mla_v2013-06-15/Microchip/Include/WirelessProtocols/MiWiPRO/MiWiPRO.h</file>
+            <file>file:/C:/mla_v2013-06-15/Microchip/Transceivers/MRF24J40/MRF24J40.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/ConfigApp.h</file>
+            <file>file:/C:/mla_v2013-06-15/Microchip/Include/WirelessProtocols/MiWiPRO/ConfigMiWiPRO.h</file>
+            <file>file:/C:/mla_v2013-06-15/Microchip/Include/Transceivers/MRF24J40/ConfigMRF24J40.h</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/Demo.c</file>
+            <file>file:/C:/mla_v2013-06-15/Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/RangeDemo.c</file>
+        </group>
     </open-files>
 </project-private>

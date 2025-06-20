@@ -30,6 +30,7 @@
 #define EXIT_IDENTIFY_MODE  5
 
 #define NODE_INFO_INTERVAL  5
+#define HEARTBEAT_INTERVAL 5  // seconds
 
 /*** State Definitions ***/
 typedef enum {
@@ -72,16 +73,24 @@ static void App_ChannelSelect(void);
 static BOOL App_SetChannel(BYTE channel);
 static BOOL App_NetworkSetup(void);
 static void App_WaitForConnection(void);
-static MENU_OPTION App_ShowMenu(void);
+//static MENU_OPTION App_ShowMenu(void);
 static void App_ShowNodeInfo(void);
+static void ShowMenuText(MENU_OPTION menuIndex);
 
 BYTE ConnectionEntry = 0;
 
 /*** Main Application Entry ***/
 void main(void)
 {
+    static BOOL menuActive = FALSE;
+    static MENU_OPTION menuIndex = MENU_RANGE_DEMO;  // persists across main loop
+    static MENU_OPTION selectedMenu = MENU_RANGE_DEMO;
+    static MIWI_TICK lastHeartbeatTick = 0;
+    static BOOL networkJoined = FALSE;
 	APP_STATE state = APP_STATE_INIT;
-	MENU_OPTION selectedMenu = MENU_RANGE_DEMO;
+    BYTE result, i;
+    MIWI_TICK now;
+    BOOL res;
 
 	// Board and LCD initialization
 	BoardInit();
@@ -93,6 +102,23 @@ void main(void)
 
 	while (state != APP_STATE_EXIT)
 	{
+        // Heartbeat logic, only if joined:
+//        if (networkJoined) 
+//        {
+//            
+//            now = MiWi_TickGet();
+//            if (MiWi_TickGetDiff(now, lastHeartbeatTick) > (ONE_SECOND * HEARTBEAT_INTERVAL)) {
+//                MiApp_FlushTx();
+//                MiApp_WriteData(0x99);
+//                MiApp_WriteData(myShortAddress.v[0]);
+//                MiApp_WriteData(myShortAddress.v[1]);
+//
+//                res = MiApp_UnicastConnection(0, TRUE);
+//                
+//                lastHeartbeatTick = now;
+//                LED0 ^= 1;
+//            }
+//        }
 		switch (state)
 		{
 			case APP_STATE_INIT:
@@ -107,8 +133,12 @@ void main(void)
 				break;
 
 			case APP_STATE_NETWORK_SETUP:
+                networkJoined = FALSE;
 				if (App_NetworkSetup())
+                {
+                    networkJoined = TRUE;
 					state = APP_STATE_WAIT_FOR_CONNECTION;
+                }
 				else
 					state = APP_STATE_CHANNEL_SELECT;
 				break;
@@ -119,15 +149,27 @@ void main(void)
 				break;
 
 			case APP_STATE_MENU:
-				selectedMenu = App_ShowMenu();
-				switch (selectedMenu)
-				{
-					case MENU_RANGE_DEMO: state = APP_STATE_RANGE_DEMO; break;
-					case MENU_TEMP_DEMO:  state = APP_STATE_TEMP_DEMO; break;
-					case MENU_NODE_INFO:  state = APP_STATE_NODE_INFO; break;
-					default:              state = APP_STATE_EXIT; break;
-				}
-				break;
+                if (!menuActive) {
+                    ShowMenuText(menuIndex);
+                    menuActive = TRUE;
+                }
+                result = ButtonPressed();
+                if (result == SW1) {
+                    selectedMenu = menuIndex;
+                    menuActive = FALSE;
+                    switch (selectedMenu)
+                    {
+                        case MENU_RANGE_DEMO: state = APP_STATE_RANGE_DEMO; break;
+                        case MENU_TEMP_DEMO:  state = APP_STATE_TEMP_DEMO; break;
+                        case MENU_NODE_INFO:  state = APP_STATE_NODE_INFO; break;
+                        default:              state = APP_STATE_EXIT; break;
+                    }
+                } else if (result == SW2) {
+                    menuIndex = (menuIndex + 1) % MENU_COUNT;
+                    ShowMenuText(menuIndex);
+                }
+                break;
+
 
 			case APP_STATE_RANGE_DEMO:
 			{
@@ -157,6 +199,7 @@ void main(void)
 				break;
 
 			default:
+                networkJoined = FALSE; // if exiting or removing connection
 				state = APP_STATE_EXIT;
                 MiApp_RemoveConnection(0);
 				break;
@@ -470,28 +513,28 @@ static void ShowMenuText(MENU_OPTION menuIndex)
 
 
 // 5. Show main menu and handle selection
-static MENU_OPTION App_ShowMenu(void)
-{
-	MENU_OPTION menuIndex = MENU_RANGE_DEMO;
-	BYTE result = 0;
-
-	// Show initial menu
-	ShowMenuText(menuIndex);
-
-	while (1) {
-		result = ButtonPressed();
-
-		if (result == SW1)
-			return menuIndex;
-		else if (result == SW2) {
-			menuIndex = (menuIndex + 1) % MENU_COUNT;
-
-			ShowMenuText(menuIndex);
-		}
-
-		// ... MiWi packet handling unchanged ...
-	}
-}
+//static MENU_OPTION App_ShowMenu(void)
+//{
+//	MENU_OPTION menuIndex = MENU_RANGE_DEMO;
+//	BYTE result = 0;
+//
+//	// Show initial menu
+//	ShowMenuText(menuIndex);
+//
+//	while (1) {
+//		result = ButtonPressed();
+//
+//		if (result == SW1)
+//			return menuIndex;
+//		else if (result == SW2) {
+//			menuIndex = (menuIndex + 1) % MENU_COUNT;
+//
+//			ShowMenuText(menuIndex);
+//		}
+//
+//		// ... MiWi packet handling unchanged ...
+//	}
+//}
 
 
 

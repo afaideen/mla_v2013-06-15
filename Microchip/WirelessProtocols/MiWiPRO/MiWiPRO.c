@@ -21,7 +21,7 @@
 * You should refer to the license agreement accompanying this Software for 
 * additional information regarding your rights and obligations.
 *
-* SOFTWARE AND DOCUMENTATION ARE PROVIDED â??AS ISâ?? WITHOUT WARRANTY OF ANY 
+* SOFTWARE AND DOCUMENTATION ARE PROVIDED ï¿½??AS ISï¿½?? WITHOUT WARRANTY OF ANY 
 * KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY 
 * WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A 
 * PARTICULAR PURPOSE. IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE 
@@ -5338,6 +5338,7 @@ volatile BOOL JoiningNetwork = FALSE;  // ? Track if device is trying to join
 
 BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
 {
+    BYTE targetIndex;
     BYTE retry = CONNECTION_RETRY_TIMES;
     BYTE i, j;
     MIWI_TICK t1, t2;
@@ -5494,6 +5495,11 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
         #if defined(ENABLE_TIME_SYNC) && !defined(ENABLE_SLEEP) && defined(ENABLE_INDIRECT_MESSAGE)
             TimeSyncTick = MiWi_TickGet();
         #endif
+        
+//        FamilyTree[myShortAddress.v[1]] = ConnectionTable[myParent].AltAddress.v[1];
+//        targetIndex = ConnectionTable[myParent].AltAddress.v[1];  // assume 0x00
+//        RoutingTable[targetIndex / 8] |= (1 << (targetIndex % 8));
+
         return myParent;
     }
     return 0xFF;

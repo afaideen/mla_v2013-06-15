@@ -72,7 +72,7 @@
         // receive MiWi PRO acknowledgement will be used to notify application
         // layer if transmission is successful.
         /*********************************************************************/
-//        #define ENABLE_MIWI_PRO_ACKNOWLEDGEMENT
+        #define ENABLE_MIWI_PRO_ACKNOWLEDGEMENT
         
         /*********************************************************************/
         // NUM_COORDINATOR defines the maximum number of Coordinators that
@@ -122,8 +122,8 @@
         // for MiWi PRO network layer, not for MAC layer. MAC layer acknowledgement
         // timeout is handled in MiMAC layer.
         /*********************************************************************/
-        #define MIWI_PRO_ACK_TIMEOUT            (ONE_SECOND)
-//        #define MIWI_PRO_ACK_TIMEOUT            (2 * ONE_SECOND)
+//        #define MIWI_PRO_ACK_TIMEOUT            (ONE_SECOND)
+        #define MIWI_PRO_ACK_TIMEOUT            (2 * ONE_SECOND)
 //        #define MIWI_PRO_ACK_TIMEOUT            (5 * ONE_SECOND)
 //        #define MIWI_PRO_ACK_TIMEOUT            (10 * ONE_SECOND)
 
