@@ -449,24 +449,24 @@ void HandleSecurity(void);
     volatile BOOL flags_bits_RF_SECIF = FALSE;
     void HandleInterruptFlags(void)
     {
-        if (flags_bits_RF_TXIF)
-        {
-            flags_bits_RF_TXIF = FALSE;
-            HandleMRF24J40TXInterrupt();
-        }
+//        if (flags_bits_RF_TXIF)
+//        {
+//            flags_bits_RF_TXIF = FALSE;
+//            HandleMRF24J40TXInterrupt();
+//        }
     
-        if (flags_bits_RF_RXIF)
-        {
-            flags_bits_RF_RXIF = FALSE;
-            HandleMRF24J40RXInterrupt();
-        }
+//        if (flags_bits_RF_RXIF)
+//        {
+//            flags_bits_RF_RXIF = FALSE;
+//            HandleMRF24J40RXInterrupt();
+//        }
         
-        if (flags_bits_RF_SECIF)
-        {
-            flags_bits_RF_SECIF = FALSE;            
-            HandleMRF24J40SecurityInterrupt();  // Now safely executed
-
-		}
+//        if (flags_bits_RF_SECIF)
+//        {
+//            flags_bits_RF_SECIF = FALSE;            
+//            HandleMRF24J40SecurityInterrupt();  // Now safely executed
+//
+//		}
 
 #if defined(__18CXX)
 	    //check to see if the symbol timer overflowed
@@ -529,7 +529,7 @@ void HandleSecurity(void);
     {   
         BYTE i;
         
-        HandleInterruptFlags();
+//        HandleInterruptFlags();
         //set the interrupt flag just in case the interrupt was missed
         if(RF_INT_PIN == 0)
         {
@@ -2044,63 +2044,51 @@ MIWI_TICK isrStart, isrEnd;
 
                 if(flags.bits.RF_TXIF)
                 {
-                    flags_bits_RF_TXIF = TRUE;
-//                    printf("\r\n[INT]RF_INT_PIN: %d, TXIF\r\n", RF_INT_PIN);
-//                    BSP_RGB_LED_BLUEToggle();
-//                    BSP_RGB_LED_REDOff();
-//                    BSP_RGB_LED_GREENOff();
-//                    HandleMRF24J40TXInterrupt();
+//                    flags_bits_RF_TXIF = TRUE;
+                    HandleMRF24J40TXInterrupt();
 //                    (void)PHYGetShortRAMAddr(READ_TXSR);  // Acknowledge TX complete
                     
                 }
                     
                 if(flags.bits.RF_RXIF)
                         {
-                    flags_bits_RF_RXIF = TRUE;
-//                    printf("\r\n[INT]RF_INT_PIN: %d, RXIF\r\n", RF_INT_PIN);
-//                    BSP_RGB_LED_REDToggle();
-//                    BSP_RGB_LED_GREENOff();
-//                    BSP_RGB_LED_BLUEOff();
-//                    HandleMRF24J40RXInterrupt();
+//                    flags_bits_RF_RXIF = TRUE;
+                    HandleMRF24J40RXInterrupt();
 //                    PHYSetShortRAMAddr(WRITE_RXFLUSH, 0x01);  // Acknowledge RX by flushing FIFO
                             
                 } //end of RXIF check
                             
     START_OF_SEC_INT:
                 if( flags.bits.SECIF )
-                            {
-                    flags_bits_RF_SECIF = TRUE;
-//                    printf("\r\n[INT]RF_INT_PIN: %d, SECIF\r\n", RF_INT_PIN);
-//                    BSP_RGB_LED_GREENToggle();
-//                    BSP_RGB_LED_REDOff();
-//                    BSP_RGB_LED_BLUEOff();
-//                    HandleMRF24J40SecurityInterrupt(flags);
+                {
+//                    flags_bits_RF_SECIF = TRUE;
+                    HandleMRF24J40SecurityInterrupt();
 //                    PHYSetShortRAMAddr(WRITE_SECCR0, 0x80);  // Ignore secured packet
 //                    BYTE secStatus = PHYGetShortRAMAddr(READ_SECISR);
 //                    PHYSetShortRAMAddr(READ_SECISR, secStatus);  // Clear SECIF
-                            }
+                }
             } //end of scope of RF interrupt handler
         } //end of if(RFIE && RFIF)
 
-//    END_OF_RF_INT:
-//    #if defined(__18CXX)
-//        //check to see if the symbol timer overflowed
-//        if(TMR_IF)
-//        {
-//            if(TMR_IE)
-//            {
-//                /* there was a timer overflow */
-//                TMR_IF = 0;
-//                timerExtension1++;
-//                if(timerExtension1 == 0)
-//                {
-//                    timerExtension2++;
-//                }
-//            }
-//        }
-//
-//        UserInterruptHandler();
-//    #endif
+    END_OF_RF_INT:
+    #if defined(__18CXX)
+        //check to see if the symbol timer overflowed
+        if(TMR_IF)
+        {
+            if(TMR_IE)
+            {
+                /* there was a timer overflow */
+                TMR_IF = 0;
+                timerExtension1++;
+                if(timerExtension1 == 0)
+                {
+                    timerExtension2++;
+                }
+            }
+        }
+
+        UserInterruptHandler();
+    #endif
 
 //        isrEnd = MiWi_TickGet();
 //        uint32_t elapsed = MiWi_TickGetDiff(isrEnd, isrStart);

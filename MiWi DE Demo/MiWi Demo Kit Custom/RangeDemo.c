@@ -153,10 +153,13 @@ void RangeDemo(void)
         	    MiApp_WriteData(0x73);
         	    MiApp_WriteData(0x21);
         	    	    
-                if( MiApp_UnicastConnection(ConnectionEntry, FALSE) == FALSE )
+                if( MiApp_UnicastConnection(ConnectionEntry, TRUE) == FALSE )
                     Pkt_Loss_Cnt++;
         	    else
+                {
+                    LED1 ^= 1;
         	        Pkt_Loss_Cnt = 0;
+                }
         	        
         	    Tx_Packet = FALSE;   		
     		}
@@ -182,9 +185,9 @@ void RangeDemo(void)
                     #endif
             		{
                 		sprintf((char *)&LCDText, (far rom char*)"Strength: Medium");
-                        LED0 = 1;
-                        LED1 = 1;
-                        LED2 = 0;
+//                        LED0 = 1;
+//                        LED1 = 1;
+//                        LED2 = 0;
                     } 
                     #if defined(MRF24J40)
                   	else if(rssi < 61)
@@ -193,9 +196,9 @@ void RangeDemo(void)
                     #endif
             		{
                 		sprintf((char *)&LCDText, (far rom char*)"Strength: Low");
-                        LED0 = 0;
-                        LED1 = 1;
-                        LED2 = 0;
+//                        LED0 = 0;
+//                        LED1 = 1;
+//                        LED2 = 0;
                     }
                     
                     // Convert to dB
@@ -230,7 +233,7 @@ void RangeDemo(void)
             	MiApp_DiscardMessage();
             	MiApp_FlushTx();
     	        MiApp_WriteData(ACK_PKT);
-    	        MiApp_UnicastConnection(ConnectionEntry, FALSE);
+    	        MiApp_UnicastConnection(ConnectionEntry, TRUE);
             	Run_Demo = FALSE;
             	LCDBacklightON();
                 LCDDisplay((char *)"   Exiting....     Range Demo  ", 0, TRUE);
@@ -262,7 +265,7 @@ void RangeDemo(void)
             /*******************************************************************/
             MiApp_FlushTx();    
             MiApp_WriteData(EXIT_PKT);
-            MiApp_UnicastConnection(ConnectionEntry, FALSE);
+            MiApp_UnicastConnection(ConnectionEntry, TRUE);
    
             LCDBacklightON();
             LCDDisplay((char *)"   Exiting....     Range Demo  ", 0, TRUE);

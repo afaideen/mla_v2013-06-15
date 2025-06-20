@@ -103,22 +103,25 @@ void main(void)
 	while (state != APP_STATE_EXIT)
 	{
         // Heartbeat logic, only if joined:
-//        if (networkJoined) 
-//        {
-//            
-//            now = MiWi_TickGet();
-//            if (MiWi_TickGetDiff(now, lastHeartbeatTick) > (ONE_SECOND * HEARTBEAT_INTERVAL)) {
-//                MiApp_FlushTx();
-//                MiApp_WriteData(0x99);
-//                MiApp_WriteData(myShortAddress.v[0]);
-//                MiApp_WriteData(myShortAddress.v[1]);
-//
-//                res = MiApp_UnicastConnection(0, TRUE);
-//                
-//                lastHeartbeatTick = now;
-//                LED0 ^= 1;
-//            }
-//        }
+        if (networkJoined) 
+        {
+            
+            now = MiWi_TickGet();
+            if (MiWi_TickGetDiff(now, lastHeartbeatTick) > (ONE_SECOND * HEARTBEAT_INTERVAL)) {
+                MiApp_FlushTx();
+                MiApp_WriteData(0x99);
+                MiApp_WriteData(myShortAddress.v[0]);
+                MiApp_WriteData(myShortAddress.v[1]);
+
+                res = MiApp_UnicastConnection(0, TRUE);
+                if(res){
+                    LED0 ^= 1;
+                }
+                
+                lastHeartbeatTick = now;
+               
+            }
+        }
 		switch (state)
 		{
 			case APP_STATE_INIT:

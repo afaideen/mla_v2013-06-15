@@ -5496,9 +5496,9 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
             TimeSyncTick = MiWi_TickGet();
         #endif
         
-//        FamilyTree[myShortAddress.v[1]] = ConnectionTable[myParent].AltAddress.v[1];
-//        targetIndex = ConnectionTable[myParent].AltAddress.v[1];  // assume 0x00
-//        RoutingTable[targetIndex / 8] |= (1 << (targetIndex % 8));
+        FamilyTree[myShortAddress.v[1]] = ConnectionTable[myParent].AltAddress.v[1];
+        targetIndex = ConnectionTable[myParent].AltAddress.v[1];  // assume 0x00
+        RoutingTable[targetIndex / 8] |= (1 << (targetIndex % 8));
 
         return myParent;
     }
@@ -5733,7 +5733,7 @@ BOOL MiApp_UnicastConnection( INPUT BYTE ConnectionIndex,
                 }                
                 //MiWiPROTasks();
                 if( MiWiPROStateMachine.bits.MiWiPROAckInProgress == 0 )
-                {
+                {                    
                     return TRUE;
                 }    
                 t2 = MiWi_TickGet();
@@ -5743,7 +5743,7 @@ BOOL MiApp_UnicastConnection( INPUT BYTE ConnectionIndex,
                     return FALSE;
                 }    
             }    
-        }
+        }        
         return TRUE;
     #else
         // for end device, always send the message to its parent
