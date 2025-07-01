@@ -130,46 +130,7 @@ void main(void)
     }
 
 	while (state != APP_STATE_EXIT)
-	{
-        
-        // Heartbeat logic, only if joined:
-        if (networkJoined) 
-        {
-            
-            now = MiWi_TickGet();
-            if (MiWi_TickGetDiff(now, lastHeartbeatTick) > (ONE_SECOND * HEARTBEAT_INTERVAL)) {
-                MiApp_FlushTx();
-                MiApp_WriteData(0x99);
-                MiApp_WriteData(myShortAddress.v[0]);
-                MiApp_WriteData(myShortAddress.v[1]);
-
-                res = MiApp_UnicastConnection(0, TRUE);
-                if (res) {
-                    LED0 ^= 1;
-                    // Reset heartbeat timeout logic
-                    heartbeatTimeoutActive = FALSE;
-                    heartbeatFirstFailTick.Val = 0;
-                } else {
-                    // Unicast failed, check/start timeout
-                    if (!heartbeatTimeoutActive) {
-                        heartbeatFirstFailTick = now;
-                        heartbeatTimeoutActive = TRUE;
-                    } else if (MiWi_TickGetDiff(now, heartbeatFirstFailTick) > (ONE_SECOND * HEARTBEAT_UNICAST_TIMEOUT_SEC)) {
-                        LCDDisplay("HB Timeout! Rejoining...", 0, TRUE);
-                        DelayMs(1000);
-                        Rejoin = 1;
-                        networkJoined = FALSE;
-                        heartbeatTimeoutActive = FALSE;
-                        heartbeatFirstFailTick.Val = 0;
-                        // Optionally break state machine or trigger rejoin immediately:
-                         state = APP_STATE_CHANNEL_SELECT;
-                    }
-                }
-                
-                lastHeartbeatTick = now;
-               
-            }
-        }
+	{        
 		switch (state)
 		{
 			case APP_STATE_INIT:

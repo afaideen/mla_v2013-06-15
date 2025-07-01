@@ -112,12 +112,12 @@ void RangeDemo(void)
     BYTE pktCmd = 0;
 
     // Patch variables for timeout logic
-    static MIWI_TICK firstUnicastAttemptTick = 0;
-    static BOOL rangeTimeoutActive = FALSE;
+//    static MIWI_TICK firstUnicastAttemptTick = 0;
+//    static BOOL rangeTimeoutActive = FALSE;
     
 
 	/*******************************************************************/
-    // Dispaly Range Demo Splach Screen
+    // Display Range Demo Splash Screen
     /*******************************************************************/	
     LCDBacklightON();
     LCDDisplay((char *)"   Microchip       Range Demo  ", 0, TRUE);
@@ -160,11 +160,11 @@ void RangeDemo(void)
         	    MiApp_WriteData(0x21);
 
 		        // --- PATCH: Timeout from first unicast attempt ---
-		        if (!rangeTimeoutActive)
-		        {
-			        firstUnicastAttemptTick = MiWi_TickGet();
-			        rangeTimeoutActive = TRUE;
-		        }
+//		        if (!rangeTimeoutActive)
+//		        {
+//			        firstUnicastAttemptTick = MiWi_TickGet();
+//			        rangeTimeoutActive = TRUE;
+//		        }
 		        // -------------------------------------------------
         	    	    
                 if( MiApp_UnicastConnection(ConnectionEntry, TRUE) == FALSE )
@@ -174,8 +174,8 @@ void RangeDemo(void)
                     LED1 ^= 1;
         	        Pkt_Loss_Cnt = 0;
 	                // --- PATCH: Reset timeout ONLY on successful send ---
-	                rangeTimeoutActive = FALSE;
-	                firstUnicastAttemptTick.Val = 0;
+//	                rangeTimeoutActive = FALSE;
+//	                firstUnicastAttemptTick.Val = 0;
 	                // ---------------------------------------------------
                 }
         	        
@@ -192,9 +192,9 @@ void RangeDemo(void)
                     #endif    
             		{
                 		sprintf((char *)&LCDText, (far rom char*)"Strength: High ");
-                        LED0 = 1;
-                        LED1 = 0;
-                        LED2 = 0;
+//                        LED0 = 1;
+//                        LED1 = 0;
+//                        LED2 = 0;
                     }
                     #if defined(MRF24J40)  		
                 	else if(rssi < 121 && rssi > 60)
@@ -243,17 +243,17 @@ void RangeDemo(void)
         }
 
 	    // --- PATCH: Check for unicast timeout ---
-	    if (rangeTimeoutActive)
-	    {
-		    MIWI_TICK now = MiWi_TickGet();
-		    if (MiWi_TickGetDiff(now, firstUnicastAttemptTick) > (ONE_SECOND * RANGE_UNICAST_TIMEOUT_SEC))
-		    {
-			    LCDDisplay((char *)"Conn lost. Rejoining...", 0, TRUE);
-			    Run_Demo = FALSE;
-                Rejoin = 1;
-			    break; // Exit immediately; main logic can now attempt rejoin
-		    }
-	    }
+//	    if (rangeTimeoutActive)
+//	    {
+//		    MIWI_TICK now = MiWi_TickGet();
+//		    if (MiWi_TickGetDiff(now, firstUnicastAttemptTick) > (ONE_SECOND * RANGE_UNICAST_TIMEOUT_SEC))
+//		    {
+//			    LCDDisplay((char *)"Conn lost. Rejoining...", 0, TRUE);
+//			    Run_Demo = FALSE;
+//                Rejoin = 1;
+//			    break; // Exit immediately; main logic can now attempt rejoin
+//		    }
+//	    }
 	    // -----------------------------------------
         
     	// Check if Message Available
@@ -314,10 +314,10 @@ void RangeDemo(void)
                         
                     MiApp_DiscardMessage();
                 }
-                if ((MiWi_TickGetDiff(tick2,tick1) > (ONE_SECOND * EXIT_DEMO_TIMEOUT)))
-                    Run_Demo = FALSE;
-                    
-                tick2 = MiWi_TickGet();
+//                if ((MiWi_TickGetDiff(tick2,tick1) > (ONE_SECOND * EXIT_DEMO_TIMEOUT)))
+//                    Run_Demo = FALSE;
+//                    
+//                tick2 = MiWi_TickGet();
             }    
         }    
     }
