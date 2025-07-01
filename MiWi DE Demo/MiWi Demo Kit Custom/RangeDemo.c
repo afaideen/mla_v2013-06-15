@@ -180,6 +180,7 @@ void RangeDemo(void)
 				    if(rxMessage.Payload[0] == ACK_PKT)
 				    {
 					    Run_Demo = FALSE;
+					    LCDDisplay((char *)"ACK received.", 0, TRUE);
 
 					}
 
