@@ -541,8 +541,17 @@
      *      None
      *
      *****************************************************************************************/ 
-    #define MiApp_WriteData(a) TxBuffer[TxData++] = a
+    #define MiApp_WriteData(a)          TxBuffer[TxData++] = a
+    #define MiApp_WriteStringRAM(str)   MiApp_WriteDataBuffer((const BYTE*)(str), strlen((const char *)(str)))
+    #define MiApp_WriteStringROM(str) \
+    do { \
+        const rom char *_p = (const rom char *)(str); \
+        while(*_p) MiApp_WriteData(*_p++); \
+    } while(0)
+
+
     
+    void MiApp_WriteDataBuffer(const BYTE *buf, BYTE len);
     /************************************************************************************
      * Function:
      *      BOOL MiApp_BroadcastPacket(BOOL SecEn )

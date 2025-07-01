@@ -103,6 +103,7 @@ extern BYTE Rejoin;
 **********************************************************************/                                
 void RangeDemo(void)
 {
+    unsigned char msg[] = "MiWi Rocks!";
     BOOL Run_Demo = TRUE;
 //    BOOL Tx_Packet = TRUE;
     BYTE rssi = 0;
@@ -130,74 +131,7 @@ void RangeDemo(void)
     
     while(Run_Demo)
     {	
-        /*******************************************************************/
-        // Read current tickcount
-        /*******************************************************************/
-    	tick2 = MiWi_TickGet();
         
-
-        if((MiWi_TickGetDiff(tick2,tick1) > (ONE_SECOND * TX_PKT_INTERVAL)))
-        {
-//	        if(!Tx_Packet)
-	        {
-		        if(Pkt_Loss_Cnt < 1)
-		        {
-#if defined(MRF24J40)
-			        if(rssi > 120)
-#else
-				        if(rssi > 100)
-#endif
-			        {
-				        sprintf((char *)&LCDText, (far rom char*)"Strength: High ");
-//                        LED0 = 1;
-//                        LED1 = 0;
-//                        LED2 = 0;
-			        }
-#if defined(MRF24J40)
-			        else if(rssi < 121 && rssi > 60)
-#else
-				        else if(rssi < 101 && rssi > 60)
-#endif
-			        {
-				        sprintf((char *)&LCDText, (far rom char*)"Strength: Medium");
-//                        LED0 = 1;
-//                        LED1 = 1;
-//                        LED2 = 0;
-			        }
-#if defined(MRF24J40)
-			        else if(rssi < 61)
-#else
-				        else if(rssi < 61)
-#endif
-			        {
-				        sprintf((char *)&LCDText, (far rom char*)"Strength: Low");
-//                        LED0 = 0;
-//                        LED1 = 1;
-//                        LED2 = 0;
-			        }
-
-			        // Convert to dB
-			        //rssi = RSSIlookupTable[rssi];
-			        sprintf((char *)&(LCDText[16]), (far rom char*)"Rcv RSSI: %03d", rssi);
-		        }
-		        else
-		        {
-			        LCDDisplay((char *)"No Device Found or Out of Range ", 0, TRUE);
-//                        LED0 = 0;
-//                        LED1 = 0;
-//                        LED2 = 1;
-		        }
-
-		        LCDUpdate();
-//		        Tx_Packet = TRUE;
-
-	        }
-	        /*******************************************************************/
-	        // Read New Start tickcount
-	        /*******************************************************************/
-      		tick1 = MiWi_TickGet();
-
-        }
 	    // Send a Message
 	    switch_val = ButtonPressed();
 		if(switch_val == SW2)
@@ -208,18 +142,8 @@ void RangeDemo(void)
             		
         	    MiApp_FlushTx();
         	    
-        	    MiApp_WriteData(RANGE_PKT);
-        	    MiApp_WriteData(0x4D);
-        	    MiApp_WriteData(0x69);
-        	    MiApp_WriteData(0x57);
-        	    MiApp_WriteData(0x69);
-        	    MiApp_WriteData(0x20);
-        	    MiApp_WriteData(0x52);
-        	    MiApp_WriteData(0x6F);
-        	    MiApp_WriteData(0x63);
-        	    MiApp_WriteData(0x6B);
-        	    MiApp_WriteData(0x73);
-        	    MiApp_WriteData(0x21);
+        	    MiApp_WriteData(RANGE_PKT);                
+                MiApp_WriteStringRAM(msg);
 
         	    	    
                 if( MiApp_UnicastConnection(ConnectionEntry, TRUE) == FALSE )
@@ -297,6 +221,75 @@ void RangeDemo(void)
         	else
             	MiApp_DiscardMessage(); 
     	}
+        
+        /*******************************************************************/
+        // Read current tickcount
+        /*******************************************************************/
+    	tick2 = MiWi_TickGet();
+        
+
+        if((MiWi_TickGetDiff(tick2,tick1) > (ONE_SECOND * TX_PKT_INTERVAL)))
+        {
+//	        if(!Tx_Packet)
+	        {
+		        if(Pkt_Loss_Cnt < 1)
+		        {
+#if defined(MRF24J40)
+			        if(rssi > 120)
+#else
+				        if(rssi > 100)
+#endif
+			        {
+				        sprintf((char *)&LCDText, (far rom char*)"Strength: High ");
+//                        LED0 = 1;
+//                        LED1 = 0;
+//                        LED2 = 0;
+			        }
+#if defined(MRF24J40)
+			        else if(rssi < 121 && rssi > 60)
+#else
+				        else if(rssi < 101 && rssi > 60)
+#endif
+			        {
+				        sprintf((char *)&LCDText, (far rom char*)"Strength: Medium");
+//                        LED0 = 1;
+//                        LED1 = 1;
+//                        LED2 = 0;
+			        }
+#if defined(MRF24J40)
+			        else if(rssi < 61)
+#else
+				        else if(rssi < 61)
+#endif
+			        {
+				        sprintf((char *)&LCDText, (far rom char*)"Strength: Low");
+//                        LED0 = 0;
+//                        LED1 = 1;
+//                        LED2 = 0;
+			        }
+
+			        // Convert to dB
+			        //rssi = RSSIlookupTable[rssi];
+			        sprintf((char *)&(LCDText[16]), (far rom char*)"Rcv RSSI: %03d", rssi);
+		        }
+		        else
+		        {
+			        LCDDisplay((char *)"No Device Found or Out of Range ", 0, TRUE);
+//                        LED0 = 0;
+//                        LED1 = 0;
+//                        LED2 = 1;
+		        }
+
+		        LCDUpdate();
+//		        Tx_Packet = TRUE;
+
+	        }
+	        /*******************************************************************/
+	        // Read New Start tickcount
+	        /*******************************************************************/
+      		tick1 = MiWi_TickGet();
+
+        }
 
     	
 

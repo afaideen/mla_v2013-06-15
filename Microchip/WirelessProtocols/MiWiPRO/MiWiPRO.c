@@ -5642,7 +5642,12 @@ BOOL MultiCast( INPUT BYTE MultiCastMode, INPUT BOOL SecEn )
     return MiMAC_SendPacket(MTP, TxBuffer, TxData);    
 }    
 
-
+void MiApp_WriteDataBuffer(const BYTE *buf, BYTE len)
+{
+    BYTE i;
+    for (i = 0; i < len; i++)
+        TxBuffer[TxData++] = buf[i];
+}
 /************************************************************************************
  * Function:
  *      BOOL MiApp_UnicastConnection(BYTE ConnectionIndex, BOOL SecEn)

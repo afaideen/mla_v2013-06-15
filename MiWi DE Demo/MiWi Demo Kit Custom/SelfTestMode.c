@@ -113,11 +113,11 @@ void SelfTest(BYTE myChannel)
                             }
                             break;
                    
-                    case 254:   LCDDisplay("Self Test Mode  Test Pass", 0, TRUE);
+                    case 254:   LCDDisplay((char *)"Self Test Mode  Test Pass", 0, TRUE);
                                 LED0 = LED1= LED2 = 1;
                                 init_case = 0xF0;
                                 break;
-                    case 255:   LCDDisplay("Self Test Mode  Test Fail", 0, TRUE);
+                    case 255:   LCDDisplay((char *)"Self Test Mode  Test Fail", 0, TRUE);
                                 LED0 = LED1 = LED2 = 1;
                                 init_case = 0xF0;
                                 break;
