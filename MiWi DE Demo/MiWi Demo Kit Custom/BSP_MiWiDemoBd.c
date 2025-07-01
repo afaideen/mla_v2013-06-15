@@ -254,6 +254,7 @@ MIWI_TICK switch1PressTime;
     PIR3bits.SSP2IF = 0; 
 
     ADC_Init();  // Initialize ADC
+//    NVMInit();
     /*******************************************************************/
     // Enable System Interupts. DISABLE THIS IF NOT USED ELSE IT MAY CREATE INSTABILITY.
     /*******************************************************************/
@@ -408,6 +409,34 @@ BYTE ButtonPressed(void)
 
 void UserInterruptHandler(void)
 {
+    if(INTCONbits.INT0IE && INTCONbits.INT0IF )
+    {
+        INTCONbits.INT0IF = 0;
+    }   
+
+    if(INTCON3bits.INT2IE && INTCON3bits.INT2IF )
+    {
+        INTCON3bits.INT2IF = 0;
+    }   
+
+    if(INTCONbits.RBIE && INTCONbits.RBIF)
+    {
+        INTCONbits.RBIF = 0;
+    }
+
+
+    if( PIE2bits.TMR3IE && PIR2bits.TMR3IF )
+    {
+        PIR2bits.TMR3IF = 0;
+//        LED_1 ^= 1;
+    } 
+    if( PIR3bits.SSP2IF )
+     {
+         PIR3bits.SSP2IF = 0;
+//         I2CTask();
+         DelayMs(5);
+     }   
+ 
 /*    if( PIR3bits.SSP2IF )
     {
         PIR3bits.SSP2IF = 0;

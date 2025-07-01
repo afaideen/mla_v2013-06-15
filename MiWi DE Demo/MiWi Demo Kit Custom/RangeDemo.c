@@ -8,7 +8,7 @@
 *
 * Copyright and Disclaimer Notice
 *
-* Copyright © 2007-2010 Microchip Technology Inc.  All rights reserved.
+* Copyright ï¿½ 2007-2010 Microchip Technology Inc.  All rights reserved.
 *
 * Microchip licenses to you the right to use, modify, copy and distribute 
 * Software only when embedded on a Microchip microcontroller or digital 
@@ -19,7 +19,7 @@
 * You should refer to the license agreement accompanying this Software for 
 * additional information regarding your rights and obligations.
 *
-* SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS” WITHOUT WARRANTY OF ANY 
+* SOFTWARE AND DOCUMENTATION ARE PROVIDED ?AS IS? WITHOUT WARRANTY OF ANY 
 * KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY 
 * WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A 
 * PARTICULAR PURPOSE. IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE 
@@ -46,6 +46,7 @@
 #define TX_PKT_INTERVAL             4
 #define DISPLAY_RSSI_INTERVAL       4
 #define EXIT_DEMO_TIMEOUT           6
+#define RANGE_UNICAST_TIMEOUT_SEC           12
 
 #define EXIT_PKT    1
 #define RANGE_PKT   2
@@ -83,6 +84,7 @@ ROM BYTE RSSIlookupTable [] =   {100,89,88,88,88,87,87,87,87,86,86,86,86,85,85,8
 
 
 extern BYTE ConnectionEntry;
+extern BYTE Rejoin;
 /*********************************************************************
 * Function:         void RangeDemo(void)
 *
@@ -104,10 +106,14 @@ void RangeDemo(void)
     BOOL Run_Demo = TRUE;
     BOOL Tx_Packet = TRUE;
     BYTE rssi = 0;
-	BYTE Pkt_Loss_Cnt = 0;
-	MIWI_TICK tick1, tick2;
+    BYTE Pkt_Loss_Cnt = 0;
+    MIWI_TICK tick1, tick2;
     BYTE switch_val;
     BYTE pktCmd = 0;
+
+    // Patch variables for timeout logic
+    static MIWI_TICK firstUnicastAttemptTick = 0;
+    static BOOL rangeTimeoutActive = FALSE;
     
 
 	/*******************************************************************/
@@ -152,6 +158,14 @@ void RangeDemo(void)
         	    MiApp_WriteData(0x6B);
         	    MiApp_WriteData(0x73);
         	    MiApp_WriteData(0x21);
+
+		        // --- PATCH: Timeout from first unicast attempt ---
+		        if (!rangeTimeoutActive)
+		        {
+			        firstUnicastAttemptTick = MiWi_TickGet();
+			        rangeTimeoutActive = TRUE;
+		        }
+		        // -------------------------------------------------
         	    	    
                 if( MiApp_UnicastConnection(ConnectionEntry, TRUE) == FALSE )
                     Pkt_Loss_Cnt++;
@@ -159,6 +173,10 @@ void RangeDemo(void)
                 {
                     LED1 ^= 1;
         	        Pkt_Loss_Cnt = 0;
+	                // --- PATCH: Reset timeout ONLY on successful send ---
+	                rangeTimeoutActive = FALSE;
+	                firstUnicastAttemptTick.Val = 0;
+	                // ---------------------------------------------------
                 }
         	        
         	    Tx_Packet = FALSE;   		
@@ -208,9 +226,9 @@ void RangeDemo(void)
                 else
                 {
                         LCDDisplay((char *)"No Device Found or Out of Range ", 0, TRUE);
-                        LED0 = 0;
-                        LED1 = 0;
-                        LED2 = 1;
+//                        LED0 = 0;
+//                        LED1 = 0;
+//                        LED2 = 1;
                 }
 
                 LCDUpdate();
@@ -223,6 +241,20 @@ void RangeDemo(void)
       		tick1 = MiWi_TickGet(); 
       		  
         }
+
+	    // --- PATCH: Check for unicast timeout ---
+	    if (rangeTimeoutActive)
+	    {
+		    MIWI_TICK now = MiWi_TickGet();
+		    if (MiWi_TickGetDiff(now, firstUnicastAttemptTick) > (ONE_SECOND * RANGE_UNICAST_TIMEOUT_SEC))
+		    {
+			    LCDDisplay((char *)"Conn lost. Rejoining...", 0, TRUE);
+			    Run_Demo = FALSE;
+                Rejoin = 1;
+			    break; // Exit immediately; main logic can now attempt rejoin
+		    }
+	    }
+	    // -----------------------------------------
         
     	// Check if Message Available
     	if(MiApp_MessageAvailable())

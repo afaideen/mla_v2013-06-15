@@ -2022,7 +2022,7 @@ MIWI_TICK isrStart, isrEnd;
     
     void InterruptHandling(void)
     {
-        isrStart = MiWi_TickGet();
+//        isrStart = MiWi_TickGet();
     
         if(RFIE && RFIF)
         {  
@@ -2050,8 +2050,8 @@ MIWI_TICK isrStart, isrEnd;
                     
                 }
                     
-                if(flags.bits.RF_RXIF)
-                        {
+                else if(flags.bits.RF_RXIF)
+                {
 //                    flags_bits_RF_RXIF = TRUE;
                     HandleMRF24J40RXInterrupt();
 //                    PHYSetShortRAMAddr(WRITE_RXFLUSH, 0x01);  // Acknowledge RX by flushing FIFO

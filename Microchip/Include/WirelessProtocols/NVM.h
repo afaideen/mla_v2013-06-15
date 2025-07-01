@@ -85,7 +85,8 @@
             #define MCHP_512KBIT            10
             #define MCHP_1MBIT              11
     
-            #define MCHP_EEPROM             MCHP_256KBIT
+//            #define MCHP_EEPROM             MCHP_256KBIT
+            #define MCHP_EEPROM             MCHP_2KBIT  //Memory used is 25AA02E48
             
             
             #if MCHP_EEPROM == 0

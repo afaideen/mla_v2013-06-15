@@ -29,8 +29,9 @@
 #define IDENTIFY_MODE       4
 #define EXIT_IDENTIFY_MODE  5
 
-#define NODE_INFO_INTERVAL  5
-#define HEARTBEAT_INTERVAL 5  // seconds
+#define NODE_INFO_INTERVAL              5
+#define HEARTBEAT_INTERVAL              5  // seconds
+#define HEARTBEAT_UNICAST_TIMEOUT_SEC   12  // seconds
 
 /*** State Definitions ***/
 typedef enum {
@@ -73,11 +74,14 @@ static void App_ChannelSelect(void);
 static BOOL App_SetChannel(BYTE channel);
 static BOOL App_NetworkSetup(void);
 static void App_WaitForConnection(void);
-//static MENU_OPTION App_ShowMenu(void);
 static void App_ShowNodeInfo(void);
 static void ShowMenuText(MENU_OPTION menuIndex);
+void FactoryResetEEPROM(void);
 
 BYTE ConnectionEntry = 0;
+BYTE Rejoin = 0;
+static MIWI_TICK heartbeatFirstFailTick = { .Val = 0 };
+static BOOL heartbeatTimeoutActive = FALSE;
 
 /*** Main Application Entry ***/
 void main(void)
@@ -91,6 +95,7 @@ void main(void)
     BYTE result, i;
     MIWI_TICK now;
     BOOL res;
+	BOOL useStoredNetwork = FALSE;
 
 	// Board and LCD initialization
 	BoardInit();
@@ -99,6 +104,30 @@ void main(void)
 	LED0 = 0;
 	LED1 = 0;
 	LED2 = 0;
+    
+    Read_MAC_Address();
+
+    useStoredNetwork = FALSE;
+    
+    // FACTORY RESET DETECTION
+    if (SW1_PORT == 0u) { // SW1 is pressed (held) at power up
+        LCDErase();
+        LCDDisplay("Resetting EEPROM...", 0, TRUE);
+        FactoryResetEEPROM();
+
+        // Wait for SW1 to be released (debounce)
+        while (SW1_PORT == 0u);
+
+        LCDDisplay("Restarting...", 0, TRUE);
+        DelayMs(500);
+#if defined(__18CXX)
+        Reset(); // PIC18 family
+#else
+        // For PIC24, PIC32, etc: use software reset
+        __asm__ volatile ("reset");
+#endif
+        while (1); // Should not reach here, just in case
+    }
 
 	while (state != APP_STATE_EXIT)
 	{
@@ -114,8 +143,26 @@ void main(void)
                 MiApp_WriteData(myShortAddress.v[1]);
 
                 res = MiApp_UnicastConnection(0, TRUE);
-                if(res){
+                if (res) {
                     LED0 ^= 1;
+                    // Reset heartbeat timeout logic
+                    heartbeatTimeoutActive = FALSE;
+                    heartbeatFirstFailTick.Val = 0;
+                } else {
+                    // Unicast failed, check/start timeout
+                    if (!heartbeatTimeoutActive) {
+                        heartbeatFirstFailTick = now;
+                        heartbeatTimeoutActive = TRUE;
+                    } else if (MiWi_TickGetDiff(now, heartbeatFirstFailTick) > (ONE_SECOND * HEARTBEAT_UNICAST_TIMEOUT_SEC)) {
+                        LCDDisplay("HB Timeout! Rejoining...", 0, TRUE);
+                        DelayMs(1000);
+                        Rejoin = 1;
+                        networkJoined = FALSE;
+                        heartbeatTimeoutActive = FALSE;
+                        heartbeatFirstFailTick.Val = 0;
+                        // Optionally break state machine or trigger rejoin immediately:
+                         state = APP_STATE_CHANNEL_SELECT;
+                    }
                 }
                 
                 lastHeartbeatTick = now;
@@ -126,8 +173,39 @@ void main(void)
 		{
 			case APP_STATE_INIT:
 				App_ShowSplash();
-				MiApp_ProtocolInit(FALSE);
-				state = APP_STATE_CHANNEL_SELECT;
+
+				// Attempt to restore from EEPROM (network freezer)
+				MiApp_ProtocolInit(TRUE);
+
+				// Check for valid stored network
+				useStoredNetwork = 0;
+                for (i = 0; i < CONNECTION_SIZE; i++) {
+                    if (
+                            ConnectionTable[i].PANID.Val != 0 && 
+                            ConnectionTable[i].PANID.Val != 0xFFFF &&
+                            ConnectionTable[i].PANID.Val != 0xFF00 &&
+                            ConnectionTable[i].AltAddress.Val != 0xFFFF &&
+                            ConnectionTable[i].status.Val != 0x0
+                            )
+                    {
+                        useStoredNetwork = 1;
+                        break;
+                    }
+                }
+
+				if(useStoredNetwork) {
+					LCDDisplay("Network Restored!", 0, TRUE);
+					DelayMs(1200);
+					networkJoined = TRUE;
+                    state = APP_STATE_MENU;
+                    
+				} else {
+					LCDDisplay("No Saved Network", 0, TRUE);
+					DelayMs(1200);
+					// Start fresh, cold start
+					MiApp_ProtocolInit(FALSE);
+					state = APP_STATE_CHANNEL_SELECT;
+				}
 				break;
 
 			case APP_STATE_CHANNEL_SELECT:
@@ -136,12 +214,12 @@ void main(void)
 				break;
 
 			case APP_STATE_NETWORK_SETUP:
-                networkJoined = FALSE;
+				networkJoined = FALSE;
 				if (App_NetworkSetup())
-                {
-                    networkJoined = TRUE;
+				{
+					networkJoined = TRUE;
 					state = APP_STATE_WAIT_FOR_CONNECTION;
-                }
+				}
 				else
 					state = APP_STATE_CHANNEL_SELECT;
 				break;
@@ -187,7 +265,11 @@ void main(void)
 					DelayMs(1000);
 				}
 				RangeDemo();
-				state = APP_STATE_MENU;
+//				state = APP_STATE_MENU;
+                if(Rejoin == 0)
+                    state = APP_STATE_MENU;
+                else
+                    state = APP_STATE_CHANNEL_SELECT;
 				break;
 			}
 
@@ -515,32 +597,6 @@ static void ShowMenuText(MENU_OPTION menuIndex)
 }
 
 
-// 5. Show main menu and handle selection
-//static MENU_OPTION App_ShowMenu(void)
-//{
-//	MENU_OPTION menuIndex = MENU_RANGE_DEMO;
-//	BYTE result = 0;
-//
-//	// Show initial menu
-//	ShowMenuText(menuIndex);
-//
-//	while (1) {
-//		result = ButtonPressed();
-//
-//		if (result == SW1)
-//			return menuIndex;
-//		else if (result == SW2) {
-//			menuIndex = (menuIndex + 1) % MENU_COUNT;
-//
-//			ShowMenuText(menuIndex);
-//		}
-//
-//		// ... MiWi packet handling unchanged ...
-//	}
-//}
-
-
-
 // 6. Node Info / Identify Mode handler
 static void App_ShowNodeInfo(void)
 {
@@ -550,4 +606,23 @@ static void App_ShowNodeInfo(void)
     LCDUpdate();
 	// Wait for SW1 or SW2 to exit (user control, not timer)
 	while(ButtonPressed() == 0);
+}
+
+#include "NVM.h"
+#define FACTORY_RESET_PATTERN       0xFF // Usually 0xFF for blank EEPROM; check your chip datasheet!
+#define FACTORY_RESET_BLOCK         NVM_PAGE_SIZE   // Write in 64-byte blocks for speed
+
+void FactoryResetEEPROM(void)
+{
+    BYTE blank[FACTORY_RESET_BLOCK];
+    WORD addr = 0;
+    WORD bytesLeft = 0xFA; // Only erase up to 0xF9 (skip MAC area)
+    memset(blank, 0xFF, sizeof(blank));
+    while (bytesLeft > 0) {
+        WORD chunk = (bytesLeft > FACTORY_RESET_BLOCK) ? FACTORY_RESET_BLOCK : bytesLeft;
+        NVMWrite(blank, addr, chunk);
+        addr += chunk;
+        bytesLeft -= chunk;
+    }
+    // Optionally, print "MAC preserved" to LCD for reassurance.
 }
