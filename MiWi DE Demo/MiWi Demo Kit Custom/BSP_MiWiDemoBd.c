@@ -434,7 +434,7 @@ void UserInterruptHandler(void)
      {
          PIR3bits.SSP2IF = 0;
 //         I2CTask();
-         DelayMs(5);
+//         DelayMs(5);
      }   
  
 /*    if( PIR3bits.SSP2IF )

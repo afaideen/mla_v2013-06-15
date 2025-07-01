@@ -80,7 +80,7 @@ void FactoryResetEEPROM(void);
 
 BYTE ConnectionEntry = 0;
 BYTE Rejoin = 0;
-static MIWI_TICK heartbeatFirstFailTick = { .Val = 0 };
+static MIWI_TICK heartbeatFirstFailTick = 0;//{ .Val = 0 };
 static BOOL heartbeatTimeoutActive = FALSE;
 
 /*** Main Application Entry ***/
@@ -131,6 +131,7 @@ void main(void)
 
 	while (state != APP_STATE_EXIT)
 	{
+        
         // Heartbeat logic, only if joined:
         if (networkJoined) 
         {
