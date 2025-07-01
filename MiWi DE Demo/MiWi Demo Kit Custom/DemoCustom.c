@@ -80,7 +80,7 @@ void FactoryResetEEPROM(void);
 
 BYTE ConnectionEntry = 0;
 BYTE Rejoin = 0;
-static MIWI_TICK heartbeatFirstFailTick = 0;//{ .Val = 0 };
+static MIWI_TICK heartbeatFirstFailTick = {0};//{ .Val = 0 };
 static BOOL heartbeatTimeoutActive = FALSE;
 
 /*** Main Application Entry ***/
@@ -112,13 +112,13 @@ void main(void)
     // FACTORY RESET DETECTION
     if (SW1_PORT == 0u) { // SW1 is pressed (held) at power up
         LCDErase();
-        LCDDisplay("Resetting EEPROM...", 0, TRUE);
+        LCDDisplay((char *)"Resetting EEPROM...", 0, TRUE);
         FactoryResetEEPROM();
 
         // Wait for SW1 to be released (debounce)
         while (SW1_PORT == 0u);
 
-        LCDDisplay("Restarting...", 0, TRUE);
+        LCDDisplay((char *)"Restarting...", 0, TRUE);
         DelayMs(500);
 #if defined(__18CXX)
         Reset(); // PIC18 family
@@ -156,13 +156,13 @@ void main(void)
                 }
 
 				if(useStoredNetwork) {
-					LCDDisplay("Network Restored!", 0, TRUE);
+					LCDDisplay((char *)"Network Restored!", 0, TRUE);
 					DelayMs(1200);
 					networkJoined = TRUE;
                     state = APP_STATE_MENU;
                     
 				} else {
-					LCDDisplay("No Saved Network", 0, TRUE);
+					LCDDisplay((char *)"No Saved Network", 0, TRUE);
 					DelayMs(1200);
 					// Start fresh, cold start
 					MiApp_ProtocolInit(FALSE);
@@ -223,7 +223,7 @@ void main(void)
 					}
 				}
 				if (validCount > 1) {
-					LCDDisplay("Select Peer Node for Range Test", 0, FALSE);
+					LCDDisplay((char *)"Select Peer Node for Range Test", 0, FALSE);
 					DelayMs(1000);
 				}
 				RangeDemo();
@@ -263,8 +263,8 @@ static void App_ShowSplash(void)
 {
     LCDBacklightON();
     LCDErase();
-    sprintf((char *)LCDText, "    Microchip   ");
-    sprintf((char *)&(LCDText[16]), " MiWi Demo Board");
+    sprintf(LCDText, (const far rom char *)"    Microchip   ");
+    sprintf(&(LCDText[16]), (const far rom char *)" MiWi Demo Board");
     LCDUpdate();
     DelayMs(2000);
 
@@ -286,8 +286,8 @@ static void App_ChannelSelect(void)
 
 	// Initial LCD display
 	LCDErase();
-	sprintf((char *)LCDText, "SW1:<Sel Ch:%02d>", select_channel);
-	sprintf((char *)&(LCDText[16]), "SW2: Chnge Chnl");
+	sprintf((char *)LCDText, (const far rom char *)"SW1:<Sel Ch:%02d>", select_channel);
+	sprintf((char *)&(LCDText[16]), (const far rom char *)"SW2: Chnge Chnl");
 	LCDUpdate();
 
 	while (1)
@@ -304,8 +304,8 @@ static void App_ChannelSelect(void)
 				select_channel = APP_CHANNEL_MIN;
 			// Update LCD ONLY when changed!
 			LCDErase();
-			sprintf((char *)LCDText, "SW1:<Sel Ch:%02d>", select_channel);
-			sprintf((char *)&(LCDText[16]), "SW2: Chnge Chnl");
+			sprintf((char *)LCDText, (const far rom char *)"SW1:<Sel Ch:%02d>", select_channel);
+			sprintf((char *)&(LCDText[16]), (const far rom char *)"SW2: Chnge Chnl");
 			LCDUpdate();
 		}
 		DelayMs(80); // debounce, optional
@@ -322,8 +322,8 @@ static BOOL App_SetChannel(BYTE channel)
     if (!MiApp_SetChannel(channel)) {
         // Use LCDText directly instead of LCDDisplay to avoid const/pointer mismatch
         LCDErase();
-        sprintf((char *)LCDText, "ERROR: Unable to");
-        sprintf((char *)&(LCDText[16]), "Set Channel..");
+        sprintf((char *)LCDText, (const far rom char *)"ERROR: Unable to");
+        sprintf((char *)&(LCDText[16]), (const far rom char *)"Set Channel..");
         LCDUpdate();
         DelayMs(2000);
         return FALSE;
@@ -340,8 +340,8 @@ static BOOL App_NetworkSetup(void)
 
 create_or_join: 
     LCDErase();
-    sprintf((char *)LCDText, "SW1: Create Ntwk");
-    sprintf((char *)&(LCDText[16]), "SW2: Join Ntwk  ");
+    sprintf((char *)LCDText, (const far rom char *)"SW1: Create Ntwk");
+    sprintf((char *)&(LCDText[16]), (const far rom char *)"SW2: Join Ntwk  ");
     LCDUpdate();
     DelayMs(1000);
 
@@ -354,19 +354,19 @@ create_or_join:
         if (sw == SW1) // Create network
         {
             LCDErase();
-            sprintf((char *)LCDText, "Creating Network");
+            sprintf((char *)LCDText, (const far rom char *)"Creating Network");
             LCDUpdate();
             MiApp_ProtocolInit(FALSE);
             MiApp_StartConnection(START_CONN_DIRECT, 0, 0);
             LCDErase();
-            sprintf((char *)LCDText, "Created Network ");
-            sprintf((char *)&(LCDText[16]), "Successfully    ");
+            sprintf((char *)LCDText, (const far rom char *)"Created Network ");
+            sprintf((char *)&(LCDText[16]), (const far rom char *)"Successfully    ");
             LCDUpdate();
             DelayMs(1000);
 
             LCDErase();
-            sprintf((char *)LCDText, "PANID:%02x%02x Ch:%02d", myPANID.v[1], myPANID.v[0], myChannel);
-            sprintf((char *)&(LCDText[16]), "Address: %02x%02x", myShortAddress.v[1], myShortAddress.v[0]);
+            sprintf((char *)LCDText, (const far rom char *)"PANID:%02x%02x Ch:%02d", myPANID.v[1], myPANID.v[0], myChannel);
+            sprintf((char *)&(LCDText[16]), (const far rom char *)"Address: %02x%02x", myShortAddress.v[1], myShortAddress.v[0]);
             LCDUpdate();
 
             // Wait for client connection
@@ -427,10 +427,10 @@ create_or_join:
 
 			        // Show PANID and give user options (SW1: Join, SW2: Next)
 			        LCDErase();
-			        sprintf((char *)LCDText, "SW1:<PANID:%02x%02x>",
+			        sprintf((char *)LCDText, (const far rom char *)"SW1:<PANID:%02x%02x>",
 			                ActiveScanResults[j].PANID.v[1],
 			                ActiveScanResults[j].PANID.v[0]);
-			        sprintf((char *)&(LCDText[16]), "SW2: Additional");
+			        sprintf((char *)&(LCDText[16]), (const far rom char *)"SW2: Additional");
 			        LCDUpdate();
 
 			        while(1)
@@ -460,9 +460,9 @@ create_or_join:
 							        {
 								        count++;
 								        LCDErase();
-								        sprintf((char *)LCDText, "SW1:<Addr:%02x%02x>",
+								        sprintf((char *)LCDText, (const far rom char *)"SW1:<Addr:%02x%02x>",
 								                ActiveScanResults[k].Address[1], ActiveScanResults[k].Address[0]);
-								        sprintf((char *)&(LCDText[16]), "SW2: Additional");
+								        sprintf((char *)&(LCDText[16]), (const far rom char *)"SW2: Additional");
 								        LCDUpdate();
 								        nodeIndex = k;
 
@@ -549,12 +549,12 @@ static void ShowMenuText(MENU_OPTION menuIndex)
 	char line1[17] = {0};
 	char line2[17] = {0};
 	// Copy first 16 chars for line 1, next 16 for line 2
-	sprintf(line1, "%.16s", menuText[menuIndex]);
-	sprintf(line2, "%.16s", menuText[menuIndex] + 16);
+	sprintf(line1, (const far rom char *)"%.16s", menuText[menuIndex]);
+	sprintf(line2, (const far rom char *)"%.16s", menuText[menuIndex] + 16);
 
 	LCDErase();
-	sprintf((char *)LCDText,      "%s", line1);
-	sprintf((char *)&LCDText[16], "%s", line2);
+	sprintf((char *)LCDText, (const far rom char *)"%s", line1);
+	sprintf((char *)&LCDText[16], (const far rom char *)"%s", line2);
 	LCDUpdate();
 }
 
@@ -563,8 +563,8 @@ static void ShowMenuText(MENU_OPTION menuIndex)
 static void App_ShowNodeInfo(void)
 {
     LCDErase();
-    sprintf((char *)LCDText, "PANID:%02x%02x Ch:%02d", myPANID.v[1], myPANID.v[0], myChannel);
-    sprintf((char *)&(LCDText[16]), "Address: %02x%02x", myShortAddress.v[1], myShortAddress.v[0]);
+    sprintf((char *)LCDText, (const far rom char *)"PANID:%02x%02x Ch:%02d", myPANID.v[1], myPANID.v[0], myChannel);
+    sprintf((char *)&(LCDText[16]), (const far rom char *)"Address: %02x%02x", myShortAddress.v[1], myShortAddress.v[0]);
     LCDUpdate();
 	// Wait for SW1 or SW2 to exit (user control, not timer)
 	while(ButtonPressed() == 0);

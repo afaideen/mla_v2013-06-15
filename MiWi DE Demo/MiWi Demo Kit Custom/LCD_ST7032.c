@@ -218,13 +218,14 @@ void LCDDisplay(char *text, BYTE value, BOOL delay)
     LCDUpdate();
     
     // display the message for 2 seconds
-    if( delay )
-    {
-        BYTE i;
-        for(i = 0; i < 8; i++)
-        {
-            DelayMs(250);
-        }
-    }
+    DelayMs(600);
+//    if( delay )
+//    {
+//        BYTE i;
+//        for(i = 0; i < 8; i++)
+//        {
+//            DelayMs(250);
+//        }
+//    }
 }
                    

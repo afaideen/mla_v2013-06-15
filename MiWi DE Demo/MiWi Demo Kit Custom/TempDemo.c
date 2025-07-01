@@ -464,7 +464,7 @@ void PrintTempLCD(void)
     
     if(NodeTemp[CurrentNodeIndex].TempValue < -90.0f)
 	{
-		sprintf((char *)&LCDText[21], " -          "); // pad with spaces to erase old data
+		sprintf((char *)&LCDText[21], (const far rom char *)" -          "); // pad with spaces to erase old data
 	}
     else
 	{
@@ -476,9 +476,9 @@ void PrintTempLCD(void)
             decpart = -decpart; // handle negative temps safely
         // Compose to a local string first for debug/clarity
         
-        sprintf(tempStr, "%2d.%1d", intpart, decpart);
+        sprintf(tempStr, (const far rom char *)"%2d.%1d", intpart, decpart);
         len = strlen(tempStr);
-        sprintf((char *)&LCDText[21], "%sC", tempStr);	
+        sprintf((char *)&LCDText[21], (const far rom char *)"%sC", tempStr);	
 
 		tempF_f = NodeTemp[CurrentNodeIndex].TempValue * 9.0 / 5.0 + 32.0;
         intpartF = (int)tempF_f;
@@ -486,7 +486,7 @@ void PrintTempLCD(void)
         if(decpartF < 0) decpartF = -decpartF;
 
         // Now format with one decimal point
-        sprintf((char *)&LCDText[21 + len + 1], "/%d.%1dF", intpartF, decpartF);
+        sprintf((char *)&LCDText[21 + len + 1], (const far rom char *)"/%d.%1dF", intpartF, decpartF);
         // Pad the rest of the line with spaces
         clearIdx = 21 + len + 1 + strlen((char *)&LCDText[21 + len + 1]);
         for(; clearIdx < 32; clearIdx++)
