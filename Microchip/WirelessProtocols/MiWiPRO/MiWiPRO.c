@@ -5053,7 +5053,7 @@ BYTE MiApp_SearchConnection(INPUT BYTE ScanDuration, INPUT DWORD ChannelMap)
             while (MiWi_TickGetDiff(MiWi_TickGet(), t1) < ScanTime[ScanDuration])
             {
                 if (MiApp_MessageAvailable()) {
-                    MiWiPROTasks();
+//                    MiWiPROTasks();
                     MiApp_DiscardMessage();  // ? Process messages if available
                 }
             }
@@ -5496,9 +5496,9 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
             TimeSyncTick = MiWi_TickGet();
         #endif
         
-        FamilyTree[myShortAddress.v[1]] = ConnectionTable[myParent].AltAddress.v[1];
-        targetIndex = ConnectionTable[myParent].AltAddress.v[1];  // assume 0x00
-        RoutingTable[targetIndex / 8] |= (1 << (targetIndex % 8));
+//        FamilyTree[myShortAddress.v[1]] = ConnectionTable[myParent].AltAddress.v[1];
+//        targetIndex = ConnectionTable[myParent].AltAddress.v[1];  // assume 0x00
+//        RoutingTable[targetIndex / 8] |= (1 << (targetIndex % 8));
 
         return myParent;
     }

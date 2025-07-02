@@ -43,10 +43,10 @@
 
 #include "RangeDemo.h"
 
-#define TX_PKT_INTERVAL             4
-#define DISPLAY_RSSI_INTERVAL       4
-#define EXIT_DEMO_TIMEOUT           6
-#define RANGE_UNICAST_TIMEOUT_SEC           12
+#define TX_PKT_INTERVAL             1
+//#define DISPLAY_RSSI_INTERVAL       4
+//#define EXIT_DEMO_TIMEOUT           6
+//#define RANGE_UNICAST_TIMEOUT_SEC           12
 
 #define EXIT_PKT    1
 #define RANGE_PKT   2
@@ -105,6 +105,7 @@ void RangeDemo(void)
 {
     unsigned char msg[] = "MiWi Rocks!";
     BOOL Run_Demo = TRUE;
+    BOOL End_Demo = TRUE;
 //    BOOL Tx_Packet = TRUE;
     BYTE rssi = 0;
     BYTE Pkt_Loss_Cnt = 0;
@@ -144,9 +145,20 @@ void RangeDemo(void)
         	    
         	    MiApp_WriteData(RANGE_PKT);                
                 MiApp_WriteStringRAM(msg);
+//                MiApp_WriteData(0x4D);
+//        	    MiApp_WriteData(0x69);
+//        	    MiApp_WriteData(0x57);
+//        	    MiApp_WriteData(0x69);
+//        	    MiApp_WriteData(0x20);
+//        	    MiApp_WriteData(0x52);
+//        	    MiApp_WriteData(0x6F);
+//        	    MiApp_WriteData(0x63);
+//        	    MiApp_WriteData(0x6B);
+//        	    MiApp_WriteData(0x73);
+//        	    MiApp_WriteData(0x21);
 
         	    	    
-                if( MiApp_UnicastConnection(ConnectionEntry, TRUE) == FALSE )
+                if( MiApp_UnicastConnection(ConnectionEntry, FALSE) == FALSE )
                     Pkt_Loss_Cnt++;
         	    else
                 {
@@ -165,13 +177,18 @@ void RangeDemo(void)
 		    /*******************************************************************/
 		    MiApp_FlushTx();
 		    MiApp_WriteData(EXIT_PKT);
-		    MiApp_UnicastConnection(ConnectionEntry, TRUE);
+		    End_Demo = MiApp_UnicastConnection(ConnectionEntry, FALSE);
 
 		    LCDBacklightON();
 		    LCDDisplay((char *)"   Exiting....     Range Demo  ", 0, TRUE);
 		    LCDBacklightOFF();
 
-//		    tick1 = MiWi_TickGet();
+//			if(End_Demo)
+//			{
+//				LCDDisplay((char *)"End demo.", 0, TRUE);
+//				return;
+//			}
+
 		    // Wait for ACK Packet
 		    while(Run_Demo)
 		    {
@@ -197,11 +214,10 @@ void RangeDemo(void)
     	{
             pktCmd = rxMessage.Payload[0];
         	if(pktCmd == EXIT_PKT)
-        	{
-            	MiApp_DiscardMessage();
+        	{            	
             	MiApp_FlushTx();
     	        MiApp_WriteData(ACK_PKT);
-    	        MiApp_UnicastConnection(ConnectionEntry, TRUE);
+    	        MiApp_UnicastConnection(ConnectionEntry, FALSE);
             	Run_Demo = FALSE;
             	LCDBacklightON();
                 LCDDisplay((char *)"   Exiting....     Range Demo  ", 0, TRUE);
@@ -217,10 +233,10 @@ void RangeDemo(void)
                     rssi = rssi<<1;
                 #endif
         	    // Disguard the Packet so can recieve next
-        	    MiApp_DiscardMessage();
+        	   
         	}
-        	else
-            	MiApp_DiscardMessage(); 
+        	
+            MiApp_DiscardMessage(); 
     	}
         
         /*******************************************************************/

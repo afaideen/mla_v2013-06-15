@@ -130,7 +130,8 @@ void main(void)
     }
 
 	while (state != APP_STATE_EXIT)
-	{        
+	{
+
 		switch (state)
 		{
 			case APP_STATE_INIT:
@@ -347,7 +348,6 @@ create_or_join:
 
     while (!networkJoined)
     {
-        
 
         sw = ButtonPressed();
 
@@ -502,12 +502,12 @@ create_or_join:
 						        LCDDisplay((char *)"Joined  Network Successfully..", 0, TRUE);
 						        joined = TRUE;
 					        }
-					        // After join, broadcast EXIT_IDENTIFY_MODE
-					        MiApp_FlushTx();
-					        MiApp_WriteData(EXIT_IDENTIFY_MODE);
-					        MiApp_WriteData(myPANID.v[1]);
-					        MiApp_WriteData(myPANID.v[0]);
-					        MiApp_BroadcastPacket(FALSE);
+//					        // After join, broadcast EXIT_IDENTIFY_MODE
+//					        MiApp_FlushTx();
+//					        MiApp_WriteData(EXIT_IDENTIFY_MODE);
+//					        MiApp_WriteData(myPANID.v[1]);
+//					        MiApp_WriteData(myPANID.v[0]);
+//					        MiApp_BroadcastPacket(FALSE);
 					        break;
 				        }
 				        else if(switch_val == SW2)
