@@ -239,7 +239,7 @@ extern OPEN_SOCKET openSocketInfo;
 #define MSK_ALT_SRC_ADDR        0x04
 #define MSK_ALT_DST_ADDR        0x08
 
-#define PACKET_TYPE_BEACON      0x03
+//#define PACKET_TYPE_BEACON      0x03
 
 #define MICRO_SECOND_PER_COUNTER_TICK   (1000000ul / ( COUNTER_CRYSTAL_FREQ / 8 ))
     

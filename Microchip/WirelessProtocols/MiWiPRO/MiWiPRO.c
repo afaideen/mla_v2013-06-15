@@ -800,13 +800,13 @@ ThisPacketIsForMe:
                                                     if(handle!=0xFF)
                                                     {
                                                         //check to see if the short address is valid for that device
-                                                        if(networkStatus[handle].bits.shortAddressValid)
+                                                        if(ConnectionTable[handle].status.bits.shortAddressValid)
                                                         {
                                                             //I know the device in question so I will send back a response
-                                                            MiApp_WriteData(networkTable[handle].PANID.v[0]);
-                                                            MiApp_WriteData(networkTable[handle].PANID.v[1]);
-                                                            MiApp_WriteData(networkTable[handle].AltAddress.v[0]);
-                                                            MiApp_WriteData(networkTable[handle].AltAddress.v[1]);
+                                                            MiApp_WriteData(ConnectionTable[handle].PANID.v[0]);
+                                                            MiApp_WriteData(ConnectionTable[handle].PANID.v[1]);
+                                                            MiApp_WriteData(ConnectionTable[handle].AltAddress.v[0]);
+                                                            MiApp_WriteData(ConnectionTable[handle].AltAddress.v[1]);
                                                              
                                                             //if everything is cool then send the response back
                                                             RouteMessage(sourcePANID, sourceShortAddress, FALSE);   
