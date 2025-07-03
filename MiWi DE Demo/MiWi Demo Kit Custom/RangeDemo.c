@@ -186,7 +186,7 @@ void RangeDemo(void)
 //			if(End_Demo)
 //			{
 //				LCDDisplay((char *)"End demo.", 0, TRUE);
-//				return;
+////				return;
 //			}
 
 		    // Wait for ACK Packet
@@ -198,8 +198,14 @@ void RangeDemo(void)
 				    {
 					    Run_Demo = FALSE;
 					    LCDDisplay((char *)"ACK received.", 0, TRUE);
+                        DelayMs(500);
 
 					}
+                    if(End_Demo)
+                    {   Run_Demo = FALSE;
+                        LCDDisplay((char *)"End demo.", 0, TRUE);
+                        DelayMs(500);
+                    }
 
 				    MiApp_DiscardMessage();
 			    }

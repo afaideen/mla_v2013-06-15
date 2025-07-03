@@ -131,6 +131,13 @@ void main(void)
 
 	while (state != APP_STATE_EXIT)
 	{
+        if(networkJoined)
+        {
+//            if(MiApp_MessageAvailable())
+//            {   
+//                MiApp_DiscardMessage();
+//            }
+        }
 
 		switch (state)
 		{
