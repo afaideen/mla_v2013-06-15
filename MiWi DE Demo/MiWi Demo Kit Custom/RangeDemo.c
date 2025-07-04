@@ -177,6 +177,7 @@ void RangeDemo(void)
 		    /*******************************************************************/
 		    MiApp_FlushTx();
 		    MiApp_WriteData(EXIT_PKT);
+		    MiApp_WriteData(0xFF);
 		    End_Demo = MiApp_UnicastConnection(ConnectionEntry, FALSE);
 
 		    LCDBacklightON();
