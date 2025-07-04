@@ -545,11 +545,32 @@ create_or_join:
     return networkJoined;
 }
 
+BOOL DelayMsAsyn(MIWI_TICK* tick1, unsigned long delayMs)
+{
+    MIWI_TICK now = MiWi_TickGet();
+//    if(MiWi_TickGetDiff(now, tick1) > (MS_TO_TICKS(delayMs)))
+    if((MiWi_TickGetDiff(now, tick1) > (ONE_SECOND * delayMs/1000)))
+    {
+        *tick1 = now;
+        return TRUE;
+    }
+
+    return FALSE;
+}
 // 4. Wait for client/peer connection if needed (optional for PAN coordinator)
 static void App_WaitForConnection(void)
 {
+    MIWI_TICK t1 = MiWi_TickGet();  
     // For PAN coordinator, usually no action needed here
-    DelayMs(500);
+//    DelayMs(500);
+    while(1)
+    {
+        if(DelayMsAsyn(&t1, 2000)){
+            Nop();
+            break;
+        }
+        MiWiPROTasks();
+    }
 }
 static void ShowMenuText(MENU_OPTION menuIndex)
 {

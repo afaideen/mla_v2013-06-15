@@ -112,6 +112,7 @@
     #define SYMBOLS_TO_TICKS(a)     ((unsigned long long)(a) * (ONE_SECOND / 62500ULL))
     #define TICKS_TO_SYMBOLS(a)     ((unsigned long long)(a) * 62500ULL / ONE_SECOND)
     #define TICK_TO_MS(x)           ((unsigned long long)((x))*1000ULL / ONE_SECOND)
+    #define MS_TO_TICKS(ms)         ((unsigned long long)(ms) * ONE_SECOND / 1000ULL)
 
     //ORIGINAL
 //    #define ONE_SECOND (((DWORD)CLOCK_FREQ/1000 * 62500) / (SYMBOL_TO_TICK_RATE / 1000))
