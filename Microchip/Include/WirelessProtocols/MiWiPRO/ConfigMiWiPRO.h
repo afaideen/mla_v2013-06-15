@@ -57,7 +57,7 @@
         // content of the P2P connection entry. It is useful in the debugging
         // process
         /*********************************************************************/
-        #define ENABLE_DUMP
+//        #define ENABLE_DUMP
 
         /*********************************************************************/
         // ENABLE_MIWI_PRO_ACKNOWLEDGEMENT enables the MiWi PRO stack to
@@ -80,7 +80,8 @@
         // NUM_COORDINAOTR definition is closedly associated with RAM and NVM
         // resources
         /*********************************************************************/
-        #define NUM_COORDINATOR             16
+//        #define NUM_COORDINATOR             16
+        #define NUM_COORDINATOR             8
         
         /*********************************************************************/
         // RFD_DATA_WAIT is the timeout defined for sleeping device to receive 
@@ -122,8 +123,8 @@
         // for MiWi PRO network layer, not for MAC layer. MAC layer acknowledgement
         // timeout is handled in MiMAC layer.
         /*********************************************************************/
-//        #define MIWI_PRO_ACK_TIMEOUT            (ONE_SECOND)
-        #define MIWI_PRO_ACK_TIMEOUT            (2 * ONE_SECOND)
+        #define MIWI_PRO_ACK_TIMEOUT            (ONE_SECOND)
+//        #define MIWI_PRO_ACK_TIMEOUT            (2 * ONE_SECOND)
 //        #define MIWI_PRO_ACK_TIMEOUT            (5 * ONE_SECOND)
 //        #define MIWI_PRO_ACK_TIMEOUT            (10 * ONE_SECOND)
 

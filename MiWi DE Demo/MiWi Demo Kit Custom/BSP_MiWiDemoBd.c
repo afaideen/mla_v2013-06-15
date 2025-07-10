@@ -51,6 +51,7 @@
 #include "LCD_ST7032.h"
 #include "HardwareProfile.h"
 #include "TCPIP Stack/Delay.h" //#include "TimeDelay.h"
+#include "definitions.h"
 
    void ADC_Init(void);  
    unsigned int ADC_Read(unsigned char channel);
@@ -88,7 +89,7 @@ MIWI_TICK switch1PressTime;
  *                  to initialize stack or any other function that
  *                  operates on the stack
  ********************************************************************/
-     void BoardInit(void)
+void BoardInit(void)
 {
     /*******************************************************************/
     // Primary Internal Oscillator
@@ -117,7 +118,7 @@ MIWI_TICK switch1PressTime;
 //    RPINR16 = 19;   //RP19 pin  UART2 RX RD2
 //    RPOR6 = 5;      //RP6 pin assigned to function 5: UART2 TX
 //#endif
-//    RTCC_Init();
+    RTCC_Init();
 	// Lock System
     EECON2 = 0x55;
     EECON2 = 0xAA;

@@ -218,14 +218,24 @@ void LCDDisplay(char *text, BYTE value, BOOL delay)
     LCDUpdate();
     
     // display the message for 2 seconds
-    DelayMs(250);
-//    if( delay )
-//    {
+//    DelayMs(250);
+    if( delay )
+    {
 //        BYTE i;
 //        for(i = 0; i < 8; i++)
-//        {
-//            DelayMs(250);
-//        }
-//    }
+        {
+            DelayMs(250);
+        }
+    }
 }
+//void LCDDisplayRAM(char *text, BYTE value, BOOL delay)
+//{
+//    LCDErase();
+////    strncpy((char *)LCDText, text, 32);   // Copy up to 32 chars to LCDText
+//    strcpy((char *)LCDText, text);   // Copy up to 32 chars to LCDText
+////    LCDText[32] = '\0';                   // Null terminate for safety
+//    LCDUpdate();
+//    if(delay)
+//        DelayMs(250);
+//}
                    

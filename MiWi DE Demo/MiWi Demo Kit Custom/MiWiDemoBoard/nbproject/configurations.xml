@@ -73,6 +73,7 @@
         <itemPath>../SST_SerialFlash.c</itemPath>
         <itemPath>../Demo - Copy.c</itemPath>
         <itemPath>../DemoCustom.c</itemPath>
+        <itemPath>../rtcc.c</itemPath>
       </logicalFolder>
       <logicalFolder name="Common" displayName="Common" projectFiles="true">
         <itemPath>../../../Microchip/Common/TimeDelay.c</itemPath>
@@ -213,6 +214,22 @@
         <C18LanguageToolchain>
         </C18LanguageToolchain>
       </item>
+      <item path="../../../Microchip/Transceivers/security.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../Microchip/WirelessProtocols/Console.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../Microchip/WirelessProtocols/MiWi/MiWi.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../Microchip/WirelessProtocols/P2P/P2P.c"
+            ex="true"
+            overriding="false">
+      </item>
       <item path="../Demo - Copy.c" ex="true" overriding="false">
         <C18>
         </C18>
@@ -232,6 +249,10 @@
         </C18-LD>
         <C18LanguageToolchain>
         </C18LanguageToolchain>
+      </item>
+      <item path="../SST_SerialFlash.c" ex="true" overriding="false">
+      </item>
+      <item path="../SelfTestMode.c" ex="true" overriding="false">
       </item>
       <item path="../bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.c"
             ex="true"
@@ -2155,7 +2176,7 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="../../../Microchip/Common/TimeDelay.c" ex="true" overriding="true">
+      <item path="../../../Microchip/Common/TimeDelay.c" ex="false" overriding="true">
         <C18>
           <property key="code-model" value="mS"/>
           <property key="data-model" value="Oa-"/>
@@ -2208,6 +2229,8 @@
           <property key="stack-analysis-mplink" value="false"/>
         </C18LanguageToolchain>
       </item>
+      <item path="../Demo - Copy.c" ex="true" overriding="false">
+      </item>
       <item path="../Demo.c" ex="true" overriding="false">
         <C18>
         </C18>
@@ -2217,6 +2240,8 @@
         </C18-LD>
         <C18LanguageToolchain>
         </C18LanguageToolchain>
+      </item>
+      <item path="../SelfTestMode.c" ex="true" overriding="false">
       </item>
       <item path="../bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.c"
             ex="true"

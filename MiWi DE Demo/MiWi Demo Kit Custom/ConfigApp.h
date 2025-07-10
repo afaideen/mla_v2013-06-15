@@ -101,7 +101,7 @@
     // This definition cannot be defined with PROTOCOL_P2P or PROTOCOL_MIWI.
     /*********************************************************************/
     #define PROTOCOL_MIWI_PRO
-    #define SUPPORT_EUI_ADDRESS_SEARCH
+//    #define SUPPORT_EUI_ADDRESS_SEARCH
 
     /*********************************************************************/
     // NWK_ROLE_COORDINATOR is not valid if PROTOCOL_P2P is defined. It
@@ -217,7 +217,8 @@
 // P2P_CONNECTION_SIZE defines the maximum P2P connections that this 
 // device allowes at the same time. 
 /*********************************************************************/
-#define CONNECTION_SIZE             10
+//#define CONNECTION_SIZE             10
+#define CONNECTION_SIZE             5
 
 
 /*********************************************************************/

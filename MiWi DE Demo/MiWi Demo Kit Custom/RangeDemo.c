@@ -112,7 +112,7 @@ void RangeDemo(void)
     MIWI_TICK tick1, tick2;
     BYTE switch_val;
     BYTE pktCmd = 0;
-
+    
     // Patch variables for timeout logic
 //    static MIWI_TICK firstUnicastAttemptTick = 0;
 //    static BOOL rangeTimeoutActive = FALSE;
@@ -137,7 +137,7 @@ void RangeDemo(void)
 	    switch_val = ButtonPressed();
 		if(switch_val == SW2)
     	{
-        	LCDErase();
+//        	LCDErase();
         	{	
             	LCDDisplay((char *)"Checking Signal Strength...", 0, TRUE);
             		
@@ -184,11 +184,6 @@ void RangeDemo(void)
 		    LCDDisplay((char *)"   Exiting....     Range Demo  ", 0, TRUE);
 		    LCDBacklightOFF();
 
-//			if(End_Demo)
-//			{
-//				LCDDisplay((char *)"End demo.", 0, TRUE);
-////				return;
-//			}
             tick1 = MiWi_TickGet();
 		    // Wait for ACK Packet
 		    while(Run_Demo)
@@ -216,8 +211,6 @@ void RangeDemo(void)
 
 				    MiApp_DiscardMessage();
 			    }
-
-
 		    }
 	    }
 

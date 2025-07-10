@@ -66,6 +66,7 @@
     void LCDBacklightON(void);
     void LCDBacklightOFF(void);
     void LCDDisplay(char *, BYTE, BOOL);
+    void LCDDisplayRAM(char *text, BYTE value, BOOL delay);
     void LCDWriteLine(WORD number, char *line);
 
 #endif

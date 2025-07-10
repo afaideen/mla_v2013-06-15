@@ -15,6 +15,7 @@
 #include "SelfTestMode.h"
 #include "WirelessProtocols/SymbolTime.h"
 #include "MAC_EEProm.h"
+#include "definitions.h"
 
 /*** Feature Definitions ***/
 #define DEMO_VERSION        "v1.3"
@@ -86,6 +87,10 @@ static BOOL heartbeatTimeoutActive = FALSE;
 /*** Main Application Entry ***/
 void main(void)
 {
+    BYTE sec;
+//    char lcdBuf[17];
+    BYTE lastSec = 0xFF;
+    rtccTimeDate time;
     static BOOL menuActive = FALSE;
     static MENU_OPTION menuIndex = MENU_RANGE_DEMO;  // persists across main loop
     static MENU_OPTION selectedMenu = MENU_RANGE_DEMO;
@@ -96,6 +101,7 @@ void main(void)
     MIWI_TICK now;
     BOOL res;
 	BOOL useStoredNetwork = FALSE;
+    
 
 	// Board and LCD initialization
 	BoardInit();
@@ -131,6 +137,16 @@ void main(void)
 
 	while (state != APP_STATE_EXIT)
 	{
+//        RTCC_ReadTimeDate(&time);
+//        sec = BCDtoDEC(time.f.sec);
+//        // Only update LCD when second changes
+//        if(sec != lastSec) {
+//            lastSec = sec;
+//            LCDErase();
+//            // Compose message: e.g. "Seconds: 12"
+//            sprintf((char*)LCDText, "Seconds: %2u    ", sec);
+//            LCDUpdate();
+//        }
         if(networkJoined)
         {
 //            if(MiApp_MessageAvailable())
@@ -165,13 +181,13 @@ void main(void)
 
 				if(useStoredNetwork) {
 					LCDDisplay((char *)"Network Restored!", 0, TRUE);
-					DelayMs(1200);
+					DelayMs(500);
 					networkJoined = TRUE;
                     state = APP_STATE_MENU;
                     
 				} else {
 					LCDDisplay((char *)"No Saved Network", 0, TRUE);
-					DelayMs(1200);
+					DelayMs(500);
 					// Start fresh, cold start
 					MiApp_ProtocolInit(FALSE);
 					state = APP_STATE_CHANNEL_SELECT;
