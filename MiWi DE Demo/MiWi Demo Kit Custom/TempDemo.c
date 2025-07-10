@@ -67,6 +67,7 @@ struct TempPacket
 {
 	BYTE NodeAddress[2];
 	float TempValue;
+    float BattValue;
 }; 
 struct TempPacket NodeTemp[10];
 
@@ -181,8 +182,8 @@ void TempDemo(void)
             /*******************************************************************/
             #if defined(__18CXX) && !defined(HI_TECH_C)	
 //            temp = ReadTempSensor(VBGResult);
-            temp = ReadTemperature();  // Read ADC temperature
-            batt = ReadBatt();  // Read ADC battery
+                temp = ReadTemperature();  // Read ADC temperature
+                batt = ReadBatt();  // Read ADC battery
             #else //For PIC32MX Wireless Eval Board, read temperature AN10 
                 temp = ReadTempSensor_WirelessEvalBoard();
             #endif
@@ -202,25 +203,12 @@ void TempDemo(void)
 //            /*******************************************************************/
 //            // Reset TX Buffer Pointer
 //            /*******************************************************************/	
-              SendData(0, (int16_t)(temp * 10), (uint16_t)(batt * 100));
-//            MiApp_FlushTx();
-//            
-//            /*******************************************************************/
-//            // Write this Nodes temperature value and Address to the TX Buffer
-//            /*******************************************************************/
-//            MiApp_WriteData(TEMP_PKT);
-////           	MiApp_WriteData((BYTE) tempAverage);
-//            MiApp_WriteData((BYTE)((tempToSend >> 8) & 0xFF));
-//            MiApp_WriteData((BYTE)(tempToSend & 0xFF));
-//		   	MiApp_WriteData(myShortAddress.v[0]);
-//			MiApp_WriteData(myShortAddress.v[1]);
-                
+              
             
-
-            
-         	// Update NodeTemp Structure
-//			NodeTemp[0].TempValue = (BYTE)tempAverage;
-            NodeTemp[0].TempValue = temp;
+                // Update NodeTemp Structure
+    //			NodeTemp[0].TempValue = (BYTE)tempAverage;
+                NodeTemp[0].TempValue = temp;
+                NodeTemp[0].BattValue = batt;
 					
            /*******************************************************************/
            // Broadcast Node Tempature across Network.
@@ -230,15 +218,12 @@ void TempDemo(void)
            // secure the frame
            /*******************************************************************/
 //           MiApp_BroadcastPacket(FALSE);
-           val = MiApp_UnicastConnection(0, FALSE);
-           if(val == 1) {
-               LED1 ^= 1; // Toggle LED1 if unicast was successful
-           }
+                SendData(0, (int16_t)(temp * 10), (uint16_t)(batt * 100));
 
 			/*******************************************************************/
             // Read New Start tickcount
             /*******************************************************************/
-//      		tick1 = MiWi_TickGet();	
+      		tick1 = MiWi_TickGet();	
 		}
         else if (switch_val == SW1)
         {
@@ -395,13 +380,8 @@ void SendData(BYTE target, int16_t tempCelsius, uint16_t battVoltage) {
     if (MiApp_UnicastConnection(target, FALSE)) {
 //    if (MiApp_BroadcastPacket(TRUE)) {
         Nop();
-        LED1 = 1;
-        DelayMs(200);
-        LED1 = 0;
-//        printf("Temperature Data Sent! Temp: %d.%d�C, Timestamp: %lu\n",
-//               packet.temperature / 10, packet.temperature % 10, packet.timestamp);
+        LED1 ^= 1;
     } else {
-//        printf("Failed to send temperature data\n");
         Nop();
     }
 }
@@ -513,56 +493,47 @@ WORD Read_VBGVoltage(void)
 **********************************************************************/
 void PrintTempLCD(void)
 {
-    int clearIdx;
-	int temp, len;
-	BYTE tempF;
-    int intpart,decpart, intpartF, decpartF;
-    char tempStr[6];
-    float tempF_f;
-	
-    LCDErase();
-    
-    if(CurrentNodeIndex == 0)
-	{
-		sprintf((char *)LCDText, (far rom char*)"   Local Temp   ");
-	}
-    else
-	{
-		sprintf((char *)LCDText, (far rom char*)"  Remote Temp  ");
-	}
-	
-    sprintf((char *)&LCDText[16], (far rom char*)"%02x%02x:",NodeTemp[CurrentNodeIndex].NodeAddress[1],NodeTemp[CurrentNodeIndex].NodeAddress[0]);
-    
-    if(NodeTemp[CurrentNodeIndex].TempValue < -90.0f)
-	{
-		sprintf((char *)&LCDText[21], (const far rom char *)" -          "); // pad with spaces to erase old data
-	}
-    else
-	{
-        
-//        sprintf((char *)&LCDText[21], "%2.1f", NodeTemp[CurrentNodeIndex].TempValue);
-        intpart = (int)NodeTemp[CurrentNodeIndex].TempValue;
-        decpart = (int)((NodeTemp[CurrentNodeIndex].TempValue - intpart) * 10.0 + 0.5);
-        if(decpart < 0) 
-            decpart = -decpart; // handle negative temps safely
-        // Compose to a local string first for debug/clarity
-        
-        sprintf(tempStr, (const far rom char *)"%2d.%1d", intpart, decpart);
-        len = strlen(tempStr);
-        sprintf((char *)&LCDText[21], (const far rom char *)"%sC", tempStr);	
+    int i, len2;
+    int intpart, decpart, intpartF, decpartF, intbatt, decbatt;
+    float tempC = NodeTemp[CurrentNodeIndex].TempValue;
+    float tempF = tempC * 9.0 / 5.0 + 32.0;
+    float batt = NodeTemp[CurrentNodeIndex].BattValue;
 
-		tempF_f = NodeTemp[CurrentNodeIndex].TempValue * 9.0 / 5.0 + 32.0;
-        intpartF = (int)tempF_f;
-        decpartF = (int)((tempF_f - intpartF) * 10.0 + 0.5);
-        if(decpartF < 0) decpartF = -decpartF;
+    // Clear the buffer
+    memset(LCDText, ' ', 32);
 
-        // Now format with one decimal point
-        sprintf((char *)&LCDText[21 + len + 1], (const far rom char *)"/%d.%1dF", intpartF, decpartF);
-        // Pad the rest of the line with spaces
-        clearIdx = 21 + len + 1 + strlen((char *)&LCDText[21 + len + 1]);
-        for(; clearIdx < 32; clearIdx++)
-            LCDText[clearIdx] = ' ';
- 	}
-    
+    // ---- Line 1: Addr TempC/TempF (e.g. "00FF 25.3C/77.5F") ----
+    intpart = (int)tempC;
+    decpart = (int)((tempC - intpart) * 10.0 + 0.5);
+    if(decpart < 0) decpart = -decpart;
+    intpartF = (int)tempF;
+    decpartF = (int)((tempF - intpartF) * 10.0 + 0.5);
+    if(decpartF < 0) decpartF = -decpartF;
+
+    sprintf((char *)&LCDText[0], "%02X%02X %2d.%1dC/%2d.%1dF",
+        NodeTemp[CurrentNodeIndex].NodeAddress[1],
+        NodeTemp[CurrentNodeIndex].NodeAddress[0],
+        intpart, decpart, intpartF, decpartF);
+
+    // Ensure line is exactly 16 chars
+    LCDText[16] = ' ';
+
+    // ---- Line 2: Battery voltage (e.g. "Batt:3.76V") ----
+    intbatt = (int)batt;
+    decbatt = (int)((batt - intbatt) * 100.0 + 0.5);
+    if(decbatt < 0) decbatt = -decbatt;
+    sprintf((char *)&LCDText[16], "Batt:%d.%02dV", intbatt, decbatt);
+
+    // Pad line 2 to 16 chars
+    len2 = strlen((char *)&LCDText[16]);
+    for(i = 16 + len2; i < 32; i++)
+        LCDText[i] = ' ';
+
+    // Null-terminate for safety
+    LCDText[32] = 0;
+
     LCDUpdate();
 }
+
+
+

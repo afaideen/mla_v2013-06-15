@@ -117,6 +117,7 @@ MIWI_TICK switch1PressTime;
 //    RPINR16 = 19;   //RP19 pin  UART2 RX RD2
 //    RPOR6 = 5;      //RP6 pin assigned to function 5: UART2 TX
 //#endif
+//    RTCC_Init();
 	// Lock System
     EECON2 = 0x55;
     EECON2 = 0xAA;
@@ -422,6 +423,7 @@ BYTE ButtonPressed(void)
         switch0PressTime = MiWi_TickGet();
         if(SW1_PORT == 0)
         {
+//            DelayMs(10);
             while(SW1_PORT == 0);
              //get the current time
             t = MiWi_TickGet();
@@ -440,6 +442,7 @@ BYTE ButtonPressed(void)
         switch1PressTime = MiWi_TickGet();
         if(SW2_PORT == 0)
         {
+//            DelayMs(10);
             while(SW2_PORT == 0);
              //get the current time
             t = MiWi_TickGet();

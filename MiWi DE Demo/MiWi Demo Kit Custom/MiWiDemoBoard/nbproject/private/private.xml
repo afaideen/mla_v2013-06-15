@@ -20,7 +20,8 @@
         <group>
             <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/DemoCustom.c</file>
             <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/TempDemo.c</file>
-            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/RangeDemo.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/BSP_MiWiDemoBd.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/TempDemo.h</file>
         </group>
     </open-files>
 </project-private>
