@@ -140,38 +140,38 @@ void TempDemo(void)
         /*******************************************************************/
         // Check if User wants to Exit Demo
         /*******************************************************************/
-        switch_val = ButtonPressed();		
-	    if((switch_val == SW1) || (switch_val == SW2))
-        {
-            /*******************************************************************/
-        	// Send Exit Demo Request Packet and exit Temp Demo
-        	/*******************************************************************/ 
-            MiApp_FlushTx();    
-            MiApp_WriteData(EXIT_PKT);
-            MiApp_BroadcastPacket(FALSE);   
-            LCDBacklightON();
-            LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, TRUE);
-            LCDBacklightOFF();
-            
-            /*******************************************************************/
-            // Wait for ACK Packet or Timeout
-            /*******************************************************************/
-            tick1 = MiWi_TickGet();
-            while(Run_Demo)
-            {
-                if(MiApp_MessageAvailable())
-                {
-                    if(rxMessage.Payload[0] == ACK_PKT)          
-                        Run_Demo = FALSE;
-                        
-                    MiApp_DiscardMessage();
-                }
-                if ((MiWi_TickGetDiff(tick2,tick1) > (ONE_SECOND * EXIT_DEMO_TIMEOUT)))
-                    Run_Demo = FALSE;
-                    
-                tick2 = MiWi_TickGet();
-            }  
-        } 
+//        switch_val = ButtonPressed();		
+//	    if((switch_val == SW1) || (switch_val == SW2))
+//        {
+//            /*******************************************************************/
+//        	// Send Exit Demo Request Packet and exit Temp Demo
+//        	/*******************************************************************/ 
+//            MiApp_FlushTx();    
+//            MiApp_WriteData(EXIT_PKT);
+//            MiApp_BroadcastPacket(FALSE);   
+//            LCDBacklightON();
+//            LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, TRUE);
+//            LCDBacklightOFF();
+//            
+//            /*******************************************************************/
+//            // Wait for ACK Packet or Timeout
+//            /*******************************************************************/
+//            tick1 = MiWi_TickGet();
+//            while(Run_Demo)
+//            {
+//                if(MiApp_MessageAvailable())
+//                {
+//                    if(rxMessage.Payload[0] == ACK_PKT)          
+//                        Run_Demo = FALSE;
+//                        
+//                    MiApp_DiscardMessage();
+//                }
+//                if ((MiWi_TickGetDiff(tick2,tick1) > (ONE_SECOND * EXIT_DEMO_TIMEOUT)))
+//                    Run_Demo = FALSE;
+//                    
+//                tick2 = MiWi_TickGet();
+//            }  
+//        } 
             
 		/*******************************************************************/
 		// Rotate through Displaying All Node Temp's
@@ -195,7 +195,9 @@ void TempDemo(void)
 		/*******************************************************************/
 		// Read the Temp every TEMP_SECOND_INTERVAL
 		/*******************************************************************/
-		if ((MiWi_TickGetDiff(tick2,tick1) > (ONE_SECOND * TEMP_SECOND_INTERVAL)))
+        switch_val = ButtonPressed();
+//		if ((MiWi_TickGetDiff(tick2,tick1) > (ONE_SECOND * TEMP_SECOND_INTERVAL)))
+        if (switch_val == SW2)
 		{
 			
 			/*******************************************************************/
@@ -262,8 +264,42 @@ void TempDemo(void)
 			/*******************************************************************/
             // Read New Start tickcount
             /*******************************************************************/
-      		tick1 = MiWi_TickGet();	
+//      		tick1 = MiWi_TickGet();	
 		}
+        else if (switch_val == SW1)
+        {
+            /*******************************************************************/
+            // Check if User wants to Exit Demo
+            /*******************************************************************/
+             /*******************************************************************/
+        	// Send Exit Demo Request Packet and exit Temp Demo
+        	/*******************************************************************/ 
+            MiApp_FlushTx();    
+            MiApp_WriteData(EXIT_PKT);
+            MiApp_BroadcastPacket(FALSE);   
+            LCDBacklightON();
+            LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, TRUE);
+            LCDBacklightOFF();
+            
+            /*******************************************************************/
+            // Wait for ACK Packet or Timeout
+            /*******************************************************************/
+            tick1 = MiWi_TickGet();
+            while(Run_Demo)
+            {
+                if(MiApp_MessageAvailable())
+                {
+                    if(rxMessage.Payload[0] == ACK_PKT)          
+                        Run_Demo = FALSE;
+                        
+                    MiApp_DiscardMessage();
+                }
+                if ((MiWi_TickGetDiff(tick2,tick1) > (ONE_SECOND * EXIT_DEMO_TIMEOUT)))
+                    Run_Demo = FALSE;
+                    
+                tick2 = MiWi_TickGet();
+            } 
+        }
 
         /*******************************************************************/
         // Check for Incomming Recieve Packet.

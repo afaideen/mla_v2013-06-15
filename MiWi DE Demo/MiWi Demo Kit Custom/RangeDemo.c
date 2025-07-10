@@ -45,7 +45,7 @@
 
 #define TX_PKT_INTERVAL             1
 //#define DISPLAY_RSSI_INTERVAL       4
-//#define EXIT_DEMO_TIMEOUT           6
+#define EXIT_DEMO_TIMEOUT           6
 //#define RANGE_UNICAST_TIMEOUT_SEC           12
 
 #define EXIT_PKT    1
@@ -189,10 +189,16 @@ void RangeDemo(void)
 //				LCDDisplay((char *)"End demo.", 0, TRUE);
 ////				return;
 //			}
-
+            tick1 = MiWi_TickGet();
 		    // Wait for ACK Packet
 		    while(Run_Demo)
 		    {
+			    tick2 = MiWi_TickGet();
+                if ((MiWi_TickGetDiff(tick2,tick1) > (ONE_SECOND * EXIT_DEMO_TIMEOUT)))
+                {
+                    Run_Demo = FALSE;
+	                tick1 = MiWi_TickGet();
+				}
 			    if(MiApp_MessageAvailable())
 			    {
 				    if(rxMessage.Payload[0] == ACK_PKT)
@@ -210,6 +216,7 @@ void RangeDemo(void)
 
 				    MiApp_DiscardMessage();
 			    }
+
 
 		    }
 	    }
