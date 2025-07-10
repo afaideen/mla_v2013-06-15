@@ -65,9 +65,9 @@
 #define SWITCH0_PRESSED     1
 #define SWITCH1_PRESSED     2
 
-BOOL switch0Pressed;
+//BOOL switch0Pressed;
 MIWI_TICK switch0PressTime;
-BOOL switch1Pressed;
+//BOOL switch1Pressed;
 MIWI_TICK switch1PressTime;
 
 
@@ -340,6 +340,58 @@ float ReadTemperature(void) {
     temperature = (voltage - 0.5) * 100.0;
 
     return temperature;  // Return final averaged temperature
+}
+
+float ReadBatt(void) {
+    WORD adcValue = 0;
+    float voltage;
+    BYTE i;
+
+    // Take multiple ADC readings and average them
+    for (i = 0; i < NUM_SAMPLES; i++) {
+        adcValue += ADC_Read(0);  // Read from AN1 (RA1)
+        Delay10us(10);  // Small delay between samples to allow stability
+    }
+
+    adcValue /= NUM_SAMPLES;  // Compute average
+
+    // Convert ADC value to voltage
+    voltage = adcValue * (3.3 / 1023.0);
+
+    return voltage;  // Return final averaged batt value
+}
+
+//MIWI_TICK t_sw = {0};
+BOOL SW_Pressed( volatile unsigned char *port, BYTE bitPos, MIWI_TICK *t_sw, int duration)
+{
+    MIWI_TICK current_time = MiWi_TickGet();  // Get current time once
+    MIWI_TICK current_time1 = *t_sw;
+    DWORD tickDiff = MiWi_TickGetDiff(current_time, current_time1);
+    if(tickDiff < 0){
+        current_time1 = MiWi_TickGet();
+        tickDiff = MiWi_TickGetDiff(current_time, current_time1);
+    }
+
+    if (!((*port >> bitPos) & 1))  // ? Check if the button is pressed (active-low)
+    {
+        if (tickDiff > (ONE_SECOND * (unsigned int)(duration / 1000)))  // Convert ms to tick units
+        {
+            if (!((*port >> bitPos) & 1))  // ? Confirm button is still pressed
+            {
+                current_time1 = MiWi_TickGet();  // ? Update timestamp correctly
+                return TRUE;
+            }
+            else
+            {
+                current_time1 = MiWi_TickGet();  // ? Reset timestamp
+            }
+        }
+    }
+    else
+    {
+        current_time1 = MiWi_TickGet();  // ? Reset timestamp when button is released
+    }
+    return FALSE;
 }
 
 

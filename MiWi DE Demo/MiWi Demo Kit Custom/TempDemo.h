@@ -59,5 +59,8 @@ float ReadTempSensor(WORD VBGResult);
 float ReadTempSensor_WirelessEvalBoard(void);
 #endif
 void PrintTempLCD(void);
+void SendData(BYTE target, int16_t tempCelsius, uint16_t battVoltage);
+float ReadTemperature(void);
+float ReadBatt(void);
 	
 #endif

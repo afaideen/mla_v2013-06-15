@@ -73,6 +73,7 @@ typedef enum _BIT { CLEAR = 0, SET } BIT;
 typedef signed int          INT;
 typedef signed char         INT8;
 typedef signed short int    INT16;
+typedef signed short int    int16_t;
 typedef signed long int     INT32;
 
 /* MPLAB C Compiler for PIC18 does not support 64-bit integers */
@@ -83,12 +84,15 @@ __EXTENSION typedef signed long long    INT64;
 /* UINT is processor specific in length may vary in size */
 typedef unsigned int        UINT;
 typedef unsigned char       UINT8;
+typedef unsigned char       uint8_t;
 typedef unsigned short int  UINT16;
+typedef unsigned short int  uint16_t;
 /* 24-bit type only available on C18 */
 #if defined(__18CXX)
 typedef unsigned short long UINT24;
 #endif
 typedef unsigned long int   UINT32;     /* other name for 32-bit integer */
+typedef unsigned long int   uint32_t;     /* other name for 32-bit integer */
 /* MPLAB C Compiler for PIC18 does not support 64-bit integers */
 #if !defined(__18CXX)
 __EXTENSION typedef unsigned long long  UINT64;

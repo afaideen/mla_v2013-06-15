@@ -90,9 +90,10 @@ struct TempPacket NodeTemp[10];
 **********************************************************************/
 void TempDemo(void)
 {
+    BYTE val;
     BOOL Run_Demo = TRUE;
     WORD VBGResult;
-    float temp;
+    float temp, batt;
     int tempToSend;
     MIWI_TICK tick1, tick2, tick3;
     BYTE switch_val, i;
@@ -110,9 +111,9 @@ void TempDemo(void)
     // Read Band Gap Voltage(1.2V), Since this is Battery Powered application 
     // for the ADC Temp readings for proper calculation of Temp.
     /*******************************************************************/
-#if defined(__18CXX) && !defined(HI_TECH_C)	
-	VBGResult = Read_VBGVoltage();		
-#endif
+//#if defined(__18CXX) && !defined(HI_TECH_C)	
+//	VBGResult = Read_VBGVoltage();		
+//#endif
 
     /*******************************************************************/
     // Initialize Temp Data Packet
@@ -135,43 +136,7 @@ void TempDemo(void)
         /*******************************************************************/
         // Read current tickcount
         /*******************************************************************/
-		tick2 = MiWi_TickGet();
-		
-        /*******************************************************************/
-        // Check if User wants to Exit Demo
-        /*******************************************************************/
-//        switch_val = ButtonPressed();		
-//	    if((switch_val == SW1) || (switch_val == SW2))
-//        {
-//            /*******************************************************************/
-//        	// Send Exit Demo Request Packet and exit Temp Demo
-//        	/*******************************************************************/ 
-//            MiApp_FlushTx();    
-//            MiApp_WriteData(EXIT_PKT);
-//            MiApp_BroadcastPacket(FALSE);   
-//            LCDBacklightON();
-//            LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, TRUE);
-//            LCDBacklightOFF();
-//            
-//            /*******************************************************************/
-//            // Wait for ACK Packet or Timeout
-//            /*******************************************************************/
-//            tick1 = MiWi_TickGet();
-//            while(Run_Demo)
-//            {
-//                if(MiApp_MessageAvailable())
-//                {
-//                    if(rxMessage.Payload[0] == ACK_PKT)          
-//                        Run_Demo = FALSE;
-//                        
-//                    MiApp_DiscardMessage();
-//                }
-//                if ((MiWi_TickGetDiff(tick2,tick1) > (ONE_SECOND * EXIT_DEMO_TIMEOUT)))
-//                    Run_Demo = FALSE;
-//                    
-//                tick2 = MiWi_TickGet();
-//            }  
-//        } 
+		tick2 = MiWi_TickGet();		
             
 		/*******************************************************************/
 		// Rotate through Displaying All Node Temp's
@@ -215,37 +180,42 @@ void TempDemo(void)
             // Take specified number of Temp Readings
             /*******************************************************************/
             #if defined(__18CXX) && !defined(HI_TECH_C)	
-            temp = ReadTempSensor(VBGResult);
+//            temp = ReadTempSensor(VBGResult);
+            temp = ReadTemperature();  // Read ADC temperature
+            batt = ReadBatt();  // Read ADC battery
             #else //For PIC32MX Wireless Eval Board, read temperature AN10 
                 temp = ReadTempSensor_WirelessEvalBoard();
             #endif
-
+            Nop();
             /*******************************************************************/
             // Turn Temp Sensor Off
             /*******************************************************************/
 			//LATAbits.LATA0 = 0;
 
-            /*******************************************************************/
-            // Calculate Average Temp
-            /*******************************************************************/			
-			tempAverage = 0;
-			tempAverage = temp;
-            tempToSend = (int)(temp * 10);  // e.g., 24.6°C -> 246
-			
-            /*******************************************************************/
-            // Reset TX Buffer Pointer
-            /*******************************************************************/			
-            MiApp_FlushTx();
+//            /*******************************************************************/
+//            // Calculate Average Temp
+//            /*******************************************************************/			
+//			tempAverage = 0;
+//			tempAverage = temp;
+//            tempToSend = (int)(temp * 10);  // e.g., 24.6°C -> 246
+//			
+//            /*******************************************************************/
+//            // Reset TX Buffer Pointer
+//            /*******************************************************************/	
+              SendData(0, (int16_t)(temp * 10), (uint16_t)(batt * 100));
+//            MiApp_FlushTx();
+//            
+//            /*******************************************************************/
+//            // Write this Nodes temperature value and Address to the TX Buffer
+//            /*******************************************************************/
+//            MiApp_WriteData(TEMP_PKT);
+////           	MiApp_WriteData((BYTE) tempAverage);
+//            MiApp_WriteData((BYTE)((tempToSend >> 8) & 0xFF));
+//            MiApp_WriteData((BYTE)(tempToSend & 0xFF));
+//		   	MiApp_WriteData(myShortAddress.v[0]);
+//			MiApp_WriteData(myShortAddress.v[1]);
+                
             
-            /*******************************************************************/
-            // Write this Nodes temperature value and Address to the TX Buffer
-            /*******************************************************************/
-            MiApp_WriteData(TEMP_PKT);
-//           	MiApp_WriteData((BYTE) tempAverage);
-            MiApp_WriteData((BYTE)((tempToSend >> 8) & 0xFF));
-            MiApp_WriteData((BYTE)(tempToSend & 0xFF));
-		   	MiApp_WriteData(myShortAddress.v[0]);
-			MiApp_WriteData(myShortAddress.v[1]);
 
             
          	// Update NodeTemp Structure
@@ -259,7 +229,11 @@ void TempDemo(void)
            // The only parameter is the boolean to indicate if we need to
            // secure the frame
            /*******************************************************************/
-           MiApp_BroadcastPacket(FALSE);
+//           MiApp_BroadcastPacket(FALSE);
+           val = MiApp_UnicastConnection(0, FALSE);
+           if(val == 1) {
+               LED1 ^= 1; // Toggle LED1 if unicast was successful
+           }
 
 			/*******************************************************************/
             // Read New Start tickcount
@@ -276,7 +250,11 @@ void TempDemo(void)
         	/*******************************************************************/ 
             MiApp_FlushTx();    
             MiApp_WriteData(EXIT_PKT);
-            MiApp_BroadcastPacket(FALSE);   
+//            MiApp_BroadcastPacket(FALSE);   
+            val = MiApp_UnicastConnection(0, FALSE);
+            if(val == 1) {
+                LED1 ^= 1; // Toggle LED1 if unicast was successful
+            }
             LCDBacklightON();
             LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, TRUE);
             LCDBacklightOFF();
@@ -318,10 +296,14 @@ void TempDemo(void)
            	/*******************************************************************/   
         	if(rxMessage.Payload[0] == EXIT_PKT)
         	{
-            	MiApp_DiscardMessage();
+//            	MiApp_DiscardMessage();
             	MiApp_FlushTx();
     	        MiApp_WriteData(ACK_PKT);
-    	        MiApp_UnicastConnection(0, FALSE);
+//    	        MiApp_UnicastConnection(0, FALSE);
+                val = MiApp_UnicastConnection(0, FALSE);
+                if(val == 1) {
+                    LED1 ^= 1; // Toggle LED1 if unicast was successful
+                }
             	Run_Demo = FALSE;
             	LCDBacklightON();
                 LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, TRUE);
@@ -370,6 +352,59 @@ BYTE ReadTempSensor_WirelessEvalBoard(void)
     return (BYTE)val;
 }
 #endif
+
+typedef struct {
+    uint8_t deviceID;      // Unique Device ID (1 byte)
+    uint32_t timestamp;    // Flight timestamp (4 bytes)
+    int16_t temperature;   // Temperature (scaled by 10 for 0.1ï¿½C resolution)
+    int16_t battery;        // Battery (scaled by 10 for 0.01ï¿½C resolution)
+} MIWIPacket;
+
+// ===========================
+// ** Send Data to PAN Coordinator **
+// ===========================
+void SendData(BYTE target, int16_t tempCelsius, uint16_t battVoltage) {
+    MIWIPacket packet;
+//    rtccTimeDate time;
+  
+    packet.deviceID = TEMP_PKT; //DEVICE_ID;  // Assign unique device ID
+//    packet.timestamp = RTCC_GetTimestamp();  // Get timestamp for flight time
+
+    packet.temperature = tempCelsius;  // Already in 0.1ï¿½C resolution
+    packet.battery = battVoltage;  // Store battery voltage (0.01V resolution)
+
+    MiApp_FlushTx();  // Clear transmission buffer
+
+    // Write structured data into the TX buffer
+    MiApp_WriteData(packet.deviceID);
+    MiApp_WriteData((packet.timestamp >> 24) & 0xFF);
+    MiApp_WriteData((packet.timestamp >> 16) & 0xFF);
+    MiApp_WriteData((packet.timestamp >> 8) & 0xFF);
+    MiApp_WriteData(packet.timestamp & 0xFF);
+    
+    // Temperature (2 bytes, 0.1ï¿½C resolution)
+    MiApp_WriteData((packet.temperature >> 8) & 0xFF);
+    MiApp_WriteData(packet.temperature & 0xFF);
+
+    // Battery Voltage (2 bytes, 0.01V resolution)
+    MiApp_WriteData((packet.battery >> 8) & 0xFF);
+    MiApp_WriteData(packet.battery & 0xFF);
+
+    // Send data as **unicast packet**
+//    if (MiApp_UnicastAddress(0, FALSE, TRUE)) {
+    if (MiApp_UnicastConnection(target, FALSE)) {
+//    if (MiApp_BroadcastPacket(TRUE)) {
+        Nop();
+        LED1 = 1;
+        DelayMs(200);
+        LED1 = 0;
+//        printf("Temperature Data Sent! Temp: %d.%dï¿½C, Timestamp: %lu\n",
+//               packet.temperature / 10, packet.temperature % 10, packet.timestamp);
+    } else {
+//        printf("Failed to send temperature data\n");
+        Nop();
+    }
+}
 
 #if defined(__18CXX) && !defined(HI_TECH_C)	
 /*********************************************************************
