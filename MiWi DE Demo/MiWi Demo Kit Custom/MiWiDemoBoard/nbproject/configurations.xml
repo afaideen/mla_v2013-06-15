@@ -217,18 +217,50 @@
       <item path="../../../Microchip/Transceivers/security.c"
             ex="true"
             overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
       <item path="../../../Microchip/WirelessProtocols/Console.c"
             ex="true"
             overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
       <item path="../../../Microchip/WirelessProtocols/MiWi/MiWi.c"
             ex="true"
             overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
       <item path="../../../Microchip/WirelessProtocols/P2P/P2P.c"
             ex="true"
             overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
       <item path="../Demo - Copy.c" ex="true" overriding="false">
         <C18>
@@ -250,9 +282,27 @@
         <C18LanguageToolchain>
         </C18LanguageToolchain>
       </item>
+      <item path="../RangeDemo.c" ex="true" overriding="false">
+      </item>
       <item path="../SST_SerialFlash.c" ex="true" overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
       <item path="../SelfTestMode.c" ex="true" overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
       <item path="../bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.c"
             ex="true"
@@ -2230,6 +2280,14 @@
         </C18LanguageToolchain>
       </item>
       <item path="../Demo - Copy.c" ex="true" overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
       <item path="../Demo.c" ex="true" overriding="false">
         <C18>
@@ -2242,6 +2300,14 @@
         </C18LanguageToolchain>
       </item>
       <item path="../SelfTestMode.c" ex="true" overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
       </item>
       <item path="../bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.c"
             ex="true"

@@ -19,9 +19,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/DemoCustom.c</file>
-            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/TempDemo.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/definitions.h</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/ConfigApp.h</file>
+            <file>file:/C:/mla_v2013-06-15/Microchip/Common/TimeDelay.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/rtcc.c</file>
+            <file>file:/C:/mla_v2013-06-15/Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/LCD_ST7032.c</file>
             <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/BSP_MiWiDemoBd.c</file>
-            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/TempDemo.h</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/RangeDemo.c</file>
+            <file>file:/C:/mla_v2013-06-15/MiWi%20DE%20Demo/MiWi%20Demo%20Kit%20Custom/bsp_wireless_eval_board/SelfTestMode.c</file>
         </group>
     </open-files>
 </project-private>

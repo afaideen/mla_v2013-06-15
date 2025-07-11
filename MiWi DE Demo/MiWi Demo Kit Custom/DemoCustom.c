@@ -17,6 +17,8 @@
 #include "MAC_EEProm.h"
 #include "definitions.h"
 
+BOOL DelayMsAsyn(MIWI_TICK* tick1, unsigned long delayMs);
+
 /*** Feature Definitions ***/
 #define DEMO_VERSION        "v1.3"
 #define APP_CHANNEL_MIN     11
@@ -25,10 +27,17 @@
 #define MiWi_CHANNEL        0x04000000                          //Channel 26 bitmap
 
 #define EXIT_DEMO           1
-#define RANGE_DEMO          2
+//#define RANGE_DEMO          2
 #define TEMP_DEMO           3
 #define IDENTIFY_MODE       4
 #define EXIT_IDENTIFY_MODE  5
+
+#define EXIT_PKT        1
+#define RANGE_PKT       2
+#define TEMP_PKT        3
+#define ACK_PKT         4
+#define REJOIN_PKT      5
+#define RTCCTIME_PKT    6
 
 #define NODE_INFO_INTERVAL              5
 #define HEARTBEAT_INTERVAL              5  // seconds
@@ -41,7 +50,7 @@ typedef enum {
 	APP_STATE_NETWORK_SETUP,
 	APP_STATE_WAIT_FOR_CONNECTION,
 	APP_STATE_MENU,
-	APP_STATE_RANGE_DEMO,
+//	APP_STATE_RANGE_DEMO,
 	APP_STATE_TEMP_DEMO,
 	APP_STATE_NODE_INFO,
 	APP_STATE_EXIT
@@ -49,7 +58,7 @@ typedef enum {
 
 /*** Menu Definitions ***/
 typedef enum {
-	MENU_RANGE_DEMO,
+//	MENU_RANGE_DEMO,
 	MENU_TEMP_DEMO,
 	MENU_NODE_INFO,
 	MENU_COUNT
@@ -64,7 +73,7 @@ extern BOOL SelfTestModeEnabled; // Used for startup test
 
 // Demo menu item names - as fixed size char arrays to avoid const warnings
 static char menuText[MENU_COUNT][34] = {
-		"SW1: Range Demo SW2: Other Apps  ",
+//		"SW1: Range Demo SW2: Other Apps  ",
 		"SW1: Temp Demo  SW2: Other Apps  ",
 		"SW1: Node Info  SW2: Other Apps  "
 };
@@ -87,18 +96,21 @@ static BOOL heartbeatTimeoutActive = FALSE;
 /*** Main Application Entry ***/
 void main(void)
 {
+    BOOL lastView = 0xFF;
+    BOOL showTimeView = FALSE;
+    MIWI_TICK t_cycle = 0;
     BYTE sec;
-//    char lcdBuf[17];
     BYTE lastSec = 0xFF;
     rtccTimeDate time;
+    
     static BOOL menuActive = FALSE;
-    static MENU_OPTION menuIndex = MENU_RANGE_DEMO;  // persists across main loop
-    static MENU_OPTION selectedMenu = MENU_RANGE_DEMO;
+    static MENU_OPTION menuIndex = MENU_TEMP_DEMO;  // persists across main loop
+    static MENU_OPTION selectedMenu = MENU_TEMP_DEMO;
     static MIWI_TICK lastHeartbeatTick = 0;
     static BOOL networkJoined = FALSE;
 	APP_STATE state = APP_STATE_INIT;
     BYTE result, i;
-    MIWI_TICK now;
+    MIWI_TICK now, t1_rtcc;
     BOOL res;
 	BOOL useStoredNetwork = FALSE;
     
@@ -137,21 +149,37 @@ void main(void)
 
 	while (state != APP_STATE_EXIT)
 	{
-//        RTCC_ReadTimeDate(&time);
-//        sec = BCDtoDEC(time.f.sec);
-//        // Only update LCD when second changes
-//        if(sec != lastSec) {
-//            lastSec = sec;
-//            LCDErase();
-//            // Compose message: e.g. "Seconds: 12"
-//            sprintf((char*)LCDText, "Seconds: %2u    ", sec);
-//            LCDUpdate();
-//        }
+
         if(networkJoined)
         {
+            Nop();
+//            if(DelayMsAsyn(&t1_rtcc, 1000))
+//            {                
+//                RTCC_ReadTimeDate(&time);
+//                sec = BCDtoDEC(time.f.sec);
+//                if(sec != lastSec) {
+//                    lastSec = sec;
+//                    LCDErase();
+//                    sprintf((char*)LCDText, "Time: %02u:%02u:%02u",
+//                        BCDtoDEC(time.f.hour),
+//                        BCDtoDEC(time.f.min),
+//                        BCDtoDEC(time.f.sec)
+//                    );
+//                    sprintf((char*)&LCDText[16], "%02u-%02u-%04u",
+//                        BCDtoDEC(time.f.mday),
+//                        BCDtoDEC(time.f.mon),
+//                        BCDtoDEC(time.f.year) + 2000
+//                    );
+//                    LCDUpdate();
+//                }
+//            }
+
+            Nop();
+            //every sec display time here!
 //            if(MiApp_MessageAvailable())
 //            {   
 //                MiApp_DiscardMessage();
+//                Nop();
 //            }
         }
 
@@ -181,13 +209,13 @@ void main(void)
 
 				if(useStoredNetwork) {
 					LCDDisplay((char *)"Network Restored!", 0, TRUE);
-					DelayMs(500);
+					DelayMs(250);
 					networkJoined = TRUE;
                     state = APP_STATE_MENU;
                     
 				} else {
 					LCDDisplay((char *)"No Saved Network", 0, TRUE);
-					DelayMs(500);
+					DelayMs(250);
 					// Start fresh, cold start
 					MiApp_ProtocolInit(FALSE);
 					state = APP_STATE_CHANNEL_SELECT;
@@ -203,7 +231,7 @@ void main(void)
 				networkJoined = FALSE;
 				if (App_NetworkSetup())
 				{
-					networkJoined = TRUE;
+//					networkJoined = TRUE;
 					state = APP_STATE_WAIT_FOR_CONNECTION;
 				}
 				else
@@ -213,12 +241,50 @@ void main(void)
 			case APP_STATE_WAIT_FOR_CONNECTION:
 				App_WaitForConnection();
 				state = APP_STATE_MENU;
+                
 				break;
 
 			case APP_STATE_MENU:
-                if (!menuActive) {
-                    ShowMenuText(menuIndex);
-                    menuActive = TRUE;
+                networkJoined = TRUE;
+                if(DelayMsAsyn(&t_cycle, 3000))   // Every 3 seconds, swap view
+                {
+                    showTimeView = !showTimeView;
+                    t_cycle = MiWi_TickGet();
+                    lastView = 0xFF;  // force redraw on next swap
+                }
+
+                if(showTimeView)
+                {
+                    RTCC_ReadTimeDate(&time);
+                    sec = BCDtoDEC(time.f.sec);
+
+                    // Only update if switching to time view or second changed
+                    if(lastView != 1 || sec != lastSec)
+                    {
+                        lastView = 1;
+                        lastSec = sec;
+                        LCDErase();
+                        sprintf((char*)LCDText, "Time: %02u:%02u:%02u",
+                            BCDtoDEC(time.f.hour),
+                            BCDtoDEC(time.f.min),
+                            BCDtoDEC(time.f.sec)
+                        );
+                        sprintf((char*)&LCDText[16], "%02u-%02u-%04u",
+                            BCDtoDEC(time.f.mday),
+                            BCDtoDEC(time.f.mon),
+                            BCDtoDEC(time.f.year) + 2000
+                        );
+                        LCDUpdate();
+                    }
+                }
+                else
+                {
+                    // Only update if switching to menu view
+                    if(lastView != 0)
+                    {
+                        lastView = 0;
+                        ShowMenuText(menuIndex);
+                    }
                 }
                 result = ButtonPressed();
                 if (result == SW1) {
@@ -226,7 +292,7 @@ void main(void)
                     menuActive = FALSE;
                     switch (selectedMenu)
                     {
-                        case MENU_RANGE_DEMO: state = APP_STATE_RANGE_DEMO; break;
+//                        case MENU_RANGE_DEMO: state = APP_STATE_RANGE_DEMO; break;
                         case MENU_TEMP_DEMO:  state = APP_STATE_TEMP_DEMO; break;
                         case MENU_NODE_INFO:  state = APP_STATE_NODE_INFO; break;
                         default:              state = APP_STATE_EXIT; break;
@@ -238,26 +304,26 @@ void main(void)
                 break;
 
 
-			case APP_STATE_RANGE_DEMO:
-			{
-				BYTE i, validCount = 0;
-				for (i = 0; i < CONNECTION_SIZE; i++) {
-					if (ConnectionTable[i].status.bits.isValid) {
-						validCount++;
-					}
-				}
-				if (validCount > 1) {
-					LCDDisplay((char *)"Select Peer Node for Range Test", 0, FALSE);
-					DelayMs(1000);
-				}
-				RangeDemo();
-//				state = APP_STATE_MENU;
-                if(Rejoin == 0)
-                    state = APP_STATE_MENU;
-                else
-                    state = APP_STATE_CHANNEL_SELECT;
-				break;
-			}
+//			case APP_STATE_RANGE_DEMO:
+//			{
+//				BYTE i, validCount = 0;
+//				for (i = 0; i < CONNECTION_SIZE; i++) {
+//					if (ConnectionTable[i].status.bits.isValid) {
+//						validCount++;
+//					}
+//				}
+//				if (validCount > 1) {
+//					LCDDisplay((char *)"Select Peer Node for Range Test", 0, FALSE);
+//					DelayMs(1000);
+//				}
+//				RangeDemo();
+////				state = APP_STATE_MENU;
+//                if(Rejoin == 0)
+//                    state = APP_STATE_MENU;
+//                else
+//                    state = APP_STATE_CHANNEL_SELECT;
+//				break;
+//			}
 
 			case APP_STATE_TEMP_DEMO:
 				TempDemo();
@@ -273,6 +339,7 @@ void main(void)
                 networkJoined = FALSE; // if exiting or removing connection
 				state = APP_STATE_EXIT;
                 MiApp_RemoveConnection(0);
+                LCDDisplay((char *)"Remove Connection...", 0, TRUE);
 				break;
 		}
 	}
@@ -367,7 +434,7 @@ create_or_join:
     sprintf((char *)LCDText, (const far rom char *)"SW1: Create Ntwk");
     sprintf((char *)&(LCDText[16]), (const far rom char *)"SW2: Join Ntwk  ");
     LCDUpdate();
-    DelayMs(1000);
+    DelayMs(500);
 
     while (!networkJoined)
     {
@@ -576,16 +643,65 @@ BOOL DelayMsAsyn(MIWI_TICK* tick1, unsigned long delayMs)
 // 4. Wait for client/peer connection if needed (optional for PAN coordinator)
 static void App_WaitForConnection(void)
 {
+//    uint8_t sec;
+//    uint8_t lastSec = 0xFF;
+    uint32_t timestamp;
+//    rtccTimeDate time;
+    
     MIWI_TICK t1 = MiWi_TickGet();  
     // For PAN coordinator, usually no action needed here
 //    DelayMs(500);
     while(1)
     {
-        if(DelayMsAsyn(&t1, 2000)){
+        if(DelayMsAsyn(&t1, 5000)){
             Nop();
             break;
         }
-        MiWiPROTasks();
+//        MiWiPROTasks();
+        if(MiApp_MessageAvailable())
+        {   
+            Nop();
+            if (rxMessage.Payload[0] == RTCCTIME_PKT && rxMessage.PayloadSize >= 5)
+            {
+                // Extract timestamp (bytes 1-4)
+                timestamp = 
+                    ((uint32_t)rxMessage.Payload[1] << 24) |
+                    ((uint32_t)rxMessage.Payload[2] << 16) |
+                    ((uint32_t)rxMessage.Payload[3] << 8)  |
+                    ((uint32_t)rxMessage.Payload[4]);
+
+                // Call a function to set the RTCC
+                RTCC_SetFromMiWiTimestamp(timestamp);
+
+//                // --- DISPLAY THE RAW TIMESTAMP ON LCD (NO LCDDisplay) ---
+//                LCDErase();
+//                sprintf((char*)LCDText, "RTCC: 0x%08lX", timestamp);
+//                // For 2-line LCD, show both hex and decimal:
+//                sprintf((char*)&LCDText[16], "%lu", (unsigned long)timestamp);
+//                LCDUpdate();
+//                Nop();
+//                RTCC_ReadTimeDate(&time);
+//                sec = BCDtoDEC(time.f.sec);
+////                if(sec != lastSec) {
+//                    lastSec = sec;
+//                    LCDErase();
+//                    sprintf((char*)LCDText, "Time: %02u:%02u:%02u",
+//                        BCDtoDEC(time.f.hour),
+//                        BCDtoDEC(time.f.min),
+//                        BCDtoDEC(time.f.sec)
+//                    );
+//                    sprintf((char*)&LCDText[16], "%02u-%02u-%04u",
+//                        BCDtoDEC(time.f.mday),
+//                        BCDtoDEC(time.f.mon),
+//                        BCDtoDEC(time.f.year) + 2000
+//                    );
+//                    LCDUpdate();
+////                }
+//                Nop();
+            }
+            MiApp_DiscardMessage();
+            Nop();
+        }
     }
 }
 static void ShowMenuText(MENU_OPTION menuIndex)
