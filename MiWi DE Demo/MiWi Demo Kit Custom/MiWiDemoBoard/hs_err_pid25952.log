@@ -1,0 +1,160 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 1048576 bytes for AllocateHeap
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Zero Based Compressed Oops mode in which the Java heap is
+#     placed in the first 32GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 32GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (memory/allocation.inline.hpp:61), pid=25952, tid=0x0000000000005890
+#
+# JRE version:  (8.0_202-b05) (build )
+# Java VM: OpenJDK 64-Bit Server VM (25.202-b05 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000002593000):  JavaThread "Unknown thread" [_thread_in_vm, id=22672, stack(0x0000000002490000,0x0000000002590000)]
+
+Stack: [0x0000000002490000,0x0000000002590000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x0000000002593000 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=22672, stack(0x0000000002490000,0x0000000002590000)]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+heap address: 0x00000005c2000000, size: 8160 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x00000007c0000000
+
+Heap:
+ PSYoungGen      total 152576K, used 2621K [0x0000000716000000, 0x0000000720a00000, 0x00000007c0000000)
+  eden space 131072K, 2% used [0x0000000716000000,0x000000071628f5d0,0x000000071e000000)
+  from space 21504K, 0% used [0x000000071f500000,0x000000071f500000,0x0000000720a00000)
+  to   space 21504K, 0% used [0x000000071e000000,0x000000071e000000,0x000000071f500000)
+ ParOldGen       total 348160K, used 0K [0x00000005c2000000, 0x00000005d7400000, 0x0000000716000000)
+  object space 348160K, 0% used [0x00000005c2000000,0x00000005c2000000,0x00000005d7400000)
+ Metaspace       used 779K, capacity 4480K, committed 4480K, reserved 1056768K
+  class space    used 76K, capacity 384K, committed 384K, reserved 1048576K
+
+Card table byte_map: [0x0000000011a50000,0x0000000012a50000] byte_map_base: 0x000000000ec40000
+
+Marking Bits: (ParMarkBitMap*) 0x000000006fe19630
+ Begin Bits: [0x0000000013cf0000, 0x000000001bc70000)
+ End Bits:   [0x000000001bc70000, 0x0000000023bf0000)
+
+Polling page: 0x0000000000b10000
+
+CodeCache: size=245760Kb used=328Kb max_used=328Kb free=245431Kb
+ bounds [0x0000000002690000, 0x0000000002900000, 0x0000000011690000]
+ total_blobs=57 nmethods=0 adapters=38
+ compilation: enabled
+
+Compilation events (0 events):
+No events
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.185 loading class java/lang/Short
+Event: 0.186 loading class java/lang/Short done
+Event: 0.186 loading class java/lang/Integer
+Event: 0.186 loading class java/lang/Integer done
+Event: 0.186 loading class java/lang/Long
+Event: 0.186 loading class java/lang/Long done
+Event: 0.187 loading class java/lang/NullPointerException
+Event: 0.187 loading class java/lang/NullPointerException done
+Event: 0.187 loading class java/lang/ArithmeticException
+Event: 0.187 loading class java/lang/ArithmeticException done
+
+
+Dynamic libraries:
+0x00007ff6ff520000 - 0x00007ff6ff555000 	C:\Microchip\MPLABX\v5.40\sys\java\zulu8.36.0.1-ca-fx-jdk8.0.202-win_x64\jre\bin\java.exe
+0x00007ffab1c30000 - 0x00007ffab1e28000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffaafdd0000 - 0x00007ffaafe92000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffaaf7a0000 - 0x00007ffaafa96000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffaa9930000 - 0x00007ffaa99c4000 	C:\WINDOWS\SYSTEM32\apphelp.dll
+0x00007ffaafea0000 - 0x00007ffaaff51000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffab0080000 - 0x00007ffab011e000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffab10a0000 - 0x00007ffab113f000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffab1ac0000 - 0x00007ffab1be3000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffaafaa0000 - 0x00007ffaafac7000 	C:\WINDOWS\System32\bcrypt.dll
+0x00007ffab02c0000 - 0x00007ffab045d000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffaaf6e0000 - 0x00007ffaaf702000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffab0e30000 - 0x00007ffab0e5b000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffaaf5c0000 - 0x00007ffaaf6d9000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffaaf2c0000 - 0x00007ffaaf35d000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffaaf4c0000 - 0x00007ffaaf5c0000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffa99a50000 - 0x00007ffa99cea000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.5915_none_60b4b9d171f9c7c7\COMCTL32.dll
+0x00007ffab0630000 - 0x00007ffab065f000 	C:\WINDOWS\System32\IMM32.DLL
+0x000000006f510000 - 0x000000006f5e2000 	C:\Microchip\MPLABX\v5.40\sys\java\zulu8.36.0.1-ca-fx-jdk8.0.202-win_x64\jre\bin\msvcr100.dll
+0x000000006f5f0000 - 0x000000006fe9a000 	C:\Microchip\MPLABX\v5.40\sys\java\zulu8.36.0.1-ca-fx-jdk8.0.202-win_x64\jre\bin\server\jvm.dll
+0x00007ffab0120000 - 0x00007ffab0128000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffa9c970000 - 0x00007ffa9c979000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffab0f50000 - 0x00007ffab0fbb000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffa9aae0000 - 0x00007ffa9ab07000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffaa7250000 - 0x00007ffaa725a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffa86a50000 - 0x00007ffa86a5f000 	C:\Microchip\MPLABX\v5.40\sys\java\zulu8.36.0.1-ca-fx-jdk8.0.202-win_x64\jre\bin\verify.dll
+0x00007ffa55ed0000 - 0x00007ffa55ef9000 	C:\Microchip\MPLABX\v5.40\sys\java\zulu8.36.0.1-ca-fx-jdk8.0.202-win_x64\jre\bin\java.dll
+0x00007ffa82e30000 - 0x00007ffa82e46000 	C:\Microchip\MPLABX\v5.40\sys\java\zulu8.36.0.1-ca-fx-jdk8.0.202-win_x64\jre\bin\zip.dll
+
+VM Arguments:
+java_command: C:/Microchip/MPLABX/v5.40/mplab_platform/platform/../mplab_ide/modules/../../bin/extractobjectdependencies.jar -d build/SIMPLE_EXAMPLE/debug/_ext/1472/DemoCustom.o
+java_class_path (initial): C:/Microchip/MPLABX/v5.40/mplab_platform/platform/../mplab_ide/modules/../../bin/extractobjectdependencies.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+USERNAME=han
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 19041 (10.0.19041.5915)
+
+CPU:total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 158 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx
+
+Memory: 4k page, physical 33415872k(10306544k free), swap 41804480k(7628k free)
+
+vm_info: OpenJDK 64-Bit Server VM (25.202-b05) for windows-amd64 JRE (Zulu 8.36.0.1-CA-win64) (1.8.0_202-b05), built on Jan 29 2019 06:24:43 by "tester" with MS VC++ 10.0 (VS2010)
+
+time: Tue Jul 01 13:05:04 2025
+timezone: Malay Peninsula Standard Time
+elapsed time: 0 seconds (0d 0h 0m 0s)
+
