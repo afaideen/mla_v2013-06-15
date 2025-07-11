@@ -1,5 +1,5 @@
-Warning[2066] C:\mla_v2013-06-15\MiWi DE Demo\MiWi Demo Kit Custom\DemoCustom.c 267 : type qualifier mismatch in assignment
-Warning[2066] C:\mla_v2013-06-15\MiWi DE Demo\MiWi Demo Kit Custom\DemoCustom.c 272 : type qualifier mismatch in assignment
-Warning[2062] C:\mla_v2013-06-15\MiWi DE Demo\MiWi Demo Kit Custom\DemoCustom.c 635 : '->' operator expected, not '.'
-Warning[2062] C:\mla_v2013-06-15\MiWi DE Demo\MiWi Demo Kit Custom\DemoCustom.c 635 : '->' operator expected, not '.'
-Warning[2062] C:\mla_v2013-06-15\MiWi DE Demo\MiWi Demo Kit Custom\DemoCustom.c 635 : '->' operator expected, not '.'
+Warning[2066] C:\mla_v2013-06-15\MiWi DE Demo\MiWi Demo Kit Custom\DemoCustom.c 260 : type qualifier mismatch in assignment
+Warning[2066] C:\mla_v2013-06-15\MiWi DE Demo\MiWi Demo Kit Custom\DemoCustom.c 265 : type qualifier mismatch in assignment
+Warning[2062] C:\mla_v2013-06-15\MiWi DE Demo\MiWi Demo Kit Custom\DemoCustom.c 607 : '->' operator expected, not '.'
+Warning[2062] C:\mla_v2013-06-15\MiWi DE Demo\MiWi Demo Kit Custom\DemoCustom.c 607 : '->' operator expected, not '.'
+Warning[2062] C:\mla_v2013-06-15\MiWi DE Demo\MiWi Demo Kit Custom\DemoCustom.c 607 : '->' operator expected, not '.'

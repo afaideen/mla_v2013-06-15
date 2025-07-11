@@ -207,7 +207,7 @@ void LCDUpdate(void)
  * Note:            This routine is only effective if Explorer16 or
  *                  PIC18 Explorer demo boards are used
  ********************************************************************/
-void LCDDisplay(char *text, BYTE value, BOOL delay)
+void LCDDisplay(char *text, BYTE value, WORD delay)
 {
     LCDErase();
 //#if defined(__18CXX) && !defined(HI_TECH_C)	    
@@ -217,15 +217,9 @@ void LCDDisplay(char *text, BYTE value, BOOL delay)
 //#endif
     LCDUpdate();
     
-    // display the message for 2 seconds
-//    DelayMs(250);
-    if( delay )
+    if( delay > 0 )
     {
-//        BYTE i;
-//        for(i = 0; i < 8; i++)
-        {
-            DelayMs(250);
-        }
+        DelayMs(delay);    
     }
 }
 //void LCDDisplayRAM(char *text, BYTE value, BOOL delay)
@@ -238,4 +232,26 @@ void LCDDisplay(char *text, BYTE value, BOOL delay)
 //    if(delay)
 //        DelayMs(250);
 //}
+//void LCDShowLines(const char* line1, const char* line2, unsigned int delayMs)
+//{
+//    char buf1[17], buf2[17];
+//    int len1 = line1 ? strlen(line1) : 0;
+//    int len2 = line2 ? strlen(line2) : 0;
+//
+//    // Fill with spaces first
+//    memset(buf1, ' ', 16); buf1[16] = '\0';
+//    memset(buf2, ' ', 16); buf2[16] = '\0';
+//
+//    // Copy the message, up to 16 chars, left-aligned
+//    if(line1) memcpy(buf1, line1, len1 > 16 ? 16 : len1);
+//    if(line2) memcpy(buf2, line2, len2 > 16 ? 16 : len2);
+//
+//    LCDErase();
+//    strcpy((char*)LCDText, buf1);
+//    strcpy((char*)&LCDText[16], buf2);
+//    LCDUpdate();
+//    if(delayMs)
+//        DelayMs(delayMs);
+//}
+
                    

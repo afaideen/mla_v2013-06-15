@@ -65,8 +65,11 @@
     void LCDErase(void);
     void LCDBacklightON(void);
     void LCDBacklightOFF(void);
-    void LCDDisplay(char *, BYTE, BOOL);
+//    void LCDDisplay(char *, BYTE, BOOL);
+    void LCDDisplay(char *text, BYTE value, WORD delay);
     void LCDDisplayRAM(char *text, BYTE value, BOOL delay);
     void LCDWriteLine(WORD number, char *line);
+    void LCDShowLines(const char* line1, const char* line2, unsigned int delayMs);
+    
 
 #endif

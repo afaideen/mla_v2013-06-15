@@ -44,15 +44,21 @@
 #include "TempDemo.h"
 #include "Compiler.h"
 #include "GenericTypeDefs.h"
+#include "definitions.h"
 
 #define TEMP_SECOND_INTERVAL        5
 #define DISPLAY_CYCLE_INTERVAL      4
-#define EXIT_DEMO_TIMEOUT           6
+#define EXIT_DEMO_TIMEOUT           3
 #define NUM_TEMP_SAMPLES            4
 
-#define EXIT_PKT                    1
-#define TEMP_PKT                    3
-#define ACK_PKT                     4
+
+
+#define EXIT_PKT        1
+#define RANGE_PKT       2
+#define TEMP_PKT        3
+#define ACK_PKT         4
+#define REJOIN_PKT      5
+#define RTCCTIME_PKT    6
 
 unsigned short tempAverage = 0;
 BYTE tempRemote = 255;
@@ -68,6 +74,7 @@ struct TempPacket
 	BYTE NodeAddress[2];
 	float TempValue;
     float BattValue;
+    BYTE    Rssi;
 }; 
 struct TempPacket NodeTemp[10];
 
@@ -91,21 +98,27 @@ struct TempPacket NodeTemp[10];
 **********************************************************************/
 void TempDemo(void)
 {
+    uint32_t timestamp;
     BYTE val;
     BOOL Run_Demo = TRUE;
     WORD VBGResult;
     float temp, batt;
     int tempToSend;
     MIWI_TICK tick1, tick2, tick3;
+    MIWI_TICK sw1_timer, sw2_timer;
     BYTE switch_val, i;
-    short tempRaw;
-    
+    short tempRaw; 
+    BYTE rssi = 0;
+    BYTE viewIndex = 0;
+    int len1, len2;
+    char strength[8];
+    char buf1[17], buf2[17];
     
 	/*******************************************************************/
     // Dispaly Temp Demo Splach Screen
     /*******************************************************************/	
     LCDBacklightON();
-    LCDDisplay((char *)"   Microchip       Temp Demo  ", 0, TRUE);
+    LCDDisplay((char *)"   Microchip       Temp Demo  ", 0, 0);
     LCDBacklightOFF();
         
     /*******************************************************************/
@@ -122,10 +135,17 @@ void TempDemo(void)
     /*******************************************************************/
 	NodeTemp[0].NodeAddress[0] = myShortAddress.v[0];
 	NodeTemp[0].NodeAddress[1] = myShortAddress.v[1];
-    for(i = 0; i < 10; i++)
+    for(i = 0; i < 10; i++){
         NodeTemp[i].TempValue = -100.0f; // -100 is 'no data'
+        NodeTemp[i].BattValue = 100.0f; // -100 is 'no data'
+        
+    }
 
+    temp = ReadTemperature();  // Read ADC temperature
+    batt = ReadBatt();  // Read ADC battery
     
+    NodeTemp[0].TempValue = temp;
+    NodeTemp[0].BattValue = batt;
 	/*******************************************************************/
     // Read Start tickcount
     /*******************************************************************/	
@@ -143,27 +163,28 @@ void TempDemo(void)
 		// Rotate through Displaying All Node Temp's
 		/*******************************************************************/
         if ((MiWi_TickGetDiff(tick2,tick3) > (ONE_SECOND * DISPLAY_CYCLE_INTERVAL)))
-		{
-    		if((ConnectionTable[CurrentNodeIndex].status.bits.isValid))
-    		{
-    		    CurrentNodeIndex++;
-    		}    
-    		else
-    		{
-    		    CurrentNodeIndex = 0;
-    		}    
-    		
-    		PrintTempLCD();
-    		
-    		tick3 = MiWi_TickGet();
-        }      
+        {
+            if((ConnectionTable[CurrentNodeIndex].status.bits.isValid))
+            {
+                CurrentNodeIndex++;
+            }
+            else
+            {
+                CurrentNodeIndex = 0;
+            }
+
+            PrintTempLCD();
+
+            tick3 = MiWi_TickGet();
+        }     
 		
 		/*******************************************************************/
 		// Read the Temp every TEMP_SECOND_INTERVAL
 		/*******************************************************************/
-        switch_val = ButtonPressed();
+//        switch_val = ButtonPressed();
 //		if ((MiWi_TickGetDiff(tick2,tick1) > (ONE_SECOND * TEMP_SECOND_INTERVAL)))
-        if (switch_val == SW2)
+//        if (switch_val == SW2)
+        if (SW_Pressed(&PORTB, 2, &sw1_timer, 350))
 		{
 			
 			/*******************************************************************/
@@ -218,14 +239,15 @@ void TempDemo(void)
            // secure the frame
            /*******************************************************************/
 //           MiApp_BroadcastPacket(FALSE);
-                SendData(0, (int16_t)(temp * 10), (uint16_t)(batt * 100));
+            SendData(0, (int16_t)(temp * 10), (uint16_t)(batt * 100));
 
 			/*******************************************************************/
             // Read New Start tickcount
             /*******************************************************************/
       		tick1 = MiWi_TickGet();	
 		}
-        else if (switch_val == SW1)
+//        else if (switch_val == SW1)
+        else if (SW_Pressed(&PORTB, 1, &sw1_timer, 350))
         {
             /*******************************************************************/
             // Check if User wants to Exit Demo
@@ -241,7 +263,7 @@ void TempDemo(void)
                 LED1 ^= 1; // Toggle LED1 if unicast was successful
             }
             LCDBacklightON();
-            LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, TRUE);
+            LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, 300);
             LCDBacklightOFF();
             
             /*******************************************************************/
@@ -262,6 +284,7 @@ void TempDemo(void)
                     
                 tick2 = MiWi_TickGet();
             } 
+            return;
         }
 
         /*******************************************************************/
@@ -273,9 +296,7 @@ void TempDemo(void)
         // structure of RECEIVED_MESSAGE.
         /*******************************************************************/
         if(MiApp_MessageAvailable())
-        {
-            BYTE i;
-            
+        {            
 			/*******************************************************************/	
            	// Check if Exit Demo Packet
            	/*******************************************************************/   
@@ -294,28 +315,71 @@ void TempDemo(void)
                 LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, TRUE);
                 LCDBacklightOFF();
             }
-            
- 			/*******************************************************************/	
-           	// Check if Message from known Connection
-           	/*******************************************************************/            
-			for(i = 0; i < CONNECTION_SIZE; i++)
-			{
-				if((ConnectionTable[i].status.bits.isValid) && (ConnectionTable[i].AltAddress.v[0] == rxMessage.Payload[2]) && (ConnectionTable[i].AltAddress.v[1] == rxMessage.Payload[3]))
-				{
-					if(rxMessage.Payload[0] == TEMP_PKT)
-					{
-						// Update the Remote Nodes Temp value
-//						NodeTemp[i+1].TempValue = rxMessage.Payload[1];
-//    					NodeTemp[i+1].NodeAddress[0] = rxMessage.Payload[2];
-//    					NodeTemp[i+1].NodeAddress[1] = rxMessage.Payload[3];
-                        
-                        tempRaw = ((rxMessage.Payload[1] << 8) | rxMessage.Payload[2]);
-                        NodeTemp[i+1].TempValue = tempRaw / 10.0;
-                        NodeTemp[i+1].NodeAddress[0] = rxMessage.Payload[3];
-                        NodeTemp[i+1].NodeAddress[1] = rxMessage.Payload[4];
-					}	
-				}
-			}
+            else if (rxMessage.Payload[0] == RTCCTIME_PKT && rxMessage.PayloadSize >= 5)
+            {
+                // Extract timestamp (bytes 1-4)
+                timestamp = 
+                    ((uint32_t)rxMessage.Payload[1] << 24) |
+                    ((uint32_t)rxMessage.Payload[2] << 16) |
+                    ((uint32_t)rxMessage.Payload[3] << 8)  |
+                    ((uint32_t)rxMessage.Payload[4]);
+
+                // Call a function to set the RTCC
+                RTCC_SetFromMiWiTimestamp(timestamp);
+                LCDDisplay((char *)"RTCC updated!", 0, TRUE);
+            }
+            if(rxMessage.Payload[0] == RANGE_PKT)
+        	{
+                // Get RSSI value from Recieved Packet
+            	rssi = rxMessage.PacketRSSI;
+        	    #if defined(MRF89XA)
+                    rssi = rssi<<1;
+                #endif
+                NodeTemp[0].Rssi = rssi;
+                
+                // ---- Show RSSI Strength, RangeDemo style ----
+                {     
+                    LCDErase();
+    #if defined(MRF24J40)
+                    if(rssi > 120) 
+                        sprintf((char *)&(LCDText[0]), (far rom char*)"Strength: High");
+                    else if(rssi > 60) 
+                        sprintf((char *)&(LCDText[0]), (far rom char*)"Strength: Medium");
+                    else 
+                        sprintf((char *)&(LCDText[0]), (far rom char*)"Strength: Low");
+    #else
+                    if(rssi > 100) strcpy(strength, "High");
+                    else if(rssi > 60) strcpy(strength, "Medium");
+                    else strcpy(strength, "Low");
+    #endif         
+                    sprintf((char *)&(LCDText[16]), (far rom char*)"Rcv RSSI: %3d", rssi);
+                    LCDUpdate();
+                    
+                    tick3 = MiWi_TickGet();
+                }
+            }
+//            
+// 			/*******************************************************************/	
+//           	// Check if Message from known Connection
+//           	/*******************************************************************/            
+//			for(i = 0; i < CONNECTION_SIZE; i++)
+//			{
+//				if((ConnectionTable[i].status.bits.isValid) && (ConnectionTable[i].AltAddress.v[0] == rxMessage.Payload[2]) && (ConnectionTable[i].AltAddress.v[1] == rxMessage.Payload[3]))
+//				{
+//					if(rxMessage.Payload[0] == TEMP_PKT)
+//					{
+//						// Update the Remote Nodes Temp value
+////						NodeTemp[i+1].TempValue = rxMessage.Payload[1];
+////    					NodeTemp[i+1].NodeAddress[0] = rxMessage.Payload[2];
+////    					NodeTemp[i+1].NodeAddress[1] = rxMessage.Payload[3];
+//                        
+//                        tempRaw = ((rxMessage.Payload[1] << 8) | rxMessage.Payload[2]);
+//                        NodeTemp[i+1].TempValue = tempRaw / 10.0;
+//                        NodeTemp[i+1].NodeAddress[0] = rxMessage.Payload[3];
+//                        NodeTemp[i+1].NodeAddress[1] = rxMessage.Payload[4];
+//					}	
+//				}
+//			}
 			
 			MiApp_DiscardMessage();
         }
@@ -348,7 +412,7 @@ typedef struct {
 // ===========================
 // ** Send Data to PAN Coordinator **
 // ===========================
-void SendData(BYTE target, int16_t tempCelsius, uint16_t battVoltage) {
+BOOL SendData(BYTE target, int16_t tempCelsius, uint16_t battVoltage) {
     MIWIPacket packet;
 //    rtccTimeDate time;
   
@@ -381,8 +445,10 @@ void SendData(BYTE target, int16_t tempCelsius, uint16_t battVoltage) {
 //    if (MiApp_BroadcastPacket(TRUE)) {
         Nop();
         LED1 ^= 1;
+        return TRUE;
     } else {
         Nop();
+        return FALSE;
     }
 }
 
@@ -493,14 +559,14 @@ WORD Read_VBGVoltage(void)
 **********************************************************************/
 void PrintTempLCD(void)
 {
-    int i, len2;
+    int i, len1, len2;
     int intpart, decpart, intpartF, decpartF, intbatt, decbatt;
     float tempC = NodeTemp[CurrentNodeIndex].TempValue;
     float tempF = tempC * 9.0 / 5.0 + 32.0;
     float batt = NodeTemp[CurrentNodeIndex].BattValue;
 
     // Clear the buffer
-    memset(LCDText, ' ', 32);
+    LCDErase();
 
     // ---- Line 1: Addr TempC/TempF (e.g. "00FF 25.3C/77.5F") ----
     intpart = (int)tempC;
@@ -515,8 +581,10 @@ void PrintTempLCD(void)
         NodeTemp[CurrentNodeIndex].NodeAddress[0],
         intpart, decpart, intpartF, decpartF);
 
-    // Ensure line is exactly 16 chars
-    LCDText[16] = ' ';
+    // Pad line 1 to 16 chars
+    len1 = strlen((char *)&LCDText[0]);
+    for(i = len1; i < 16; i++)
+        LCDText[i] = ' ';
 
     // ---- Line 2: Battery voltage (e.g. "Batt:3.76V") ----
     intbatt = (int)batt;
@@ -534,6 +602,7 @@ void PrintTempLCD(void)
 
     LCDUpdate();
 }
+
 
 
 

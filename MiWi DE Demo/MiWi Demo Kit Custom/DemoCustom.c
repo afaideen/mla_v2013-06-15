@@ -79,7 +79,7 @@ static char menuText[MENU_COUNT][34] = {
 };
 
 /*** Function Prototypes ***/
-static void App_ShowSplash(void);
+static void App_ShowSplash(unsigned int delay);
 static void App_ChannelSelect(void);
 static BOOL App_SetChannel(BYTE channel);
 static BOOL App_NetworkSetup(void);
@@ -96,6 +96,7 @@ static BOOL heartbeatTimeoutActive = FALSE;
 /*** Main Application Entry ***/
 void main(void)
 {
+    uint32_t timestamp;
     BOOL lastView = 0xFF;
     BOOL showTimeView = FALSE;
     MIWI_TICK t_cycle = 0;
@@ -111,6 +112,7 @@ void main(void)
 	APP_STATE state = APP_STATE_INIT;
     BYTE result, i;
     MIWI_TICK now, t1_rtcc;
+    static MIWI_TICK t_rtcc = 0; 
     BOOL res;
 	BOOL useStoredNetwork = FALSE;
     
@@ -130,13 +132,13 @@ void main(void)
     // FACTORY RESET DETECTION
     if (SW1_PORT == 0u) { // SW1 is pressed (held) at power up
         LCDErase();
-        LCDDisplay((char *)"Resetting EEPROM...", 0, TRUE);
+        LCDDisplay((char *)"Resetting EEPROM...", 0, 250);
         FactoryResetEEPROM();
 
         // Wait for SW1 to be released (debounce)
         while (SW1_PORT == 0u);
 
-        LCDDisplay((char *)"Restarting...", 0, TRUE);
+        LCDDisplay((char *)"Restarting...", 0, 250);
         DelayMs(500);
 #if defined(__18CXX)
         Reset(); // PIC18 family
@@ -153,41 +155,36 @@ void main(void)
         if(networkJoined)
         {
             Nop();
-//            if(DelayMsAsyn(&t1_rtcc, 1000))
-//            {                
-//                RTCC_ReadTimeDate(&time);
-//                sec = BCDtoDEC(time.f.sec);
-//                if(sec != lastSec) {
-//                    lastSec = sec;
-//                    LCDErase();
-//                    sprintf((char*)LCDText, "Time: %02u:%02u:%02u",
-//                        BCDtoDEC(time.f.hour),
-//                        BCDtoDEC(time.f.min),
-//                        BCDtoDEC(time.f.sec)
-//                    );
-//                    sprintf((char*)&LCDText[16], "%02u-%02u-%04u",
-//                        BCDtoDEC(time.f.mday),
-//                        BCDtoDEC(time.f.mon),
-//                        BCDtoDEC(time.f.year) + 2000
-//                    );
-//                    LCDUpdate();
-//                }
-//            }
+            if(MiApp_MessageAvailable())
+            {   
+                Nop();
+                if (rxMessage.Payload[0] == RTCCTIME_PKT && rxMessage.PayloadSize >= 5)
+                {
+                    // Extract timestamp (bytes 1-4)
+                    timestamp = 
+                        ((uint32_t)rxMessage.Payload[1] << 24) |
+                        ((uint32_t)rxMessage.Payload[2] << 16) |
+                        ((uint32_t)rxMessage.Payload[3] << 8)  |
+                        ((uint32_t)rxMessage.Payload[4]);
+
+                    // Call a function to set the RTCC
+                    RTCC_SetFromMiWiTimestamp(timestamp);
+                    LCDDisplay((char *)"RTCC updated!", 0, 500);
+
+                }
+                MiApp_DiscardMessage();
+                Nop();
+            }
 
             Nop();
-            //every sec display time here!
-//            if(MiApp_MessageAvailable())
-//            {   
-//                MiApp_DiscardMessage();
-//                Nop();
-//            }
+
         }
 
 		switch (state)
 		{
 			case APP_STATE_INIT:
-				App_ShowSplash();
-
+				App_ShowSplash(500);
+                networkJoined = FALSE;    
 				// Attempt to restore from EEPROM (network freezer)
 				MiApp_ProtocolInit(TRUE);
 
@@ -208,14 +205,12 @@ void main(void)
                 }
 
 				if(useStoredNetwork) {
-					LCDDisplay((char *)"Network Restored!", 0, TRUE);
-					DelayMs(250);
-					networkJoined = TRUE;
+					LCDDisplay((char *)"Network Restored!", 0, 250);
                     state = APP_STATE_MENU;
                     
 				} else {
-					LCDDisplay((char *)"No Saved Network", 0, TRUE);
-					DelayMs(250);
+                    
+					LCDDisplay((char *)"No Saved Network", 0, 250);
 					// Start fresh, cold start
 					MiApp_ProtocolInit(FALSE);
 					state = APP_STATE_CHANNEL_SELECT;
@@ -231,7 +226,6 @@ void main(void)
 				networkJoined = FALSE;
 				if (App_NetworkSetup())
 				{
-//					networkJoined = TRUE;
 					state = APP_STATE_WAIT_FOR_CONNECTION;
 				}
 				else
@@ -252,15 +246,14 @@ void main(void)
                     t_cycle = MiWi_TickGet();
                     lastView = 0xFF;  // force redraw on next swap
                 }
-
+                   
                 if(showTimeView)
                 {
-                    RTCC_ReadTimeDate(&time);
-                    sec = BCDtoDEC(time.f.sec);
+                    // Update RTCC/time LCD only once per second
+                    if(DelayMsAsyn(&t_rtcc, 1000) || lastView != 1) {
+                        RTCC_ReadTimeDate(&time);
+                        sec = BCDtoDEC(time.f.sec);
 
-                    // Only update if switching to time view or second changed
-                    if(lastView != 1 || sec != lastSec)
-                    {
                         lastView = 1;
                         lastSec = sec;
                         LCDErase();
@@ -279,9 +272,7 @@ void main(void)
                 }
                 else
                 {
-                    // Only update if switching to menu view
-                    if(lastView != 0)
-                    {
+                    if(lastView != 0) {
                         lastView = 0;
                         ShowMenuText(menuIndex);
                     }
@@ -304,27 +295,6 @@ void main(void)
                 break;
 
 
-//			case APP_STATE_RANGE_DEMO:
-//			{
-//				BYTE i, validCount = 0;
-//				for (i = 0; i < CONNECTION_SIZE; i++) {
-//					if (ConnectionTable[i].status.bits.isValid) {
-//						validCount++;
-//					}
-//				}
-//				if (validCount > 1) {
-//					LCDDisplay((char *)"Select Peer Node for Range Test", 0, FALSE);
-//					DelayMs(1000);
-//				}
-//				RangeDemo();
-////				state = APP_STATE_MENU;
-//                if(Rejoin == 0)
-//                    state = APP_STATE_MENU;
-//                else
-//                    state = APP_STATE_CHANNEL_SELECT;
-//				break;
-//			}
-
 			case APP_STATE_TEMP_DEMO:
 				TempDemo();
 				state = APP_STATE_MENU;
@@ -339,7 +309,7 @@ void main(void)
                 networkJoined = FALSE; // if exiting or removing connection
 				state = APP_STATE_EXIT;
                 MiApp_RemoveConnection(0);
-                LCDDisplay((char *)"Remove Connection...", 0, TRUE);
+                LCDDisplay((char *)"Remove Connection...", 0, 250);
 				break;
 		}
 	}
@@ -350,14 +320,14 @@ void main(void)
 ***************************************************************************/
 
 // 1. Splash screen and self test (optional)
-static void App_ShowSplash(void)
+static void App_ShowSplash(unsigned int delay)
 {
     LCDBacklightON();
     LCDErase();
     sprintf(LCDText, (const far rom char *)"    Microchip   ");
     sprintf(&(LCDText[16]), (const far rom char *)" MiWi Demo Board");
     LCDUpdate();
-    DelayMs(2000);
+    DelayMs(delay);
 
     LCDBacklightOFF();
     // Optional: Self-test at startup (hold button)
@@ -428,6 +398,7 @@ static BOOL App_NetworkSetup(void)
     BYTE sw, selBtn;
     BOOL networkJoined = FALSE;
     DWORD scanChannelBitmap;
+    BYTE buf1[17], buf2[17];
 
 create_or_join: 
     LCDErase();
@@ -452,13 +423,13 @@ create_or_join:
             sprintf((char *)LCDText, (const far rom char *)"Created Network ");
             sprintf((char *)&(LCDText[16]), (const far rom char *)"Successfully    ");
             LCDUpdate();
-            DelayMs(1000);
-
+            DelayMs(500);
+            
             LCDErase();
             sprintf((char *)LCDText, (const far rom char *)"PANID:%02x%02x Ch:%02d", myPANID.v[1], myPANID.v[0], myChannel);
             sprintf((char *)&(LCDText[16]), (const far rom char *)"Address: %02x%02x", myShortAddress.v[1], myShortAddress.v[0]);
             LCDUpdate();
-
+            
             // Wait for client connection
             while (!ConnectionTable[0].status.bits.isValid) {
                 if (MiApp_MessageAvailable())
@@ -471,8 +442,8 @@ create_or_join:
 	        BYTE scanresult = 0, j, k;
 	        BOOL joined = FALSE;
 
-	        LCDDisplay((char *)"  Scanning for    Networks....", 0, TRUE);
-	        LCDDisplay((char *)"Please Select   Network to Join ", 0, TRUE);
+	        LCDDisplay((char *)"  Scanning for    Networks....", 0, 250);
+	        LCDDisplay((char *)"Please Select   Network to Join ", 0, 250);
 
 	        MiApp_ProtocolInit(FALSE);
 
@@ -487,7 +458,8 @@ create_or_join:
 	        else
 		        scanChannelBitmap = (0x01000000 << (myChannel-24));
 
-	        scanresult = MiApp_SearchConnection(10, scanChannelBitmap);
+//	        scanresult = MiApp_SearchConnection(10, scanChannelBitmap);
+	        scanresult = MiApp_SearchConnection(11, scanChannelBitmap);
 
 	        if(scanresult > 0)
 	        {
@@ -584,12 +556,12 @@ create_or_join:
 					        Status = MiApp_EstablishConnection(j, CONN_MODE_DIRECT);
 					        if(Status == 0xFF)
 					        {
-						        LCDDisplay((char *)"Join Failed!!!", 0, TRUE);
+						        LCDDisplay((char *)"Join Failed!!!", 0, 250);
 						        goto create_or_join; // Return to main menu
 					        }
 					        else
 					        {
-						        LCDDisplay((char *)"Joined  Network Successfully..", 0, TRUE);
+						        LCDDisplay((char *)"Joined  Network Successfully..", 0, 250);
 						        joined = TRUE;
 					        }
 //					        // After join, broadcast EXIT_IDENTIFY_MODE
@@ -615,7 +587,7 @@ create_or_join:
 	        }
 	        else
 	        {
-		        LCDDisplay((char *)"No Network FoundSW2: Re-Scan", 0, FALSE);
+		        LCDDisplay((char *)"No Network FoundSW2: Re-Scan", 0, 100);
 		        // Wait for user to press SW2 to rescan
 		        while (ButtonPressed() != SW2);
 		        goto create_or_join; // Jump back to top
@@ -645,7 +617,7 @@ static void App_WaitForConnection(void)
 {
 //    uint8_t sec;
 //    uint8_t lastSec = 0xFF;
-    uint32_t timestamp;
+//    uint32_t timestamp;
 //    rtccTimeDate time;
     
     MIWI_TICK t1 = MiWi_TickGet();  
@@ -653,55 +625,12 @@ static void App_WaitForConnection(void)
 //    DelayMs(500);
     while(1)
     {
-        if(DelayMsAsyn(&t1, 5000)){
+        if(DelayMsAsyn(&t1, 2000)){
             Nop();
             break;
         }
-//        MiWiPROTasks();
-        if(MiApp_MessageAvailable())
-        {   
-            Nop();
-            if (rxMessage.Payload[0] == RTCCTIME_PKT && rxMessage.PayloadSize >= 5)
-            {
-                // Extract timestamp (bytes 1-4)
-                timestamp = 
-                    ((uint32_t)rxMessage.Payload[1] << 24) |
-                    ((uint32_t)rxMessage.Payload[2] << 16) |
-                    ((uint32_t)rxMessage.Payload[3] << 8)  |
-                    ((uint32_t)rxMessage.Payload[4]);
-
-                // Call a function to set the RTCC
-                RTCC_SetFromMiWiTimestamp(timestamp);
-
-//                // --- DISPLAY THE RAW TIMESTAMP ON LCD (NO LCDDisplay) ---
-//                LCDErase();
-//                sprintf((char*)LCDText, "RTCC: 0x%08lX", timestamp);
-//                // For 2-line LCD, show both hex and decimal:
-//                sprintf((char*)&LCDText[16], "%lu", (unsigned long)timestamp);
-//                LCDUpdate();
-//                Nop();
-//                RTCC_ReadTimeDate(&time);
-//                sec = BCDtoDEC(time.f.sec);
-////                if(sec != lastSec) {
-//                    lastSec = sec;
-//                    LCDErase();
-//                    sprintf((char*)LCDText, "Time: %02u:%02u:%02u",
-//                        BCDtoDEC(time.f.hour),
-//                        BCDtoDEC(time.f.min),
-//                        BCDtoDEC(time.f.sec)
-//                    );
-//                    sprintf((char*)&LCDText[16], "%02u-%02u-%04u",
-//                        BCDtoDEC(time.f.mday),
-//                        BCDtoDEC(time.f.mon),
-//                        BCDtoDEC(time.f.year) + 2000
-//                    );
-//                    LCDUpdate();
-////                }
-//                Nop();
-            }
-            MiApp_DiscardMessage();
-            Nop();
-        }
+        MiWiPROTasks();
+        
     }
 }
 static void ShowMenuText(MENU_OPTION menuIndex)
