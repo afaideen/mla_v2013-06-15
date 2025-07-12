@@ -109,7 +109,7 @@ void HandleSecurity(void);
         BYTE tmpSourceLongAddress[MY_ADDRESS_LENGTH];
         DWORD_VAL tmpFrameCounter;  
         
-        #include "WirelessProtocols/MCHP_API.h"          
+        #include "WirelessProtocols/MCHP_API.h"
     #endif	
     
     #if defined(__18CXX)
@@ -468,24 +468,24 @@ void HandleSecurity(void);
 //
 //		}
 
-#if defined(__18CXX)
-	    //check to see if the symbol timer overflowed
-            if(TMR_IF)
-            {
-                if(TMR_IE)
-                {
-                    /* there was a timer overflow */
-                    TMR_IF = 0;
-                    timerExtension1++;
-                    if(timerExtension1 == 0)
-                    {
-                        timerExtension2++;
-                    }
-                }
-            }
-
-            UserInterruptHandler();
-#endif
+//#if defined(__18CXX)
+//	    //check to see if the symbol timer overflowed
+//            if(TMR_IF)
+//            {
+//                if(TMR_IE)
+//                {
+//                    /* there was a timer overflow */
+//                    TMR_IF = 0;
+//                    timerExtension1++;
+//                    if(timerExtension1 == 0)
+//                    {
+//                        timerExtension2++;
+//                    }
+//                }
+//            }
+//
+//            UserInterruptHandler();
+//#endif
     }
 
     /************************************************************************************
@@ -774,6 +774,7 @@ void HandleSecurity(void);
                 case 0x00:
                     // use reserved packet type to represent beacon packet
                     MACRxPacket.flags.bits.packetType = PACKET_TYPE_RESERVE;
+                    
                     break;
                 default:    // not support frame type
                     MiMAC_DiscardPacket();
@@ -1167,16 +1168,24 @@ void HandleSecurity(void);
                         MRF24J40Status.bits.TX_FAIL = 0;
                         return FALSE;
                     }
+                    Nop();
 					//For Unicast, packet ACK is expected true here, loop breaks and MiMAC_SendPacket() returns TRUE
                     break;   //For broadcast transmission will never expect packet ACK
                 }
                 t2 = MiWi_TickGet();
-//                if( MiWi_TickGetDiff(t2, t1) > FORTY_MILI_SECOND )
-                if( MiWi_TickGetDiff(t2, t1) > HUNDRED_MILI_SECOND )
+                if( MiWi_TickGetDiff(t2, t1) > FORTY_MILI_SECOND )
+//                if( MiWi_TickGetDiff(t2, t1) > HUNDRED_MILI_SECOND )
                 {
+                    LED0_ON();
+                    LED1_ON();
+                    LED2_ON();
                     InitMRF24J40();
                     MiMAC_SetAltAddress(myNetworkAddress.v, MAC_PANID.v);
                     MRF24J40Status.bits.TX_BUSY = 0;
+                    DelayMs(200);
+                    LED0_OFF();
+                    LED1_OFF();
+                    LED2_OFF();
                     return FALSE;
                 }
             }
@@ -2050,7 +2059,7 @@ MIWI_TICK isrStart, isrEnd;
                     
                 }
                     
-                else if(flags.bits.RF_RXIF)
+                if(flags.bits.RF_RXIF)
                 {
 //                    flags_bits_RF_RXIF = TRUE;
                     HandleMRF24J40RXInterrupt();

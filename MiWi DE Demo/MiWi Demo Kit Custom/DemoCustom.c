@@ -158,6 +158,7 @@ void main(void)
             if(MiApp_MessageAvailable())
             {   
                 Nop();
+                MiApp_DiscardMessage();
                 if (rxMessage.Payload[0] == RTCCTIME_PKT && rxMessage.PayloadSize >= 5)
                 {
                     // Extract timestamp (bytes 1-4)
@@ -172,7 +173,7 @@ void main(void)
                     LCDDisplay((char *)"RTCC updated!", 0, 500);
 
                 }
-                MiApp_DiscardMessage();
+                
                 Nop();
             }
 
@@ -257,12 +258,12 @@ void main(void)
                         lastView = 1;
                         lastSec = sec;
                         LCDErase();
-                        sprintf((char*)LCDText, "Time: %02u:%02u:%02u",
+                        sprintf((char*)LCDText, (const far rom char *)"Time: %02u:%02u:%02u",
                             BCDtoDEC(time.f.hour),
                             BCDtoDEC(time.f.min),
                             BCDtoDEC(time.f.sec)
                         );
-                        sprintf((char*)&LCDText[16], "%02u-%02u-%04u",
+                        sprintf((char*)&LCDText[16], (const far rom char *)"%02u-%02u-%04u",
                             BCDtoDEC(time.f.mday),
                             BCDtoDEC(time.f.mon),
                             BCDtoDEC(time.f.year) + 2000
@@ -294,6 +295,27 @@ void main(void)
                 }
                 break;
 
+
+//			case APP_STATE_RANGE_DEMO:
+//			{
+//				BYTE i, validCount = 0;
+//				for (i = 0; i < CONNECTION_SIZE; i++) {
+//					if (ConnectionTable[i].status.bits.isValid) {
+//						validCount++;
+//					}
+//				}
+//				if (validCount > 1) {
+//					LCDDisplay((char *)"Select Peer Node for Range Test", 0, FALSE);
+//					DelayMs(1000);
+//				}
+//				RangeDemo();
+////				state = APP_STATE_MENU;
+//                if(Rejoin == 0)
+//                    state = APP_STATE_MENU;
+//                else
+//                    state = APP_STATE_CHANNEL_SELECT;
+//				break;
+//			}
 
 			case APP_STATE_TEMP_DEMO:
 				TempDemo();
@@ -561,10 +583,10 @@ create_or_join:
 					        }
 					        else
 					        {
-						        LCDDisplay((char *)"Joined  Network Successfully..", 0, 250);
+						        LCDDisplay((char *)"Joined  Network Successfully..", 0, 0);
 						        joined = TRUE;
 					        }
-//					        // After join, broadcast EXIT_IDENTIFY_MODE
+					        // After join, broadcast EXIT_IDENTIFY_MODE
 //					        MiApp_FlushTx();
 //					        MiApp_WriteData(EXIT_IDENTIFY_MODE);
 //					        MiApp_WriteData(myPANID.v[1]);
@@ -625,7 +647,7 @@ static void App_WaitForConnection(void)
 //    DelayMs(500);
     while(1)
     {
-        if(DelayMsAsyn(&t1, 2000)){
+        if(DelayMsAsyn(&t1, 4000)){
             Nop();
             break;
         }

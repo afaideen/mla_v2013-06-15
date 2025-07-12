@@ -12,7 +12,6 @@
 
 
 rtccTimeDate RTCC_ReadTime(void);
-uint32_t RTCC_GetTimestamp(void);
 void RTCC_TimestampToDate(uint32_t timestamp, rtccTimeDate *time);
 void RTCC_WriteTimeDate(unsigned char year, unsigned char month, unsigned char mday, 
                         unsigned char hour, unsigned char min, unsigned char sec, 

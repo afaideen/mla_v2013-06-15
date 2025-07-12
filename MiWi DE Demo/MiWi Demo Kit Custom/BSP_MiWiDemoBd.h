@@ -130,6 +130,16 @@
 		#define LED2				LATAbits.LATA7
 		#define LED2_TRIS			TRISAbits.TRISA7
 
+        #define LED0_OFF()          {LED0 = 0;}//{LATCCLR = BIT_2;}
+        #define LED0_ON()           {LED0 = 1;}//{LATCSET = BIT_2;}
+        #define LED0_INV()          {LED0 = ~LED0;}//LATCINV = BIT_2;
+        #define LED1_OFF()          {LED1 = 0;}//{LATACLR = BIT_6;}
+        #define LED1_ON()           {LED1 = 1;}//{LATASET = BIT_6;}
+        #define LED1_INV()          {LED1 = ~LED1;}//LATAINV = BIT_6;
+        #define LED2_OFF()          {LED2 = 0;}//{LATACLR = BIT_7;}
+        #define LED2_ON()           {LED2 = 1;}//{LATASET = BIT_7;}
+        #define LED2_INV()          {LED2 = ~LED2;}//LATAINV = BIT_7;
+
         // External EEPROM Pin Definitions
 		//#define EE_nCS_TRIS         TRISDbits.TRISD5
         #define MAC_nCS             LATDbits.LATD5

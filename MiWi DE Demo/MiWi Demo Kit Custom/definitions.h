@@ -71,6 +71,7 @@ void RTCC_Init(void);
 void RTCC_SetFromMiWiTimestamp(uint32_t timestamp);
 void RTCC_ReadTimeDate(rtccTimeDate *time);
 void RTCC_SetFromMiWiTimestamp(uint32_t timestamp);
+uint32_t RTCC_GetTimestamp(void);
 BOOL SW_Pressed( volatile unsigned char *port, BYTE bitPos, MIWI_TICK *t_sw, int duration);
 
 #endif	/* DEFINITIONS_H */

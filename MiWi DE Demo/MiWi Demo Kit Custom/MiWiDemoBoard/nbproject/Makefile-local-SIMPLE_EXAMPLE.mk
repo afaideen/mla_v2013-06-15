@@ -35,4 +35,4 @@ MP_AS_DIR="C:\Microchip\C18\v3.46\bin\..\mpasm"
 MP_LD_DIR="C:\Microchip\C18\v3.46\bin"
 MP_AR_DIR="C:\Microchip\C18\v3.46\bin"
 # MP_BC_DIR is not defined
-DFP_DIR=C:/Microchip/MPLABX/v5.40/packs/Microchip/PIC18F-J_DFP/1.3.35
+DFP_DIR=C:/Microchip/MPLABX/v5.40/packs/Microchip/PIC18F-J_DFP/1.1.24

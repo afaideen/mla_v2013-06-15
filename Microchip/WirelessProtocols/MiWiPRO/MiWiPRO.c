@@ -5732,13 +5732,14 @@ BOOL MiApp_UnicastConnection( INPUT BYTE ConnectionIndex,
             t1 = MiWi_TickGet();
             while(1)
             {
-                if( MiApp_MessageAvailable())
-                {
-                    MiApp_DiscardMessage();
-                }                
-                //MiWiPROTasks();
+//                if( MiApp_MessageAvailable())
+//                {
+//                    MiApp_DiscardMessage();
+//                }                
+                MiWiPROTasks();
                 if( MiWiPROStateMachine.bits.MiWiPROAckInProgress == 0 )
-                {                    
+                {   
+                    Nop();
                     return TRUE;
                 }    
                 t2 = MiWi_TickGet();

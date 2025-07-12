@@ -79,7 +79,7 @@ struct TempPacket
 struct TempPacket NodeTemp[10];
 
 
-
+unsigned char msg[] = "MiWi Rocks!";
 /*********************************************************************
 * Function:         void TempDemo(void)
 *
@@ -112,7 +112,9 @@ void TempDemo(void)
     BYTE viewIndex = 0;
     int len1, len2;
     char strength[8];
-    char buf1[17], buf2[17];
+//    char buf1[17], buf2[17];
+    int16_t temp_, batt_;
+    BYTE Pkt_Loss_Cnt = 0;
     
 	/*******************************************************************/
     // Dispaly Temp Demo Splach Screen
@@ -187,17 +189,6 @@ void TempDemo(void)
         if (SW_Pressed(&PORTB, 2, &sw1_timer, 350))
 		{
 			
-			/*******************************************************************/
-			// Power-up Temperature Sensor
-			/*******************************************************************/							
-			//LATAbits.LATA0 = 1;
-			//DelayMs(2);         // Delay 2 ms after powering up the temperature sensor
-            
-            /*******************************************************************/
-            // Toggle LED1 Every Temp Read Cycle
-            /*******************************************************************/
-            //LED0 ^= 1;
-            
             /*******************************************************************/
             // Take specified number of Temp Readings
             /*******************************************************************/
@@ -205,46 +196,43 @@ void TempDemo(void)
 //            temp = ReadTempSensor(VBGResult);
                 temp = ReadTemperature();  // Read ADC temperature
                 batt = ReadBatt();  // Read ADC battery
+                
             #else //For PIC32MX Wireless Eval Board, read temperature AN10 
                 temp = ReadTempSensor_WirelessEvalBoard();
             #endif
             Nop();
-            /*******************************************************************/
-            // Turn Temp Sensor Off
-            /*******************************************************************/
-			//LATAbits.LATA0 = 0;
 
-//            /*******************************************************************/
-//            // Calculate Average Temp
-//            /*******************************************************************/			
-//			tempAverage = 0;
-//			tempAverage = temp;
-//            tempToSend = (int)(temp * 10);  // e.g., 24.6°C -> 246
-//			
-//            /*******************************************************************/
-//            // Reset TX Buffer Pointer
-//            /*******************************************************************/	
-              
-            
                 // Update NodeTemp Structure
     //			NodeTemp[0].TempValue = (BYTE)tempAverage;
                 NodeTemp[0].TempValue = temp;
                 NodeTemp[0].BattValue = batt;
 					
-           /*******************************************************************/
-           // Broadcast Node Tempature across Network.
-           /*******************************************************************/
-           // Function MiApp_BroadcastPacket is used to broadcast a message
-           // The only parameter is the boolean to indicate if we need to
-           // secure the frame
-           /*******************************************************************/
-//           MiApp_BroadcastPacket(FALSE);
-            SendData(0, (int16_t)(temp * 10), (uint16_t)(batt * 100));
+//            SendData(0, (int16_t)(temp * 10), (uint16_t)(batt * 100));
 
-			/*******************************************************************/
-            // Read New Start tickcount
-            /*******************************************************************/
-      		tick1 = MiWi_TickGet();	
+            temp_ = temp * 10;
+            batt_ = batt * 100;
+            timestamp = RTCC_GetTimestamp();  // Get timestamp for flight time
+            MiApp_FlushTx();
+//        	    MiApp_WriteData(RANGE_PKT);                
+//                MiApp_WriteStringRAM(msg);
+            MiApp_WriteData(TEMP_PKT);      
+            MiApp_WriteData((BYTE)(timestamp >> 24) & 0xFF);
+            MiApp_WriteData((BYTE)(timestamp >> 16) & 0xFF);
+            MiApp_WriteData((BYTE)(timestamp >> 8) & 0xFF);
+            MiApp_WriteData((BYTE)timestamp & 0xFF);
+            MiApp_WriteData((BYTE)(temp_ >> 8) & 0xFF);
+            MiApp_WriteData((BYTE)temp_ & 0xFF);
+            MiApp_WriteData((BYTE)(batt_ >> 8) & 0xFF);
+            MiApp_WriteData((BYTE)batt_ & 0xFF);
+            MiApp_WriteData(myShortAddress.v[1]);
+            MiApp_WriteData(myShortAddress.v[0]);
+            if( MiApp_UnicastConnection(0, FALSE) == FALSE )
+                Pkt_Loss_Cnt++;
+            else
+            {
+                LED1 ^= 1;
+                Pkt_Loss_Cnt = 0;
+            }
 		}
 //        else if (switch_val == SW1)
         else if (SW_Pressed(&PORTB, 1, &sw1_timer, 350))
@@ -296,7 +284,8 @@ void TempDemo(void)
         // structure of RECEIVED_MESSAGE.
         /*******************************************************************/
         if(MiApp_MessageAvailable())
-        {            
+        {    
+            MiApp_DiscardMessage();
 			/*******************************************************************/	
            	// Check if Exit Demo Packet
            	/*******************************************************************/   
@@ -381,7 +370,7 @@ void TempDemo(void)
 //				}
 //			}
 			
-			MiApp_DiscardMessage();
+//			MiApp_DiscardMessage();
         }
     }   
 }
@@ -426,10 +415,10 @@ BOOL SendData(BYTE target, int16_t tempCelsius, uint16_t battVoltage) {
 
     // Write structured data into the TX buffer
     MiApp_WriteData(packet.deviceID);
-    MiApp_WriteData((packet.timestamp >> 24) & 0xFF);
-    MiApp_WriteData((packet.timestamp >> 16) & 0xFF);
-    MiApp_WriteData((packet.timestamp >> 8) & 0xFF);
-    MiApp_WriteData(packet.timestamp & 0xFF);
+//    MiApp_WriteData((packet.timestamp >> 24) & 0xFF);
+//    MiApp_WriteData((packet.timestamp >> 16) & 0xFF);
+//    MiApp_WriteData((packet.timestamp >> 8) & 0xFF);
+//    MiApp_WriteData(packet.timestamp & 0xFF);
     
     // Temperature (2 bytes, 0.1ï¿½C resolution)
     MiApp_WriteData((packet.temperature >> 8) & 0xFF);
@@ -576,7 +565,7 @@ void PrintTempLCD(void)
     decpartF = (int)((tempF - intpartF) * 10.0 + 0.5);
     if(decpartF < 0) decpartF = -decpartF;
 
-    sprintf((char *)&LCDText[0], "%02X%02X %2d.%1dC/%2d.%1dF",
+    sprintf((char *)&LCDText[0], (const far rom char *)"%02X%02X %2d.%1dC/%2d.%1dF",
         NodeTemp[CurrentNodeIndex].NodeAddress[1],
         NodeTemp[CurrentNodeIndex].NodeAddress[0],
         intpart, decpart, intpartF, decpartF);
@@ -590,7 +579,7 @@ void PrintTempLCD(void)
     intbatt = (int)batt;
     decbatt = (int)((batt - intbatt) * 100.0 + 0.5);
     if(decbatt < 0) decbatt = -decbatt;
-    sprintf((char *)&LCDText[16], "Batt:%d.%02dV", intbatt, decbatt);
+    sprintf((char *)&LCDText[16], (const far rom char *)"Batt:%d.%02dV", intbatt, decbatt);
 
     // Pad line 2 to 16 chars
     len2 = strlen((char *)&LCDText[16]);

@@ -381,18 +381,18 @@ BOOL SW_Pressed( volatile unsigned char *port, BYTE bitPos, MIWI_TICK *t_sw, int
             if (!((*port >> bitPos) & 1))  // ? Confirm button is still pressed
             {
                 while(!((*port >> bitPos) & 1));
-                current_time1 = MiWi_TickGet();  // ? Update timestamp correctly
+                *t_sw = MiWi_TickGet(); 
                 return TRUE;
             }
             else
             {
-                current_time1 = MiWi_TickGet();  // ? Reset timestamp
+                *t_sw = MiWi_TickGet(); 
             }
         }
     }
     else
     {
-        current_time1 = MiWi_TickGet();  // ? Reset timestamp when button is released
+        *t_sw = MiWi_TickGet();   // ? Reset timestamp when button is released
     }
     return FALSE;
 }

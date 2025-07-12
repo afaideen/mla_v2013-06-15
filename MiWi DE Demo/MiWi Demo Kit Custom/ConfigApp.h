@@ -243,7 +243,7 @@
 // transceivers can only broadcast, or hardcoded the destination address
 // to perform unicast.
 /*********************************************************************/
-//#define ENABLE_HAND_SHAKE
+//#define ENABLE_HAND_SHAKE //For P2P only
 
 
 /*********************************************************************/
