@@ -51,15 +51,6 @@
 #define EXIT_DEMO_TIMEOUT           3
 #define NUM_TEMP_SAMPLES            4
 
-
-
-#define EXIT_PKT        1
-#define RANGE_PKT       2
-#define TEMP_PKT        3
-#define ACK_PKT         4
-#define REJOIN_PKT      5
-#define RTCCTIME_PKT    6
-
 unsigned short tempAverage = 0;
 BYTE tempRemote = 255;
 BYTE NodeIndex = 1;
@@ -289,7 +280,22 @@ void TempDemo(void)
 			/*******************************************************************/	
            	// Check if Exit Demo Packet
            	/*******************************************************************/   
-        	if(rxMessage.Payload[0] == EXIT_PKT)
+            if (rxMessage.Payload[0] == PING_PKT)
+                {
+                    // Send PONG reply to sender
+                    MiApp_FlushTx();
+                    MiApp_WriteData(PONG_PKT);
+                    MiApp_WriteData(myShortAddress.v[1]);
+                    MiApp_WriteData(myShortAddress.v[0]);
+                    MiApp_UnicastAddress(rxMessage.SourceAddress, FALSE, FALSE);
+                    LCDDisplay((char *)"Ping? Pong!", 0, 0);
+                    while(!DelayMsAsyn(&tick3, 500))
+                    {
+                        MiWiPROTasks();
+                    }
+                    
+                }
+        	else if(rxMessage.Payload[0] == EXIT_PKT)
         	{
 //            	MiApp_DiscardMessage();
             	MiApp_FlushTx();
@@ -317,7 +323,7 @@ void TempDemo(void)
                 RTCC_SetFromMiWiTimestamp(timestamp);
                 LCDDisplay((char *)"RTCC updated!", 0, TRUE);
             }
-            if(rxMessage.Payload[0] == RANGE_PKT)
+            else if(rxMessage.Payload[0] == RANGE_PKT)
         	{
                 // Get RSSI value from Recieved Packet
             	rssi = rxMessage.PacketRSSI;

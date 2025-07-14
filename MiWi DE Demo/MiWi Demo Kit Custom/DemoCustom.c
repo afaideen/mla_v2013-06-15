@@ -32,13 +32,6 @@ BOOL DelayMsAsyn(MIWI_TICK* tick1, unsigned long delayMs);
 #define IDENTIFY_MODE       4
 #define EXIT_IDENTIFY_MODE  5
 
-#define EXIT_PKT        1
-#define RANGE_PKT       2
-#define TEMP_PKT        3
-#define ACK_PKT         4
-#define REJOIN_PKT      5
-#define RTCCTIME_PKT    6
-
 #define NODE_INFO_INTERVAL              5
 #define HEARTBEAT_INTERVAL              5  // seconds
 #define HEARTBEAT_UNICAST_TIMEOUT_SEC   12  // seconds
@@ -172,6 +165,21 @@ void main(void)
                     RTCC_SetFromMiWiTimestamp(timestamp);
                     LCDDisplay((char *)"RTCC updated!", 0, 500);
 
+                }
+                else if (rxMessage.Payload[0] == PING_PKT)
+                {
+                    // Send PONG reply to sender
+                    MiApp_FlushTx();
+                    MiApp_WriteData(PONG_PKT);
+                    MiApp_WriteData(myShortAddress.v[1]);
+                    MiApp_WriteData(myShortAddress.v[0]);
+                    MiApp_UnicastAddress(rxMessage.SourceAddress, FALSE, FALSE);
+                    LCDDisplay((char *)"Ping? Pong!", 0, 0);
+                    while(!DelayMsAsyn(&lastHeartbeatTick, 500))
+                    {
+                        MiWiPROTasks();
+                    }
+                    
                 }
                 
                 Nop();
@@ -628,7 +636,7 @@ BOOL DelayMsAsyn(MIWI_TICK* tick1, unsigned long delayMs)
 //    if(MiWi_TickGetDiff(now, tick1) > (MS_TO_TICKS(delayMs)))
     if((MiWi_TickGetDiff(now, tick1) > (ONE_SECOND * delayMs/1000)))
     {
-        *tick1 = now;
+        *tick1 = MiWi_TickGet();
         return TRUE;
     }
 

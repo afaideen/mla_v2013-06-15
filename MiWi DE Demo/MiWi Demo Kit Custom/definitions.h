@@ -74,5 +74,14 @@ void RTCC_SetFromMiWiTimestamp(uint32_t timestamp);
 uint32_t RTCC_GetTimestamp(void);
 BOOL SW_Pressed( volatile unsigned char *port, BYTE bitPos, MIWI_TICK *t_sw, int duration);
 
+#define EXIT_PKT        1
+#define RANGE_PKT       2
+#define TEMP_PKT        3
+#define ACK_PKT         4
+#define REJOIN_PKT      5
+#define RTCCTIME_PKT    6
+#define PING_PKT        7
+#define PONG_PKT        8
+
 #endif	/* DEFINITIONS_H */
 
