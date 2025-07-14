@@ -115,14 +115,6 @@ void TempDemo(void)
     LCDBacklightOFF();
         
     /*******************************************************************/
-    // Read Band Gap Voltage(1.2V), Since this is Battery Powered application 
-    // for the ADC Temp readings for proper calculation of Temp.
-    /*******************************************************************/
-//#if defined(__18CXX) && !defined(HI_TECH_C)	
-//	VBGResult = Read_VBGVoltage();		
-//#endif
-
-    /*******************************************************************/
     // Initialize Temp Data Packet
     // NodeTemp[0] = Self
     /*******************************************************************/
@@ -288,11 +280,11 @@ void TempDemo(void)
                     MiApp_WriteData(myShortAddress.v[1]);
                     MiApp_WriteData(myShortAddress.v[0]);
                     MiApp_UnicastAddress(rxMessage.SourceAddress, FALSE, FALSE);
-                    LCDDisplay((char *)"Ping? Pong!", 0, 0);
-                    while(!DelayMsAsyn(&tick3, 500))
-                    {
-                        MiWiPROTasks();
-                    }
+                    LCDDisplay((char *)"Ping? Pong!", 0, 500);
+//                    while(!DelayMsAsyn(&tick3, 500))
+//                    {
+//                        MiWiPROTasks();
+//                    }
                     
                 }
         	else if(rxMessage.Payload[0] == EXIT_PKT)
