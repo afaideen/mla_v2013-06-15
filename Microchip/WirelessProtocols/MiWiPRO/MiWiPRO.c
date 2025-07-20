@@ -293,7 +293,7 @@
         
     #endif
     
-    
+    BOOL    security = FALSE;
     #if defined(ENABLE_FREQUENCY_AGILITY) 
         struct
         {
@@ -4674,6 +4674,7 @@ EndOfSearchLoop:
                 nvmGetConnectionTable(ConnectionTable);
 //                nvmGetMyShortAddress(myShortAddress.v);
                 nvmGetMyParent(&myParent);
+                nvmGetSecurity((BYTE)&security);
                 #if defined(NWK_ROLE_COORDINATOR)
                     nvmGetRoutingTable(RoutingTable);
                     nvmGetNeighborRoutingTable(NeighborRoutingTable);
@@ -4681,14 +4682,14 @@ EndOfSearchLoop:
                     nvmGetRole(&role);
                 #endif
                 
-                Printf("Channel:");
-                PrintDec(currentChannel);
-                Printf(" PANID:");
-                PrintChar(myPANID.v[1]);
-                PrintChar(myPANID.v[0]);
-                Printf("ShortAddr:");
-                PrintChar(myShortAddress.v[1]);
-                PrintChar(myShortAddress.v[0]);
+//                Printf("Channel:");
+//                PrintDec(currentChannel);
+//                Printf(" PANID:");
+//                PrintChar(myPANID.v[1]);
+//                PrintChar(myPANID.v[0]);
+//                Printf("ShortAddr:");
+//                PrintChar(myShortAddress.v[1]);
+//                PrintChar(myShortAddress.v[0]);
             
 //                MiApp_SetChannel(currentChannel);
 //                MiMAC_SetAltAddress(myShortAddress.v, myPANID.v);
@@ -4703,6 +4704,7 @@ EndOfSearchLoop:
                 
                 nvmPutMyShortAddress(myShortAddress.v);
                 nvmPutMyParent(&myParent);
+                nvmPutSecurity((BYTE)&security);
                 #if defined(NWK_ROLE_COORDINATOR)
                     for(i = 0; i < NUM_COORDINATOR/8; i++)
                     {

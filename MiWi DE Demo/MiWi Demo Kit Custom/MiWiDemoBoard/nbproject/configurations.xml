@@ -17,6 +17,7 @@
         <itemPath>../BSP_MiWiDemoBd.h</itemPath>
         <itemPath>../bsp_wireless_eval_board/BSP_PC32MX_WirelessEvalBoard.h</itemPath>
         <itemPath>../pic18f_miwi_demo_kit.h</itemPath>
+        <itemPath>../definitions.h</itemPath>
       </logicalFolder>
       <logicalFolder name="Common" displayName="Common" projectFiles="true">
         <itemPath>../../../Microchip/Include/GenericTypeDefs.h</itemPath>
@@ -444,6 +445,7 @@
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
         <property key="hwtoolclock.units" value="mips"/>

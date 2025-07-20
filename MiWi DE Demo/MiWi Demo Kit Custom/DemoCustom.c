@@ -16,6 +16,13 @@
 #include "WirelessProtocols/SymbolTime.h"
 #include "MAC_EEProm.h"
 #include "definitions.h"
+#include "NVM.h"
+
+extern BYTE         currentChannel;
+extern BYTE         role;
+extern BOOL         security;
+extern WORD_VAL     myPANID;
+extern WORD_VAL     myShortAddress;
 
 BOOL DelayMsAsyn(MIWI_TICK* tick1, unsigned long delayMs);
 
@@ -109,6 +116,8 @@ void main(void)
     BOOL res;
 	BOOL useStoredNetwork = FALSE;
     
+    BYTE pktType;
+    
 
 	// Board and LCD initialization
 	BoardInit();
@@ -152,7 +161,22 @@ void main(void)
             {   
                 Nop();
                 MiApp_DiscardMessage();
-                if (rxMessage.Payload[0] == RTCCTIME_PKT && rxMessage.PayloadSize >= 5)
+                pktType = rxMessage.Payload[0];
+                
+                // Expecting: [0]=CMD, [1]=PANID_LSB, [2]=PANID_MSB, [3]=CHANNEL,
+                //            [4]=SHORT_LSB, [5]=SHORT_MSB, [6]=ROLE, [7]=SECURITY
+                if (pktType == CONFIG_PKT)
+                {
+                    processConfigPKT();
+                    
+                }
+                else if (pktType == REQCONFIG_PKT)
+                {
+                    sendReplyConfigPKT();
+                    LCDDisplay((char *)"Sent ConfigReply!", 0, 0);
+                    
+                }
+                else if (pktType == RTCCTIME_PKT)
                 {
                     // Extract timestamp (bytes 1-4)
                     timestamp = 
@@ -163,25 +187,22 @@ void main(void)
 
                     // Call a function to set the RTCC
                     RTCC_SetFromMiWiTimestamp(timestamp);
-                    LCDDisplay((char *)"RTCC updated!", 0, 500);
+                    LCDDisplay((char *)"RTCC updated!", 0, 0);
+                   
 
                 }
-                else if (rxMessage.Payload[0] == PING_PKT)
+                else if (pktType == PING_PKT)
                 {
                     // Send PONG reply to sender
-                    MiApp_FlushTx();
-                    MiApp_WriteData(PONG_PKT);
-                    MiApp_WriteData(myShortAddress.v[1]);
-                    MiApp_WriteData(myShortAddress.v[0]);
-                    MiApp_UnicastAddress(rxMessage.SourceAddress, FALSE, FALSE);
-                    LCDDisplay((char *)"Ping? Pong!", 0, 0);
-                    while(!DelayMsAsyn(&lastHeartbeatTick, 500))
-                    {
-                        MiWiPROTasks();
-                    }
+                    sendPONGPKT();
+                    LCDDisplay((char *)"Ping? Pong!", 0, 0);                    
                     
                 }
-                
+                lastHeartbeatTick = MiWi_TickGet();
+                while(!DelayMsAsyn(&lastHeartbeatTick, 500))
+                {
+                    MiWiPROTasks();
+                }
                 Nop();
             }
 
@@ -404,8 +425,6 @@ static void App_ChannelSelect(void)
 
 	App_SetChannel(myChannel);
 }
-
-
 
 
 static BOOL App_SetChannel(BYTE channel)
@@ -634,7 +653,7 @@ BOOL DelayMsAsyn(MIWI_TICK* tick1, unsigned long delayMs)
 {
     MIWI_TICK now = MiWi_TickGet();
 //    if(MiWi_TickGetDiff(now, tick1) > (MS_TO_TICKS(delayMs)))
-    if((MiWi_TickGetDiff(now, tick1) > (ONE_SECOND * delayMs/1000)))
+    if(MiWi_TickGetDiff(now, tick1) > (ONE_SECOND * delayMs/1000))
     {
         *tick1 = MiWi_TickGet();
         return TRUE;

@@ -171,12 +171,14 @@
                 extern WORD        nvmMyShortAddress;
                 extern WORD        nvmMyLongAddress;
                 extern WORD        nvmMyParent;
+                extern WORD         nvmSecurity;
                 
                 #ifdef NWK_ROLE_COORDINATOR
                     extern WORD    nvmRoutingTable;
                     extern WORD    nvmFamilyTree;
                     extern WORD    nvmNeighborRoutingTable;
                     extern WORD    nvmRole;
+                    
                 #endif
             #endif
         
@@ -299,6 +301,9 @@
 
                         #define nvmGetRole( x )                 NVMRead( (BYTE *)x, nvmRole, 1)
                         #define nvmPutRole( x )                 NVMWrite((BYTE *)x, nvmRole, 1)
+                        
+                        #define nvmGetSecurity( x )                 NVMRead( (BYTE *)x, nvmSecurity, 1)
+                        #define nvmPutSecurity( x )                 NVMWrite((BYTE *)x, nvmSecurity, 1)
 
                     #endif
                 

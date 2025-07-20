@@ -65,6 +65,13 @@ typedef union
 //
 //    } MIWI_CONFIG;
 //#endif
+typedef struct __attribute__((__packed__)) miwiConfigReplyStruct
+{
+    WORD_VAL    PANID;
+    BYTE        Channel;
+    BYTE        security;
+    BYTE        Role;
+} MIWI_CONFIG_REPLY;
 
 uint8_t BCDtoDEC(uint8_t bcdValue);
 void RTCC_Init(void);
@@ -74,14 +81,18 @@ void RTCC_SetFromMiWiTimestamp(uint32_t timestamp);
 uint32_t RTCC_GetTimestamp(void);
 BOOL SW_Pressed( volatile unsigned char *port, BYTE bitPos, MIWI_TICK *t_sw, int duration);
 
-#define EXIT_PKT        1
-#define RANGE_PKT       2
-#define TEMP_PKT        3
-#define ACK_PKT         4
-#define REJOIN_PKT      5
-#define RTCCTIME_PKT    6
-#define PING_PKT        7
-#define PONG_PKT        8
+#define EXIT_PKT            1
+#define RANGE_PKT           2
+#define TEMP_PKT            3
+#define ACK_PKT             4
+#define REJOIN_PKT          5
+#define RTCCTIME_PKT        6
+#define PING_PKT            7
+#define PONG_PKT            8
+#define CONFIG_PKT          9
+#define CONFIG_ACK_PKT      10
+#define REQCONFIG_PKT       11
+#define REPLYCONFIG_PKT     12
 
 #endif	/* DEFINITIONS_H */
 

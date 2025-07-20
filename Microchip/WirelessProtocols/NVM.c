@@ -79,6 +79,7 @@
             WORD        nvmMyShortAddress;
             WORD        nvmMyLongAddress;
             WORD        nvmMyParent;
+            WORD        nvmSecurity;            
             
             #ifdef NWK_ROLE_COORDINATOR
                 WORD    nvmRoutingTable;
@@ -558,6 +559,7 @@ EEPROM_NEXT_PAGE:
                 result &= NVMalloc(2, &nvmMyShortAddress);
                 result &= NVMalloc(MY_ADDRESS_LENGTH, &nvmMyLongAddress);
                 result &= NVMalloc(1, &nvmMyParent);
+                result &= NVMalloc(1, &nvmSecurity);
                 
                 #if defined(NWK_ROLE_COORDINATOR)
                     result &= NVMalloc((NUM_COORDINATOR/8), &nvmRoutingTable);

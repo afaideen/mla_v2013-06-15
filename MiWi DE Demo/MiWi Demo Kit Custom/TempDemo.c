@@ -45,6 +45,7 @@
 #include "Compiler.h"
 #include "GenericTypeDefs.h"
 #include "definitions.h"
+#include "NVM.h"
 
 #define TEMP_SECOND_INTERVAL        5
 #define DISPLAY_CYCLE_INTERVAL      4
@@ -58,7 +59,11 @@ BYTE CurrentNodeIndex = 0;
 
 
 extern BOOL NetFreezerEnable;
-extern BYTE role;
+extern BYTE         currentChannel;
+extern BYTE         role;
+extern BOOL         security;
+extern WORD_VAL     myPANID;
+extern WORD_VAL     myShortAddress;
 
 struct TempPacket
 {
@@ -272,21 +277,25 @@ void TempDemo(void)
 			/*******************************************************************/	
            	// Check if Exit Demo Packet
            	/*******************************************************************/   
-            if (rxMessage.Payload[0] == PING_PKT)
-                {
-                    // Send PONG reply to sender
-                    MiApp_FlushTx();
-                    MiApp_WriteData(PONG_PKT);
-                    MiApp_WriteData(myShortAddress.v[1]);
-                    MiApp_WriteData(myShortAddress.v[0]);
-                    MiApp_UnicastAddress(rxMessage.SourceAddress, FALSE, FALSE);
-                    LCDDisplay((char *)"Ping? Pong!", 0, 500);
-//                    while(!DelayMsAsyn(&tick3, 500))
-//                    {
-//                        MiWiPROTasks();
-//                    }
-                    
-                }
+            if (rxMessage.Payload[0] == CONFIG_PKT)
+            {
+                processConfigPKT();
+            }
+            else if (rxMessage.Payload[0] == REQCONFIG_PKT)
+            {
+                sendReplyConfigPKT();
+                LCDDisplay((char *)"Sent ConfigReply!", 0, 0);
+
+            }
+            else if (rxMessage.Payload[0] == PING_PKT)
+            {
+                // Send PONG reply to sender
+                sendPONGPKT();
+                
+                LCDDisplay((char *)"Ping? Pong!", 0, FALSE);
+
+
+            }
         	else if(rxMessage.Payload[0] == EXIT_PKT)
         	{
 //            	MiApp_DiscardMessage();
@@ -299,7 +308,7 @@ void TempDemo(void)
                 }
             	Run_Demo = FALSE;
             	LCDBacklightON();
-                LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, TRUE);
+                LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, FALSE);
                 LCDBacklightOFF();
             }
             else if (rxMessage.Payload[0] == RTCCTIME_PKT && rxMessage.PayloadSize >= 5)
@@ -313,7 +322,7 @@ void TempDemo(void)
 
                 // Call a function to set the RTCC
                 RTCC_SetFromMiWiTimestamp(timestamp);
-                LCDDisplay((char *)"RTCC updated!", 0, TRUE);
+                LCDDisplay((char *)"RTCC updated!", 0, FALSE);
             }
             else if(rxMessage.Payload[0] == RANGE_PKT)
         	{
@@ -342,9 +351,10 @@ void TempDemo(void)
                     sprintf((char *)&(LCDText[16]), (far rom char*)"Rcv RSSI: %3d", rssi);
                     LCDUpdate();
                     
-                    tick3 = MiWi_TickGet();
+                    
                 }
             }
+            tick3 = MiWi_TickGet();
 //            
 // 			/*******************************************************************/	
 //           	// Check if Message from known Connection
@@ -487,9 +497,6 @@ float ReadTempSensor(WORD VBGResult)
     tempAverage = tempAverage / NUM_TEMP_SAMPLES;
     return tempAverage;
 }
-
-
-
     				
 /*********************************************************************
 * Function:         WORD Read_VBGVoltage(void)
@@ -590,6 +597,62 @@ void PrintTempLCD(void)
     LCDUpdate();
 }
 
+void sendReplyConfigPKT(void)
+{
+    BYTE i;
+    MIWI_CONFIG_REPLY reply;
+    uint8_t payload[1 + sizeof(MIWI_CONFIG_REPLY)];
+    reply.PANID = myPANID;
+    reply.Channel = currentChannel;
+    reply.security = security;
+    reply.Role = role;
+
+    payload[0] = REPLYCONFIG_PKT; // For example, 12 for REPLYCONFIG_PKT
+    memcpy(&payload[1], &reply, sizeof(MIWI_CONFIG_REPLY));
+    // Prepare transmit
+    MiApp_FlushTx();
+    // Write all payload bytes
+    for (i = 0; i < sizeof(payload); i++)
+        MiApp_WriteData(payload[i]);
+    // Send back to PAN using source address from rxMessage
+    MiApp_UnicastAddress(rxMessage.SourceAddress, FALSE, security);
+    
+}
+
+void sendPONGPKT(void)
+{
+    MiApp_FlushTx();
+    MiApp_WriteData(PONG_PKT);
+    MiApp_WriteData(myShortAddress.v[1]);
+    MiApp_WriteData(myShortAddress.v[0]);
+    
+    MiApp_UnicastAddress(rxMessage.SourceAddress, FALSE, security);
+}
+void processConfigPKT(void)
+{
+    // [1],[2] = address (can ignore or check if addressed to self)
+    myPANID.Val         = ((WORD)rxMessage.Payload[3]) | (((WORD)rxMessage.Payload[4]) << 8);
+    currentChannel      = rxMessage.Payload[5];
+    role                = rxMessage.Payload[6];
+    security            = rxMessage.Payload[7];
+
+    // Store to EEPROM/NVM
+    nvmPutMyPANID(&myPANID.v);
+    nvmPutCurrentChannel(&currentChannel);
+    nvmPutMyShortAddress(&myShortAddress.v);
+    // If you have a custom NVM location for role/security, store them here:
+     nvmPutRole(&role);
+     nvmPutSecurity((BYTE)&security);
+
+    // Do not send a custom ACK here!
+    // (MAC-level ACK happens automatically on unicast)
+    // Prepare and send ACK
+//                    MiApp_FlushTx();
+//                    MiApp_WriteData(CONFIG_ACK_PKT); // ACK command
+//                    MiApp_WriteData(0x00);         // Status code 0x00 = Success
+//                    MiApp_UnicastConnection(0, FALSE); // Send to coordinator (index 0 or as appropriate)
+
+}
 
 
 
