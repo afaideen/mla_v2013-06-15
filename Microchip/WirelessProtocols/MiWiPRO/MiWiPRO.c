@@ -63,7 +63,6 @@
     #include "WirelessProtocols/MCHP_API.h"
     #include "WirelessProtocols/EEPROM.h"
     
-
     /************************ VARIABLES ********************************/
     /*
      At PBCLK3=100Mhz
@@ -4702,6 +4701,9 @@ EndOfSearchLoop:
                 nvmPutConnectionTable(ConnectionTable);
                 
                 nvmPutMyShortAddress(myShortAddress.v);
+                #if !defined(ENABLE_NVM_MAC)
+                    nvmPutMyLongAddress(myLongAddress);
+                #endif
                 nvmPutMyParent(&myParent);
                 nvmPutRole(&role);
                 nvmPutSecurity(&security);
@@ -4775,6 +4777,8 @@ EndOfSearchLoop:
         
         RFIF = 0;
         RFIE = 1;
+//        printf("\r\nMiWi Pro initialization succeeded!\r\n");
+        
         return TRUE;        
     
     }
@@ -5050,7 +5054,6 @@ BYTE MiApp_SearchConnection(INPUT BYTE ScanDuration, INPUT DWORD ChannelMap)
             #endif
             
             t1 = MiWi_TickGet();
-            /////////////////////////////////////////
             // ? Use Non-blocking Delay Instead of Busy Waiting
             while (MiWi_TickGetDiff(MiWi_TickGet(), t1) < ScanTime[ScanDuration])
             {
@@ -5340,9 +5343,9 @@ volatile BOOL JoiningNetwork = FALSE;  // ? Track if device is trying to join
 
 BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
 {
-    BYTE targetIndex;
     BYTE retry = CONNECTION_RETRY_TIMES;
     BYTE i, j;
+    BYTE targetIndex;
     MIWI_TICK t1, t2;
 	BYTE bestNetworkIndex = 0xFF;
 	BYTE bestRSSI = -127;
@@ -5650,6 +5653,7 @@ void MiApp_WriteDataBuffer(const BYTE *buf, BYTE len)
     for (i = 0; i < len; i++)
         TxBuffer[TxData++] = buf[i];
 }
+
 /************************************************************************************
  * Function:
  *      BOOL MiApp_UnicastConnection(BYTE ConnectionIndex, BOOL SecEn)
@@ -6143,19 +6147,24 @@ BOOL MiApp_StartConnection(BYTE Mode, BYTE ScanDuration, DWORD ChannelMap)
                     myPANID.v[0] = TMRL;
                     myPANID.v[1] = TMRL+0x51;
                 #else
-                    myPANID.Val = MY_PAN_ID;
+//                    myPANID.Val = MY_PAN_ID;
+                    nvmGetMyPANID(myPANID.v);
                 #endif
                 MiMAC_SetAltAddress(myShortAddress.v, myPANID.v);
                 MiWiPROStateMachine.bits.memberOfNetwork = 1;
                 role = ROLE_PAN_COORDINATOR;
                 MiWiPROCapacityInfo.bits.Role = role;
-                FamilyTree[0] = 0;
-                RoutingTable[0] = 0;
-                NeighborRoutingTable[0][0] = 0;
+//                FamilyTree[0] = 0;
+//                RoutingTable[0] = 0;
+//                NeighborRoutingTable[0][0] = 0;
+                nvmGetFamilyTree(FamilyTree);
+                nvmGetRoutingTable(RoutingTable);
+                nvmGetNeighborRoutingTable(NeighborRoutingTable);
                 #if defined(ENABLE_NETWORK_FREEZER)
                     nvmPutMyShortAddress(myShortAddress.v);
                     nvmPutMyPANID(myPANID.v);
                     nvmPutRole(&role);
+                    nvmPutSecurity(&security);
                     nvmPutFamilyTree(FamilyTree);
                     nvmPutRoutingTable(RoutingTable);
                     nvmPutNeighborRoutingTable(NeighborRoutingTable);
@@ -6312,16 +6321,16 @@ BOOL MiApp_StartConnection(BYTE Mode, BYTE ScanDuration, DWORD ChannelMap)
                         }
                     } 
                     
-                    Printf("\r\nChannel ");
-                    PrintDec(i);
-                    Printf(": ");
+//                    Printf("\r\nChannel ");
+//                    PrintDec(i);
+//                    Printf(": ");
                     j = maxRSSI/5;
                     for(k = 0; k < j; k++)
                     {
                         ConsolePut('-');
                     }
-                    Printf(" ");
-                    PrintChar(maxRSSI);
+//                    Printf(" ");
+//                    PrintChar(maxRSSI);
                     
                     #if defined(ENABLE_FREQUENCY_AGILITY)
                         EnergyScanResults[i] = maxRSSI;
@@ -6423,8 +6432,8 @@ BOOL MiApp_StartConnection(BYTE Mode, BYTE ScanDuration, DWORD ChannelMap)
                             }
                         }
                         
-                        Printf("\r\nChecking Channel ");
-                        PrintDec(j);
+//                        Printf("\r\nChecking Channel ");
+//                        PrintDec(j);
                         MiApp_SetChannel(j);
                         j++;
     
@@ -6443,9 +6452,9 @@ BOOL MiApp_StartConnection(BYTE Mode, BYTE ScanDuration, DWORD ChannelMap)
                 }
                 if( MiWiPROStateMachine.bits.Resynning == 0 )
                 {
-                    Printf("\r\nResynchronized Connection to Channel ");
-                    PrintDec(currentChannel);
-                    Printf("\r\n");
+//                    Printf("\r\nResynchronized Connection to Channel ");
+//                    PrintDec(currentChannel);
+//                    Printf("\r\n");
                     return TRUE;
                 }
 GetOutOfLoop:

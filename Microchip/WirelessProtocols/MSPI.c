@@ -265,7 +265,7 @@ BYTE SPIGet(void)
     
 
 #elif defined(__18CXX) || defined(__XC8)
-
+    extern void LCDDisplay(char *text, BYTE value, WORD delay);
 /************************ FUNCTIONS ********************************/
  
 /*********************************************************************
@@ -415,7 +415,7 @@ BYTE SPIGet(void)
                     SSP2CON1bits.SSPEN = 0;  // Disable SPI2
                     SSP2CON1bits.SSPEN = 1;  // Re-enable SPI2
                     // Optionally display error or increment error count
-                     LCDDisplay("SPI2 Timeout", 0, 500);
+                     LCDDisplay((char*)"SPI2 Timeout", 0, 500);
                     // ++spi2_error_counter;
                     return; // Exit early on error!
                 }

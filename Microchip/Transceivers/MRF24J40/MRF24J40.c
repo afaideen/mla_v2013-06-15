@@ -1173,19 +1173,22 @@ void HandleSecurity(void);
                     break;   //For broadcast transmission will never expect packet ACK
                 }
                 t2 = MiWi_TickGet();
-                if( MiWi_TickGetDiff(t2, t1) > FORTY_MILI_SECOND )
-//                if( MiWi_TickGetDiff(t2, t1) > HUNDRED_MILI_SECOND )
+//                if( MiWi_TickGetDiff(t2, t1) > FORTY_MILI_SECOND )
+                if( MiWi_TickGetDiff(t2, t1) > HUNDRED_MILI_SECOND )
                 {
-                    LED0_ON();
-                    LED1_ON();
-                    LED2_ON();
+//                    LED0_ON();
+//                    LED1_ON();
+//                    LED2_ON();
+                    LED0_INV(); 
+                    LED1_INV(); 
+                    LED2_INV(); 
                     InitMRF24J40();
                     MiMAC_SetAltAddress(myNetworkAddress.v, MAC_PANID.v);
                     MRF24J40Status.bits.TX_BUSY = 0;
-                    DelayMs(200);
-                    LED0_OFF();
-                    LED1_OFF();
-                    LED2_OFF();
+//                    DelayMs(50);
+//                    LED0_OFF();
+//                    LED1_OFF();
+//                    LED2_OFF();
                     return FALSE;
                 }
             }
