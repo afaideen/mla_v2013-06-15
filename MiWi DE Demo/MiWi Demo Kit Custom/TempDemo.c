@@ -61,7 +61,7 @@ BYTE CurrentNodeIndex = 0;
 extern BOOL NetFreezerEnable;
 extern BYTE         currentChannel;
 extern BYTE         role;
-extern BOOL         security;
+extern BYTE         security;
 extern WORD_VAL     myPANID;
 extern WORD_VAL     myShortAddress;
 
@@ -154,14 +154,14 @@ void TempDemo(void)
 		/*******************************************************************/
         if ((MiWi_TickGetDiff(tick2,tick3) > (ONE_SECOND * DISPLAY_CYCLE_INTERVAL)))
         {
-            if((ConnectionTable[CurrentNodeIndex].status.bits.isValid))
-            {
-                CurrentNodeIndex++;
-            }
-            else
-            {
+//            if((ConnectionTable[CurrentNodeIndex].status.bits.isValid))
+//            {
+//                CurrentNodeIndex++;
+//            }
+//            else
+//            {
                 CurrentNodeIndex = 0;
-            }
+//            }
 
             PrintTempLCD();
 
@@ -214,7 +214,7 @@ void TempDemo(void)
             MiApp_WriteData((BYTE)batt_ & 0xFF);
             MiApp_WriteData(myShortAddress.v[1]);
             MiApp_WriteData(myShortAddress.v[0]);
-            if( MiApp_UnicastConnection(0, FALSE) == FALSE )
+            if( MiApp_UnicastConnection(0, security) == FALSE )
                 Pkt_Loss_Cnt++;
             else
             {
@@ -232,8 +232,7 @@ void TempDemo(void)
         	// Send Exit Demo Request Packet and exit Temp Demo
         	/*******************************************************************/ 
             MiApp_FlushTx();    
-            MiApp_WriteData(EXIT_PKT);
-//            MiApp_BroadcastPacket(FALSE);   
+            MiApp_WriteData(EXIT_PKT);   
             val = MiApp_UnicastConnection(0, FALSE);
             if(val == 1) {
                 LED1 ^= 1; // Toggle LED1 if unicast was successful
@@ -280,11 +279,19 @@ void TempDemo(void)
             if (rxMessage.Payload[0] == CONFIG_PKT)
             {
                 processConfigPKT();
+                security = 0;
+                nvmGetMyPANID(myPANID.v);
+                nvmGetCurrentChannel(&currentChannel);
+                nvmGetMyShortAddress(myShortAddress.v); // if different, make new variable
+                nvmGetRole(&role);
+                nvmGetSecurity(&security);
+                LCDDisplay((char *)"Set config", 0, 500);
+                Reset();
             }
             else if (rxMessage.Payload[0] == REQCONFIG_PKT)
             {
                 sendReplyConfigPKT();
-                LCDDisplay((char *)"Sent ConfigReply!", 0, 0);
+                LCDDisplay((char *)"Read config", 0, 0);
 
             }
             else if (rxMessage.Payload[0] == PING_PKT)
@@ -298,10 +305,8 @@ void TempDemo(void)
             }
         	else if(rxMessage.Payload[0] == EXIT_PKT)
         	{
-//            	MiApp_DiscardMessage();
             	MiApp_FlushTx();
     	        MiApp_WriteData(ACK_PKT);
-//    	        MiApp_UnicastConnection(0, FALSE);
                 val = MiApp_UnicastConnection(0, FALSE);
                 if(val == 1) {
                     LED1 ^= 1; // Toggle LED1 if unicast was successful
@@ -599,24 +604,34 @@ void PrintTempLCD(void)
 
 void sendReplyConfigPKT(void)
 {
-    BYTE i;
-    MIWI_CONFIG_REPLY reply;
-    uint8_t payload[1 + sizeof(MIWI_CONFIG_REPLY)];
-    reply.PANID = myPANID;
-    reply.Channel = currentChannel;
-    reply.security = security;
-    reply.Role = role;
-
-    payload[0] = REPLYCONFIG_PKT; // For example, 12 for REPLYCONFIG_PKT
-    memcpy(&payload[1], &reply, sizeof(MIWI_CONFIG_REPLY));
-    // Prepare transmit
+//    BYTE i;
+//    MIWI_CONFIG_REPLY reply;
+//    uint8_t payload[1 + sizeof(MIWI_CONFIG_REPLY)];
+//    reply.PANID = myPANID;
+//    reply.Channel = currentChannel;
+//    reply.security = security;
+//    reply.Role = role;
+//
+//    payload[0] = REPLYCONFIG_PKT; // For example, 12 for REPLYCONFIG_PKT
+//    memcpy(&payload[1], (const void*)&reply, sizeof(MIWI_CONFIG_REPLY));
+//    // Prepare transmit
+//    MiApp_FlushTx();
+//    // Write all payload bytes
+//    for (i = 0; i < sizeof(payload); i++)
+//        MiApp_WriteData(payload[i]);
+    
     MiApp_FlushTx();
-    // Write all payload bytes
-    for (i = 0; i < sizeof(payload); i++)
-        MiApp_WriteData(payload[i]);
+    MiApp_WriteData(REPLYCONFIG_PKT);
+    MiApp_WriteData(myPANID.v[0]);  //0xCD
+    MiApp_WriteData(myPANID.v[1]);  //0xAB
+    MiApp_WriteData(currentChannel);
+    MiApp_WriteData(security);
+    MiApp_WriteData(role);
+    MiApp_WriteData(myShortAddress.v[1]);
+    MiApp_WriteData(myShortAddress.v[0]);
     // Send back to PAN using source address from rxMessage
     MiApp_UnicastAddress(rxMessage.SourceAddress, FALSE, security);
-    
+    Nop();
 }
 
 void sendPONGPKT(void)
@@ -637,13 +652,13 @@ void processConfigPKT(void)
     security            = rxMessage.Payload[7];
 
     // Store to EEPROM/NVM
-    nvmPutMyPANID(&myPANID.v);
+    nvmPutMyPANID(myPANID.v);
     nvmPutCurrentChannel(&currentChannel);
-    nvmPutMyShortAddress(&myShortAddress.v);
+    nvmPutMyShortAddress(myShortAddress.v);
     // If you have a custom NVM location for role/security, store them here:
      nvmPutRole(&role);
-     nvmPutSecurity((BYTE)&security);
-
+     nvmPutSecurity(&security);
+     Nop();
     // Do not send a custom ACK here!
     // (MAC-level ACK happens automatically on unicast)
     // Prepare and send ACK

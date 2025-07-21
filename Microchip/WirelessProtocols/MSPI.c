@@ -373,6 +373,7 @@ BYTE SPIGet(void)
         ********************************************************************/
          void SPIPut2(BYTE v)
         {
+             int timeout;
             BYTE i;
             
             #if !defined(HARDWARE_SPI)
@@ -405,7 +406,19 @@ BYTE SPIGet(void)
             	
             	//perform write again if write collision occurs
                 //while( SPI2SSPIF == 0 );
-                while( PIR3bits.SSP2IF == 0 );
+//                while( PIR3bits.SSP2IF == 0 );//original
+                timeout = 10000;
+                while(PIR3bits.SSP2IF == 0 && --timeout);
+                if(timeout == 0)
+                {
+                    // SPI2 failed to transfer. Reset and notify.
+                    SSP2CON1bits.SSPEN = 0;  // Disable SPI2
+                    SSP2CON1bits.SSPEN = 1;  // Re-enable SPI2
+                    // Optionally display error or increment error count
+                     LCDDisplay("SPI2 Timeout", 0, 500);
+                    // ++spi2_error_counter;
+                    return; // Exit early on error!
+                }
                 
             	//Wait until interrupt is received from the MSSP module
             	//SPI2SSPIF = 0;

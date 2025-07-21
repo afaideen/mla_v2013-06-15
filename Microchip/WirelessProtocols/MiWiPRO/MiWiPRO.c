@@ -293,7 +293,7 @@
         
     #endif
     
-    BOOL    security = FALSE;
+    BYTE    security = 0;
     #if defined(ENABLE_FREQUENCY_AGILITY) 
         struct
         {
@@ -4619,7 +4619,7 @@ EndOfSearchLoop:
             {
                 RouterFailures[i] = 0;
             }
-            role = ROLE_FFD_END_DEVICE;
+//            role = ROLE_FFD_END_DEVICE;
             MiWiPROStatus.Val = 0;
         #endif
         MiWiPROStateMachine.Val = 0;
@@ -4674,14 +4674,13 @@ EndOfSearchLoop:
                 nvmGetConnectionTable(ConnectionTable);
 //                nvmGetMyShortAddress(myShortAddress.v);
                 nvmGetMyParent(&myParent);
-                nvmGetSecurity((BYTE)&security);
+                nvmGetSecurity(&security);
                 #if defined(NWK_ROLE_COORDINATOR)
                     nvmGetRoutingTable(RoutingTable);
                     nvmGetNeighborRoutingTable(NeighborRoutingTable);
                     nvmGetFamilyTree(FamilyTree);
                     nvmGetRole(&role);
                 #endif
-                
 //                Printf("Channel:");
 //                PrintDec(currentChannel);
 //                Printf(" PANID:");
@@ -4704,7 +4703,8 @@ EndOfSearchLoop:
                 
                 nvmPutMyShortAddress(myShortAddress.v);
                 nvmPutMyParent(&myParent);
-                nvmPutSecurity((BYTE)&security);
+                nvmPutRole(&role);
+                nvmPutSecurity(&security);
                 #if defined(NWK_ROLE_COORDINATOR)
                     for(i = 0; i < NUM_COORDINATOR/8; i++)
                     {
@@ -5379,8 +5379,8 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
     {
         if( ActiveScanIndex == 0xFF )
         {
-            while( i = MiApp_SearchConnection(10, ((DWORD)0x00000001)<<currentChannel) == 0 )
-//            while( i = MiApp_SearchConnection(11, ((DWORD)0x00000001) << currentChannel) == 0 )
+//            while( i = MiApp_SearchConnection(10, ((DWORD)0x00000001)<<currentChannel) == 0 )
+            while( i = MiApp_SearchConnection(11, ((DWORD)0x00000001) << currentChannel) == 0 )
             {
                 if( --retry == 0 )
                 {

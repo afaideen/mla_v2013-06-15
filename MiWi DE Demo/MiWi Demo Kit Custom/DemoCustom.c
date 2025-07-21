@@ -18,6 +18,7 @@
 #include "definitions.h"
 #include "NVM.h"
 
+
 extern BYTE         currentChannel;
 extern BYTE         role;
 extern BOOL         security;
@@ -112,7 +113,8 @@ void main(void)
 	APP_STATE state = APP_STATE_INIT;
     BYTE result, i;
     MIWI_TICK now, t1_rtcc;
-    static MIWI_TICK t_rtcc = 0; 
+    MIWI_TICK t_rtcc = 0; 
+    MIWI_TICK sw1_timer, sw2_timer;
     BOOL res;
 	BOOL useStoredNetwork = FALSE;
     
@@ -123,6 +125,8 @@ void main(void)
 	BoardInit();
 	LCDInit();
 	InitSymbolTimer();
+    NVMInit();
+    
 	LED0 = 0;
 	LED1 = 0;
 	LED2 = 0;
@@ -130,6 +134,31 @@ void main(void)
     Read_MAC_Address();
 
     useStoredNetwork = FALSE;
+//    MiApp_ProtocolInit(useStoredNetwork);
+    Nop();
+//    myPANID.Val         = ((WORD)rxMessage.Payload[3]) | (((WORD)rxMessage.Payload[4]) << 8);
+//    myPANID.v[1]        = 0xAB;
+//    myPANID.v[0]        = 0xCD;
+//    myShortAddress.v[1] = 0x01;
+//    myShortAddress.v[0] = 0x00;
+//    currentChannel      = 11;
+//    role                = 1;
+//    security            = 1;
+
+    // Store to EEPROM/NVM
+//    nvmPutMyPANID(myPANID.v);
+//    nvmPutCurrentChannel(&currentChannel);
+//    nvmPutMyShortAddress(myShortAddress.v);
+//     nvmPutRole(&role);
+//     nvmPutSecurity(&security);
+     Nop();
+//        // Read back from NVM
+//    nvmGetMyPANID(myPANID.v);
+//    nvmGetCurrentChannel(&currentChannel);
+//    nvmGetMyShortAddress(myShortAddress.v); // if different, make new variable
+//    nvmGetRole(&role);
+//    nvmGetSecurity(&security);
+    Nop();
     
     // FACTORY RESET DETECTION
     if (SW1_PORT == 0u) { // SW1 is pressed (held) at power up
@@ -150,7 +179,7 @@ void main(void)
 #endif
         while (1); // Should not reach here, just in case
     }
-
+    
 	while (state != APP_STATE_EXIT)
 	{
 
@@ -168,12 +197,13 @@ void main(void)
                 if (pktType == CONFIG_PKT)
                 {
                     processConfigPKT();
+                    LCDDisplay((char *)"Set config", 0, 0);
                     
                 }
                 else if (pktType == REQCONFIG_PKT)
                 {
                     sendReplyConfigPKT();
-                    LCDDisplay((char *)"Sent ConfigReply!", 0, 0);
+                    LCDDisplay((char *)"Read config", 0, 0);
                     
                 }
                 else if (pktType == RTCCTIME_PKT)
@@ -199,7 +229,7 @@ void main(void)
                     
                 }
                 lastHeartbeatTick = MiWi_TickGet();
-                while(!DelayMsAsyn(&lastHeartbeatTick, 500))
+                while(!DelayMsAsyn(&lastHeartbeatTick, 400))
                 {
                     MiWiPROTasks();
                 }
@@ -235,12 +265,17 @@ void main(void)
                 }
 
 				if(useStoredNetwork) {
-					LCDDisplay((char *)"Network Restored!", 0, 250);
+					LCDDisplay((char *)"Network Restored!", 0, 400);
+//                    if(security == 1) {
+//                        state = APP_STATE_CHANNEL_SELECT;
+//                    } else {
                     state = APP_STATE_MENU;
-                    
+                    sw1_timer = MiWi_TickGet();
+                    sw2_timer = MiWi_TickGet();
+//                    }   
 				} else {
                     
-					LCDDisplay((char *)"No Saved Network", 0, 250);
+					LCDDisplay((char *)"No Saved Network", 0, 400);
 					// Start fresh, cold start
 					MiApp_ProtocolInit(FALSE);
 					state = APP_STATE_CHANNEL_SELECT;
@@ -265,7 +300,8 @@ void main(void)
 			case APP_STATE_WAIT_FOR_CONNECTION:
 				App_WaitForConnection();
 				state = APP_STATE_MENU;
-                
+                sw1_timer = MiWi_TickGet();
+                sw2_timer = MiWi_TickGet();
 				break;
 
 			case APP_STATE_MENU:
@@ -281,11 +317,11 @@ void main(void)
                 {
                     // Update RTCC/time LCD only once per second
                     if(DelayMsAsyn(&t_rtcc, 1000) || lastView != 1) {
+                        lastView = 1;
+//                        lastSec = sec;
                         RTCC_ReadTimeDate(&time);
                         sec = BCDtoDEC(time.f.sec);
 
-                        lastView = 1;
-                        lastSec = sec;
                         LCDErase();
                         sprintf((char*)LCDText, (const far rom char *)"Time: %02u:%02u:%02u",
                             BCDtoDEC(time.f.hour),
@@ -307,8 +343,10 @@ void main(void)
                         ShowMenuText(menuIndex);
                     }
                 }
-                result = ButtonPressed();
-                if (result == SW1) {
+//                result = ButtonPressed();
+//                if (result == SW1)                 
+                if (SW_Pressed(&PORTB, 1, &sw1_timer, 350))
+                {
                     selectedMenu = menuIndex;
                     menuActive = FALSE;
                     switch (selectedMenu)
@@ -318,7 +356,10 @@ void main(void)
                         case MENU_NODE_INFO:  state = APP_STATE_NODE_INFO; break;
                         default:              state = APP_STATE_EXIT; break;
                     }
-                } else if (result == SW2) {
+                } 
+//                else if (result == SW2) 
+                if (SW_Pressed(&PORTB, 2, &sw1_timer, 350))
+                {
                     menuIndex = (menuIndex + 1) % MENU_COUNT;
                     ShowMenuText(menuIndex);
                 }
@@ -448,25 +489,28 @@ static BOOL App_NetworkSetup(void)
     BOOL networkJoined = FALSE;
     DWORD scanChannelBitmap;
     BYTE buf1[17], buf2[17];
+    MIWI_TICK sw1_timer, sw2_timer;
 
 create_or_join: 
     LCDErase();
     sprintf((char *)LCDText, (const far rom char *)"SW1: Create Ntwk");
     sprintf((char *)&(LCDText[16]), (const far rom char *)"SW2: Join Ntwk  ");
     LCDUpdate();
-    DelayMs(500);
-
+    DelayMs(50);
+    sw1_timer = MiWi_TickGet();
+    sw2_timer = MiWi_TickGet();
     while (!networkJoined)
     {
 
-        sw = ButtonPressed();
+//        sw = ButtonPressed();
 
-        if (sw == SW1) // Create network
+//        if (sw == SW1) // Create network
+        if (SW_Pressed(&PORTB, 1, &sw1_timer, 350))
         {
             LCDErase();
             sprintf((char *)LCDText, (const far rom char *)"Creating Network");
             LCDUpdate();
-            MiApp_ProtocolInit(FALSE);
+//            MiApp_ProtocolInit(FALSE);
             MiApp_StartConnection(START_CONN_DIRECT, 0, 0);
             LCDErase();
             sprintf((char *)LCDText, (const far rom char *)"Created Network ");
@@ -486,15 +530,17 @@ create_or_join:
             }
             networkJoined = TRUE;
         }
-        else if (sw == SW2) // Join network
+//        else if (sw == SW2) // Join network
+        else if (SW_Pressed(&PORTB, 2, &sw2_timer, 350))
         {
 	        BYTE scanresult = 0, j, k;
 	        BOOL joined = FALSE;
+            
 
 	        LCDDisplay((char *)"  Scanning for    Networks....", 0, 250);
 	        LCDDisplay((char *)"Please Select   Network to Join ", 0, 250);
 
-	        MiApp_ProtocolInit(FALSE);
+//	        MiApp_ProtocolInit(FALSE);
 
 	        // Calculate channel bitmap for current myChannel (matches Demo.c)
 	        scanChannelBitmap = 0;
@@ -543,12 +589,13 @@ create_or_join:
 			                ActiveScanResults[j].PANID.v[0]);
 			        sprintf((char *)&(LCDText[16]), (const far rom char *)"SW2: Additional");
 			        LCDUpdate();
-
+                    sw1_timer = MiWi_TickGet();
+                    sw2_timer = MiWi_TickGet();
 			        while(1)
 			        {
-				        BYTE switch_val = ButtonPressed();
-
-				        if(switch_val == SW1)
+//				        BYTE switch_val = ButtonPressed();
+//				        if(switch_val == SW1)
+                        if (SW_Pressed(&PORTB, 1, &sw1_timer, 350))
 				        {
 					        // Check if PANID has multiple coordinators
 					        BYTE CoordCount = 0, nodeIndex = 0, count = 0, Status;
@@ -576,18 +623,21 @@ create_or_join:
 								        sprintf((char *)&(LCDText[16]), (const far rom char *)"SW2: Additional");
 								        LCDUpdate();
 								        nodeIndex = k;
-
+                                        sw1_timer = MiWi_TickGet();
+                                        sw2_timer = MiWi_TickGet();
 								        while(1)
 								        {
-									        BYTE addrBtn = ButtonPressed();
-									        if(addrBtn == SW1)
+//									        BYTE addrBtn = ButtonPressed();
+//									        if(addrBtn == SW1)
+                                            if (SW_Pressed(&PORTB, 1, &sw1_timer, 350))
 									        {
 										        //Establish connection with nodeIndex
 										        j = nodeIndex;
 										        k = scanresult-1;
 										        break;
 									        }
-									        else if(addrBtn == SW2)
+//									        else if(addrBtn == SW2)
+									        else if (SW_Pressed(&PORTB, 2, &sw2_timer, 350))
 									        {
 										        if((k == (scanresult - 1)) || (count == CoordCount))
 										        {
@@ -621,7 +671,8 @@ create_or_join:
 //					        MiApp_BroadcastPacket(FALSE);
 					        break;
 				        }
-				        else if(switch_val == SW2)
+//				        else if(switch_val == SW2)
+                        else if (SW_Pressed(&PORTB, 2, &sw2_timer, 350))
 				        {
 					        if((scanresult-j-1) == 0)
 						        j = -1;
@@ -672,14 +723,9 @@ static void App_WaitForConnection(void)
     MIWI_TICK t1 = MiWi_TickGet();  
     // For PAN coordinator, usually no action needed here
 //    DelayMs(500);
-    while(1)
-    {
-        if(DelayMsAsyn(&t1, 4000)){
-            Nop();
-            break;
-        }
-        MiWiPROTasks();
-        
+    while(!DelayMsAsyn(&t1, 2000))
+    {        
+        MiWiPROTasks();        
     }
 }
 static void ShowMenuText(MENU_OPTION menuIndex)
