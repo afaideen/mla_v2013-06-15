@@ -72,10 +72,10 @@
     
     #define SW1             1
     #define SW2             2	
-#if !defined(WIRELESS_EVAL_BOARD)
-    // Following definition is for delay functionality
-    #define GetInstructionClock()	(CLOCK_FREQ/4)
-#endif
+//#if !defined(WIRELESS_EVAL_BOARD)
+//    // Following definition is for delay functionality
+//    #define GetInstructionClock()	(CLOCK_FREQ/4)
+//#endif
     BYTE ButtonPressed(void);
     void BoardInit(void);
 	

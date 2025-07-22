@@ -292,7 +292,7 @@
         
     #endif
     
-    BYTE    security = 0;
+    BOOL    security = TRUE;
     #if defined(ENABLE_FREQUENCY_AGILITY) 
         struct
         {
@@ -6154,12 +6154,12 @@ BOOL MiApp_StartConnection(BYTE Mode, BYTE ScanDuration, DWORD ChannelMap)
                 MiWiPROStateMachine.bits.memberOfNetwork = 1;
                 role = ROLE_PAN_COORDINATOR;
                 MiWiPROCapacityInfo.bits.Role = role;
-//                FamilyTree[0] = 0;
-//                RoutingTable[0] = 0;
-//                NeighborRoutingTable[0][0] = 0;
-                nvmGetFamilyTree(FamilyTree);
-                nvmGetRoutingTable(RoutingTable);
-                nvmGetNeighborRoutingTable(NeighborRoutingTable);
+                FamilyTree[0] = 0;
+                RoutingTable[0] = 0;
+                NeighborRoutingTable[0][0] = 0;
+//                nvmGetFamilyTree(FamilyTree);
+//                nvmGetRoutingTable(RoutingTable);
+//                nvmGetNeighborRoutingTable(NeighborRoutingTable);
                 #if defined(ENABLE_NETWORK_FREEZER)
                     nvmPutMyShortAddress(myShortAddress.v);
                     nvmPutMyPANID(myPANID.v);

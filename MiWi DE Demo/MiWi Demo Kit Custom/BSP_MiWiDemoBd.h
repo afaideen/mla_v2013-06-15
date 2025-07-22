@@ -44,6 +44,7 @@
 
     // System Clock Frequency
     #define CLOCK_FREQ          16000000
+    #define GetInstructionClock()	(CLOCK_FREQ/4)
     
     // There are three ways to use NVM to store data: External EPROM, Data EEPROM and 
     // programming space, with following definitions:

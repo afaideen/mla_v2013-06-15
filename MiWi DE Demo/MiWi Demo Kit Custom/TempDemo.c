@@ -47,9 +47,9 @@
 #include "definitions.h"
 #include "NVM.h"
 
-#define TEMP_SECOND_INTERVAL        5
-#define DISPLAY_CYCLE_INTERVAL      4
-#define EXIT_DEMO_TIMEOUT           3
+//#define TEMP_SECOND_INTERVAL        5
+#define DISPLAY_CYCLE_INTERVAL      1
+#define EXIT_DEMO_TIMEOUT           1
 #define NUM_TEMP_SAMPLES            4
 
 unsigned short tempAverage = 0;
@@ -61,7 +61,7 @@ BYTE CurrentNodeIndex = 0;
 extern BOOL NetFreezerEnable;
 extern BYTE         currentChannel;
 extern BYTE         role;
-extern BYTE         security;
+extern BOOL         security;
 extern WORD_VAL     myPANID;
 extern WORD_VAL     myShortAddress;
 
@@ -72,10 +72,10 @@ struct TempPacket
     float BattValue;
     BYTE    Rssi;
 }; 
-struct TempPacket NodeTemp[10];
+struct TempPacket NodeTemp[5];
 
-
-unsigned char msg[] = "MiWi Rocks!";
+BOOL Run_Demo;
+//unsigned char msg[] = "MiWi Rocks!";
 /*********************************************************************
 * Function:         void TempDemo(void)
 *
@@ -96,7 +96,7 @@ void TempDemo(void)
 {
     uint32_t timestamp;
     BYTE val;
-    BOOL Run_Demo = TRUE;
+    
     WORD VBGResult;
     float temp, batt;
     int tempToSend;
@@ -104,13 +104,14 @@ void TempDemo(void)
     MIWI_TICK sw1_timer, sw2_timer;
     BYTE switch_val, i;
     short tempRaw; 
-    BYTE rssi = 0;
+    
     BYTE viewIndex = 0;
     int len1, len2;
     char strength[8];
 //    char buf1[17], buf2[17];
     int16_t temp_, batt_;
     BYTE Pkt_Loss_Cnt = 0;
+    BYTE index;
     
 	/*******************************************************************/
     // Dispaly Temp Demo Splach Screen
@@ -118,7 +119,7 @@ void TempDemo(void)
     LCDBacklightON();
     LCDDisplay((char *)"   Microchip       Temp Demo  ", 0, 0);
     LCDBacklightOFF();
-        
+    Run_Demo = TRUE;    
     /*******************************************************************/
     // Initialize Temp Data Packet
     // NodeTemp[0] = Self
@@ -201,8 +202,6 @@ void TempDemo(void)
             batt_ = batt * 100;
             timestamp = RTCC_GetTimestamp();  // Get timestamp for flight time
             MiApp_FlushTx();
-//        	    MiApp_WriteData(RANGE_PKT);                
-//                MiApp_WriteStringRAM(msg);
             MiApp_WriteData(TEMP_PKT);      
             MiApp_WriteData((BYTE)(timestamp >> 24) & 0xFF);
             MiApp_WriteData((BYTE)(timestamp >> 16) & 0xFF);
@@ -272,120 +271,120 @@ void TempDemo(void)
         /*******************************************************************/
         if(MiApp_MessageAvailable())
         {    
-            MiApp_DiscardMessage();
-			/*******************************************************************/	
-           	// Check if Exit Demo Packet
-           	/*******************************************************************/   
-            if (rxMessage.Payload[0] == CONFIG_PKT)
-            {
-                processConfigPKT();
-                security = 0;
-                nvmGetMyPANID(myPANID.v);
-                nvmGetCurrentChannel(&currentChannel);
-                nvmGetMyShortAddress(myShortAddress.v); // if different, make new variable
-                nvmGetRole(&role);
-                nvmGetSecurity(&security);
-                LCDDisplay((char *)"Set config", 0, 500);
-                Reset();
-            }
-            else if (rxMessage.Payload[0] == REQCONFIG_PKT)
-            {
-                sendReplyConfigPKT();
-                LCDDisplay((char *)"Read config", 0, 0);
-
-            }
-            else if (rxMessage.Payload[0] == PING_PKT)
-            {
-                // Send PONG reply to sender
-                sendPONGPKT();
-                
-                LCDDisplay((char *)"Ping? Pong!", 0, FALSE);
-
-
-            }
-        	else if(rxMessage.Payload[0] == EXIT_PKT)
-        	{
-            	MiApp_FlushTx();
-    	        MiApp_WriteData(ACK_PKT);
-                val = MiApp_UnicastConnection(0, FALSE);
-                if(val == 1) {
-                    LED1 ^= 1; // Toggle LED1 if unicast was successful
-                }
-            	Run_Demo = FALSE;
-            	LCDBacklightON();
-                LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, FALSE);
-                LCDBacklightOFF();
-            }
-            else if (rxMessage.Payload[0] == RTCCTIME_PKT && rxMessage.PayloadSize >= 5)
-            {
-                // Extract timestamp (bytes 1-4)
-                timestamp = 
-                    ((uint32_t)rxMessage.Payload[1] << 24) |
-                    ((uint32_t)rxMessage.Payload[2] << 16) |
-                    ((uint32_t)rxMessage.Payload[3] << 8)  |
-                    ((uint32_t)rxMessage.Payload[4]);
-
-                // Call a function to set the RTCC
-                RTCC_SetFromMiWiTimestamp(timestamp);
-                LCDDisplay((char *)"RTCC updated!", 0, FALSE);
-            }
-            else if(rxMessage.Payload[0] == RANGE_PKT)
-        	{
-                // Get RSSI value from Recieved Packet
-            	rssi = rxMessage.PacketRSSI;
-        	    #if defined(MRF89XA)
-                    rssi = rssi<<1;
-                #endif
-                NodeTemp[0].Rssi = rssi;
-                
-                // ---- Show RSSI Strength, RangeDemo style ----
-                {     
-                    LCDErase();
-    #if defined(MRF24J40)
-                    if(rssi > 120) 
-                        sprintf((char *)&(LCDText[0]), (far rom char*)"Strength: High");
-                    else if(rssi > 60) 
-                        sprintf((char *)&(LCDText[0]), (far rom char*)"Strength: Medium");
-                    else 
-                        sprintf((char *)&(LCDText[0]), (far rom char*)"Strength: Low");
-    #else
-                    if(rssi > 100) strcpy(strength, "High");
-                    else if(rssi > 60) strcpy(strength, "Medium");
-                    else strcpy(strength, "Low");
-    #endif         
-                    sprintf((char *)&(LCDText[16]), (far rom char*)"Rcv RSSI: %3d", rssi);
-                    LCDUpdate();
-                    
-                    
+            
+            /*******************************************************************/	
+            // Check if Message from known Connection
+            /*******************************************************************/    
+            index = 0xFF;
+            for(i = 0; i < CONNECTION_SIZE; i++)
+			{
+				if((ConnectionTable[i].status.bits.isValid) && 
+                        (ConnectionTable[i].AltAddress.v[0] == rxMessage.SourceAddress[0]) && 
+                        (ConnectionTable[i].AltAddress.v[1] == rxMessage.SourceAddress[1])
+                )
+				{
+                    index = i;
+                    CheckPKT(index);
+                    break;
                 }
             }
-            tick3 = MiWi_TickGet();
-//            
-// 			/*******************************************************************/	
-//           	// Check if Message from known Connection
-//           	/*******************************************************************/            
-//			for(i = 0; i < CONNECTION_SIZE; i++)
-//			{
-//				if((ConnectionTable[i].status.bits.isValid) && (ConnectionTable[i].AltAddress.v[0] == rxMessage.Payload[2]) && (ConnectionTable[i].AltAddress.v[1] == rxMessage.Payload[3]))
-//				{
-//					if(rxMessage.Payload[0] == TEMP_PKT)
-//					{
-//						// Update the Remote Nodes Temp value
-////						NodeTemp[i+1].TempValue = rxMessage.Payload[1];
-////    					NodeTemp[i+1].NodeAddress[0] = rxMessage.Payload[2];
-////    					NodeTemp[i+1].NodeAddress[1] = rxMessage.Payload[3];
-//                        
-//                        tempRaw = ((rxMessage.Payload[1] << 8) | rxMessage.Payload[2]);
-//                        NodeTemp[i+1].TempValue = tempRaw / 10.0;
-//                        NodeTemp[i+1].NodeAddress[0] = rxMessage.Payload[3];
-//                        NodeTemp[i+1].NodeAddress[1] = rxMessage.Payload[4];
-//					}	
-//				}
-//			}
 			
-//			MiApp_DiscardMessage();
+            MiApp_DiscardMessage();
+            tick3 = MiWi_TickGet();
         }
     }   
+}
+void CheckPKT(BYTE i)
+{
+    BYTE rssi = 0;
+    BOOL val;
+    uint32_t timestamp;
+    /*******************************************************************/	
+    // Check if Exit Demo Packet
+    /*******************************************************************/   
+    if (rxMessage.Payload[0] == CONFIG_PKT)
+    {
+        processConfigPKT();
+        security = 0;
+        nvmGetMyPANID(myPANID.v);
+        nvmGetCurrentChannel(&currentChannel);
+        nvmGetMyShortAddress(myShortAddress.v); // if different, make new variable
+        nvmGetRole(&role);
+        nvmGetSecurity(&security);
+        LCDDisplay((char *)"Set config", 0, 500);
+        Reset();
+    }
+    else if (rxMessage.Payload[0] == REQCONFIG_PKT)
+    {
+        sendReplyConfigPKT();
+        LCDDisplay((char *)"Read config", 0, 0);
+
+    }
+    else if (rxMessage.Payload[0] == PING_PKT)
+    {
+        // Send PONG reply to sender
+        sendPONGPKT();
+
+        LCDDisplay((char *)"Ping? Pong!", 0, FALSE);
+
+
+    }
+    else if(rxMessage.Payload[0] == EXIT_PKT)
+    {
+        MiApp_FlushTx();
+        MiApp_WriteData(ACK_PKT);
+        val = MiApp_UnicastConnection(0, security);
+        if(val == 1) {
+            LED1 ^= 1; // Toggle LED1 if unicast was successful
+        }
+        Run_Demo = FALSE;
+        LCDBacklightON();
+        LCDDisplay((char *)"   Exiting....     Temp Demo  ", 0, FALSE);
+        LCDBacklightOFF();
+    }
+    else if (rxMessage.Payload[0] == RTCCTIME_PKT && rxMessage.PayloadSize >= 5)
+    {
+        // Extract timestamp (bytes 1-4)
+        timestamp = 
+            ((uint32_t)rxMessage.Payload[1] << 24) |
+            ((uint32_t)rxMessage.Payload[2] << 16) |
+            ((uint32_t)rxMessage.Payload[3] << 8)  |
+            ((uint32_t)rxMessage.Payload[4]);
+
+        // Call a function to set the RTCC
+        RTCC_SetFromMiWiTimestamp(timestamp);
+        LCDDisplay((char *)"RTCC updated!", 0, FALSE);
+    }
+    else if(rxMessage.Payload[0] == RANGE_PKT)
+    {
+        // Get RSSI value from Recieved Packet
+        rssi = rxMessage.PacketRSSI;
+        #if defined(MRF89XA)
+            rssi = rssi<<1;
+        #endif
+        NodeTemp[0].Rssi = rssi;
+
+        // ---- Show RSSI Strength, RangeDemo style ----
+        {     
+            LCDErase();
+#if defined(MRF24J40)
+            if(rssi > 120) 
+                sprintf((char *)&(LCDText[0]), (far rom char*)"Strength: High");
+            else if(rssi > 60) 
+                sprintf((char *)&(LCDText[0]), (far rom char*)"Strength: Medium");
+            else 
+                sprintf((char *)&(LCDText[0]), (far rom char*)"Strength: Low");
+#else
+            if(rssi > 100) strcpy(strength, "High");
+            else if(rssi > 60) strcpy(strength, "Medium");
+            else strcpy(strength, "Low");
+#endif         
+            sprintf((char *)&(LCDText[16]), (far rom char*)"Rcv RSSI: %3d", rssi);
+            LCDUpdate();
+
+
+        }
+    }
 }
 #if defined(__PIC32MX__)
 //Read AN10
@@ -404,55 +403,55 @@ BYTE ReadTempSensor_WirelessEvalBoard(void)
 }
 #endif
 
-typedef struct {
-    uint8_t deviceID;      // Unique Device ID (1 byte)
-    uint32_t timestamp;    // Flight timestamp (4 bytes)
-    int16_t temperature;   // Temperature (scaled by 10 for 0.1�C resolution)
-    int16_t battery;        // Battery (scaled by 10 for 0.01�C resolution)
-} MIWIPacket;
+//typedef struct {
+//    uint8_t deviceID;      // Unique Device ID (1 byte)
+//    uint32_t timestamp;    // Flight timestamp (4 bytes)
+//    int16_t temperature;   // Temperature (scaled by 10 for 0.1�C resolution)
+//    int16_t battery;        // Battery (scaled by 10 for 0.01�C resolution)
+//} MIWIPacket;
 
 // ===========================
 // ** Send Data to PAN Coordinator **
 // ===========================
-BOOL SendData(BYTE target, int16_t tempCelsius, uint16_t battVoltage) {
-    MIWIPacket packet;
-//    rtccTimeDate time;
-  
-    packet.deviceID = TEMP_PKT; //DEVICE_ID;  // Assign unique device ID
-//    packet.timestamp = RTCC_GetTimestamp();  // Get timestamp for flight time
-
-    packet.temperature = tempCelsius;  // Already in 0.1�C resolution
-    packet.battery = battVoltage;  // Store battery voltage (0.01V resolution)
-
-    MiApp_FlushTx();  // Clear transmission buffer
-
-    // Write structured data into the TX buffer
-    MiApp_WriteData(packet.deviceID);
-//    MiApp_WriteData((packet.timestamp >> 24) & 0xFF);
-//    MiApp_WriteData((packet.timestamp >> 16) & 0xFF);
-//    MiApp_WriteData((packet.timestamp >> 8) & 0xFF);
-//    MiApp_WriteData(packet.timestamp & 0xFF);
-    
-    // Temperature (2 bytes, 0.1�C resolution)
-    MiApp_WriteData((packet.temperature >> 8) & 0xFF);
-    MiApp_WriteData(packet.temperature & 0xFF);
-
-    // Battery Voltage (2 bytes, 0.01V resolution)
-    MiApp_WriteData((packet.battery >> 8) & 0xFF);
-    MiApp_WriteData(packet.battery & 0xFF);
-
-    // Send data as **unicast packet**
-//    if (MiApp_UnicastAddress(0, FALSE, TRUE)) {
-    if (MiApp_UnicastConnection(target, FALSE)) {
-//    if (MiApp_BroadcastPacket(TRUE)) {
-        Nop();
-        LED1 ^= 1;
-        return TRUE;
-    } else {
-        Nop();
-        return FALSE;
-    }
-}
+//BOOL SendData(BYTE target, int16_t tempCelsius, uint16_t battVoltage) {
+//    MIWIPacket packet;
+////    rtccTimeDate time;
+//  
+//    packet.deviceID = TEMP_PKT; //DEVICE_ID;  // Assign unique device ID
+////    packet.timestamp = RTCC_GetTimestamp();  // Get timestamp for flight time
+//
+//    packet.temperature = tempCelsius;  // Already in 0.1�C resolution
+//    packet.battery = battVoltage;  // Store battery voltage (0.01V resolution)
+//
+//    MiApp_FlushTx();  // Clear transmission buffer
+//
+//    // Write structured data into the TX buffer
+//    MiApp_WriteData(packet.deviceID);
+////    MiApp_WriteData((packet.timestamp >> 24) & 0xFF);
+////    MiApp_WriteData((packet.timestamp >> 16) & 0xFF);
+////    MiApp_WriteData((packet.timestamp >> 8) & 0xFF);
+////    MiApp_WriteData(packet.timestamp & 0xFF);
+//    
+//    // Temperature (2 bytes, 0.1�C resolution)
+//    MiApp_WriteData((packet.temperature >> 8) & 0xFF);
+//    MiApp_WriteData(packet.temperature & 0xFF);
+//
+//    // Battery Voltage (2 bytes, 0.01V resolution)
+//    MiApp_WriteData((packet.battery >> 8) & 0xFF);
+//    MiApp_WriteData(packet.battery & 0xFF);
+//
+//    // Send data as **unicast packet**
+////    if (MiApp_UnicastAddress(0, FALSE, TRUE)) {
+//    if (MiApp_UnicastConnection(target, security)) {
+////    if (MiApp_BroadcastPacket(TRUE)) {
+//        Nop();
+//        LED1 ^= 1;
+//        return TRUE;
+//    } else {
+//        Nop();
+//        return FALSE;
+//    }
+//}
 
 #if defined(__18CXX) && !defined(HI_TECH_C)	
 /*********************************************************************
@@ -601,24 +600,28 @@ void PrintTempLCD(void)
 
     LCDUpdate();
 }
-
-void sendReplyConfigPKT(void)
+int FindConnectionIndexByShortAddr(uint8_t* addr)
 {
-//    BYTE i;
-//    MIWI_CONFIG_REPLY reply;
-//    uint8_t payload[1 + sizeof(MIWI_CONFIG_REPLY)];
-//    reply.PANID = myPANID;
-//    reply.Channel = currentChannel;
-//    reply.security = security;
-//    reply.Role = role;
-//
-//    payload[0] = REPLYCONFIG_PKT; // For example, 12 for REPLYCONFIG_PKT
-//    memcpy(&payload[1], (const void*)&reply, sizeof(MIWI_CONFIG_REPLY));
-//    // Prepare transmit
-//    MiApp_FlushTx();
-//    // Write all payload bytes
-//    for (i = 0; i < sizeof(payload); i++)
-//        MiApp_WriteData(payload[i]);
+    int i;
+    for(i = 0; i < CONNECTION_SIZE; i++)
+    {
+        if(ConnectionTable[i].status.bits.isValid)
+        {
+            // Usually compare short address (2 bytes)
+            if(ConnectionTable[i].AltAddress.v[0] == addr[0] &&
+               ConnectionTable[i].AltAddress.v[1] == addr[1])
+            {
+                return i; // Found
+            }
+        }
+    }
+    return -1; // Not found
+}
+BOOL sendReplyConfigPKT(void)
+{
+    uint8_t addr_bytes[2];
+    BOOL ret;
+    BYTE connIndex;
     
     MiApp_FlushTx();
     MiApp_WriteData(REPLYCONFIG_PKT);
@@ -629,19 +632,27 @@ void sendReplyConfigPKT(void)
     MiApp_WriteData(role);
     MiApp_WriteData(myShortAddress.v[1]);
     MiApp_WriteData(myShortAddress.v[0]);
+    addr_bytes[0] = rxMessage.SourceAddress[0]; // LSB
+    addr_bytes[1] = rxMessage.SourceAddress[1]; // MSB
+    connIndex = FindConnectionIndexByShortAddr(addr_bytes);
     // Send back to PAN using source address from rxMessage
-    MiApp_UnicastAddress(rxMessage.SourceAddress, FALSE, security);
+    ret = MiApp_UnicastConnection(connIndex, FALSE);
     Nop();
+    return ret;
 }
 
-void sendPONGPKT(void)
+BOOL sendPONGPKT(void)
 {
+    BOOL ret;
+    BYTE connIndex;
     MiApp_FlushTx();
     MiApp_WriteData(PONG_PKT);
     MiApp_WriteData(myShortAddress.v[1]);
     MiApp_WriteData(myShortAddress.v[0]);
-    
-    MiApp_UnicastAddress(rxMessage.SourceAddress, FALSE, security);
+    connIndex = FindConnectionIndexByShortAddr(rxMessage.SourceAddress);
+    ret = MiApp_UnicastConnection(connIndex, FALSE);
+    return ret;
+   
 }
 void processConfigPKT(void)
 {
@@ -659,13 +670,6 @@ void processConfigPKT(void)
      nvmPutRole(&role);
      nvmPutSecurity(&security);
      Nop();
-    // Do not send a custom ACK here!
-    // (MAC-level ACK happens automatically on unicast)
-    // Prepare and send ACK
-//                    MiApp_FlushTx();
-//                    MiApp_WriteData(CONFIG_ACK_PKT); // ACK command
-//                    MiApp_WriteData(0x00);         // Status code 0x00 = Success
-//                    MiApp_UnicastConnection(0, FALSE); // Send to coordinator (index 0 or as appropriate)
 
 }
 

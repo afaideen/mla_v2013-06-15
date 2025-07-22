@@ -124,8 +124,8 @@
         // timeout is handled in MiMAC layer.
         /*********************************************************************/
 //        #define MIWI_PRO_ACK_TIMEOUT            (ONE_SECOND)
-        #define MIWI_PRO_ACK_TIMEOUT            (2 * ONE_SECOND)
-//        #define MIWI_PRO_ACK_TIMEOUT            (5 * ONE_SECOND)
+//        #define MIWI_PRO_ACK_TIMEOUT            (2 * ONE_SECOND)
+        #define MIWI_PRO_ACK_TIMEOUT            (3 * ONE_SECOND)
 //        #define MIWI_PRO_ACK_TIMEOUT            (10 * ONE_SECOND)
 
         /*********************************************************************/
@@ -160,7 +160,8 @@
         // ACTIVE_SCAN_RESULT_SIZE defines the maximum number of active scan
         // results that can be received and recorded within one active scan.
         /*********************************************************************/
-        #define ACTIVE_SCAN_RESULT_SIZE 4
+//        #define ACTIVE_SCAN_RESULT_SIZE 4
+        #define ACTIVE_SCAN_RESULT_SIZE 2
             
         /*********************************************************************/
         // INDIRECT_MESSAGE_SIZE defines the maximum number of packets that

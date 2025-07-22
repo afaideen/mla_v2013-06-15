@@ -51,7 +51,8 @@
 *  4.1   6/3/2011     yfy       MAL v2011-06
 ********************************************************************/
 #include "SystemProfile.h"
-#include "../../Include/TimeDelay.h"
+//#include "../../Include/TimeDelay.h"
+#include "TCPIP Stack/Delay.h"
 void HandleInterruptFlags(void);
 void InterruptHandling(void);
 static void HandleMRF24J40RXInterrupt(void);
@@ -436,10 +437,10 @@ void HandleSecurity(void);
         #endif          
         
         // 1??2?? Verify MRF24J40 is operational
-        if (PHYGetShortRAMAddr(READ_SOFTRST) & 0x07) {
-                //printf("? ERROR: MRF24J40 did not reset correctly!\n");
-                return FALSE;
-        }
+//        if (PHYGetShortRAMAddr(READ_SOFTRST) & 0x07) {
+//                //printf("? ERROR: MRF24J40 did not reset correctly!\n");
+//                return FALSE;
+//        }
         return TRUE;  // ? SUCCESS
     }
         
@@ -449,11 +450,11 @@ void HandleSecurity(void);
     volatile BOOL flags_bits_RF_SECIF = FALSE;
     void HandleInterruptFlags(void)
     {
-//        if (flags_bits_RF_TXIF)
-//        {
-//            flags_bits_RF_TXIF = FALSE;
-//            HandleMRF24J40TXInterrupt();
-//        }
+        if (flags_bits_RF_TXIF)
+        {
+            flags_bits_RF_TXIF = FALSE;
+            HandleMRF24J40TXInterrupt();
+        }
     
 //        if (flags_bits_RF_RXIF)
 //        {
@@ -1173,8 +1174,9 @@ void HandleSecurity(void);
                     break;   //For broadcast transmission will never expect packet ACK
                 }
                 t2 = MiWi_TickGet();
+//                if( MiWi_TickGetDiff(t2, t1) > HUNDRED_MILI_SECOND )
 //                if( MiWi_TickGetDiff(t2, t1) > FORTY_MILI_SECOND )
-                if( MiWi_TickGetDiff(t2, t1) > HUNDRED_MILI_SECOND )
+                if( MiWi_TickGetDiff(t2, t1) > TWENTY_MILI_SECOND )
                 {
 //                    LED0_ON();
 //                    LED1_ON();
@@ -2099,7 +2101,7 @@ MIWI_TICK isrStart, isrEnd;
             }
         }
 
-        UserInterruptHandler();
+//        UserInterruptHandler();
     #endif
 
 //        isrEnd = MiWi_TickGet();

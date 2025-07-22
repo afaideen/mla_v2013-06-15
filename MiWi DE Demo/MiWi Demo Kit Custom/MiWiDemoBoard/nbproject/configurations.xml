@@ -150,7 +150,7 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="../../../Microchip/Common/TimeDelay.c" ex="false" overriding="true">
+      <item path="../../../Microchip/Common/TimeDelay.c" ex="true" overriding="true">
         <C18>
           <property key="code-model" value="mS"/>
           <property key="data-model" value="Oa-"/>
@@ -202,6 +202,10 @@
           <property key="stack-analysis-mcc18" value="false"/>
           <property key="stack-analysis-mplink" value="false"/>
         </C18LanguageToolchain>
+      </item>
+      <item path="../../../Microchip/TCPIP Stack/Delay.c"
+            ex="true"
+            overriding="false">
       </item>
       <item path="../../../Microchip/Transceivers/MRF89XA/MRF89XA.c"
             ex="true"
@@ -445,6 +449,7 @@
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="hwtoolclock.instructionspeed" value="4"/>
         <property key="hwtoolclock.units" value="mips"/>

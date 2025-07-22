@@ -5,11 +5,11 @@
  * Created on March 1, 2025, 5:13 PM
  */
 #define USE_OR_MASKS
-#include "pic18f_miwi_demo_kit.h"
+//#include "pic18f_miwi_demo_kit.h"
 //#include "common.h"
 #include "definitions.h"
-#include "TimeDelay.h"
-
+//#include "TimeDelay.h"
+#include "TCPIP Stack/Delay.h"
 
 rtccTimeDate RTCC_ReadTime(void);
 void RTCC_TimestampToDate(uint32_t timestamp, rtccTimeDate *time);

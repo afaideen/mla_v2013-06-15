@@ -63,6 +63,7 @@ BOOL SendData(BYTE target, int16_t tempCelsius, uint16_t battVoltage);
 float ReadTemperature(void);
 float ReadBatt(void);
 void processConfigPKT(void);
-void sendPONGPKT(void);
-void sendReplyConfigPKT(void);
+BOOL sendPONGPKT(void);
+BOOL sendReplyConfigPKT(void);
+void CheckPKT(BYTE i);
 #endif

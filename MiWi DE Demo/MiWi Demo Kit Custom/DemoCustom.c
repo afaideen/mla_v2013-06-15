@@ -125,7 +125,7 @@ void main(void)
 	BoardInit();
 	LCDInit();
 	InitSymbolTimer();
-    NVMInit();
+//    NVMInit();
     
 	LED0 = 0;
 	LED1 = 0;
@@ -151,6 +151,9 @@ void main(void)
 //    nvmPutMyShortAddress(myShortAddress.v);
 //     nvmPutRole(&role);
 //     nvmPutSecurity(&security);
+//     role = 2;
+//     security = 0;
+             
      Nop();
 //        // Read back from NVM
 //    nvmGetMyPANID(myPANID.v);
@@ -229,7 +232,7 @@ void main(void)
                     
                 }
                 lastHeartbeatTick = MiWi_TickGet();
-                while(!DelayMsAsyn(&lastHeartbeatTick, 400))
+                while(!DelayMsAsyn(&lastHeartbeatTick, 500))
                 {
                     MiWiPROTasks();
                 }
@@ -246,8 +249,7 @@ void main(void)
 				App_ShowSplash(500);
                 networkJoined = FALSE;    
 				// Attempt to restore from EEPROM (network freezer)
-				MiApp_ProtocolInit(TRUE);
-
+                nvmGetConnectionTable(ConnectionTable);
 				// Check for valid stored network
 				useStoredNetwork = 0;
                 for (i = 0; i < CONNECTION_SIZE; i++) {
@@ -263,7 +265,7 @@ void main(void)
                         break;
                     }
                 }
-
+                MiApp_ProtocolInit(useStoredNetwork);    
 				if(useStoredNetwork) {
 					LCDDisplay((char *)"Network Restored!", 0, 400);
 //                    if(security == 1) {
@@ -277,7 +279,6 @@ void main(void)
                     
 					LCDDisplay((char *)"No Saved Network", 0, 400);
 					// Start fresh, cold start
-					MiApp_ProtocolInit(FALSE);
 					state = APP_STATE_CHANNEL_SELECT;
 				}
 				break;
@@ -540,7 +541,7 @@ create_or_join:
 	        LCDDisplay((char *)"  Scanning for    Networks....", 0, 250);
 	        LCDDisplay((char *)"Please Select   Network to Join ", 0, 250);
 
-//	        MiApp_ProtocolInit(FALSE);
+	        MiApp_ProtocolInit(FALSE);
 
 	        // Calculate channel bitmap for current myChannel (matches Demo.c)
 	        scanChannelBitmap = 0;
@@ -664,11 +665,11 @@ create_or_join:
 						        joined = TRUE;
 					        }
 					        // After join, broadcast EXIT_IDENTIFY_MODE
-//					        MiApp_FlushTx();
-//					        MiApp_WriteData(EXIT_IDENTIFY_MODE);
-//					        MiApp_WriteData(myPANID.v[1]);
-//					        MiApp_WriteData(myPANID.v[0]);
-//					        MiApp_BroadcastPacket(FALSE);
+					        MiApp_FlushTx();
+					        MiApp_WriteData(EXIT_IDENTIFY_MODE);
+					        MiApp_WriteData(myPANID.v[1]);
+					        MiApp_WriteData(myPANID.v[0]);
+					        MiApp_BroadcastPacket(FALSE);
 					        break;
 				        }
 //				        else if(switch_val == SW2)
