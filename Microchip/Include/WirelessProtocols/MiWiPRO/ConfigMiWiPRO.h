@@ -124,8 +124,8 @@
         // timeout is handled in MiMAC layer.
         /*********************************************************************/
 //        #define MIWI_PRO_ACK_TIMEOUT            (ONE_SECOND)
-//        #define MIWI_PRO_ACK_TIMEOUT            (2 * ONE_SECOND)
-        #define MIWI_PRO_ACK_TIMEOUT            (3 * ONE_SECOND)
+        #define MIWI_PRO_ACK_TIMEOUT            (2 * ONE_SECOND)
+//        #define MIWI_PRO_ACK_TIMEOUT            (3 * ONE_SECOND)
 //        #define MIWI_PRO_ACK_TIMEOUT            (10 * ONE_SECOND)
 
         /*********************************************************************/
@@ -259,7 +259,8 @@
         // services that use COMM_INTERVAL are FAMILY_TREE_REPORT, 
         // ROUTING_TABLE_REPORT and CHANNLE_HOPPING_REQUEST.
         /*********************************************************************/
-        #define COMM_INTERVAL               ONE_SECOND
+//        #define COMM_INTERVAL               ONE_SECOND
+        #define COMM_INTERVAL               5*ONE_SECOND
         
         /*********************************************************************/
         // FAMILY_TREE_BROADCAST defines the number of broadcasts for Family 

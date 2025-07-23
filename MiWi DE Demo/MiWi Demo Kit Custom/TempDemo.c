@@ -51,6 +51,7 @@
 #define DISPLAY_CYCLE_INTERVAL      1
 #define EXIT_DEMO_TIMEOUT           1
 #define NUM_TEMP_SAMPLES            4
+#define MAX_TX_RETRY                2
 
 unsigned short tempAverage = 0;
 BYTE tempRemote = 255;
@@ -103,6 +104,7 @@ void TempDemo(void)
     MIWI_TICK tick1, tick2, tick3;
     MIWI_TICK sw1_timer, sw2_timer;
     BYTE switch_val, i;
+    BOOL success;
     short tempRaw; 
     
     BYTE viewIndex = 0;
@@ -201,24 +203,36 @@ void TempDemo(void)
             temp_ = temp * 10;
             batt_ = batt * 100;
             timestamp = RTCC_GetTimestamp();  // Get timestamp for flight time
-            MiApp_FlushTx();
-            MiApp_WriteData(TEMP_PKT);      
-            MiApp_WriteData((BYTE)(timestamp >> 24) & 0xFF);
-            MiApp_WriteData((BYTE)(timestamp >> 16) & 0xFF);
-            MiApp_WriteData((BYTE)(timestamp >> 8) & 0xFF);
-            MiApp_WriteData((BYTE)timestamp & 0xFF);
-            MiApp_WriteData((BYTE)(temp_ >> 8) & 0xFF);
-            MiApp_WriteData((BYTE)temp_ & 0xFF);
-            MiApp_WriteData((BYTE)(batt_ >> 8) & 0xFF);
-            MiApp_WriteData((BYTE)batt_ & 0xFF);
-            MiApp_WriteData(myShortAddress.v[1]);
-            MiApp_WriteData(myShortAddress.v[0]);
-            if( MiApp_UnicastConnection(0, security) == FALSE )
-                Pkt_Loss_Cnt++;
-            else
+            
+            success = FALSE;
+
+            for (i = 0; i <= MAX_TX_RETRY; i++) // Try up to 3 times (initial + 2 retries)
             {
-                LED1 ^= 1;
-                Pkt_Loss_Cnt = 0;
+                MiApp_FlushTx();
+                MiApp_WriteData(TEMP_PKT);      
+                MiApp_WriteData((BYTE)(timestamp >> 24) & 0xFF);
+                MiApp_WriteData((BYTE)(timestamp >> 16) & 0xFF);
+                MiApp_WriteData((BYTE)(timestamp >> 8) & 0xFF);
+                MiApp_WriteData((BYTE)timestamp & 0xFF);
+                MiApp_WriteData((BYTE)(temp_ >> 8) & 0xFF);
+                MiApp_WriteData((BYTE)temp_ & 0xFF);
+                MiApp_WriteData((BYTE)(batt_ >> 8) & 0xFF);
+                MiApp_WriteData((BYTE)batt_ & 0xFF);
+                MiApp_WriteData(myShortAddress.v[1]);
+                MiApp_WriteData(myShortAddress.v[0]);
+
+                if (MiApp_UnicastConnection(0, security) == TRUE)
+                {
+                    success = TRUE;
+                    LED1 ^= 1;
+                    Pkt_Loss_Cnt = 0;
+                    break; // Success, exit the loop
+                }
+            }
+            // If still not successful after retries
+            if (!success)
+            {
+                Pkt_Loss_Cnt++;
             }
 		}
 //        else if (switch_val == SW1)
