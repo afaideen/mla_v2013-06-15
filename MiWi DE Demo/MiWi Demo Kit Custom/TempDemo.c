@@ -319,14 +319,14 @@ void CheckPKT(BYTE i)
     if (rxMessage.Payload[0] == CONFIG_PKT)
     {
         processConfigPKT();
-        security = 0;
+      
         nvmGetMyPANID(myPANID.v);
         nvmGetCurrentChannel(&currentChannel);
         nvmGetMyShortAddress(myShortAddress.v); // if different, make new variable
         nvmGetRole(&role);
         nvmGetSecurity(&security);
-        LCDDisplay((char *)"Set config", 0, 500);
-        Reset();
+        LCDDisplay((char *)"Set config", 0, 0);
+//        Reset();
     }
     else if (rxMessage.Payload[0] == REQCONFIG_PKT)
     {
