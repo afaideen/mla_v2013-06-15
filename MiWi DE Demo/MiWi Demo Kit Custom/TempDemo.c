@@ -73,7 +73,7 @@ struct TempPacket
     float BattValue;
     BYTE    Rssi;
 }; 
-struct TempPacket NodeTemp[5];
+struct TempPacket NodeTemp[2];
 
 BOOL Run_Demo;
 //unsigned char msg[] = "MiWi Rocks!";
@@ -118,6 +118,8 @@ void TempDemo(void)
 	/*******************************************************************/
     // Dispaly Temp Demo Splach Screen
     /*******************************************************************/	
+  
+    Nop();
     LCDBacklightON();
     LCDDisplay((char *)"   Microchip       Temp Demo  ", 0, 0);
     LCDBacklightOFF();
@@ -128,7 +130,7 @@ void TempDemo(void)
     /*******************************************************************/
 	NodeTemp[0].NodeAddress[0] = myShortAddress.v[0];
 	NodeTemp[0].NodeAddress[1] = myShortAddress.v[1];
-    for(i = 0; i < 10; i++){
+    for(i = 0; i < 2; i++){
         NodeTemp[i].TempValue = -100.0f; // -100 is 'no data'
         NodeTemp[i].BattValue = 100.0f; // -100 is 'no data'
         
@@ -320,11 +322,12 @@ void CheckPKT(BYTE i)
     {
         processConfigPKT();
       
-        nvmGetMyPANID(myPANID.v);
-        nvmGetCurrentChannel(&currentChannel);
-        nvmGetMyShortAddress(myShortAddress.v); // if different, make new variable
-        nvmGetRole(&role);
-        nvmGetSecurity(&security);
+//        nvmGetMyPANID(myPANID.v);
+//        nvmGetCurrentChannel(&currentChannel);
+//        nvmGetMyShortAddress(myShortAddress.v); // if different, make new variable
+//        nvmGetRole(&role);
+//        nvmGetSecurity(&security);
+        Nop();
         LCDDisplay((char *)"Set config", 0, 0);
 //        Reset();
     }
@@ -670,21 +673,42 @@ BOOL sendPONGPKT(void)
 }
 void processConfigPKT(void)
 {
+    BOOL val;
+//    BYTE security;
+    
     // [1],[2] = address (can ignore or check if addressed to self)
+    uint16_t addr = (WORD)rxMessage.Payload[1] | ((WORD)rxMessage.Payload[2] << 8);
+    if (addr != myShortAddress.Val)
+        return; // Not for me, ignore
     myPANID.Val         = ((WORD)rxMessage.Payload[3]) | (((WORD)rxMessage.Payload[4]) << 8);
     currentChannel      = rxMessage.Payload[5];
     role                = rxMessage.Payload[6];
-    security            = rxMessage.Payload[7];
-
+    security            = rxMessage.Payload[7] ? TRUE : FALSE;
+    Nop();
     // Store to EEPROM/NVM
+    
     nvmPutMyPANID(myPANID.v);
     nvmPutCurrentChannel(&currentChannel);
     nvmPutMyShortAddress(myShortAddress.v);
-    // If you have a custom NVM location for role/security, store them here:
      nvmPutRole(&role);
      nvmPutSecurity(&security);
      Nop();
+//     nvmGetMyPANID(myPANID.v);
+     Nop();
+         // --- Optionally send ACK back to the PAN Coordinator ---
+    MiApp_FlushTx();
+    MiApp_WriteData(CONFIG_ACK_PKT);          // 0: ACK command code
+    MiApp_WriteData((BYTE)myShortAddress.v[0]);    // 1: LSB
+    MiApp_WriteData((BYTE)myShortAddress.v[1]);    // 2: MSB
+    MiApp_WriteData((BYTE)myPANID.v[0]);           // 3: PANID LSB
+    MiApp_WriteData((BYTE)myPANID.v[1]);           // 4: PANID MSB
+    MiApp_WriteData((BYTE)currentChannel);         // 5: channel
+    MiApp_WriteData((BYTE)role);                   // 6: role
+    MiApp_WriteData((BYTE)security ? 1 : 0);        // 7: security (0 or 1)
 
+    // Usually PAN Coordinator is index 0 in ConnectionTable
+    val = MiApp_UnicastConnection(0, FALSE);
+    Nop();
 }
 
 

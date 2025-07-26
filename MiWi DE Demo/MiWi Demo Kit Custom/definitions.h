@@ -65,13 +65,13 @@ typedef union
 //
 //    } MIWI_CONFIG;
 //#endif
-typedef struct __attribute__((__packed__)) miwiConfigReplyStruct
-{
-    WORD_VAL    PANID;
-    BYTE        Channel;
-    BYTE        security;
-    BYTE        Role;
-} MIWI_CONFIG_REPLY;
+//typedef struct __attribute__((__packed__)) miwiConfigReplyStruct
+//{
+//    WORD_VAL    PANID;
+//    BYTE        Channel;
+//    BOOL        security;
+//    BYTE        Role;
+//} MIWI_CONFIG_REPLY;
 
 uint8_t BCDtoDEC(uint8_t bcdValue);
 void RTCC_Init(void);

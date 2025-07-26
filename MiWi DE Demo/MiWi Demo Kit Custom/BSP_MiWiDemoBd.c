@@ -257,7 +257,7 @@ void BoardInit(void)
     PIR3bits.SSP2IF = 0; 
 
     ADC_Init();  // Initialize ADC
-    NVMInit();
+//    NVMInit();
     /*******************************************************************/
     // Enable System Interupts. DISABLE THIS IF NOT USED ELSE IT MAY CREATE INSTABILITY.
     /*******************************************************************/

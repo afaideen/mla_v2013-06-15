@@ -125,7 +125,7 @@ void main(void)
 	BoardInit();
 	LCDInit();
 	InitSymbolTimer();
-//    NVMInit();
+    NVMInit();
     
 	LED0 = 0;
 	LED1 = 0;
@@ -136,26 +136,28 @@ void main(void)
     useStoredNetwork = FALSE;
 //    MiApp_ProtocolInit(useStoredNetwork);
     Nop();
+//    rxMessage.Payload[4] = 0xAB;
+//    rxMessage.Payload[3] = 0XCD;
 //    myPANID.Val         = ((WORD)rxMessage.Payload[3]) | (((WORD)rxMessage.Payload[4]) << 8);
 //    myPANID.v[1]        = 0xAB;
 //    myPANID.v[0]        = 0xCD;
-//    myShortAddress.v[1] = 0x01;
-//    myShortAddress.v[0] = 0x00;
-//    currentChannel      = 11;
+////    myShortAddress.v[1] = 0x01;
+////    myShortAddress.v[0] = 0x00;
+////    currentChannel      = 11;
 //    role                = 1;
 //    security            = 1;
-
-    // Store to EEPROM/NVM
+//////
+//////    // Store to EEPROM/NVM
 //    nvmPutMyPANID(myPANID.v);
-//    nvmPutCurrentChannel(&currentChannel);
-//    nvmPutMyShortAddress(myShortAddress.v);
+////    nvmPutCurrentChannel(&currentChannel);
+////    nvmPutMyShortAddress(myShortAddress.v);
 //     nvmPutRole(&role);
 //     nvmPutSecurity(&security);
 //     role = 2;
 //     security = 0;
-             
-     Nop();
-//        // Read back from NVM
+//             
+//     Nop();
+//////        // Read back from NVM
 //    nvmGetMyPANID(myPANID.v);
 //    nvmGetCurrentChannel(&currentChannel);
 //    nvmGetMyShortAddress(myShortAddress.v); // if different, make new variable
