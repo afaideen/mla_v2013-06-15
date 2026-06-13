@@ -169,8 +169,8 @@ void BerkeleyTCPClientDemo(void)
         case BSD_SEND:
             //send TCP data
 //            send(bsdClientSocket, (const char*)sendRequest, strlen((char*)sendRequest), 0);  
-            size_dt = strlen(send_body_data);
-            sprintf(send_data, 
+            size_dt = strlen((const char *)send_body_data);
+            sprintf((char *)send_data, 
                     "GET /post/test HTTP/1.1\r\n"
                     "Host: %s:%d\r\n"
                     "Accept: */*\r\n"
@@ -180,7 +180,7 @@ void BerkeleyTCPClientDemo(void)
                     "%s"
                     , ServerName
                     , PORTNUM
-                    , size_dt
+                    , (int)size_dt
                     , send_body_data);
             send(bsdClientSocket, (const char*)send_data, strlen((char*)send_data), 0); 
             BSDClientState = BSD_OPERATION;

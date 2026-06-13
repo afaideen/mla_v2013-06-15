@@ -26,6 +26,74 @@
             </bookmark>
         </file>
         <file>
+            <url>file:/D:/github/microchip/mla_v2013-06-15/Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c</url>
+            <bookmark id="32">
+                <name/>
+                <line>4674</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/LocalFiles/MRF24J40.c</url>
+            <bookmark id="34">
+                <name/>
+                <line>265</line>
+                <key/>
+            </bookmark>
+            <bookmark id="33">
+                <name/>
+                <line>1536</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>file:/D:/microchip_solutions_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemo.c</url>
+            <bookmark id="4">
+                <name/>
+                <line>524</line>
+                <key/>
+            </bookmark>
+            <bookmark id="3">
+                <name/>
+                <line>840</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>file:/D:/microchip_solutions_v2013-06-15/Microchip/WirelessProtocols/MiWi/MiWi.c</url>
+            <bookmark id="5">
+                <name/>
+                <line>3689</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemoTest.c</url>
+            <bookmark id="30">
+                <name/>
+                <line>316</line>
+                <key/>
+            </bookmark>
+            <bookmark id="31">
+                <name/>
+                <line>429</line>
+                <key/>
+            </bookmark>
+            <bookmark id="35">
+                <name/>
+                <line>961</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>file:/D:/microchip_solutions_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/LocalFiles/MRF24J40.c</url>
+            <bookmark id="2">
+                <name/>
+                <line>1047</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
             <url>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/CustomHTTPApp.c</url>
             <bookmark id="17">
                 <name/>
@@ -123,74 +191,6 @@
             </bookmark>
         </file>
         <file>
-            <url>file:/D:/github/microchip/mla_v2013-06-15/Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c</url>
-            <bookmark id="32">
-                <name/>
-                <line>4674</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/LocalFiles/MRF24J40.c</url>
-            <bookmark id="34">
-                <name/>
-                <line>265</line>
-                <key/>
-            </bookmark>
-            <bookmark id="33">
-                <name/>
-                <line>1536</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>file:/D:/microchip_solutions_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemo.c</url>
-            <bookmark id="4">
-                <name/>
-                <line>524</line>
-                <key/>
-            </bookmark>
-            <bookmark id="3">
-                <name/>
-                <line>840</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>file:/D:/microchip_solutions_v2013-06-15/Microchip/WirelessProtocols/MiWi/MiWi.c</url>
-            <bookmark id="5">
-                <name/>
-                <line>3689</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemoTest.c</url>
-            <bookmark id="30">
-                <name/>
-                <line>316</line>
-                <key/>
-            </bookmark>
-            <bookmark id="31">
-                <name/>
-                <line>429</line>
-                <key/>
-            </bookmark>
-            <bookmark id="35">
-                <name/>
-                <line>961</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>file:/D:/microchip_solutions_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/LocalFiles/MRF24J40.c</url>
-            <bookmark id="2">
-                <name/>
-                <line>1047</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
             <url>file:/D:/github/microchip/mla_v2013-06-15/Microchip/Transceivers/MRF24J40/MRF24J40.c</url>
             <bookmark id="22">
                 <name/>
@@ -219,7 +219,23 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/github/microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemoTest.c</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Microchip/WirelessProtocols/MiWiPRO/MiWiPRO.c</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Microchip/WirelessProtocols/EEPROM.c</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Microchip/Include/WirelessProtocols/Console.h</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/LCD_ST7032.h</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/Configs/HWP%20PIC32%20EVAL_BRD.h</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/DemoOutput.c</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/LCD_ST7032.c</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Microchip/WirelessProtocols/MSPI.c</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/WF_Config.c</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/MainDemoTest.c</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Microchip/WirelessProtocols/MiWiHelper.c</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Microchip/Include/Compiler.h</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Microchip/Include/WirelessProtocols/MSPI.h</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/BerkeleyTCPServerDemo.c</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/HardwareProfile.h</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Combo/MiWi%20Protocol%20to%20WiFi%20Wireless%20Demo%20Kit/Wireless_Eval_Board/WirelessProtocols/MSPI.h</file>
+            <file>file:/C:/Microchip/mla_v2013-06-15/Microchip/WirelessProtocols/NVM.c</file>
         </group>
     </open-files>
 </project-private>

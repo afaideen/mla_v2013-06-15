@@ -151,6 +151,7 @@
                 defined(CFG_INCLUDE_PIC32_USB_SK_MRF24WG)
 			#include "Configs/TCPIP MRF24W PIC32_SK.h"
 #elif   defined(CFG_INCLUDE_PIC32_EVAL_BOARD)
+
             #define MRF24WG
             #include    "Configs/TCPIP MRF24W EVAL_BRD.h"
 #elif   defined(CFG_INCLUDE_PIC32_EVAL_BOARD_MRF24WB)

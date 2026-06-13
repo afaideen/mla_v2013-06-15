@@ -49,6 +49,8 @@
 #include "HardwareProfile.h"
 #include "WirelessProtocols/LCDBlocking.h"
 #include "WirelessProtocols/MCHP_API.h"
+#include "TCPIP Stack/Delay.h"
+#include "DemoOutput.h"
 
 extern void LCDDisplay(char *text, BYTE value, BOOL delay);
 extern void LCDTRXCount(BYTE txCount, BYTE rxCount);
@@ -243,7 +245,7 @@ extern BYTE LCDText[16*2+1];
 void DemoOutput_Channel_Addr(BYTE channel, BYTE high_addr, BYTE low_addr)
 {
     LCDErase();
-    sprintf(LCDText, "Connected Peer  addr:%02x%02x ch:%d", high_addr, low_addr, channel);
+    sprintf((char *)LCDText, "Connected Peer  addr:%02x%02x ch:%d", high_addr, low_addr, channel);
     LCDUpdate();
     DelayMs(4000);   
         

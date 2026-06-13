@@ -2,6 +2,7 @@
 #include "GenericTypeDefs.h"
 #include "MiWiHelper.h"
 #include "WirelessProtocols/MCHP_API.h"
+#include "LCD_ST7032.h"
 
 #if defined(MIWI_HELPER)
 extern void DemoOutput_ChannelError(BYTE channel);
@@ -17,7 +18,7 @@ BOOL MiWiHelper_SendData(BYTE conn_index, BYTE *data)
 {
     BYTE i;
     MiApp_FlushTx();
-    for(i = 0; i < strlen(data); i++)
+    for(i = 0; i < strlen((const char *)data); i++)
     {
         MiApp_WriteData(data[i]);
     }
@@ -86,7 +87,7 @@ WORD AutoSearchActiveConnection(DWORD scan_chnl)
 {
     WORD o = 0;
     BYTE j, OperatingChannel = 0xFF, retry = 3;
-    DWORD scan_chnl_;
+//    DWORD scan_chnl_;
     Printf("Autosearching...");
 //    LCDDisplay((char *)"Search Ch %d", channel, TRUE);
     LCDDisplay((char *)"Searching...", 0, FALSE);

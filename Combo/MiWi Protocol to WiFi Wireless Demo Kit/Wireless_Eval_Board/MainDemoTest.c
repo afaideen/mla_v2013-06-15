@@ -85,7 +85,7 @@
 #include "Storage.h"
 #include "SelfTestMode.h"
 #include "WirelessProtocols/Console.h"
-
+#include "DemoOutput.h"
 
 // Used for Wi-Fi assertions
 #define WF_MODULE_NUMBER   WF_MODULE_MAIN_DEMO
@@ -259,14 +259,14 @@ int main(void)
 {
     BYTE i;
     static DWORD t = 0;
-    static DWORD t_eeprom_reset = 0;
+//    static DWORD t_eeprom_reset = 0;
     static DWORD dwLastIP = 0;
     static UINT8 updateDisplay = 0;
     BOOL protocol_init = FALSE;
 
-#if defined (EZ_CONFIG_STORE)
-    static DWORD ButtonPushStart = 0;
-#endif
+//#if defined (EZ_CONFIG_STORE)
+//    static DWORD ButtonPushStart = 0;
+//#endif
 
 #if (MY_DEFAULT_NETWORK_TYPE == WF_SOFT_AP)
     UINT8 channelList[] = MY_DEFAULT_CHANNEL_LIST_PRESCAN; // WF_PRESCAN
@@ -333,8 +333,8 @@ int main(void)
         while (1);
     }
     BYTE msg[16] = {0};
-    sprintf(msg,"Channel: %d",myChannel);
-    putsUART2(msg);
+    sprintf((char *)msg,"Channel: %d",myChannel);
+    putsUART2((const char *)msg);
 
     /*******************************************************************/
     //  Set the connection mode. The possible connection modes are:
@@ -560,7 +560,7 @@ int main(void)
         {
             mychildren[j] = 0x01;
             memset(mybuff,0,sizeof(mybuff));
-            sprintf(mybuff,"My child - PANID:0x%04x,AltAddr:0x%04x,Addr:%c%c%c%c%c%c%c%c\r\n",
+            sprintf((char *)mybuff,"My child - PANID:0x%04x,AltAddr:0x%04x,Addr:%c%c%c%c%c%c%c%c\r\n",
                     ConnectionTable[j].PANID.Val,
                     ConnectionTable[j].AltAddress.Val,
                     ConnectionTable[j].Address[7],                        
@@ -572,7 +572,7 @@ int main(void)
                     ConnectionTable[j].Address[1],                        
                     ConnectionTable[j].Address[0]                       
                     );
-            putsUART(mybuff);
+            putsUART((const char *)mybuff);
         }
     }
     while (1) {
@@ -582,7 +582,7 @@ int main(void)
             {
                 mychildren[j] = 0x01;
                 memset(mybuff,0,sizeof(mybuff));
-                sprintf(mybuff,"New child - PANID:0x%04x,AltAddr:0x%04x,Addr:%c%c%c%c%c%c%c%c\r\n",
+                sprintf((char *)mybuff,"New child - PANID:0x%04x,AltAddr:0x%04x,Addr:%c%c%c%c%c%c%c%c\r\n",
                         ConnectionTable[j].PANID.Val,
                         ConnectionTable[j].AltAddress.Val,
                         ConnectionTable[j].Address[7],                        
@@ -594,7 +594,7 @@ int main(void)
                         ConnectionTable[j].Address[1],                        
                         ConnectionTable[j].Address[0]                       
                         );
-                putsUART(mybuff);
+                putsUART((const char *)mybuff);
             }
         }
         if(MiApp_MessageAvailable())

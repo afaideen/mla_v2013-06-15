@@ -282,6 +282,7 @@
 // External EEPROM SPI chip select pin definition
 #define EE_nCS_TRIS         TRISBbits.TRISB14
 #define EE_nCS              LATBbits.LATB14
+#define MAC_nCS             EE_nCS
 
 #define TMRL                TMR2
 

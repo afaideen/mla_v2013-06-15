@@ -1854,7 +1854,9 @@ ASSIGN_COORDINATOR_SHORT_ADDRESS:
                 
                 //if it is a command packet
                 case PACKET_TYPE_COMMAND:
+#if defined(ENABLE_TIME_SYNC) && defined(ENABLE_SLEEP)
 HANDLE_COMMAND_PACKET:
+#endif
                     //figure out which command packet it is
                     switch(MACRxPacket.Payload[0])
                     {
@@ -2396,7 +2398,7 @@ START_ASSOCIATION_RESPONSE:
                         #if defined(NWK_ROLE_COORDINATOR) && defined(ENABLE_INDIRECT_MESSAGE)
                         case MAC_COMMAND_DATA_REQUEST:
                         {
-                            BYTE handle;
+//                            BYTE handle;
                             
                             #if defined(IEEE_802_15_4)                              
                                 
@@ -3340,8 +3342,8 @@ START_ASSOCIATION_RESPONSE:
                 tmpTick = MiWi_TickGet();
                 if( (tmpTick.Val - TimeSyncTick.Val) < ((ONE_SECOND) * RFD_WAKEUP_INTERVAL) )
                 {
-                    //tmpW.Val = (((ONE_SECOND) * RFD_WAKEUP_INTERVAL) - (tmpTick.Val - TimeSyncTick.Val) + ( TimeSlotTick.Val * TimeSyncSlot ) ) / (ONE_SECOND * 16);
-                    tmpW.Val = (((ONE_SECOND) * RFD_WAKEUP_INTERVAL) - (tmpTick.Val - TimeSyncTick.Val) + ( TimeSlotTick.Val * TimeSyncSlot ) ) / SYMBOLS_TO_TICKS((DWORD)0xFFFF * MICRO_SECOND_PER_COUNTER_TICK / 16);
+                    tmpW.Val = (((ONE_SECOND) * RFD_WAKEUP_INTERVAL) - (tmpTick.Val - TimeSyncTick.Val) + ( TimeSlotTick.Val * TimeSyncSlot ) ) / (ONE_SECOND * 16);
+//                    tmpW.Val = (((ONE_SECOND) * RFD_WAKEUP_INTERVAL) - (tmpTick.Val - TimeSyncTick.Val) + ( TimeSlotTick.Val * TimeSyncSlot ) ) / SYMBOLS_TO_TICKS((DWORD)0xFFFF * MICRO_SECOND_PER_COUNTER_TICK / 16);
                     MiApp_WriteData(tmpW.v[0]);
                     MiApp_WriteData(tmpW.v[1]);
                     //tmpW.Val = 0xFFFF - (WORD)((TICKS_TO_SYMBOLS((((ONE_SECOND) * RFD_WAKEUP_INTERVAL) - (tmpTick.Val - TimeSyncTick.Val)  + ( TimeSlotTick.Val * TimeSyncSlot ) + TimeSlotTick.Val/2 - (ONE_SECOND * tmpW.Val * 16) )) * 16 / 250));
@@ -5019,7 +5021,8 @@ BYTE MiApp_SearchConnection(INPUT BYTE ScanDuration, INPUT DWORD ChannelMap)
     BYTE i;
     DWORD channelMask = 0x00000001;  
     BYTE backupChannel = currentChannel;
-    MIWI_TICK t1, t2;
+    MIWI_TICK t1;
+//    MIWI_TICK t2;
         
     if (ScanDuration < 1 || ScanDuration > 14) {
         //printf("ERROR: Invalid ScanDuration (%d). Must be between 1-14.\n", ScanDuration);
@@ -5345,7 +5348,7 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
 {
     BYTE retry = CONNECTION_RETRY_TIMES;
     BYTE i, j;
-    BYTE targetIndex;
+//    BYTE targetIndex;
     MIWI_TICK t1, t2;
 	BYTE bestNetworkIndex = 0xFF;
 	BYTE bestRSSI = -127;
@@ -5383,7 +5386,7 @@ BYTE    MiApp_EstablishConnection(INPUT BYTE ActiveScanIndex, INPUT BYTE Mode)
         if( ActiveScanIndex == 0xFF )
         {
 //            while( i = MiApp_SearchConnection(10, ((DWORD)0x00000001)<<currentChannel) == 0 )
-            while( i = MiApp_SearchConnection(11, ((DWORD)0x00000001) << currentChannel) == 0 )
+            while( (i = MiApp_SearchConnection(11, ((DWORD)0x00000001) << currentChannel)) == 0 )
             {
                 if( --retry == 0 )
                 {

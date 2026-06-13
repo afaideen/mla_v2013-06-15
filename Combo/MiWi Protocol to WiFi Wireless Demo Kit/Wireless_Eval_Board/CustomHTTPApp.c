@@ -205,7 +205,8 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
 	BYTE *ptr, *ptr1, *ptr2, *ptr3, *temp;
 	BYTE filename[32];
 	
-	BYTE code, v;
+//	BYTE v;
+	BYTE code;
     WORD scan_chnl = 11;
     WORD channel, panId;
     WORD tmp = 0xFFFF;

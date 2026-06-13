@@ -2183,10 +2183,10 @@ SHORT Replace(BYTE *vExpression, ROM BYTE *vFind, ROM BYTE *vReplacement, WORD w
 
 BYTE *getHostInString(IP_ADDR* IPAddress, WORD portnum)
 {
-    BYTE host[21];
+    static BYTE host[21];
 //    BYTE *host;
     memset(host, 0, 21);
-    sprintf(host, "%d.%d.%d.%d:%d"
+    sprintf((char *)host, "%d.%d.%d.%d:%d"
                                 , IPAddress->v[0]
                                 , IPAddress->v[1]
                                 , IPAddress->v[2]

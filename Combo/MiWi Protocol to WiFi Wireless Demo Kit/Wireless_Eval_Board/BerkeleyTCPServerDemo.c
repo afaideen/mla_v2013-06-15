@@ -170,9 +170,9 @@ void BerkeleyTCPServerDemo(void)
                     putsUART(bfr);
                     if(length < (sizeof(bfr) - 1) )
                     {
-                        strcpy(host, getHostInString(&AppConfig.MyIPAddr, PORTNUM));
+                        strcpy((char *)host, (const char *)getHostInString(&AppConfig.MyIPAddr, PORTNUM));
                         memset(bfr, 0, sizeof(bfr)); 
-                        sprintf(bfr,"HTTP/1.1 200 OK\r\n"
+                        sprintf((char *)bfr,"HTTP/1.1 200 OK\r\n"
 //                                    "Content-Type: text/plain\r\n"
                                     "Content-Type: application/json\r\n"
                                     "Accept: */*\r\n"
@@ -183,7 +183,7 @@ void BerkeleyTCPServerDemo(void)
                                     "\r\n"
                                     "%s"
                                     , host
-                                    , strlen(data_body)//content-lenth
+                                    , (int)strlen((const char *)data_body)//content-lenth
                                     , data_body    //data in body     
                                 );
                         send(ClientSock[i], bfr, strlen(bfr), 0);
