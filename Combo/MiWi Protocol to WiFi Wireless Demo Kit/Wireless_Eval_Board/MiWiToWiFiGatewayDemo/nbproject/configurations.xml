@@ -513,7 +513,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="..;../../../Microchip/Include;../../../../Microchip/Include;../../../../Microchip/Include/TCPIP Stack;../Configs;../LocalFiles;..\..\..\..\TCPIP\WiFi EZConfig"/>
+                  value="..;../../../Microchip/Include;..\..\..\..\Microchip\Include;../../../../Microchip/Include;../../../../Microchip/Include/TCPIP Stack;../Configs;../LocalFiles;..\..\..\..\TCPIP\WiFi EZConfig"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="false"/>

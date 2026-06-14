@@ -1,5 +1,7 @@
 #include "SystemProfile.h"
 #include "WirelessProtocols/MSPI.h"
+void SPIPut(BYTE v);
+BYTE SPIGet(void);
 
 #if defined(ENABLE_EEPROM)
 

@@ -51,7 +51,10 @@
     #include "WirelessProtocols/MSPI.h"
     #include "WirelessProtocols/Console.h"
     #include "ConfigApp.h"
-#include "TCPIP Stack/Delay.h" //#include "TimeDelay.h"
+    #include "TCPIP Stack/Delay.h" //#include "TimeDelay.h"
+
+    void SPIPut(BYTE v);
+    BYTE SPIGet(void);
     
     extern void MacroNop(void);
       
